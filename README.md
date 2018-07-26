@@ -7,3 +7,9 @@
 #### ● 박건우<br>
 #### ● 박영기<br>
 #### ● 최민
+
+## 프로젝트 환경
+
+- Spring framework 4.3.9
+- Mybatis
+- MySQL 5.7
