@@ -13,3 +13,15 @@
 - Spring framework 4.3.9
 - Mybatis
 - MySQL 5.7
+
+## 프로젝트 예제
+
+### List 예제
+```
+접속주소 : http://localhost:8080/community/list
+```
+
+### Insert 예제
+```
+접속주소 : http://localhost:8080/community/insert
+```
