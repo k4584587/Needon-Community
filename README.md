@@ -18,10 +18,10 @@
 
 ### List 예제
 ```
-접속주소 : http://localhost:8080/community/list
+접속주소 : http://localhost:8080/community/sample/list
 ```
 
 ### Insert 예제
 ```
-접속주소 : http://localhost:8080/community/insert
+접속주소 : http://localhost:8080/community/sample/insert
 ```
