@@ -49,6 +49,9 @@
 			value="classpath:/Mybatis/**/**/*_SQL.xml"></property>
 	</bean>
 
+	<bean class="kr.needon.community.Config.SecurityConfig" />
+
+
 	<context:component-scan
 		base-package="kr.needon.community.Module"></context:component-scan>
 
