@@ -1,24 +1,29 @@
 <!DOCTYPE tiles-definitions PUBLIC
-"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
-"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <!-- 타일즈 layout 설정 -->
 <tiles-definitions>
 	<definition name="tilesbase" template="/WEB-INF/layout/Needon-Template/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/Needon-Template/header.jsp" />
+		<put-attribute name="head" value="/WEB-INF/layout/Needon-Template/head.jsp" />
+		<put-attribute name="top" value="/WEB-INF/layout/Needon-Template/top.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/layout/Needon-Template/menu.jsp" />
 		<put-attribute name="sidebar" value="/WEB-INF/layout/Needon-Template/sidebar.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/layout/Needon-Template/footer.jsp" />
 	</definition>
-	
+
 	<definition name="home" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+
 	<definition name="board_list" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/board/board_list.jsp" />
 	</definition>
+
 	<definition name="board_view" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/board/board_view.jsp" />
 	</definition>
+
 </tiles-definitions>
