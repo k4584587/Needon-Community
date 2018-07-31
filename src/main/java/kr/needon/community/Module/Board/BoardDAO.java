@@ -14,4 +14,6 @@ public interface BoardDAO {
 	public void insert (Board board)throws Exception;
 	
 	public List<Board> list()throws Exception;
+	
+	public Board view(Board board)throws Exception;
 }

@@ -13,4 +13,6 @@ public interface BoardService {
 	public List<Board> list()throws Exception;
 	
 	public boolean insert(Board board)throws Exception;
+	
+	public Board view(Board board)throws Exception;
 }

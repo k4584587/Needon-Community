@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.needon.community.Model.Board;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 
 //=====================================
@@ -26,5 +27,14 @@ public class BoardController {
 		model.addAttribute("list", service.list());
 		
 		return "board_list";
+	}
+	
+	@RequestMapping("/view")
+	public String board_view(Board board, Model model) throws Exception{		// 게시판 조회
+		
+		model.addAttribute("title", "게시판 조회");
+		model.addAttribute("board", service.view(board));
+		
+		return "board_view";
 	}
 }

@@ -8,8 +8,12 @@
 		select * from nb_board_notice where cm_ck=0 order by no desc;
 	</select>
 	
+	<select id="view" resultType="Board">
+		select * from nb_board_notice where no = #{no};
+	</select>
+	
 	<insert id="insert">
-		INSERT INTO nb_board_notice (`subject`, `content`, `file`, `ip`, `wr_no`) 
+		INSERT INTO nb_board_notice (subject, content, file, ip, wr_no) 
 		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});
 	</insert>
 

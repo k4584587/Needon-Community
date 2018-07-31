@@ -38,4 +38,10 @@ public class BoardServiceImpl implements BoardService{
 		return true;
 	}
 
+	@Override
+	public Board view(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.view(board);
+	}
+
 }

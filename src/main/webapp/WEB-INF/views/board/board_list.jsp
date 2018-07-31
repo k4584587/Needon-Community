@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <h1 align=center>게시판 목록</h1>
 <table align=center border=1>
@@ -15,10 +16,10 @@
 <c:forEach items="${list }" var="list">
 	<tr align=center>
 		<td>${ list.no }</td>
-		<td>${ list.subject }</td>
+		<td><a href="<c:url value="/board/view?no=${list.no }" />">${ list.subject }</a></td>
 		<td> 작성자 </td>
 		<td>${ list.read_count }</td>
-		<td>${ list.register_date }</td>
+		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
 	</tr>
 </c:forEach>
 </table>
