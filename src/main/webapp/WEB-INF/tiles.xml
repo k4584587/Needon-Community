@@ -33,5 +33,9 @@
 	<definition name="board_write" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/board/board_write.jsp" />
 	</definition>
+	
+	<definition name="page_view" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/page/page_view.jsp" />
+	</definition>
 
 </tiles-definitions>
