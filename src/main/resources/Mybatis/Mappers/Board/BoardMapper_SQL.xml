@@ -7,5 +7,10 @@
 	<select id="list" resultType="Board">
 		select * from nb_board_notice where cm_ck=0 order by no desc;
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO nb_board_notice (`subject`, `content`, `file`, `ip`, `wr_no`) 
+		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});
+	</insert>
 
 </mapper>

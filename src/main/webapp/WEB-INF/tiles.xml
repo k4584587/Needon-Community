@@ -15,4 +15,7 @@
 	<definition name="home" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+	<definition name="board_list" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/board/board_list.jsp" />
+	</definition>
 </tiles-definitions>

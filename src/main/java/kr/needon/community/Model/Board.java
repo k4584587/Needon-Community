@@ -1,6 +1,6 @@
 package kr.needon.community.Model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import lombok.Data;
 

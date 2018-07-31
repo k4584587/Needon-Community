@@ -11,4 +11,6 @@ import kr.needon.community.Model.Board;
 
 public interface BoardService {
 	public List<Board> list()throws Exception;
+	
+	public boolean insert(Board board)throws Exception;
 }

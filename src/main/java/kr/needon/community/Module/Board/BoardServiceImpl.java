@@ -24,4 +24,18 @@ public class BoardServiceImpl implements BoardService{
 		return dao.list();
 	}
 
+	@Override
+	public boolean insert(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.insert(board);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
 }

@@ -11,5 +11,7 @@ import kr.needon.community.Model.Board;
 
 public interface BoardDAO {
 	
+	public void insert (Board board)throws Exception;
+	
 	public List<Board> list()throws Exception;
 }

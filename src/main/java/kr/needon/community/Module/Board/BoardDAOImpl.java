@@ -29,4 +29,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return session.selectList(namespace + ".list");
 	}
 
+	@Override
+	public void insert(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".insert", board);
+	}
+
 }
