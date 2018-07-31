@@ -1,0 +1,32 @@
+/* 초기화 */
+body {
+    background-color: #eee;
+}
+
+header {
+    background-color: white;
+}
+
+/* 네비바  */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255, 255, 255)!important;
+}
+
+.blue-theme {
+    background-color: #b694fa!important;
+}
+
+/* 사이드바 */
+.left-side {
+    background-color: white;
+}
+
+/* 풋더 */
+footer {
+    background-color: white;
+    height: 120px;
+}
+
+nav {
+    box-shadow: 0 6px 14px -2px #bdbdbd;
+}
