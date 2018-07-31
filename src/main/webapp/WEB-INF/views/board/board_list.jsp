@@ -22,4 +22,9 @@
 		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
 	</tr>
 </c:forEach>
+	<tr>
+		<td colspan="5" align="right">
+			<input type="button" value="글쓰기" onclick="location='<c:url  value="/board/write_from" />'">
+		</td>
+	</tr>
 </table>

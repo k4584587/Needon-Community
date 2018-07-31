@@ -29,5 +29,9 @@
 	<definition name="login" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
 	</definition>
+	
+	<definition name="board_write" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/board/board_write.jsp" />
+	</definition>
 
 </tiles-definitions>
