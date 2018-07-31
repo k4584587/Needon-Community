@@ -24,9 +24,9 @@
 	</tr>
 	<tr>
 		<td colspan="4" align=center>
-			<input type="button" value="수정" onclick="location='/board/board_modify?no=${board.no}&page=${page}'" /> &nbsp;&nbsp;
-			<input type="button" value="삭제" onclick="location='/board/board_delete?no=${board.no}&page=${page}'" /> &nbsp;&nbsp;
-			<input type="button" value="목록" onclick="location='/board/board_list?page=${page}'" />
+			<input type="button" value="수정" onclick="location='<c:url  value="/board/modify?no=${board.no}&page=${page}" />'"> &nbsp;&nbsp;
+			<input type="button" value="삭제" onclick="location='<c:url  value="/board/delete?no=${board.no}&page=${page}" />'" /> &nbsp;&nbsp;
+			<input type="button" value="목록" onclick="location='<c:url  value="/board/list?page=${page}" />'"/>
 		</td>
 	</tr>
 	

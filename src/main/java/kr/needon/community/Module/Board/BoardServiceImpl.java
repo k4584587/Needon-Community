@@ -30,6 +30,10 @@ public class BoardServiceImpl implements BoardService{
 	public boolean insert(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		try {
+			
+			board.setWr_no(0);
+			board.setIp("192.168.30.16");
+			
 			dao.insert(board);
 		} catch (Exception e) {
 			// TODO: handle exception

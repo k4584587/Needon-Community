@@ -47,8 +47,6 @@ public class BoardController {
 	@RequestMapping("/write_from" )
 	public String board_write(Board board) throws Exception{		// 게시판 조회
 		
-	
-		
 		return "board_write";
 	}
 	
