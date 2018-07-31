@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Sample;
+import kr.needon.community.Module.Board.BoardDAOImpl;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +18,9 @@ public class BoardTest {
 
 	@Autowired
 	private BoardServiceImpl service;
+	
+	@Autowired
+	private BoardDAOImpl dao;
 
 	@Test
 	public void List() throws Exception {
@@ -36,5 +39,15 @@ public class BoardTest {
 
 		Boolean result = service.insert(board);
 		System.out.println("결과 ==> " + result);
+	}
+	
+	@Test
+	public void getListCount() throws Exception{
+		int result = dao.getListCount();
+		System.out.println(result);
+	}
+	@Test
+	public void count()throws Exception{
+		service.viewCount(2);
 	}
 }

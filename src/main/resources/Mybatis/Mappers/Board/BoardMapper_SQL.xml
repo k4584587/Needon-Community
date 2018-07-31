@@ -12,6 +12,15 @@
 		select * from nb_board_notice where no = #{no};
 	</select>
 	
+	<select id="listcount" resultType="int">
+		select count(no) from nb_board_notice;
+	</select>
+	
+	<update id="viewcount" parameterType="int">
+		update nb_board_notice set read_count=read_count+1
+		where no=#{no};
+	</update>
+	
 	<insert id="insert">
 		INSERT INTO nb_board_notice (subject, content, file, ip, wr_no) 
 		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});

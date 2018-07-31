@@ -16,4 +16,8 @@ public interface BoardDAO {
 	public List<Board> list()throws Exception;
 	
 	public Board view(Board board)throws Exception;
+	
+	public int getListCount() throws Exception;
+	
+	public void viewCount(int no)throws Exception;
 }

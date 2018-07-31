@@ -15,4 +15,6 @@ public interface BoardService {
 	public boolean insert(Board board)throws Exception;
 	
 	public Board view(Board board)throws Exception;
+	
+	public void viewCount(int no)throws Exception;
 }

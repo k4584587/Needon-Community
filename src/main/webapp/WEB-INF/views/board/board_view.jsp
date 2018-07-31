@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h1>게시판 조회</h1>
+<h1 align=center>게시판 조회</h1>
 <table align="center" border=1>
 	<tr>
 		<th>제목</th>

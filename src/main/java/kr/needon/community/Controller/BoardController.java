@@ -30,10 +30,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/view")
-	public String board_view(Board board, Model model) throws Exception{		// 게시판 조회
+	public String board_view(Board board, Model model, int no) throws Exception{		// 게시판 조회
 		
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
+		service.viewCount(no);
 		
 		return "board_view";
 	}

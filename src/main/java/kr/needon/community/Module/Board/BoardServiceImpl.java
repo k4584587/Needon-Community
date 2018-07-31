@@ -18,12 +18,14 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDAOImpl dao;
 	
+	/*게시판 목록보기*/
 	@Override
 	public List<Board> list() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.list();
 	}
-
+	
+	/*게시판 글쓰기*/
 	@Override
 	public boolean insert(Board board) throws Exception {
 		// TODO Auto-generated method stub
@@ -37,11 +39,19 @@ public class BoardServiceImpl implements BoardService{
 		
 		return true;
 	}
-
+	
+	/*게시판 조회*/
 	@Override
 	public Board view(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.view(board);
+	}
+	
+	/*게시판 조회수 증가*/
+	@Override
+	public void viewCount(int no) throws Exception {
+		// TODO Auto-generated method stub
+		dao.viewCount(no);
 	}
 
 }
