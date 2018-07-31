@@ -36,7 +36,7 @@
 			<div class="col" style="margin-top:10px;">
 				<tiles:insertAttribute name="body" />
 			</div>
-			<!-- 내용시작 } -->
+			<!-- 내용 끝 } -->
 		</div>
 	</div>
 	<!-- 풋더시작 { -->

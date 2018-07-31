@@ -43,7 +43,7 @@ public class BoardController {
 		return "board_view";
 	}
 
-	/*게시판 글쓰기*/
+	/*게시판 글쓰는 폼*/
 	@RequestMapping("/write_from" )
 	public String board_write(Board board) throws Exception{		// 게시판 조회
 		
