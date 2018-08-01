@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- 풋더시작 -->
 <footer>
 	<center class="p-3">
 		<div style="margin-bottom: 10px;">Needon</div>
@@ -11,4 +10,3 @@
 		</div>
 	</center>
 </footer>
-<!-- 풋더 끝 -->
