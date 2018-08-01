@@ -1,5 +1,9 @@
 package kr.needon.community.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +23,14 @@ import kr.needon.community.Module.Board.BoardServiceImpl;
 @RequestMapping("/board/**")
 public class BoardController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Autowired
 	private BoardServiceImpl service;
 	
 	/*게시판 목록*/
 	@RequestMapping("/list")
-	public String board_list(Model model) throws Exception{		// 게시판 리스트
+	public String board_list(Model model) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
 		model.addAttribute("list", service.list());
@@ -34,28 +40,58 @@ public class BoardController {
 	
 	/*게시판 조회*/
 	@RequestMapping("/view")
-	public String board_view(Board board, Model model, int no) throws Exception{		// 게시판 조회
+	public String board_view(Board board, Model model) throws Exception{		
 		
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
-		service.viewCount(no);
+		service.viewCount(board);
 		
 		return "board_view";
 	}
 
 	/*게시판 글쓰는 폼*/
 	@RequestMapping("/write_from" )
-	public String board_write(Board board) throws Exception{		// 게시판 조회
+	public String board_write(Board board) throws Exception{		
 		
 		return "board_write";
 	}
 	
 	/*게시판 글쓰기*/
 	@RequestMapping(value = "/write", method =  RequestMethod.POST )
-	public String board_write_post(@ModelAttribute Board board) throws Exception{		// 게시판 조회
+	public String board_write_post(@ModelAttribute Board board) throws Exception{		
 		
 		service.insert(board);
 		
 		return "redirect:/board/list";
 	}
+	
+	/*게시판 삭제폼*/
+	@RequestMapping(value = "/delete_form", method = RequestMethod.GET)
+	public String board_delete(int no, Model model) throws Exception{
+		
+		logger.info("delete_form.....");
+		model.addAttribute("no", no);
+		
+		return "board_delete";
+	}
+	
+	/*게시판 삭제*/
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String board_delete_post(int no) throws Exception{
+		
+		logger.info("delete.....");
+		service.delete(no);
+		
+		return "redirect:/board/list";
+	}
+	
+	/*게시판 수정폼*/
+	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
+	public String board_modify(Board board, Model model)throws Exception {
+		model.addAttribute("title", "게시판 조회");
+		model.addAttribute("board", service.view(board));
+		
+		return "board_modify";
+	}
+	
 }

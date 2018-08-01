@@ -53,9 +53,16 @@ public class BoardServiceImpl implements BoardService{
 	
 	/*게시판 조회수 증가*/
 	@Override
-	public void viewCount(int no) throws Exception {
+	public void viewCount(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		dao.viewCount(no);
+		dao.viewCount(board);
+	}
+	
+	/*게시판 삭제*/
+	@Override
+	public int delete(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.delete(no);
 	}
 
 }

@@ -17,5 +17,7 @@ public interface BoardService {
 	
 	public Board view(Board board)throws Exception;
 	
-	public void viewCount(int no)throws Exception;
+	public void viewCount(Board board)throws Exception;
+	
+	public int delete(int no)throws Exception;
 }

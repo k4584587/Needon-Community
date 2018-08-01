@@ -54,9 +54,16 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	/*게시판 조회수 증가*/
 	@Override
-	public void viewCount(int no) throws Exception {
+	public void viewCount(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace+".viewcount",no);
+		session.update(namespace+".viewcount",board);
+	}
+	
+	/*게시판 삭제*/
+	@Override
+	public int delete(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+".delete",no);
 	}
 
 }

@@ -25,5 +25,9 @@
 		INSERT INTO nb_board_notice (subject, content, file, ip, wr_no) 
 		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});
 	</insert>
+	
+	<delete id="delete">
+		DELETE FROM nb_board_notice WHERE no = #{no};
+	</delete>
 
 </mapper>

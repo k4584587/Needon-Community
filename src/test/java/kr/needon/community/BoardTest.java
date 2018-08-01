@@ -46,8 +46,5 @@ public class BoardTest {
 		int result = dao.getListCount();
 		System.out.println(result);
 	}
-	@Test
-	public void count()throws Exception{
-		service.viewCount(2);
-	}
+	
 }
