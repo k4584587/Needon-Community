@@ -2,6 +2,7 @@ package kr.needon.community.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,11 @@ import kr.needon.community.Module.Board.BoardServiceImpl;
 //  작성자 : 박영기
 //=====================================
 
+@Log
 @Controller
 @RequestMapping("/board/**")
 public class BoardController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
+
 	@Autowired
 	private BoardServiceImpl service;
 	
@@ -69,7 +69,7 @@ public class BoardController {
 	@RequestMapping(value = "/delete_form", method = RequestMethod.GET)
 	public String board_delete(int no, Model model) throws Exception{
 		
-		logger.info("delete_form.....");
+		log.info("delete_form.....");
 		model.addAttribute("no", no);
 		
 		return "board_delete";
@@ -79,7 +79,7 @@ public class BoardController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String board_delete_post(int no) throws Exception{
 		
-		logger.info("delete.....");
+		log.info("delete.....");
 		service.delete(no);
 		
 		return "redirect:/board/list";
