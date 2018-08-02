@@ -84,7 +84,7 @@ public class BoardController {
 		log.info("delete.....");
 		service.delete(board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 	/*게시판 수정폼*/
@@ -104,7 +104,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		service.modify(request, board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 }

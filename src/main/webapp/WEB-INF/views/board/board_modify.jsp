@@ -4,6 +4,7 @@
 
 <form action="<c:url value="/board/modify" />" method="post">
 <input type="hidden" name="no" value="${param.no}" />
+<input type="hidden" name="category" value="${param.category}" />
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <h1 align=center>게시판 수정</h1>
 <table align="center" border=1>
