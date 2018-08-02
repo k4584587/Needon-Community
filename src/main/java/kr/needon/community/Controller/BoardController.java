@@ -32,6 +32,7 @@ public class BoardController {
 	public String board_list(@PathVariable("category") String category, Model model, Board board) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
+		model.addAttribute("category", category);
 		
 		board.setCategory(category);
 		model.addAttribute("list", service.list(board));
@@ -63,7 +64,7 @@ public class BoardController {
 		
 		service.insert(request, board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 	/*게시판 삭제폼*/

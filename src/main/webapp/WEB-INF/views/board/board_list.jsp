@@ -38,4 +38,4 @@
     </c:choose>
     </tbody>
 </table>
-<button class="btn btn-info" style="float: right;margin-bottom: 10px;">글쓰기</button>
+<button class="btn btn-info" style="float: right;margin-bottom: 10px;" onClick=location.href="<c:url value="/board/write_from?category=${category }"/>">글쓰기</button>
