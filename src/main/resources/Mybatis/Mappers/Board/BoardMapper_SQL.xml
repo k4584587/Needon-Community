@@ -30,5 +30,10 @@
 		DELETE FROM nb_board_notice WHERE no = #{no};
 		ALTER TABLE nb_board_notice AUTO_INCREMENT=1;	
 	</delete>
+	
+	<update id="modify">
+		update nb_board_notice set subject=#{subject}, content=#{content}, file=#{file, jdbcType=BLOB},
+		ip=#{ip, jdbcType=VARCHAR}, register_date=#{register_date} where no = #{no};
+	</update>
 
 </mapper>

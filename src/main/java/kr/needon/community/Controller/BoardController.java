@@ -3,6 +3,9 @@ package kr.needon.community.Controller;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,9 +56,9 @@ public class BoardController {
 	
 	/*게시판 글쓰기*/
 	@RequestMapping(value = "/write", method =  RequestMethod.POST )
-	public String board_write_post(@ModelAttribute Board board) throws Exception{		
+	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request) throws Exception{		
 		
-		service.insert(board);
+		service.insert(request, board);
 		
 		return "redirect:/board/list";
 	}
@@ -83,10 +86,21 @@ public class BoardController {
 	/*게시판 수정폼*/
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
 	public String board_modify(Board board, Model model)throws Exception {
-		model.addAttribute("title", "게시판 조회");
+		
+		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
 		
 		return "board_modify";
+	}
+	
+	/*게시판 수정*/
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String board_modify_post(HttpServletRequest request, Board board, Model model)throws Exception{
+		
+		model.addAttribute("board", board);
+		service.modify(request, board);
+		
+		return "redirect:/board/list";
 	}
 	
 }

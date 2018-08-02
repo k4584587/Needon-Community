@@ -65,5 +65,12 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		session.delete(namespace+".delete",board);
 	}
+	
+	/*게시판 수정*/
+	@Override
+	public void modify(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".modify", board);
+	}
 
 }

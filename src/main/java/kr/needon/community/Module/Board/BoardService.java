@@ -2,6 +2,8 @@ package kr.needon.community.Module.Board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import kr.needon.community.Model.Board;
 
 //=====================================
@@ -13,11 +15,13 @@ public interface BoardService {
 	
 	public List<Board> list()throws Exception;
 	
-	public boolean insert(Board board)throws Exception;
+	public boolean insert(HttpServletRequest request, Board board)throws Exception;
 	
 	public Board view(Board board)throws Exception;
 	
 	public void viewCount(Board board)throws Exception;
 	
 	public boolean delete(Board board)throws Exception;
+	
+	public boolean modify(HttpServletRequest request, Board board)throws Exception;
 }
