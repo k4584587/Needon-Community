@@ -1,6 +1,15 @@
 /* 초기화 */
 body {
+    font-size: 13px;
     background-color: #eee;
+}
+
+.container {
+    max-width: 1150px!important;
+}
+
+a {
+    color: black;
 }
 
 header {
@@ -29,4 +38,10 @@ footer {
 
 nav {
     box-shadow: 0 6px 14px -2px #bdbdbd;
+}
+
+
+tr {
+    text-align: center;
+    background-color: white;
 }
