@@ -5,7 +5,12 @@
 <mapper namespace="Board">
 
 	<select id="list" resultType="Board">
-		select * from nb_board_${category} where cm_ck=0 order by no desc;
+		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc;
+	</select>
+	
+	<select id="listpage" resultType="Board">
+		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc
+		limit #{pageStart}, #{perPageNum};
 	</select>
 	
 	<select id="view" resultType="Board">

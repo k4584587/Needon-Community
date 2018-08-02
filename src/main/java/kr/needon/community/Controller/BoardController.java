@@ -1,6 +1,7 @@
 package kr.needon.community.Controller;
 
 import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
 
@@ -29,13 +30,14 @@ public class BoardController {
 	
 	/*게시판 목록*/
 	@RequestMapping("/{category}/list")
-	public String board_list(@PathVariable("category") String category, Model model, Board board) throws Exception{		
+	public String board_list(@PathVariable("category") String category, 
+			Model model, Board board, Criteria cri) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
 		model.addAttribute("category", category);
 		
 		board.setCategory(category);
-		model.addAttribute("list", service.list(board));
+		model.addAttribute("list", service.listpage(cri));
 		
 		return "board_list";
 	}
