@@ -25,9 +25,9 @@ public class BoardDAOImpl implements BoardDAO{
 	
     /*게시판 목록보기*/
 	@Override
-	public List<Board> list() throws Exception {
+	public List<Board> list(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list");
+		return session.selectList(namespace + ".list", board);
 	}
 	
 	/*게시판 글쓰기*/
