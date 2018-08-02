@@ -35,7 +35,8 @@ public class BoardTest {
 
 	@Test
 	public void List() throws Exception {
-		List<Board> list = service.list();
+		Board board = new Board();
+		List<Board> list = service.list(board);
 		System.out.println(list.toString());
 	}
 
