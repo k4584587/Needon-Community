@@ -1,9 +1,10 @@
 package kr.needon.community;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Module.Board.BoardDAOImpl;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Module.Board.BoardDAOImpl;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import lombok.extern.java.Log;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,12 +36,6 @@ public class BoardTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@Test
-	public void List() throws Exception {
-		Board board = new Board();
-		List<Board> list = service.list(board);
-		System.out.println(list.toString());
-	}
 
 	@Test
 	public void insert() throws Exception{
