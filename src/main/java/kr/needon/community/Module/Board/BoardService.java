@@ -19,5 +19,5 @@ public interface BoardService {
 	
 	public void viewCount(Board board)throws Exception;
 	
-	public int delete(int no)throws Exception;
+	public boolean delete(Board board)throws Exception;
 }

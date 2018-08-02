@@ -13,15 +13,15 @@
 		<th>작성일</th>
 	</tr>
 
-<c:forEach items="${list }" var="list">
-	<tr align=center>
-		<td>${ list.no }</td>
-		<td><a href="<c:url value="/board/view?no=${list.no }" />">${ list.subject }</a></td>
-		<td> 작성자 </td>
-		<td>${ list.read_count }</td>
-		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
-	</tr>
-</c:forEach>
+		<c:forEach items="${list }" var="list">
+			<tr align=center>
+				<td>${ list.no }</td>
+				<td><a href="<c:url value="/board/view?no=${list.no }" />">${ list.subject }</a></td>
+				<td> 작성자 </td>
+				<td>${ list.read_count }</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
+		</tr>
+		</c:forEach>
 	<tr>
 		<td colspan="5" align="right">
 			<input type="button" value="글쓰기" onclick="location='<c:url  value="/board/write_from" />'">

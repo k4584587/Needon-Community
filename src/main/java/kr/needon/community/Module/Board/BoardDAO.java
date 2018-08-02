@@ -21,5 +21,5 @@ public interface BoardDAO {
 	
 	public void viewCount(Board board)throws Exception;
 	
-	public int delete(int no)throws Exception;
+	public void delete(Board board)throws Exception;
 }

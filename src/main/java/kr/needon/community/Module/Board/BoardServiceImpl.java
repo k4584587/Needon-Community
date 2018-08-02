@@ -60,9 +60,15 @@ public class BoardServiceImpl implements BoardService{
 	
 	/*게시판 삭제*/
 	@Override
-	public int delete(int no) throws Exception {
+	public boolean delete(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.delete(no);
+		try{
+			dao.delete(board);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 }

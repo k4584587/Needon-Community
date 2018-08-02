@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <form action="<c:url value="/board/delete" />" method="post">
+<input type="hidden" name="no" value="${param.no}" />
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <h1 align=center>게시판 삭제</h1>
 <table align=center border=1>

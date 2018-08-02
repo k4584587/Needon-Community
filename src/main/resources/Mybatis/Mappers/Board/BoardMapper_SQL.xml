@@ -28,6 +28,7 @@
 	
 	<delete id="delete">
 		DELETE FROM nb_board_notice WHERE no = #{no};
+		ALTER TABLE nb_board_notice AUTO_INCREMENT=1;	
 	</delete>
 
 </mapper>

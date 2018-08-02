@@ -61,9 +61,9 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	/*게시판 삭제*/
 	@Override
-	public int delete(int no) throws Exception {
+	public void delete(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return session.delete(namespace+".delete",no);
+		session.delete(namespace+".delete",board);
 	}
 
 }

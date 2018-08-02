@@ -72,10 +72,10 @@ public class BoardController {
 	
 	/*게시판 삭제*/
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String board_delete_post(int no) throws Exception{
+	public String board_delete_post(Board board) throws Exception{
 		
 		log.info("delete.....");
-		service.delete(no);
+		service.delete(board);
 		
 		return "redirect:/board/list";
 	}
