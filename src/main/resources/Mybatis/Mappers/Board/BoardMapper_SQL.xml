@@ -5,7 +5,7 @@
 <mapper namespace="Board">
 
 	<select id="list" resultType="Board">
-		select * from nb_board_notice where cm_ck=0 order by no desc;
+		select * from nb_board_${category} where cm_ck=0 order by no desc;
 	</select>
 	
 	<select id="view" resultType="Board">
@@ -35,5 +35,6 @@
 		update nb_board_notice set subject=#{subject}, content=#{content}, file=#{file, jdbcType=BLOB},
 		ip=#{ip, jdbcType=VARCHAR}, register_date=#{register_date} where no = #{no};
 	</update>
+	
 
 </mapper>

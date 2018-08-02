@@ -23,9 +23,9 @@ public class BoardServiceImpl implements BoardService {
 
 	/* 게시판 목록보기 */
 	@Override
-	public List<Board> list() throws Exception {
+	public List<Board> list(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.list();
+		return dao.list(board);
 	}
 
 	/* 게시판 글쓰기 */

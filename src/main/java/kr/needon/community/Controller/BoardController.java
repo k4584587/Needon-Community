@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,11 +28,13 @@ public class BoardController {
 	private BoardServiceImpl service;
 	
 	/*게시판 목록*/
-	@RequestMapping("/list")
-	public String board_list(Model model) throws Exception{		
+	@RequestMapping("/{category}/list")
+	public String board_list(@PathVariable("category") String category, Model model, Board board) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
-		model.addAttribute("list", service.list());
+		
+		board.setCategory(category);
+		model.addAttribute("list", service.list(board));
 		
 		return "board_list";
 	}
