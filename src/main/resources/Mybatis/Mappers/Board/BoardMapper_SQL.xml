@@ -5,34 +5,39 @@
 <mapper namespace="Board">
 
 	<select id="list" resultType="Board">
-		select * from nb_board_${category} where cm_ck=0 order by no desc;
+		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc;
+	</select>
+	
+	<select id="listpage" resultType="Board">
+		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc
+		limit #{pageStart}, #{perPageNum};
 	</select>
 	
 	<select id="view" resultType="Board">
-		select * from nb_board_notice where no = #{no};
+		select * from nb_board_${category} where no = #{no};
 	</select>
 	
 	<select id="listcount" resultType="int">
-		select count(no) from nb_board_notice;
+		select count(no) from nb_board_${category};
 	</select>
 	
 	<update id="viewcount" parameterType="int">
-		update nb_board_notice set read_count=read_count+1
+		update nb_board_${category} set read_count=read_count+1
 		where no=#{no};
 	</update>
 	
 	<insert id="insert">
-		INSERT INTO nb_board_notice (subject, content, file, ip, wr_no) 
+		INSERT INTO nb_board_${category} (subject, content, file, ip, wr_no) 
 		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});
 	</insert>
 	
 	<delete id="delete">
-		DELETE FROM nb_board_notice WHERE no = #{no};
+		DELETE FROM nb_board_${category} WHERE no = #{no};
 		ALTER TABLE nb_board_notice AUTO_INCREMENT=1;	
 	</delete>
 	
 	<update id="modify">
-		update nb_board_notice set subject=#{subject}, content=#{content}, file=#{file, jdbcType=BLOB},
+		update nb_board_${category} set subject=#{subject}, content=#{content}, file=#{file, jdbcType=BLOB},
 		ip=#{ip, jdbcType=VARCHAR}, register_date=#{register_date} where no = #{no};
 	</update>
 	

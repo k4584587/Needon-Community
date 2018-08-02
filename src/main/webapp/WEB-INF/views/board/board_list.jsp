@@ -23,7 +23,7 @@
             <c:forEach items="${list }" var="list">
                 <tr>
                 <td>${ list.no }</td>
-                <td><a href="<c:url value="/board/view?no=${list.no }" />">${ list.subject }</a></td>
+                <td><a href="<c:url value="/board/view?no=${list.no }&category=${category }" />">${ list.subject }</a></td>
                 <td> 작성자</td>
                 <td>${ list.read_count }</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
@@ -38,4 +38,4 @@
     </c:choose>
     </tbody>
 </table>
-<button class="btn btn-info" style="float: right;margin-bottom: 10px;">글쓰기</button>
+<button class="btn btn-info" style="float: right;margin-bottom: 10px;" onClick="location= '<c:url value="/board/write_from?category=${category }"/>'">글쓰기</button>

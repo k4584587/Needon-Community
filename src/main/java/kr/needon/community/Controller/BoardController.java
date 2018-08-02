@@ -1,6 +1,7 @@
 package kr.needon.community.Controller;
 
 import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
 
@@ -29,12 +30,14 @@ public class BoardController {
 	
 	/*게시판 목록*/
 	@RequestMapping("/{category}/list")
-	public String board_list(@PathVariable("category") String category, Model model, Board board) throws Exception{		
+	public String board_list(@PathVariable("category") String category, 
+			Model model, Board board, Criteria cri) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
+		model.addAttribute("category", category);
 		
 		board.setCategory(category);
-		model.addAttribute("list", service.list(board));
+		model.addAttribute("list", service.listpage(cri));
 		
 		return "board_list";
 	}
@@ -63,7 +66,7 @@ public class BoardController {
 		
 		service.insert(request, board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 	/*게시판 삭제폼*/
@@ -83,7 +86,7 @@ public class BoardController {
 		log.info("delete.....");
 		service.delete(board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 	/*게시판 수정폼*/
@@ -103,7 +106,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		service.modify(request, board);
 		
-		return "redirect:/board/list";
+		return "redirect:/board/"+board.getCategory()+"/list";
 	}
 	
 }

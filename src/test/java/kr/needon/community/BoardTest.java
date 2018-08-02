@@ -1,8 +1,9 @@
 package kr.needon.community;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Module.Board.BoardDAOImpl;
-import kr.needon.community.Module.Board.BoardServiceImpl;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Module.Board.BoardDAOImpl;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 
+@Log
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
 public class BoardTest {
@@ -58,6 +63,19 @@ public class BoardTest {
 	public void getListCount() throws Exception{
 		int result = dao.getListCount();
 		System.out.println(result);
+	}
+	
+	@Test
+	public void ListCri()throws Exception{
+		Criteria cri = new Criteria();
+		cri.setPage(2);
+		cri.setPerPageNum(20);
+		
+		List<Board> list = dao.listPage(cri);
+		
+		for(Board board : list) {
+			log.info(board.getNo()+" : "+board.getSubject());
+		}
 	}
 	
 }

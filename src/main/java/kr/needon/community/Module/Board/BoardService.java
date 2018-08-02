@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
 
 //=====================================
 //클래스 설명 : 게시판 Service 인터페이스
@@ -13,7 +14,9 @@ import kr.needon.community.Model.Board;
 
 public interface BoardService {
 	
-	public List<Board> list(Board board)throws Exception;
+	//public List<Board> list(Board board)throws Exception;
+	
+	public List<Board> listpage(Criteria cri)throws Exception;
 	
 	public boolean insert(HttpServletRequest request, Board board)throws Exception;
 	
