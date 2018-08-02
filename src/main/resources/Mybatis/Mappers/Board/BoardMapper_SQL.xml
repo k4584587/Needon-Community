@@ -4,9 +4,9 @@
 
 <mapper namespace="Board">
 
-	<select id="list" resultType="Board">
+	<!-- <select id="list" resultType="Board">
 		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc;
-	</select>
+	</select> -->
 	
 	<select id="listpage" resultType="Board">
 		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc
