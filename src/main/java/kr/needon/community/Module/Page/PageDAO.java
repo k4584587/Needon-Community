@@ -4,5 +4,6 @@ import kr.needon.community.Model.Board;
 
 public interface PageDAO {
 
-	public Board pageView()throws Exception;
+	public Board pageView(Board board)throws Exception;
+	
 }

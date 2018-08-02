@@ -16,11 +16,11 @@ public class PageDAOImpl implements PageDAO{
 	private static String namespace = "Page";
 	
 	@Override
-	public Board pageView() throws Exception {
+	public Board pageView(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".pageView");
+		return session.selectOne(namespace+".pageView",board);
 	}
-	
+
 	
 	
 

@@ -13,10 +13,11 @@ public class PageServiceImpl implements PageService{
 	private PageDAO dao;
 
 	@Override
-	public Board pageView() throws Exception {
+	public Board pageView(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.pageView();
+		return dao.pageView(board);
 	}
+
 	
 	
 

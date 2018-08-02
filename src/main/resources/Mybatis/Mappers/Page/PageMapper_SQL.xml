@@ -5,7 +5,11 @@
 <mapper namespace="Page">
 
 	<select id="pageView" resultType="Board">
-		select * from nb_board_info where no = 1;
+		select * from nb_board_${category} where no = 1;
 	</select>
+	
+	
+	
+	
 
 </mapper>

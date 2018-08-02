@@ -4,6 +4,7 @@ import kr.needon.community.Model.Board;
 
 public interface PageService {
 	
-	public Board pageView()throws Exception;
+	public Board pageView(Board board)throws Exception;
+	
 
 }

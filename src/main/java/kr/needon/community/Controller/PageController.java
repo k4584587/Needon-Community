@@ -27,10 +27,14 @@ public class PageController {
 	public String page_view(Board board ,
 			                        Model model)throws Exception {
 		
-		model.addAttribute("page",service.pageView());
+		board.setCategory(board.getCategory());
 		
+		model.addAttribute("page",service.pageView(board));
+		System.out.println("카테고리 ==> " + board.getCategory());
 		return "page_view";
 	}
+	
+	
 	
 
 }
