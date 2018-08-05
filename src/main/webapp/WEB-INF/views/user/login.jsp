@@ -35,9 +35,16 @@
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous">
+
+<script
+        src="//code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
 <body>
 <style>
     .error {
+        text-align: left!important;
         margin-top: 10px;
         margin-bottom: 10px;
         color: red;
@@ -51,8 +58,8 @@
                 <img class="mb-4" src="<c:url value="/resources/img/logo.png" />">
                 <h1 class="h3 mb-3 font-weight-normal">니드온 로그인</h1>
                 <label for="inputUsername" class="sr-only">아이디</label>
-                <input type="text" name="username" id="inputUsername" class="form-control" placeholder="아이디" required
-                       autofocus>
+                <input type="text" name="username" id="inputUsername" class="form-control" placeholder="아이디" required autofocus>
+                <span id="input_error"></span>
                 <label for="inputPassword" class="sr-only">비밀번호</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
                 <div class="checkbox mb-3">
@@ -70,6 +77,31 @@
         </div>
     </div>
 </center>
+<script>
+    var id_null = 0;
+    $(function () {
+        console.log("login ajax call!");
+        $("input[id='inputUsername']").on("input", function() {
+            console.log("아이디 입력값 " + $("input[id='inputUsername']").val().length);
 
+            var count = 0;
+
+            if($("input[id='inputUsername']").val().length == 0) {
+                console.log("아이디 입력값이 null 임");
+                $.ajax({
+                    async:true,
+                    type:'GET',
+                    contentType: "application/json; charset=UTF-8",
+                    success : function(data) {
+
+                            var error_html = "<div class=\"error\">아이디를 입력해주세요.</div>";
+                            $('#input_error').html(error_html);
+
+                    }
+                });
+            }
+        });
+    })
+</script>
 </body>
 </html>
