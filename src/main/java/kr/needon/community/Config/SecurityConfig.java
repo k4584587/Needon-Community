@@ -70,7 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(successHandler())
-                .permitAll();
+                .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/");
 
 
 	}
