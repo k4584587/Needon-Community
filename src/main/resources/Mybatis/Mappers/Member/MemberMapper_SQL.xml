@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+	<select id="getUserLogin" resultType="Member">
+
+		SELECT
+			username,
+			password,
+			role,
+			enabled
+		FROM
+			nb_member
+		WHERE
+			username = #{username}
+
+	</select>
+
+	<select id="geteUserRole" resultType="UserRole">
+
+		SELECT
+			username,
+			role
+		FROM
+			nb_member
+		WHERE
+			username = #{username}
+
+	</select>
+
+	<select id="getFindUser" resultType="Member">
+
+		  SELECT
+		  	*
+		  FROM
+		  	nb_member
+		  WHERE
+		  	username = #{username}
+
+	</select>
+
+</mapper>

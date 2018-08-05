@@ -47,7 +47,7 @@
                 <input type="text" name="username" id="inputUsername" class="form-control" placeholder="아이디" required
                        autofocus>
                 <label for="inputPassword" class="sr-only">비밀번호</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
                 <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" value="remember-me"> 자동로그인
