@@ -13,6 +13,7 @@
 			<div class="card-body">
 				<div class="row" style="margin-bottom: 10px;">
 					<div class="col-auto" style="padding-right: 0px!important;">
+						<%--회원가입 구현되면 여기는 프로필 사진이 오는곳으로 수정바람--%>
 						<img src="http://via.placeholder.com/52">
 					</div>
 					<div class="col-auto">
@@ -24,7 +25,9 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<button type="submit" class="btn btn-primary btn-block">로그아웃</button>
 				</form>
-				<a class="btn btn-danger btn-block" style="color: white">관리자</a>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="<c:url value="/admin/" />" class="btn btn-danger btn-block" style="color: white">관리자</a>
+				</sec:authorize>
 			</div>
 		</div>
 		<!-- 로그인 됨 끝 } -->

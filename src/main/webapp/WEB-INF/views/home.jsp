@@ -4,8 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <sec:authentication property="principal"/>
-
-
 <!-- 슬라이드 끝 } -->
 <div class="col" style="margin-bottom: 400px;">
     <div class="" style="background-color: white; height:150px;margin-bottom: 10px;">

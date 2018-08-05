@@ -1,12 +1,17 @@
 package kr.needon.community.Config;
 
+//=====================================
+// 	클래스 설명 : 시큐리티 설정 클래스
+//	작성자 : 김현우
+//=====================================
+
+
 import kr.needon.community.Module.User.UserSecurityService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,70 +26,53 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import java.io.IOException;
-
-//=====================================
-// 	클래스 설명 : 시큐리티 설정 클래스
-//	작성자 : 김현우
-//=====================================
 
 @Log
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	DataSource dataSource;
-
-	@Autowired
-    UserSecurityService securityUserService;
+    @Autowired
+    UserSecurityService userSecurityService;
 
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**");
-	}
-
-    /*@Bean
-    public DaoAuthenticationProvider authProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }*/
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/resources/**");
+    }
 
     //시큐리티 설정
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // TODO Auto-generated method stub
+
+        http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
         http
-                .authorizeRequests()
-                .antMatchers("/").permitAll();
-
-		http
-				.formLogin()
-				.loginPage("/user/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .successHandler(successHandler())
-                .permitAll()
+                .formLogin()
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .formLogin()
+                .and()
+                .logout().logoutSuccessUrl("/").invalidateHttpSession(true)
+                .and()
+                .exceptionHandling().accessDeniedPage("/page/accessDenied")
+                .and()
+                .formLogin().loginPage("/user/login")
+                .and()
+                .userDetailsService(userSecurityService);
 
 
-	}
+    }
 
 
-	//시큐리티 로그인 커스텀
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         System.out.println("security configure ... ");
 
-        auth.userDetailsService(securityUserService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
     }
 
     //로그인 성공시 이동할 페이지
@@ -92,6 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationSuccessHandler successHandler() {
         return new MyCustomLoginSuccessHandler("/");
     }
+
 
     //시큐리티 로그인 커스텀
     public class MyCustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -118,11 +107,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
 
-    //시큐리티 페스워드 암호화
+
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() { //패스워드 암호화
         return new BCryptPasswordEncoder();
     }
-
 
 }

@@ -36,6 +36,13 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous">
 <body>
+<style>
+    .error {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: red;
+    }
+</style>
 <center style="margin-top: 10px;">
     <div class="login-form">
         <div class="login-form">
@@ -49,6 +56,9 @@
                 <label for="inputPassword" class="sr-only">비밀번호</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
                 <div class="checkbox mb-3">
+                    <c:if test="${param.error != null}">
+                        <div class="error">아이디 또는 비밀번호를 다시 확인하세요.</div>
+                    </c:if>
                     <label>
                         <input type="checkbox" value="remember-me"> 자동로그인
                     </label>
