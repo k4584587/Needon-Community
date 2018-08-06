@@ -26,5 +26,10 @@ public class UserController {
 
         return "user/login"; //titles 안쓴 jsp 로그인 페이지
     }
+    
+    @RequestMapping(value="/userJoinForm")
+    public String userJoinForm() { 
+    	return "user/userJoinForm";  
+    }
 
 }
