@@ -1,9 +1,5 @@
 package kr.needon.community.Controller;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import lombok.extern.java.Log;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.PageMaker;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 
 //=====================================
 //	클래스 설명 : 게시판 컨트롤러 클래스
@@ -29,13 +31,19 @@ public class BoardController {
 	
 	/*게시판 목록*/
 	@RequestMapping("/{category}/list")
-	public String board_list(@PathVariable("category") String category, Model model, Board board) throws Exception{		
+	public String board_list(@PathVariable("category") String category, 
+			Model model, Board board, Criteria cri) throws Exception{		
 		
 		model.addAttribute("title", "게시판 리스트");
 		model.addAttribute("category", category);
 		
 		board.setCategory(category);
-		model.addAttribute("list", service.list(board));
+		model.addAttribute("list", service.listpage(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(131);
+		
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "board_list";
 	}

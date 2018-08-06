@@ -7,6 +7,7 @@
     구글광고
 </div>
 
+<!-- 게시판 목록 시작-->
 <table class="table table-hover" style="margin-top: 10px;">
     <thead style="background-color: white;">
     <tr>
@@ -38,4 +39,10 @@
     </c:choose>
     </tbody>
 </table>
+<!-- 게시판 목록 끝 -->
+
+<!-- 페이징 처리 시작 -->
+
+<!-- 페이징 처리 끝 -->
+
 <button class="btn btn-info" style="float: right;margin-bottom: 10px;" onClick="location= '<c:url value="/board/write_from?category=${category }"/>'">글쓰기</button>

@@ -3,6 +3,7 @@ package kr.needon.community.Module.Board;
 import java.util.List;
 
 import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 인터페이스
@@ -13,7 +14,9 @@ public interface BoardDAO {
 	
 	public void insert (Board board)throws Exception;
 	
-	public List<Board> list(Board board)throws Exception;
+	//public List<Board> list(Board board)throws Exception;
+	
+	public List<Board> listPage(Criteria cri)throws Exception;
 	
 	public Board view(Board board)throws Exception;
 	

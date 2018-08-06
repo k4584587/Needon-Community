@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 클래스
@@ -25,9 +26,9 @@ public class BoardDAOImpl implements BoardDAO{
 	
     /*게시판 목록보기*/
 	@Override
-	public List<Board> list(Board board) throws Exception {
+	public List<Board> listPage(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list", board);
+		return session.selectList(namespace+".listpage", cri);
 	}
 	
 	/*게시판 글쓰기*/
