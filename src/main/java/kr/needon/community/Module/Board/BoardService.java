@@ -22,6 +22,8 @@ public interface BoardService {
 	
 	public Board view(Board board)throws Exception;
 	
+	public int getListCount(Criteria cri) throws Exception;
+	
 	public void viewCount(Board board)throws Exception;
 	
 	public boolean delete(Board board)throws Exception;

@@ -97,5 +97,12 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
+	
+	/*게시판 총 갯수*/
+	@Override
+	public int getListCount(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getListCount(cri);
+	}
 
 }

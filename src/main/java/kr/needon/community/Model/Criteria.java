@@ -7,7 +7,7 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page = 1;
-		this.perPageNum = 1;
+		this.perPageNum = 10;
 	}
 
 	public int getPage() {
@@ -46,4 +46,14 @@ public class Criteria {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	@Override
+	public String toString() {
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", category=" + category + ", getPage()="
+				+ getPage() + ", getPerPageNum()=" + getPerPageNum() + ", getPageStart()=" + getPageStart()
+				+ ", getCategory()=" + getCategory() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }

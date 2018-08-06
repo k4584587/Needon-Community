@@ -1,10 +1,9 @@
 package kr.needon.community;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Module.Board.BoardDAOImpl;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import lombok.extern.java.Log;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +12,14 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Module.Board.BoardDAOImpl;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,9 +56,14 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void getListCount() throws Exception{
-		int result = dao.getListCount();
-		System.out.println(result);
+	public void uri(int page) {
+		UriComponents uriComponets = UriComponentsBuilder.newInstance()
+													.path("/board/view")
+													.queryParam("no", 12)
+													.queryParam("perPageNum", 20)
+													.build();
+		log.info("/board/view?no=12&perPageNum=20");
+		log.info(uriComponets.toString());
 	}
 	
 	@Test

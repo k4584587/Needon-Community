@@ -24,7 +24,7 @@
             <c:forEach items="${list }" var="list">
                 <tr>
                 <td>${ list.no }</td>
-                <td><a href="<c:url value="/board/view?no=${list.no }&category=${category }" />">${ list.subject }</a></td>
+                <td><a href="<c:url value="/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }" />">${ list.subject }</a></td>
                 <td> 작성자</td>
                 <td>${ list.read_count }</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }"/></td>
@@ -42,7 +42,21 @@
 <!-- 게시판 목록 끝 -->
 
 <!-- 페이징 처리 시작 -->
+${pageMaker }
 
+<div>
+	<ul>
+<c:if test = "${pageMaker.prev }">
+	<a href = "<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.startPage - 1)}"/>">&laquo;</a>
+</c:if>
+<c:forEach var="a" begin="${pageMaker.startPage }" end="${pageMaker.totalPage }">
+		<a href="<c:url value="/board/${category }/list${pageMaker.uri(a)}"/>">${a }</a>
+</c:forEach>
+<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+	<a href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">&raquo;</a>
+</c:if>
+</ul>
+</div>
 <!-- 페이징 처리 끝 -->
 
 <button class="btn btn-info" style="float: right;margin-bottom: 10px;" onClick="location= '<c:url value="/board/write_from?category=${category }"/>'">글쓰기</button>

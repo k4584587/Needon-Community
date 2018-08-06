@@ -46,11 +46,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	/* 게시판 총 갯수 */
-	public int getListCount() throws Exception {
-		int count = 0;	
-		count = ((Integer) session.selectOne(namespace+".listcount")).intValue();
+	public int getListCount(Criteria cri) throws Exception {
+	
+		return session.selectOne(namespace+".listcount", cri);
 
-		return count;
 	}
 	
 	/*게시판 조회수 증가*/

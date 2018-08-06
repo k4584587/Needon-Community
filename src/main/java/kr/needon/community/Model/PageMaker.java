@@ -1,9 +1,13 @@
 package kr.needon.community.Model;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 	
 	private int totalCount;
 	private int startPage;
+	private int endPage;
 	private int totalPage;
 	private boolean prev;
 	private boolean next;
@@ -20,14 +24,15 @@ public class PageMaker {
 		startPage = (totalPage - limit) + 1;
 		
 		// 마지막 페이지 10, 20, 30...
-		int endPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
+		endPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
 		
 		if (totalPage > endPage) {
 			totalPage = endPage;
 		}
 		
 		prev = startPage == 1 ? false : true;
-		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
+		next = totalPage * cri.getPerPageNum() >= totalCount ? false : true;
+	
 	}
 	
 	public void setCri(Criteria cri) {
@@ -88,4 +93,27 @@ public class PageMaker {
 		return cri;
 	}
 	
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public String uri(int page) {
+		UriComponents uriComponets = UriComponentsBuilder.newInstance()
+													.queryParam("page", page)
+													.queryParam("perPageNum", cri.getPerPageNum())
+													.build();
+		return uriComponets.toUriString();
+	}
+
+	@Override
+	public String toString() {
+		return "PageMaker [endPage="+endPage+"totalCount=" + totalCount + ", startPage=" + startPage + ", totalPage=" + totalPage
+				+ ", prev=" + prev + ", next=" + next + ", limit=" + limit + ", cri=" + cri + "]";
+	}
+
+
 }

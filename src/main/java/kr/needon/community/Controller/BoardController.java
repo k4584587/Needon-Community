@@ -41,7 +41,8 @@ public class BoardController {
 		model.addAttribute("list", service.listpage(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(131);
+		//pageMaker.setTotalCount(131);
+		pageMaker.setTotalCount(service.getListCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
@@ -50,7 +51,7 @@ public class BoardController {
 	
 	/*게시판 조회*/
 	@RequestMapping("/view")
-	public String board_view(Board board, Model model) throws Exception{		
+	public String board_view(Board board, @ModelAttribute("cri") Criteria cri,Model model) throws Exception{		
 		
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
