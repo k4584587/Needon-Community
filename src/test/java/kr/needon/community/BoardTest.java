@@ -56,17 +56,6 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void uri(int page) {
-		UriComponents uriComponets = UriComponentsBuilder.newInstance()
-													.path("/board/view")
-													.queryParam("no", 12)
-													.queryParam("perPageNum", 20)
-													.build();
-		log.info("/board/view?no=12&perPageNum=20");
-		log.info(uriComponets.toString());
-	}
-	
-	@Test
 	public void ListCri()throws Exception{
 		Criteria cri = new Criteria();
 		cri.setPage(2);
