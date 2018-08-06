@@ -59,9 +59,10 @@
                 <h1 class="h3 mb-3 font-weight-normal">니드온 로그인</h1>
                 <label for="inputUsername" class="sr-only">아이디</label>
                 <input type="text" name="username" id="inputUsername" class="form-control" placeholder="아이디" required autofocus>
-                <span id="input_error"></span>
+                <span id="username_input_error"></span>
                 <label for="inputPassword" class="sr-only">비밀번호</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+                <span id="password_input_error"></span>
                 <div class="checkbox mb-3">
                     <c:if test="${param.error != null}">
                         <div class="error">아이디 또는 비밀번호를 다시 확인하세요.</div>
@@ -78,14 +79,12 @@
     </div>
 </center>
 <script>
-    var id_null = 0;
+
     $(function () {
+
         console.log("login ajax call!");
         $("input[id='inputUsername']").on("input", function() {
             console.log("아이디 입력값 " + $("input[id='inputUsername']").val().length);
-
-            var count = 0;
-
             if($("input[id='inputUsername']").val().length == 0) {
                 console.log("아이디 입력값이 null 임");
                 $.ajax({
@@ -93,15 +92,38 @@
                     type:'GET',
                     contentType: "application/json; charset=UTF-8",
                     success : function(data) {
-
-                            var error_html = "<div class=\"error\">아이디를 입력해주세요.</div>";
-                            $('#input_error').html(error_html);
-
+                        var error_html = "<div class=\"error\">아이디를 입력해주세요.</div>";
+                        $('#username_input_error').html(error_html);
                     }
                 });
+            } else {
+                console.log("값이 입력됨");
+                $('#username_input_error').html(null);
             }
         });
+
+        $("input[id='inputPassword']").on("input", function() {
+
+            if($("input[id='inputPassword']").val().length == 0) {
+                console.log("아이디 입력값이 null 임");
+                $.ajax({
+                    async:true,
+                    type:'GET',
+                    contentType: "application/json; charset=UTF-8",
+                    success : function(data) {
+                        var error_html = "<div class=\"error\">비밀번호를 입력해주세요.</div>";
+                        $('#password_input_error').html(error_html);
+                    }
+                });
+            } else {
+                console.log("값이 입력됨");
+                $('#password_input_error').html(null);
+            }
+        });
+
     })
+
 </script>
 </body>
 </html>
+
