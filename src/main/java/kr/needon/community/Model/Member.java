@@ -25,6 +25,7 @@ public class Member implements UserDetails {
     private String password;
     private String name;
     private String nick;
+    private String phone;
     private String birth;
     private int sex;
     private String email;
@@ -35,7 +36,7 @@ public class Member implements UserDetails {
     private String email_ck;
     private int point;
     private String follow;
-    private byte[]photo;
+    private String photo;
     private int level;
     private int exp;
     private int msg_ck;
