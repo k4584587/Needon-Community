@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-test 여긴 plj
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="<%=request.getContextPath()%>/js/member.js"></script>
+<script src="<%=request.getContextPath() %>/WEP-INF/views/user/js/member.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	//우편번호, 주소 Daum API
@@ -30,7 +29,7 @@ test 여긴 plj
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td><input name="id" id="id" size="14" value="1" /> 
+				<td><input name="username" id="username" size="14" value="1" /> 
 				<input type="button" value="중복체크" onclick="id_check()" /></td>
 			</tr>
 			 <tr>
@@ -50,6 +49,16 @@ test 여긴 plj
 				<td><input id="nick" name="nick" value="1"/></td>
 			</tr>
 			<tr>
+				<th>핸드폰</th>
+				<td><%@ include file="include/phone_number.jsp"%>
+					<select name="phone1">
+						<c:forEach var="t" items="${phone }" begin="0" end="16">
+							<option value="${t }">${t }</option>
+						</c:forEach>
+				</select>-<input name="phone2" id="phone2" size="4" maxlength="4" value=1 />-<input
+					name="phone3" id="phone3" size="4" maxlength="4" value=1 /></td>
+			</tr>
+			<tr>
 				<th>생년월일</th>
 				<td><input  id="birth1" name="birth1" value=1 />-<input type="password" id="birth2" name="birth2" value=1 />
 				
@@ -63,16 +72,7 @@ test 여긴 plj
 				</td>
 			</tr>
 			
-			<tr>
-				<th>핸드폰</th>
-				<%-- <td><%@ include file="../include/phone_number.jsp"%> --%>
-					<select name="phone1">
-						<c:forEach var="t" items="${phone }" begin="0" end="16">
-							<option value="${t }">${t }</option>
-						</c:forEach>
-				</select>-<input name="phone2" id="phone2" size="4" maxlength="4" value=1 />-<input
-					name="phone3" id="phone3" size="4" maxlength="4" value=1 /></td>
-			</tr>
+			
 
 			<tr>
 				<th>전자우편</th>
@@ -106,6 +106,10 @@ test 여긴 plj
 			<tr>
 				<th>나머지 주소</th>
 				<td><input name="address2" id="address2" size="40" value=1 /></td>
+			</tr>
+			<tr>
+				<th>프로필</th>
+				<td><input type="text" name="profile" id="profile" size=50/></td>
 			</tr>
 
 			<tr>
