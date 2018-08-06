@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 //=====================================
 //클래스 설명 : 회원관리 컨트롤러 클래스
-//작성자 : 김현우
+//작성자 : 김현우,최민승
 //=====================================
 
 @Controller
