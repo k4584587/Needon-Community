@@ -34,27 +34,9 @@
 		 $("#nick").val("").focus();
 		 return false;
 	 }
-	 if($.trim($("#birth1").val())==""){
-		 alert("생년월일을 입력하세요!");
-		 $("#birth1").val("").focus();
-		 return false;
-	 }
-	 if($.trim($("#birth2").val())==""){
-		 alert("생년월일을 입력하세요!");
-		 $("#birth2").val("").focus();
-		 return false;
-	 }
 	 
-	 /*if($.trim($("#tel2").val())==""){
-		 alert("전화번호를 입력하세요!");
-		 $("#tel2").val("").focus();
-		 return false;
-	 }
-	 if($.trim($("#tel3").val())==""){
-		 alert("전화번호를 입력하세요!");
-		 $("#tel3").val("").focus();
-		 return false;
-	 }*/
+	 
+	
 	 if($.trim($("#phone2").val())==""){
 		 alert("휴대전화번호를 입력하세요!");
 		 $("#phone2").val("").focus();
@@ -63,6 +45,16 @@
 	 if($.trim($("#phone3").val())==""){
 		 alert("휴대전화번호를 입력하세요!");
 		 $("#phone3").val("").focus();
+		 return false;
+	 }
+	 if($.trim($("#birth1").val())==""){
+		 alert("생년월일을 입력하세요!");
+		 $("#birth1").val("").focus();
+		 return false;
+	 }
+	 if($.trim($("#birth2").val())==""){
+		 alert("생년월일을 입력하세요!");
+		 $("#birth2").val("").focus();
 		 return false;
 	 }
 	 if($.trim($("#mailid").val())==""){
@@ -75,11 +67,11 @@
 		 $("#domain").val("").focus();
 		 return false;
 	 }		 
-	 /* if($.trim($("#join_zip1").val())==""){
+	  if($.trim($("#post").val())==""){
 	 alert("우편번호를 입력하세요!");
-	 $("#join_zip1").val("").focus();
+	
 	 return false;
- 	}*/
+ 	}
 	 /*if($.trim($("#join_zip2").val())==""){
 	 alert("우편번호를 입력하세요!");
 	 $("#join_zip2").val("").focus();
@@ -101,7 +93,31 @@
 		alert("우편번호 검색 버튼을 클릭하세요!");
 	}
  
-
+ function domain_list() {
+	 var num=f.mail_list.selectedIndex;
+	 
+	 /*selectedIndex속성은 select객체하위의 속성으로서 해당리스트 목록번호를 반환
+	  */
+	 //alert(f.mail_list.options[num].value);
+	 //num==-1은 해당 리스트 목록이 없다
+	 if(num==-1){
+		 return true;
+	 }
+	 if(f.mail_list.value=="0")
+	 {
+		 f.domain.value="";
+		 f.domain.readOnly=false;
+		 f.domain.focus();
+	 }
+	 
+	 else{
+		 //리스트 목록을 선택했을 때
+		 f.domain.value=f.mail_list.options[num].value;
+		 f.domain.readOnly=true;
+		 
+	 }
+	 
+ }
 
 
 
