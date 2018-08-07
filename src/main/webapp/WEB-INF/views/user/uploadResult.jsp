@@ -4,7 +4,7 @@
 
 <c:if test="${result == 1}">
 	<script>
-		alert("파일은 100kb까지 업로드 가능.");
+		alert("파일은 10mb까지 업로드 가능.");
 		history.go(-1);
 	</script>
 </c:if>
@@ -13,5 +13,12 @@
 	<script>
 		alert("첨부파일은 jpg,gif,png만 업로드 가능");
 		history.go(-1);
+	</script>
+</c:if>
+
+<c:if test="${result == 3 }">
+	<script>
+		alert("else");
+		histrory.go(-1);
 	</script>
 </c:if>

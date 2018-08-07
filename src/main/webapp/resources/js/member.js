@@ -87,6 +87,11 @@
 		 $("#address2").val("").focus();
 		 return false;
 	 }
+	 if($.trim($("#profile").val())==""){
+		 alert("프로필을 입력하세요!");
+		 $("#profile").val("").focus();
+		 return false;
+	 }
  }
  
  function post_search(){
