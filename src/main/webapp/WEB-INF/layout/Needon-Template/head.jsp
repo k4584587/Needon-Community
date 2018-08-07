@@ -25,6 +25,8 @@
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 		crossorigin="anonymous"></script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
 <!-- insert custom css -->  
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 
