@@ -36,7 +36,7 @@ public class Member implements UserDetails {
     private String email_ck;
     private int point;
     private String follow;
-    private String photo;
+    private byte[] photo;
     private int level;
     private int exp;
     private int msg_ck;
@@ -96,8 +96,8 @@ public class Member implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-    
-    
 
-    
+
+
+
 }

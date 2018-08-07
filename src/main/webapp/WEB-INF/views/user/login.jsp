@@ -72,7 +72,7 @@
                     </label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-                <button class="btn btn-lg btn-success btn-block" type="submit">회원가입</button>
+                <a href="<c:url value="/user/userJoinForm" />" class="btn btn-lg btn-success btn-block" style="color: white">회원가입</a>
                 <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>
             </form>
         </div>

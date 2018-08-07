@@ -1,11 +1,7 @@
 package kr.needon.community.Controller;
 
-import java.io.File;
-import java.lang.reflect.Member;
-import java.util.StringTokenizer;
-
-import javax.servlet.http.HttpServletRequest;
-
+import kr.needon.community.Model.Member;
+import kr.needon.community.Module.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.needon.community.Module.User.UserService;
-import lombok.Data;
+import javax.servlet.http.HttpServletRequest;
+import java.util.StringTokenizer;
 
 //=====================================
 //클래스 설명 : 회원관리 컨트롤러 클래스
@@ -52,8 +48,7 @@ public class UserController {
 
 	// 폼에서 값 받아와서 db에 저장
 	@RequestMapping(value = "/userJoin_ok", method = RequestMethod.POST)
-	public String userJoin_Ok(@RequestParam("photo1") MultipartFile mf, kr.needon.community.Model.Member member,
-			HttpServletRequest request, Model model) throws Exception {
+	public String userJoin_Ok(@RequestParam("img") MultipartFile mf, Member member, HttpServletRequest request, Model model) throws Exception {
 
 		String filename = mf.getOriginalFilename();
 		int size = (int) mf.getSize();
@@ -87,29 +82,18 @@ public class UserController {
 				model.addAttribute("result", result);
 
 				return "user/uploadResult";
-			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+			} /*else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
 
 				result = 2;
 
 				model.addAttribute("result", result);
 
 				return "user/uploadResult";
-			} 
-				
-			if (size > 0) { // 첨부파일이 전송된 경우
-				
-				mf.transferTo(new File(path + "/" + filename));
-				
-			}
-			
-		}
-		
-		
-		
+			} */
 
-		String phone1 = request.getParameter("phone1").trim();
 		String phone2 = request.getParameter("phone2").trim();
 		String phone3 = request.getParameter("phone3").trim();
+		String phone1 = request.getParameter("phone1").trim();
 		String phone = phone1 + "-" + phone2 + "-" + phone3;
 
 		String mailid = request.getParameter("mailid").trim();
@@ -122,13 +106,19 @@ public class UserController {
 
 		member.setPhone(phone);
 		member.setEmail(email);
-		member.setPhoto(filename);
+		member.setPhoto(mf.getBytes());
 		member.setBirth(birth);
 
 		int out = service.member_Join(member);
 
 		if (out == 1)
 			System.out.println("성공");
+
+		}
+
+
+
+
 
 		return "redirect:login";
 	}

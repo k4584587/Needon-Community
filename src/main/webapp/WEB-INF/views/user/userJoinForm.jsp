@@ -115,7 +115,7 @@
 
 			<tr>
 				<th>프로필사진</th>
-				<td><input type="file" id="photo" name="photo1" /></td>
+				<td><input type="file" id="photo" name="img" /></td>
 			</tr> 
 		</table>
 
