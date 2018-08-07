@@ -24,8 +24,9 @@
 </head>
 <body>
 	
-	<form name="f" method="post" action="" onsubmit="return check()" 
+	<form name="f" method="post" action=<c:url value="/user/userJoin_ok"/> onsubmit="return check()" 
 			enctype="multipart/form-data"> 
+			
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
@@ -114,7 +115,7 @@
 
 			<tr>
 				<th>프로필사진</th>
-				<td><input type="file" id="photo" name="photo" /></td>
+				<td><input type="file" id="photo" name="photo1" /></td>
 			</tr> 
 		</table>
 
