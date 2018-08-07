@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.needon.community.Module.User.UserService;
 import lombok.Data;
 
 //=====================================
@@ -29,6 +30,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder; //페스워드 암호화시 사용하면됨.
+    
+    @Autowired
+    private UserService service;
 
     /**
      * 로그인 페이지
@@ -50,13 +54,7 @@ public class UserController {
     public String userJoinForm1() { 
     	return "user/test";  
     }
-    //테스트
-    @RequestMapping(value="/test", method=RequestMethod.POST)
-    public String userJoinForm2(@RequestParam("test") String test) { 
-    	System.out.println(test);
-    	return "";  
-    }
-    
+ 
     
     //폼에서 값 받아와서 db에 저장
     @RequestMapping(value="/userJoin_ok", method=RequestMethod.POST)
@@ -118,6 +116,12 @@ public class UserController {
 		member.setEmail(email);
 		member.setPhoto(filename);
 		member.setBirth(birth);
+		
+		int out=service.member_Join(member);
+		
+		if(out == 1)
+			System.out.println("성공");
+		
 		
 		
 		

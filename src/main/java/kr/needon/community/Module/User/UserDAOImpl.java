@@ -35,4 +35,10 @@ public class UserDAOImpl implements UserDAO {
     public Member getFindUser(String username) {
         return session.selectOne(namespace + ".getFindUser", username);
     }
+    
+    @Override
+    public int member_Join(Member member) {
+    	// TODO Auto-generated method stub
+    	return session.insert(namespace + ".memberInsert",member);
+    }
 }

@@ -4,9 +4,8 @@
                 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-<typeAliases>
-  <package name="kr.needon.community.Model"/>
-</typeAliases>
-
+	<typeAliases>
+	  <package name="kr.needon.community.Model"/>
+	</typeAliases>
 
 </configuration>

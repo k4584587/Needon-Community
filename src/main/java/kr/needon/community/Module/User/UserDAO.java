@@ -17,5 +17,7 @@ public interface UserDAO {
     public UserRole getUserRole(String username);
 
     public Member getFindUser(String username);
+    
+    public int member_Join(Member member);
 
 }

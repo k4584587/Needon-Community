@@ -40,5 +40,15 @@
 		  	username = #{username}
 
 	</select>
+	
+	<insert id="memberInsert" parameterType="Member">
+		insert into nb_member(username,password,name,
+		nick,phone,birth,sex,email,post,address1,address2,
+		profile,photo,register_date,last_date) values(#{username},#{password},#{name},
+		#{nick},#{phone},#{birth},#{sex},#{email},#{post},#{address1},#{address2},
+		#{profile},#{photo},NOW(),NOW())
+		
+	
+	</insert>
 
 </mapper>
