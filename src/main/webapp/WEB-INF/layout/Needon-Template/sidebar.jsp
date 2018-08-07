@@ -14,7 +14,7 @@
 				<div class="row" style="margin-bottom: 10px;">
 					<div class="col-auto" style="padding-right: 0px!important;">
 						<%--회원가입 구현되면 여기는 프로필 사진이 오는곳으로 수정바람--%>
-						<img src="http://via.placeholder.com/52">
+						<img src="<c:url value="/file/profile.png?username=${user.username}" />">
 					</div>
 					<div class="col-auto">
 						<div>${user.username} 님 <a href="#">내정보</a></div>
