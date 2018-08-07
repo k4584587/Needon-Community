@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-test 여긴 plj
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="<%=request.getContextPath()%>/js/member.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/member.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	//우편번호, 주소 Daum API
@@ -25,33 +24,43 @@ test 여긴 plj
 </head>
 <body>
 	
-	<form method="post" action="join_ok" onsubmit="return check()" 
+	<form method="post" action="" onsubmit="return check()" 
 			enctype="multipart/form-data"> 
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td><input name="id" id="id" size="14" value="1" /> 
+				<td><input name="username" id="username" size="14"  /> 
 				<input type="button" value="중복체크" onclick="id_check()" /></td>
 			</tr>
 			 <tr>
 				<th>비밀번호</th>
-				<td><input type="password" id="password" name="password" value="1" /></td>
+				<td><input type="password" id="password" name="password" /></td>
 			</tr>
 			<tr>
 				<th>비밀번호 확인</th>
-				<td><input type="password" id="password2" name="password2" value="1" /></td>
+				<td><input type="password" id="password2" name="password2" /></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input id="name" name="name" value="1" /></td>
+				<td><input id="name" name="name" /></td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
-				<td><input id="nick" name="nick" value="1"/></td>
+				<td><input id="nick" name="nick" /></td>
+			</tr>
+			<tr>
+				<th>핸드폰</th>
+				<td><%@ include file="include/phone_number.jsp"%>
+					<select name="phone1">
+						<c:forEach var="t" items="${phone }" begin="0" end="16">
+							<option value="${t }">${t }</option>
+						</c:forEach>
+				</select>-<input name="phone2" id="phone2" size="4" maxlength="4"/>-<input
+					name="phone3" id="phone3" size="4" maxlength="4"  /></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td><input  id="birth1" name="birth1" value=1 />-<input type="password" id="birth2" name="birth2" value=1 />
+				<td><input  id="birth1" name="birth1" value=1 />-<input type="password" id="birth2" name="birth2"  />
 				
 				</td>
 			</tr>
@@ -63,20 +72,11 @@ test 여긴 plj
 				</td>
 			</tr>
 			
-			<tr>
-				<th>핸드폰</th>
-				<%-- <td><%@ include file="../include/phone_number.jsp"%> --%>
-					<select name="phone1">
-						<c:forEach var="t" items="${phone }" begin="0" end="16">
-							<option value="${t }">${t }</option>
-						</c:forEach>
-				</select>-<input name="phone2" id="phone2" size="4" maxlength="4" value=1 />-<input
-					name="phone3" id="phone3" size="4" maxlength="4" value=1 /></td>
-			</tr>
+			
 
 			<tr>
 				<th>전자우편</th>
-				<td><input name="mailid" id="mailid" size="10" value=1 />@
+				<td><input name="mailid" id="mailid" size="10"  />@
 				<input name="domain"
 					id="domain" size="20" readonly value=1  />
 					 <!--readonly는 단지 쓰기,수정이 불가능하고 읽기만 가능하다 //-->
@@ -95,7 +95,7 @@ test 여긴 plj
 			<tr>
 				<th>우편번호</th>
 				<td>
-					<input name="post" id="post" size="5" readonly onclick="post_search()" value=1 />
+					<input name="post" id="post" size="5" readonly onclick="post_search()" />
 					<input type="button" value="우편번호검색" onclick="openDaumPostcode()" /></td>
 			</tr>
 			<tr>
@@ -105,7 +105,11 @@ test 여긴 plj
 			</tr>
 			<tr>
 				<th>나머지 주소</th>
-				<td><input name="address2" id="address2" size="40" value=1 /></td>
+				<td><input name="address2" id="address2" size="40" /></td>
+			</tr>
+			<tr>
+				<th>프로필</th>
+				<td><input type="text" name="profile" id="profile" size="50" /></td>
 			</tr>
 
 			<tr>

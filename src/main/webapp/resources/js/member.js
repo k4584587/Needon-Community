@@ -1,8 +1,8 @@
 ﻿
  function check(){
-	 if($.trim($("#id").val())==""){
+	 if($.trim($("#username").val())==""){
 		 alert("회원아이디를 입력하세요!");
-		 $("#id").val("").focus();
+		 $("#username").val("").focus();
 		 return false;
 	 }
 	 if($.trim($("#password").val())==""){
