@@ -19,11 +19,18 @@
 		</tr>
 	</thead>
 	<tbody>
+		<!-- 화면 출력 번호  변수 정의 -->
+		<c:set var="num"
+			value="${pageMaker.totalCount-(pageMaker.cri.page-1)*10}" />
 		<c:choose>
 			<c:when test="${fn:length(list) != 0 }">
 				<c:forEach items="${list }" var="list">
 					<tr>
-						<td>${ list.no }</td>
+						<td>
+							<!-- 번호 출력 부분 --> 
+							<c:out value="${num}" /> 
+							<c:set var="num" value="${num-1}" />
+						</td>
 						<td><a
 							href="<c:url value="/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }" />">${ list.subject }</a></td>
 						<td>작성자</td>
@@ -46,13 +53,17 @@
 <!-- 페이징 처리 시작 -->
 <%-- ${pageMaker } <br>
 ${pageMaker.cri.page} --%>
+
 <div align=center>
-	<c:if test = "${pageMaker.cri.page != 1 }">
-	<a href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.start)}"/>">&laquo; 처음</a>
-	</c:if>
-	<c:if test = "${pageMaker.startPage >= 11 }">
+	<c:if test="${pageMaker.cri.page != 1 }">
 		<a
-			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.startPage - 1)}"/>">&lt; 이전</a>
+			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.start)}"/>">&laquo;
+			처음</a>
+	</c:if>
+	<c:if test="${pageMaker.startPage >= 11 }">
+		<a
+			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.startPage - 1)}"/>">&lt;
+			이전</a>
 	</c:if>
 	<c:forEach var="a" begin="${pageMaker.startPage }"
 		end="${pageMaker.totalPage }">
@@ -60,12 +71,14 @@ ${pageMaker.cri.page} --%>
 	</c:forEach>
 	<c:if test="${pageMaker.next  }">
 		<a
-			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">다음 &gt;</a>
+			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">다음
+			&gt;</a>
 		<a
-			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.endPage)} "/>">&raquo; 마지막</a>
+			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.endPage)} "/>">&raquo;
+			마지막</a>
 	</c:if>
 </div>
 <!-- 페이징 처리 끝 -->
 
 <button class="btn btn-info" style="float: right; margin-bottom: 10px;"
-	onClick="location= '<c:url value="/board/write_from?category=${category }"/>'">글쓰기</button>
+	onClick="location= '<c:url value="/board/write_from?page=${pageMaker.cri.page }&category=${category }"/>'">글쓰기</button>

@@ -5,6 +5,7 @@
 <form action="<c:url value="/board/write" />" method="post">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <input type="hidden" name="category" value="${param.category }"/>
+<input type="hidden" name="page" value="${param.page}" />
 	<table align="center" border=1>
 		<tr>
 			<th>작성자</th>
