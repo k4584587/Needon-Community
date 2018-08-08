@@ -84,10 +84,11 @@
                     <div class="checkbox mb-3">
                         <label style="float: left!important;">
                             <input type="checkbox" value="remember-me" style="margin-top: 10px"> 자동로그인
-                            &nbsp;<a href="#" onclick="psw_find()">비밀번호 찾기</a>
                         </label>
                     </div>
                     <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+                    <hr>
+                    <a style="float: left!important;"  href="#" onclick="psw_find()">비밀번호 찾기</a>
                     <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>
                 </form>
             </div>
