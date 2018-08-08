@@ -1,11 +1,16 @@
 package kr.needon.community.Controller;
 
 import kr.needon.community.Model.Member;
+import kr.needon.community.Module.admin.AdminService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/admin/**")
 public class AdminController {
+	@Autowired
+	AdminService adminService;
 	
 
     @GetMapping("/")
@@ -32,9 +39,12 @@ public class AdminController {
     //유저목록 출력
     @RequestMapping(value="/userList")
     public String userList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
+    	Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
     	
-    	return "";
+    	Map<String,Object> userList = adminService.user_List(request, response);
+    	model.addAllAttributes(userList);
+    	return "admin/userList";
     }
    
 

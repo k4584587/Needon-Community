@@ -41,7 +41,7 @@
 
 	</select>
 	
-	<select id="getUserCount">
+	<select id="getUserCount" resultType="int">
 		SELECT
 		  count(username)
 		FROM

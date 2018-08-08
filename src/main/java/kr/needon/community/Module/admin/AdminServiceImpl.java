@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService{
 	AdminDAO adminDao;
 	
 	public Map<String,Object> user_List(HttpServletRequest request,
-			HttpServletResponse response, Model model) throws Exception{
+			HttpServletResponse response) throws Exception{
 		
 		List<Member> userList = new ArrayList<Member>();
 		int page=1;
@@ -36,7 +36,6 @@ public class AdminServiceImpl implements AdminService{
 		
 		//총 리스트 수를 받아온다
 		int listcount=adminDao.getListCount();
-		System.out.println(listcount);
 		
 		
 		//유저 리스트 페이지로 보낼 변수들을 맵으로 저장해서 보낸다
