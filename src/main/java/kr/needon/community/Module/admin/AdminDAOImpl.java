@@ -2,12 +2,16 @@ package kr.needon.community.Module.admin;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.needon.community.Module.Board.BoardDAO;
 
 //=====================================
 //클래스 설명 : 관리자 DAO 클래스
 //작성자 : 최민승
 //=====================================
-public class AdminDAOImpl {
+@Repository
+public class AdminDAOImpl implements AdminDAO{
 	@Autowired
 	SqlSession session;
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import kr.needon.community.Model.Member;
@@ -17,7 +18,8 @@ import kr.needon.community.Model.Member;
 //클래스 설명 : 관리자 service 클래스
 //작성자 : 최민승
 //=====================================
-public class AdminServiceImpl {
+@Service
+public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AdminDAO adminDao;
 	
