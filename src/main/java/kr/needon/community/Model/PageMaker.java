@@ -9,8 +9,8 @@ public class PageMaker {
 	private int startPage;
 	private int endPage;
 	private int totalPage;
-	private boolean prev;
 	private boolean next;
+	private int start = 1;
 	
 	private int limit = 10;		// 한 화면에 출력할 레코드 수
 	
@@ -30,7 +30,6 @@ public class PageMaker {
 			totalPage = endPage;
 		}
 		
-		prev = startPage == 1 ? false : true;
 		next = totalPage * cri.getPerPageNum() >= totalCount ? false : true;
 	
 	}
@@ -63,14 +62,6 @@ public class PageMaker {
 
 	public void setTotalPage(int endPage) {
 		this.totalPage = totalPage;
-	}
-
-	public boolean isPrev() {
-		return prev;
-	}
-
-	public void setPrev(boolean prev) {
-		this.prev = prev;
 	}
 
 	public boolean isNext() {
@@ -106,14 +97,29 @@ public class PageMaker {
 													.queryParam("page", page)
 													.queryParam("perPageNum", cri.getPerPageNum())
 													.build();
+		if(page == 0) {
+			UriComponents uriComponets1 = UriComponentsBuilder.newInstance()
+					.queryParam("page", 1)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.build();
+			return uriComponets1.toUriString();
+		}
 		return uriComponets.toUriString();
 	}
 
+
 	@Override
 	public String toString() {
-		return "PageMaker [endPage="+endPage+"totalCount=" + totalCount + ", startPage=" + startPage + ", totalPage=" + totalPage
-				+ ", prev=" + prev + ", next=" + next + ", limit=" + limit + ", cri=" + cri + "]";
+		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", totalPage=" + totalPage + ", next=" + next + ", start=" + start +  ", limit=" + limit + ", cri=" + cri + "]";
 	}
 
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
 
 }
