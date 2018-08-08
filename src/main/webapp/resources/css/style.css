@@ -74,13 +74,32 @@ tr {
 .form-signin .form-control:focus {
     z-index: 2;
 }
-.form-signin input[type="email"] {
+.form-signin input[type="inputUsername"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-.form-signin input[type="password"] {
+.form-signin input[type="inputPassword"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+/*Phone Number Input "hack"*/
+.phone-number .col-xs-3::after{
+    content: "-";
+    position:absolute;
+    right: 5px;
+    color: black;
+    border: 0px solid;
+    top: 5px;
+}
+
+.phone-number .col-xs-4{
+    width:25%;
+}
+
+.phone-number .col-xs-3, .phone-number .col-xs-4{
+
+    padding-left:0;
 }

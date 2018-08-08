@@ -88,46 +88,39 @@ public class UserController {
 				model.addAttribute("result", result);
 
 				return "user/uploadResult";
-			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+			} /*else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
 
 				result = 2;
 
 				model.addAttribute("result", result);
 
-				return "user/uploadResult";
-			}
+				return "user/uploadResult";*/
+			//}
 			
 			//password 암호화
 			member.setPassword(passwordEncoder.encode(member.getPassword()));
 
-			String phone2 = request.getParameter("phone2").trim();
-			String phone3 = request.getParameter("phone3").trim();
-			String phone1 = request.getParameter("phone1").trim();
-			String phone = phone1 + "-" + phone2 + "-" + phone3;
+//			String birth1 = request.getParameter("birth1").trim();
+//			String birth2 = request.getParameter("birth2").trim();
+//			String birth = birth1 + "-" + birth2;
 
-			String mailid = request.getParameter("mailid").trim();
-			String domain = request.getParameter("domain").trim();
-			String email = mailid + "@" + domain;
-
-			String birth1 = request.getParameter("birth1").trim();
-			String birth2 = request.getParameter("birth2").trim();
-			String birth = birth1 + "-" + birth2;
-
-			member.setPhone(phone);
-			member.setEmail(email);
 			member.setPhoto(mf.getBytes());
-			member.setBirth(birth);
+			member.setBirth("");
+			member.setAddress1("");
+			member.setAddress2("");
 
 			int out = service.member_Join(member);
 
 			if (out == 1)
 				System.out.println("성공");
+                model.addAttribute("msg","회원가입되었습니다.");
+                model.addAttribute("url","/");
 
 		}
 
 		model.addAttribute("username", member.getUsername());
 
-		return "redirect:../file/profile.jpg";
+		return "/msg";
 	}
 	
 	 //비밀번호 찾기 폼
