@@ -36,7 +36,7 @@ public class Member implements UserDetails {
     private String email_ck;
     private int point;
     private String follow;
-    private String photo;
+    private byte[] photo;
     private int level;
     private int exp;
     private int msg_ck;
@@ -44,8 +44,7 @@ public class Member implements UserDetails {
     private Timestamp last_date;
     private boolean enabled;
     List<UserRole> getUserRole;
-
-
+    
     @Override
     public String getPassword() {
         return this.password;
@@ -85,5 +84,20 @@ public class Member implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+
 
 }
