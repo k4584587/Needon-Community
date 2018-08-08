@@ -120,4 +120,5 @@ public class UserController {
 		return "redirect:../file/profile.jpg";
 	}
 
+
 }
