@@ -44,9 +44,9 @@
 <!-- 게시판 목록 끝 -->
 
 <!-- 페이징 처리 시작 -->
-${pageMaker } <br>
-${pageMaker.cri.page}
-<div>
+<%-- ${pageMaker } <br>
+${pageMaker.cri.page} --%>
+<div align=center>
 	<c:if test = "${pageMaker.cri.page != 1 }">
 	<a href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.start)}"/>">&laquo; 처음</a>
 	</c:if>
@@ -60,7 +60,7 @@ ${pageMaker.cri.page}
 	</c:forEach>
 	<c:if test="${pageMaker.next  }">
 		<a
-			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">&gt; 다음</a>
+			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">다음 &gt;</a>
 		<a
 			href="<c:url value="/board/${category }/list${pageMaker.uri(pageMaker.endPage)} "/>">&raquo; 마지막</a>
 	</c:if>
