@@ -35,6 +35,13 @@
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous">
+      
+<script>      
+      /*비번찾기 공지창*/
+ function psw_find(){
+	 window.open("psw_find","비번찾기","width=400,height=400");
+ }
+ </script>
 
 <script
         src="//code.jquery.com/jquery-3.3.1.js"
@@ -73,6 +80,7 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
                 <a href="<c:url value="/user/userJoinForm" />" class="btn btn-lg btn-success btn-block" style="color: white">회원가입</a>
+                <input type="button" value="비번찾기" class="btn btn-lg btn-primary btn-block" onclick="psw_find()" />
                 <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>
             </form>
         </div>

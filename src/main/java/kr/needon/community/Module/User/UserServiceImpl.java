@@ -21,4 +21,19 @@ public class UserServiceImpl implements UserService {
 		return userDAO.member_Join(member);
 	}
 	
+	@Override
+	public Boolean getUpdate(Member member) {
+		// TODO Auto-generated method stub
+		
+		try {
+			userDAO.getUpdate(member);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

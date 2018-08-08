@@ -230,6 +230,13 @@
             <artifactId>tiles-api</artifactId>
             <version>2.2.2</version>
         </dependency>
+        
+        <!-- EMail -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>

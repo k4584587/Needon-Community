@@ -10,7 +10,7 @@ import java.util.List;
 
 //=====================================
 //클래스 설명 : 회원관리 DAO 클래스
-//작성자 : 김현우
+//작성자 : 김현우, 박건우
 //=====================================
 
 @Repository
@@ -41,4 +41,11 @@ public class UserDAOImpl implements UserDAO {
     	// TODO Auto-generated method stub
     	return session.insert(namespace + ".memberInsert",member);
     }
+    
+    @Override
+	public void getUpdate(Member member) {
+		// TODO Auto-generated method stub
+		session.update(namespace+".psw_chage",member);
+		
+	}
 }

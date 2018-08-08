@@ -58,5 +58,14 @@
 		
 	
 	</insert>
+	
+	<update id="psw_chage">
+		UPDATE 
+			nb_member 
+		SET  
+			password=#{password}
+		WHERE username = #{username};
+	
+	</update>
 
 </mapper>

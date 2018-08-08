@@ -9,4 +9,6 @@ import kr.needon.community.Model.Member;
 public interface UserService {
 	
 	public int member_Join(Member member);
+	
+	public Boolean getUpdate(Member member);
 }
