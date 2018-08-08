@@ -14,5 +14,4 @@ import org.springframework.ui.Model;
 public interface AdminService {
 	public Map<String,Object> user_List(HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception;
-
 }

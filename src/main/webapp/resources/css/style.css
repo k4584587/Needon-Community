@@ -1,5 +1,8 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
 /* 초기화 */
 body {
+    font-family: 'Jeju Gothic', sans-serif;
     font-size: 13px;
     background-color: #eee;
 }
