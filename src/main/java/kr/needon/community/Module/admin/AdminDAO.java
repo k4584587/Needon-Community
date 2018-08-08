@@ -4,5 +4,5 @@ package kr.needon.community.Module.admin;
 //작성자 : 최민승
 //=====================================
 public interface AdminDAO {
-	public int getListCount() throws Exception;
+
 }

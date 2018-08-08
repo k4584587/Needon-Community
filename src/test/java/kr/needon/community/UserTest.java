@@ -28,7 +28,7 @@ public class UserTest {
     @Test
     public void UserPsswordEncoder() {
 
-        String rawPassword = "test1234";
+        String rawPassword = "1234";
         String encodedPassword = passwordEncoder.encode(rawPassword);
 
 
