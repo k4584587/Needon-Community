@@ -16,9 +16,3 @@
 	</script>
 </c:if>
 
-<c:if test="${result == 3 }">
-	<script>
-		alert("else");
-		histrory.go(-1);
-	</script>
-</c:if>

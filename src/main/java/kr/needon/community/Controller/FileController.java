@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class FileController {
     @Autowired
     UserDAO dao;
 
-    @GetMapping({"/profile.jpg", "/profile.png", "/profile.bmp"})
+    @RequestMapping({"/profile.jpg", "/profile.png", "/profile.bmp"})
     public void ProfileImg(HttpServletResponse res, String username) throws IOException {
 
         Member getUser = dao.getFindUser(username);

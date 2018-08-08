@@ -48,79 +48,76 @@ public class UserController {
 
 	// 폼에서 값 받아와서 db에 저장
 	@RequestMapping(value = "/userJoin_ok", method = RequestMethod.POST)
-	public String userJoin_Ok(@RequestParam("img") MultipartFile mf, Member member, HttpServletRequest request, Model model) throws Exception {
+	public String userJoin_Ok(@RequestParam("img") MultipartFile mf, Member member, HttpServletRequest request,
+			Model model) throws Exception {
 
-		String filename = mf.getOriginalFilename();
 		int size = (int) mf.getSize();
+		String filename = mf.getOriginalFilename();
 		String path = request.getRealPath("upload");
 
 		// 사진 없으면 null
-		if (size == 0)
+		if (size == 0) {
 			filename = "null";
-		
-		else {
 
-			
-			System.out.println("mf=" + mf);
-			System.out.println("filename=" + filename);
-			System.out.println("size=" + size);
-			System.out.println("Path=" + path);
+		} else {
 
 			int result = 0;
+
 			String file[] = new String[2];
 
 			StringTokenizer st = new StringTokenizer(filename, ".");
 			file[0] = st.nextToken();
 			file[1] = st.nextToken();
-			
-			System.out.println("file[0]"+file[0]);
-			System.out.println("file[1]"+file[1]);
 
-			//10000000
+			System.out.println("file[0]" + file[0]);
+			System.out.println("file[1]" + file[1]);
+
+			// 10000000
 			if (size > 10000000) {
 				result = 1;
 				model.addAttribute("result", result);
 
 				return "user/uploadResult";
-			} /*else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+			} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
 
 				result = 2;
 
 				model.addAttribute("result", result);
 
 				return "user/uploadResult";
-			} */
+			}
+			
+			//password 암호화
+			member.setPassword(passwordEncoder.encode(member.getPassword()));
 
-		String phone2 = request.getParameter("phone2").trim();
-		String phone3 = request.getParameter("phone3").trim();
-		String phone1 = request.getParameter("phone1").trim();
-		String phone = phone1 + "-" + phone2 + "-" + phone3;
+			String phone2 = request.getParameter("phone2").trim();
+			String phone3 = request.getParameter("phone3").trim();
+			String phone1 = request.getParameter("phone1").trim();
+			String phone = phone1 + "-" + phone2 + "-" + phone3;
 
-		String mailid = request.getParameter("mailid").trim();
-		String domain = request.getParameter("domain").trim();
-		String email = mailid + "@" + domain;
+			String mailid = request.getParameter("mailid").trim();
+			String domain = request.getParameter("domain").trim();
+			String email = mailid + "@" + domain;
 
-		String birth1 = request.getParameter("birth1").trim();
-		String birth2 = request.getParameter("birth2").trim();
-		String birth = birth1 + "-" + birth2;
+			String birth1 = request.getParameter("birth1").trim();
+			String birth2 = request.getParameter("birth2").trim();
+			String birth = birth1 + "-" + birth2;
 
-		member.setPhone(phone);
-		member.setEmail(email);
-		member.setPhoto(mf.getBytes());
-		member.setBirth(birth);
+			member.setPhone(phone);
+			member.setEmail(email);
+			member.setPhoto(mf.getBytes());
+			member.setBirth(birth);
 
-		int out = service.member_Join(member);
+			int out = service.member_Join(member);
 
-		if (out == 1)
-			System.out.println("성공");
+			if (out == 1)
+				System.out.println("성공");
 
 		}
 
+		model.addAttribute("username", member.getUsername());
 
-
-
-
-		return "redirect:login";
+		return "redirect:../file/profile.jpg";
 	}
 
 }
