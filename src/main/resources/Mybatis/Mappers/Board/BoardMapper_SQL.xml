@@ -9,7 +9,21 @@
 	</select> -->
 	
 	<select id="listpage" resultType="Board">
-		select * from nb_board_${category} where cm_ck=0 order by no desc, register_date desc
+		select * from nb_board_${category} 
+		<where>
+		<choose>
+			<when test="keyword != null and search!='subcon'">
+				${search} like CONCAT ('%', #{keyword}, '%')
+			</when>
+			<when test="keyword != null and search=='subcon'">
+				subject like CONCAT ('%', #{keyword}, '%') or
+				content like CONCAT ('%', #{keyword}, '%')
+			</when>
+			<otherwise>
+			cm_ck=0
+			</otherwise>
+		</choose>
+		</where> order by no desc, register_date desc
 		limit #{pageStart}, #{perPageNum};
 	</select>
 	
@@ -18,7 +32,16 @@
 	</select>
 	
 	<select id="listcount" resultType="int">
-		select count(no) from nb_board_${category};
+		select count(no) from nb_board_${category}
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like CONCAT ('%', #{keyword}, '%')
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				subject like CONCAT ('%', #{keyword}, '%') or
+				content like CONCAT ('%', #{keyword}, '%')
+			</if>
+		</where>;
 	</select>
 	
 	<update id="viewcount" parameterType="int">
