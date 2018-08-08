@@ -38,10 +38,10 @@ public class BoardController {
 		model.addAttribute("category", category);
 		
 		board.setCategory(category);
+		cri.setPerPageNum(10);
 		model.addAttribute("list", service.listpage(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		//pageMaker.setTotalCount(131);
 		pageMaker.setTotalCount(service.getListCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
@@ -69,11 +69,11 @@ public class BoardController {
 	
 	/*게시판 글쓰기*/
 	@RequestMapping(value = "/write", method =  RequestMethod.POST )
-	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request) throws Exception{		
+	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page) throws Exception{		
 		
 		service.insert(request, board);
 		
-		return "redirect:/board/"+board.getCategory()+"/list";
+		return "redirect:/board/"+board.getCategory()+"/list?page="+page;
 	}
 	
 	/*게시판 삭제폼*/
@@ -88,12 +88,12 @@ public class BoardController {
 	
 	/*게시판 삭제*/
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String board_delete_post(Board board) throws Exception{
+	public String board_delete_post(Board board, int page) throws Exception{
 		
 		log.info("delete.....");
 		service.delete(board);
 		
-		return "redirect:/board/"+board.getCategory()+"/list";
+		return "redirect:/board/"+board.getCategory()+"/list?page="+page;
 	}
 	
 	/*게시판 수정폼*/
@@ -108,12 +108,12 @@ public class BoardController {
 	
 	/*게시판 수정*/
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String board_modify_post(HttpServletRequest request, Board board, Model model)throws Exception{
+	public String board_modify_post(HttpServletRequest request, Board board, Model model, int page)throws Exception{
 		
 		model.addAttribute("board", board);
 		service.modify(request, board);
 		
-		return "redirect:/board/"+board.getCategory()+"/list";
+		return "redirect:/board/view?page="+page+"&no="+board.getNo()+"&category="+board.getCategory();
 	}
 	
 }

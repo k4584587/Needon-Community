@@ -94,13 +94,11 @@ public class PageMaker {
 
 	public String uri(int page) {
 		UriComponents uriComponets = UriComponentsBuilder.newInstance()
-													.queryParam("page", page)
-													.queryParam("perPageNum", cri.getPerPageNum())
+													.queryParam("page", page)												
 													.build();
 		if(page == 0) {
 			UriComponents uriComponets1 = UriComponentsBuilder.newInstance()
 					.queryParam("page", 1)
-					.queryParam("perPageNum", cri.getPerPageNum())
 					.build();
 			return uriComponets1.toUriString();
 		}

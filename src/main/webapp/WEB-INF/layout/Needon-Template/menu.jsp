@@ -6,8 +6,8 @@
 	<div class="container">
 		<div class="collapse navbar-collapse" id="navbarsExample07">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="<c:url value="/board/notice/list" />">공지사항</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value="/board/freeboard/list" />">자유게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value="/board/notice/list?page=1" />">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value="/board/freeboard/list?page=1" />">자유게시판</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value="/board/qna/list" />">문의사항</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
 			</ul>
