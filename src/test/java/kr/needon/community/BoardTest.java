@@ -12,8 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
@@ -39,8 +37,16 @@ public class BoardTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 	}
-
-
+	@Test
+	public void mybatis()throws Exception{
+		
+		Criteria cri = new Criteria();
+		
+		List<Board> result = service.listpage(cri);
+		System.out.println("결과 ==> " + result);
+	}
+	
+	
 	@Test
 	public void insert() throws Exception{
 		Board board = new Board();
@@ -55,17 +61,6 @@ public class BoardTest {
 		System.out.println("결과 ==> " + result);
 	}
 	
-	@Test
-	public void ListCri()throws Exception{
-		Criteria cri = new Criteria();
-		cri.setPage(2);
-		cri.setPerPageNum(20);
-		
-		List<Board> list = dao.listPage(cri);
-		
-		for(Board board : list) {
-			log.info(board.getNo()+" : "+board.getSubject());
-		}
-	}
+	
 	
 }

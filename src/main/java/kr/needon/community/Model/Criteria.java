@@ -4,6 +4,8 @@ public class Criteria {
 	private int page;
 	private int perPageNum;
 	private String category;
+	private String search;
+	private String keyword;
 	
 	public Criteria() {
 		this.page = 1;
@@ -45,6 +47,22 @@ public class Criteria {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	@Override

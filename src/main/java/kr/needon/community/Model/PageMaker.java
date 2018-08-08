@@ -11,6 +11,7 @@ public class PageMaker {
 	private int totalPage;
 	private boolean next;
 	private int start = 1;
+	private String category;
 	
 	private int limit = 10;		// 한 화면에 출력할 레코드 수
 	
@@ -118,6 +119,14 @@ public class PageMaker {
 
 	public void setStart(int start) {
 		this.start = start;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }
