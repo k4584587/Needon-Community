@@ -141,7 +141,7 @@ public class UserController {
     	
     	return"user/findForm";
     }
-    
+  
     @RequestMapping(value = "/count")
     public String pw_check(HttpServletRequest request,HttpSession session, Model model) {
     	
@@ -305,9 +305,9 @@ public class UserController {
     	
     	if(!password.equals(password2)) {
 			model.addAttribute("msg","비밀번호가 다릅니다");
-			/*model.addAttribute("count", 2);
+			model.addAttribute("count", 2);
 			model.addAttribute("url","/user/psw_find");
-			System.out.println("비밀번호가 다릅니다");*/
+			System.out.println("비밀번호가 다릅니다");
 			
 			return "/alert";
 			
