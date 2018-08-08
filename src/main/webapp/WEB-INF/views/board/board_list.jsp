@@ -63,7 +63,7 @@
 		<option value="subcon"
 			<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 	</select> <input type="text" name="keyword"> <input type="submit"
-		value="확인">
+		value="검색">
 </form>
 <!-- 검색 처리 끝 -->
 
