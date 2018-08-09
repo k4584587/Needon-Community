@@ -84,6 +84,9 @@
                     <label for="inputPassword" class="sr-only">비밀번호</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
                     <span id="password_input_error"></span>
+                    <c:if test="${ param.error != null}">
+                        <div class="error">아이디 또는 비밀번호를 다시 확인해 주세요.</div>
+                    </c:if>
                     <div class="checkbox mb-3">
                         <label style="float: left!important;">
                             <input type="checkbox" value="remember-me" style="margin-top: 10px"> 자동로그인
