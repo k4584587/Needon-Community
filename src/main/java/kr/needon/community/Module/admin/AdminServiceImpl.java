@@ -23,6 +23,7 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AdminDAO adminDao;
 	
+	//유저 목록 보기
 	public Map<String,Object> user_List(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		
@@ -32,7 +33,7 @@ public class AdminServiceImpl implements AdminService{
 		Map<String,Integer> param = new HashMap<String, Integer>();
 		
 		int page=1;
-		int limit=20;//한 화면에 출력할 유저 수
+		int limit=10;//한 화면에 출력할 유저 수
 		
 		if(request.getParameter("page")!=null) {
 			page=Integer.parseInt(request.getParameter("page"));
@@ -60,7 +61,9 @@ public class AdminServiceImpl implements AdminService{
 		//유저 리스트 페이지로 보낼 변수들을 맵으로 저장해서 보낸다
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		
+		
 		resultMap.put("page", page);
+		resultMap.put("limit", limit);
 		resultMap.put("startpage", startpage);
 		resultMap.put("endpage", endpage);
 		resultMap.put("maxpage", maxpage);
