@@ -1,15 +1,12 @@
 package kr.needon.community.Module.Board;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 //=====================================
 //클래스 설명 : 게시판 Service 클래스
@@ -39,7 +36,6 @@ public class BoardServiceImpl implements BoardService {
 				ip = request.getRemoteAddr();
 
 			board.setIp(ip);
-			board.setWr_no(0);
 
 			dao.insert(board);
 		} catch (Exception e) {

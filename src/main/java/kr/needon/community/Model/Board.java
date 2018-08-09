@@ -29,7 +29,6 @@ public class Board {
 	private int bo_good;
 	private int bo_bad;
 	private int notice_ck;
-	private int wr_no;
 	private Timestamp register_date;
 	private String category;
 }
