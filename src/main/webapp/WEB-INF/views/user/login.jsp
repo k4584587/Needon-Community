@@ -76,7 +76,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane container active" id="login">
-                <form class="form-signin" action="<c:url value="/user/login" />" method="post">
+                <form class="form-signin" action="<c:url value="/user/login.check" />" method="post">
                     <img class="mb-4" src="<c:url value="/resources/img/logo.png" />">
                     <label for="inputUsername" class="sr-only">아이디</label>
                     <input type="text" name="username" id="inputUsername" class="form-control" placeholder="아이디" required autofocus>
@@ -98,122 +98,30 @@
                     <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>
                 </form>
             </div>
-            <div class="tab-pane container fade" id="join">
+            <div class="tab-pane container fade" id="join" style="margin-top: 10px;">
+                <img class="mb-4" src="<c:url value="/resources/img/logo.png" />">
+
                 <form class="form-signin" action="<c:url value="/user/userJoin_ok" />" method="post" enctype="multipart/form-data">
-                    <img class="mb-4" src="<c:url value="/resources/img/logo.png" />">
-                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <div class="input-group mb-3">
 
-                        <div class="input-group mb-3">
-
-                                <input name="username" type="text" class="form-control" placeholder="아이디" >
-                                <div class="input-group-append">
-                                    <button class="btn btn-lg btn-success btn-block" type="submit">중복확인</button>
-                                </div>
+                        <input name="username" type="text" class="form-control" placeholder="아이디" >
+                        <div class="input-group-append">
+                            <button class="btn btn-lg btn-success btn-block">중복확인</button>
                         </div>
+                    </div>
+                        <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
+                        <input type="text" id="inputEmail" class="form-control" placeholder="닉네임" name="nick" required>
 
-
-                    <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="닉네임" name="nick" required>
-
-                    <input type="password" id="inputPassword" class="form-control" placeholder="패스워드" name="password" required>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="패스워드 확인" name="password_re" required>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="이메일" name="email" required>
-                    <input id="cellPhone" name="phone" class="form-control" type="tel" maxlength="13"  placeholder="형식) 010-123-1234" required>
-                    <textarea class="form-control" name="profile" placeholder="자기소개"></textarea>
-                    <br>
-                    <label>프로필 사진</label>
-                    <input type="file" id="img" name="img" class="form-control" placeholder="프로필 사진">
-                    <br>
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="회원가입">
-
-                    <script>
-                        $(document).ready(function () {
-                            //한글입력 안되게 처리
-                            $("input[name=username]").keyup(function (event) {
-                                if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-                                    var inputVal = $(this).val();
-                                    $(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
-                                }
-                            });
-                        });
-
-                        function autoHypenPhone(str) {
-                            str = str.replace(/[^0-9]/g, '');
-                            var tmp = '';
-                            if (str.length < 4) {
-                                return str;
-                            } else if (str.length < 7) {
-                                tmp += str.substr(0, 3);
-                                tmp += '-';
-                                tmp += str.substr(3);
-                                return tmp;
-                            } else if (str.length < 11) {
-                                tmp += str.substr(0, 3);
-                                tmp += '-';
-                                tmp += str.substr(3, 3);
-                                tmp += '-';
-                                tmp += str.substr(6);
-                                return tmp;
-                            } else {
-                                tmp += str.substr(0, 3);
-                                tmp += '-';
-                                tmp += str.substr(3, 4);
-                                tmp += '-';
-                                tmp += str.substr(7);
-                                return tmp;
-                            }
-                            return str;
-                        }
-
-                        var cellPhone = document.getElementById('cellPhone');
-                        cellPhone.onkeyup = function (event) {
-                            event = event || window.event;
-                            var _val = this.value.trim();
-                            this.value = autoHypenPhone(_val);
-                        }
-
-                        $(function () {
-                            console.log("login ajax call!");
-                            $("input[id='inputUsername']").on("input", function() {
-                                console.log("아이디 입력값 " + $("input[id='inputUsername']").val().length);
-                                if($("input[id='inputUsername']").val().length == 0) {
-                                    console.log("아이디 입력값이 null 임");
-                                    $.ajax({
-                                        async:true,
-                                        type:'GET',
-                                        contentType: "application/json; charset=UTF-8",
-                                        success : function(data) {
-                                            var error_html = "<div class=\"error\">아이디를 입력해주세요.</div>";
-                                            $('#username_input_error').html(error_html);
-                                        }
-                                    });
-                                } else {
-                                    console.log("값이 입력됨");
-                                    $('#username_input_error').html(null);
-                                }
-                            });
-                            $("input[id='inputPassword']").on("input", function() {
-                                if($("input[id='inputPassword']").val().length == 0) {
-                                    console.log("아이디 입력값이 null 임");
-                                    $.ajax({
-                                        async:true,
-                                        type:'GET',
-                                        contentType: "application/json; charset=UTF-8",
-                                        success : function(data) {
-                                            var error_html = "<div class=\"error\">비밀번호를 입력해주세요.</div>";
-                                            $('#password_input_error').html(error_html);
-                                        }
-                                    });
-                                } else {
-                                    console.log("값이 입력됨");
-                                    $('#password_input_error').html(null);
-                                }
-                            });
-                        })
-
-                    </script>
-
-
+                        <input type="password" id="inputPassword" class="form-control" placeholder="패스워드" name="password" required>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="패스워드 확인" name="password_re" required>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="이메일" name="email" required>
+                        <input id="cellPhone" name="phone" class="form-control" type="tel" maxlength="13"  placeholder="형식) 010-123-1234" required>
+                        <textarea class="form-control" name="profile" placeholder="자기소개"></textarea>
+                        <br>
+                        <label>프로필 사진</label>
+                        <input type="file" id="img" name="img" class="form-control" placeholder="프로필 사진">
+                        <br>
+                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="회원가입">
                 </form>
             </div>
         </div>
@@ -222,11 +130,57 @@
 </center>
 <script>
 
-    $(function () {
+    $(document).ready(function () {
+        //한글입력 안되게 처리
+        $("input[name=username]").keyup(function (event) {
+            if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+                var inputVal = $(this).val();
+                $(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
+            }
+        });
+    });
 
+    function autoHypenPhone(str) {
+        str = str.replace(/[^0-9]/g, '');
+        var tmp = '';
+        if (str.length < 4) {
+            return str;
+        } else if (str.length < 7) {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            return tmp;
+        } else if (str.length < 11) {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            return tmp;
+        } else {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            return tmp;
+        }
+        return str;
+    }
+
+    var cellPhone = document.getElementById('cellPhone');
+    cellPhone.onkeyup = function (event) {
+        event = event || window.event;
+        var _val = this.value.trim();
+        this.value = autoHypenPhone(_val);
+    };
+
+
+
+    $(function () {
         console.log("login ajax call!");
         $("input[id='inputUsername']").on("input", function() {
-            console.log("아이디 입력값 " + $("input[id='inputUsername']").val().length);
+            console.log("ghldn아이디 입력값 " + $("input[id='inputUsername']").val().length);
             if($("input[id='inputUsername']").val().length == 0) {
                 console.log("아이디 입력값이 null 임");
                 $.ajax({
@@ -243,9 +197,7 @@
                 $('#username_input_error').html(null);
             }
         });
-
         $("input[id='inputPassword']").on("input", function() {
-
             if($("input[id='inputPassword']").val().length == 0) {
                 console.log("아이디 입력값이 null 임");
                 $.ajax({
@@ -262,8 +214,9 @@
                 $('#password_input_error').html(null);
             }
         });
-
     })
+
+
 
 </script>
 </body>

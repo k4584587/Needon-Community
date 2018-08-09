@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserSecurityService userSecurityService;
 
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
@@ -55,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .and()
-                .formLogin()
+                .formLogin().loginProcessingUrl("/user/login.check")
                 .and()
                 .logout().logoutSuccessUrl("/").invalidateHttpSession(true)
                 .and()
