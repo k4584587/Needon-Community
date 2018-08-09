@@ -49,6 +49,18 @@
 	
 	</select>
 	
+	<select id="getUserList" parameterType="int" resultType="Member">
+		<![CDATA[
+		SELECT
+			no,username,name,nick,phone,birth,sex,email,address1,address2,
+			post,profile,email_ck,point,follow,photo,level,exp,msg_ck,register_date,last_date 
+		FROM
+			nb_member
+		WHERE 
+			no >=((#{page}-1)*#{limit}) and no <=(#{page}*#{limit})
+		]]>
+	</select>
+	
 	<insert id="memberInsert" parameterType="Member">
 		insert into nb_member(username,password,name,
 		nick,phone,birth,sex,email,post,address1,address2,

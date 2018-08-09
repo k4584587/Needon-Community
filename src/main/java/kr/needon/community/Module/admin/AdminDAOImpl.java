@@ -1,6 +1,7 @@
 package kr.needon.community.Module.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,11 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectOne("Member.getUserCount");
 	}
 	
+	@Override
 	//유저리스트 받아오기
-	public List<Member> getUserList( int page) throws Exception{
-		return session.selectList("Member.getUserList", page);
+	public List<Member> getUserList( Map<String,Integer> param) throws Exception{
+		return session.selectList("Member.getUserList", param);
 	}
+
+	
 }

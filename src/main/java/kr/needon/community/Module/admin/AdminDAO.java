@@ -1,6 +1,7 @@
 package kr.needon.community.Module.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.needon.community.Model.Member;
 
@@ -10,5 +11,5 @@ import kr.needon.community.Model.Member;
 //=====================================
 public interface AdminDAO {
 	public int getListCount() throws Exception;
-	public List<Member> getUserList(int page) throws Exception;
+	public List<Member> getUserList(Map<String, Integer> param) throws Exception;
 }
