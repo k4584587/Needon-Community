@@ -240,7 +240,7 @@
  		$("#username").val("").focus();
  		return false;
  	};
- 	/* //입력아이디 유효성 검사
+ 	 //입력아이디 유효성 검사
  	if(!(validate_userid(memid))){
  		var newtext='<font color="red">아이디는 영문소문자,숫자,_ 조합만 가능합니다.</font>';
  		$("#idcheck").text('');
@@ -249,7 +249,9 @@
  		$("#username").val("").focus();
  		return false;
  	};
- 	 */
+ 	
+ 	
+ 	 
  	 
  	//아이디 중복확인
      $.ajax({
@@ -284,7 +286,12 @@
      });
  };
 
-
+ function validate_userid(memid)
+ {
+   var pattern= new RegExp(/^[a-z0-9_]+$/);
+   //영문 소문자,숫자 ,_가능,정규표현식
+   return pattern.test(memid);
+ };
 
 </script>
 </body>
