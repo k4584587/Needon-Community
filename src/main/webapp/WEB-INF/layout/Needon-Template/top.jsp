@@ -5,7 +5,7 @@
 <!-- 상단시작 -->
 <div class="container">
 	<div class="top p-4">
-		<span class="logo"> <a href="/"><img
+		<span class="logo"> <a href="<c:url value="/" />"><img
 				src="<c:url value="/resources/img/logo.png" />"></a>
 		</span> <span style="float: right;">날씨</span>
 	</div>
