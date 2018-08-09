@@ -58,8 +58,8 @@
 			<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
 		<option value="content"
 			<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
-		<option value="writer"
-			<c:if test="${search=='writer'}">selected="selected" </c:if>>작성자</option>
+		<option value="wr_nick"
+			<c:if test="${search=='wr_nick'}">selected="selected" </c:if>>작성자</option>
 		<option value="subcon"
 			<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 	</select> <input type="text" name="keyword"> <input type="submit"

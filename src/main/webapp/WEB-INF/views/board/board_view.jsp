@@ -23,11 +23,24 @@
 		<td colspan="4"><pre>${board.content }</pre></td>
 	</tr>
 	<tr>
-		<td colspan="4" align=center>
-			<input type="button" value="수정" onclick="location='<c:url  value="/board/modify_form?page=${param.page }&no=${board.no}&category=${param.category }" />'"> &nbsp;&nbsp;
-			<input type="button" value="삭제" onclick="location='<c:url  value="/board/delete_form?page=${param.page }&no=${board.no}&category=${param.category }" />'" /> &nbsp;&nbsp;
-			<input type="button" value="목록" onclick="location='<c:url  value="/board/${param.category }/list?page=${param.page} "/>'"/>
+		<td colspan="4" align=center><input type="button" value="수정"
+			onclick="location='<c:url  value="/board/modify_form?page=${param.page }&no=${board.no}&category=${param.category }" />'">
+			&nbsp;&nbsp; <input type="button" value="삭제"
+			onclick="location='<c:url  value="/board/delete_form?page=${param.page }&no=${board.no}&category=${param.category }" />'" />
+			&nbsp;&nbsp; <input type="button" value="목록"
+			onclick="location='<c:url  value="/board/${param.category }/list?page=${param.page} "/>'" />
 		</td>
 	</tr>
-	
+
 </table>
+
+<p>
+<div id="slist"></div>
+<p>
+<form name="frm" id="frm" align=center>
+	<input type="hidden" name="replyer" value="${board.wr_nick}"> <input
+		type="hidden" name="no" value="${board.no}"> 
+		댓글 :
+	<textarea rows="2" cols="50" name="replytext"></textarea>
+	<input type="button" value="확인" id="repInsert">
+</form>
