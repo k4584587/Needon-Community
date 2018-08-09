@@ -17,7 +17,7 @@
 						<img style="background-size: cover" width="70" class="rounded" src="<c:url value="/file/profile.png?username=${user.username}" />">
 					</div>
 					<div class="col-auto">
-						<div>${user.username} 님 <a href="#">내정보</a></div>
+						<div>${user.nick} 님 <a href="#">내정보</a></div>
 						<div><a href="#"><b>내 블로그</b></a> <a href="#"><b>쪽지(0)</b></a></div>
 					</div>
 				</div>

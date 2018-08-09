@@ -47,8 +47,8 @@
 	</update>
 	
 	<insert id="insert">
-		INSERT INTO nb_board_${category} (subject, content, file, ip, wr_no) 
-		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_no});
+		INSERT INTO nb_board_${category} (subject, content, file, ip,wr_nick,wr_password)
+		VALUES (#{subject}, #{content}, #{file}, #{ip}, #{wr_nick},#{wr_password});
 	</insert>
 	
 	<delete id="delete">

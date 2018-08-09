@@ -32,7 +32,7 @@
 						</td>
 						<td><a
 							href="<c:url value="/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }" />">${ list.subject }</a></td>
-						<td>작성자</td>
+						<td>${list.wr_nick}</td>
 						<td>${ list.read_count }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${ list.register_date }" /></td>

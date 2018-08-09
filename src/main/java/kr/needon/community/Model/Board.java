@@ -1,8 +1,8 @@
 package kr.needon.community.Model;
 
-import java.sql.Timestamp;
-
 import lombok.Data;
+
+import java.sql.Timestamp;
 
 //=====================================
 //클래스 설명 : 게시판 DTO 클래스
@@ -14,6 +14,8 @@ public class Board {
 	private int no;
 	private String subject;
 	private String content;
+	private String wr_nick;
+	private String wr_password;
 	private byte[] file;
 	private String sub_category;
 	private String cm_body;

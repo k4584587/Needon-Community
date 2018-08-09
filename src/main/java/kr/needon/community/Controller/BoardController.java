@@ -1,8 +1,13 @@
 package kr.needon.community.Controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.PageMaker;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,11 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.PageMaker;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import lombok.extern.java.Log;
+import javax.servlet.http.HttpServletRequest;
 
 //=====================================
 //	클래스 설명 : 게시판 컨트롤러 클래스
@@ -75,6 +76,11 @@ public class BoardController {
 			throws Exception {
 
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
+
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		board.setWr_nick(member.getNick());
+		board.setWr_password(member.getPassword());
+
 
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");

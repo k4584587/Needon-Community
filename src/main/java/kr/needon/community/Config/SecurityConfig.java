@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO Auto-generated method stub
 
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/board/write_from").hasAnyRole("ADMIN","USER");
 
         http
         	.csrf().disable();
