@@ -53,7 +53,20 @@ public class UserController {
 	public String userJoinForm() {
 		return "user/userJoinForm";
 	}
-
+	
+	//아이디 중복검사 데이터
+	@RequestMapping(value="/id_check", method = RequestMethod.POST)
+	public String id_check(@RequestParam("memid") String username, Model model) {
+		
+		System.out.println("username>>>>>>>>>"+username);
+		int result = service.id_check(username);
+		System.out.println("result>>>>>>>>>>>>"+result);
+		
+		model.addAttribute("result",result);
+		
+		return "idcheckResult";
+	}
+	
 	// 폼에서 값 받아와서 db에 저장
 	@RequestMapping(value = "/userJoin_ok", method = RequestMethod.POST)
 	public String userJoin_Ok(@RequestParam("img") MultipartFile mf, Member member, HttpServletRequest request,

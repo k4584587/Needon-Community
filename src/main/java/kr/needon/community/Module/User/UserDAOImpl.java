@@ -48,4 +48,14 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".psw_chage",member);
 		
 	}
+
+	@Override
+	public int id_check(String username) {
+		// TODO Auto-generated method stub
+		int re = -1;	// 사용 가능한 ID
+		Member member = (Member) session.selectOne(namespace+".getFindUser",username);
+		if (member != null)
+			re = 1; 	// 중복id
+		return re;
+	}
 }

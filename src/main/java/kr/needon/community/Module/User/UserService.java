@@ -11,4 +11,6 @@ public interface UserService {
 	public int member_Join(Member member);
 	
 	public Boolean getUpdate(Member member);
+	
+	public int id_check(String username);
 }

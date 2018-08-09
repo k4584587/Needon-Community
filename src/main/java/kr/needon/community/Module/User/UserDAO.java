@@ -21,4 +21,6 @@ public interface UserDAO {
     public int member_Join(Member member);
     
     public void getUpdate(Member member);
+    
+    public int id_check(String username);
 }

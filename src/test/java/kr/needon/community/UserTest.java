@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -67,5 +68,14 @@ public class UserTest {
 
         System.out.println("회원찾음 " + getLogin.size());
     }
+    
+    @Test
+    public void id_check() {
+    	
+    	int result =userDAO.id_check("test");
+    	System.out.println("result===>"+result);
+    	
+    }
+    
 
 }
