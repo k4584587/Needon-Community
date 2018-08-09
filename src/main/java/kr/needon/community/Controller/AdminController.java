@@ -33,7 +33,7 @@ public class AdminController {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("로그인한 사용자 ==> " + member.toString());
 
-        return "admin/admin";
+        return "redirect:admin/userList";
     }
     
     //유저목록 출력
@@ -45,6 +45,7 @@ public class AdminController {
     	Map<String,Object> userList = adminService.user_List(request, response);
     	model.addAllAttributes(userList);
     	return "admin/userList";
+    	
     }
    
 

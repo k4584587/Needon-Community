@@ -48,7 +48,7 @@ public class UserTest {
 
         user.setGetUserRole(Arrays.asList(userRole));
 
-
+        System.out.println("결과 ==> " + user.toString());
 
         /*Member user = userDAO.getFindUser("test");
         UserRole userRole = userDAO.geteUserRole("test");

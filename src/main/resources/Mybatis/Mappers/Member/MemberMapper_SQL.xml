@@ -53,7 +53,7 @@
 		<![CDATA[
 		SELECT
 			no,username,name,nick,phone,birth,sex,email,address1,address2,
-			post,profile,email_ck,point,follow,photo,level,exp,msg_ck,register_date,last_date 
+			post,profile,email_ck,point,follow,photo,level,exp,msg_ck,register_date,last_date,enabled 
 		FROM
 			nb_member
 		WHERE 

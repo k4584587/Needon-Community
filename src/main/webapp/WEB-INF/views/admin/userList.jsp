@@ -30,6 +30,8 @@
 		<td>메세지확인여부</td>
 		<td>가입일</td>
 		<td>마지막로그인</td>
+		<td>활성화</td>
+		<td>권한</td>
 	</tr>
 	
 	<!-- 화면 출력 번호 변수 정의 -->
@@ -88,6 +90,8 @@
 		<td>
 		<fmt:formatDate value="${b.last_date}" pattern="yyyy-MM-dd HH:mm"/>
 		</td>
+		<td>${b.enabled }</td>
+		<td>롤</td>
 	</tr>
 	</c:forEach>
 </table>

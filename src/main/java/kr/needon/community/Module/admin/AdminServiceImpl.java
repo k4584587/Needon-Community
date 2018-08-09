@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import kr.needon.community.Model.Member;
+import kr.needon.community.Module.User.UserDAO;
 
 //=====================================
 //클래스 설명 : 관리자 service 클래스
@@ -23,11 +23,15 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AdminDAO adminDao;
 	
+	@Autowired
+	UserDAO userDao;
+	
 	//유저 목록 보기
 	public Map<String,Object> user_List(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
-		
+		System.out.println("service user_List");
 		List<Member> userList = new ArrayList<Member>();
+		
 		
 		//page와 limit값을 dao로 전달해줄 변수
 		Map<String,Integer> param = new HashMap<String, Integer>();
@@ -45,6 +49,7 @@ public class AdminServiceImpl implements AdminService{
 		//총 리스트 수를 받아온다
 		int listcount=adminDao.getListCount();
 		userList=adminDao.getUserList(param);//리스트 받기
+		System.out.println("사용자 리스트 ==> " + userList.toString());
 		
 		//총 페이지 수
 		int maxpage=(int)((double)listcount/limit+0.95);
@@ -61,6 +66,17 @@ public class AdminServiceImpl implements AdminService{
 		//유저 리스트 페이지로 보낼 변수들을 맵으로 저장해서 보낸다
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		
+		//유저 권한 받아오기
+		List<String> roleList = new ArrayList<String>();
+		
+		System.out.println("userList start");
+		//롤 리스트로 받아오기
+		for(int i=0; i<userList.size(); i++) {
+			String role=userDao.getUserRole(userList.get(i).getUsername()).getRole();
+			roleList.add(role);
+			System.out.println(i+"번째 롤:"+role);
+		}
+		System.out.println("userList end");
 		
 		resultMap.put("page", page);
 		resultMap.put("limit", limit);
@@ -69,7 +85,9 @@ public class AdminServiceImpl implements AdminService{
 		resultMap.put("maxpage", maxpage);
 		resultMap.put("listcount", listcount);
 		resultMap.put("userList", userList);
+		resultMap.put("roleList", roleList);
 		
 		return resultMap;
+		
 	}
 }
