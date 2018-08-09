@@ -35,5 +35,11 @@ public class UserServiceImpl implements UserService {
 		
 		return true;
 	}
+
+	@Override
+	public int id_check(String username) {
+		// TODO Auto-generated method stub
+		return userDAO.id_check(username);
+	}
 	
 }

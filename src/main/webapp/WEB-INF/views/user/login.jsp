@@ -104,9 +104,10 @@
                 <form class="form-signin" action="<c:url value="/user/userJoin_ok" />" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
 
-                        <input name="username" type="text" class="form-control" placeholder="아이디" >
+                        <input name="username" id ="username" type="text" class="form-control" placeholder="아이디" required>
                         <div class="input-group-append">
-                            <button class="btn btn-lg btn-success btn-block">중복확인</button>
+                            <button class="btn btn-lg btn-success btn-block" onclick="id_check()">중복확인</button>
+                            <div id="idcheck"></div>
                         </div>
                     </div>
                         <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
@@ -215,6 +216,73 @@
             }
         });
     })
+    
+    
+    /* 아이디 중복 체크*/
+ function id_check(){
+ 	$("#idcheck").hide(); 
+ 	var memid=$("#username").val();  
+ 	//입력글자 길이 체크
+ 	if($.trim($("#username").val()).length < 4){
+ 		var newtext='<font color="red">아이디는 4자 이상이어야 합니다.</font>';
+ 		$("#idcheck").text('');
+ 		$("#idcheck").show();
+ 		$("#idcheck").append(newtext); 
+ 		$("#username").val("").focus();
+ 		return false;
+ 	};
+ 	//입력글자 길이 체크
+ 	if($.trim($("#username").val()).length >12){
+ 		var newtext='<font color="red">아이디는 12자 이하이어야 합니다.</font>';
+ 		$("#idcheck").text('');
+ 		$("#idcheck").show();
+ 		$("#idcheck").append(newtext); 
+ 		$("#username").val("").focus();
+ 		return false;
+ 	};
+ 	/* //입력아이디 유효성 검사
+ 	if(!(validate_userid(memid))){
+ 		var newtext='<font color="red">아이디는 영문소문자,숫자,_ 조합만 가능합니다.</font>';
+ 		$("#idcheck").text('');
+ 		$("#idcheck").show();
+ 		$("#idcheck").append(newtext);
+ 		$("#username").val("").focus();
+ 		return false;
+ 	};
+ 	 */
+ 	 
+ 	//아이디 중복확인
+     $.ajax({
+         type:"POST",
+         /*url:"./jsp/member/member_idcheck.jsp",*/
+         url:"<c:url value='/user/id_check' />",     
+         data: {"memid":memid},   
+         success: function (data) { 
+//       console.log("AJAX 호츨 데이터 ==> " + data.body);
+//    	 console.log("중복체크 ajax실행");
+       	 if(data==1){	//중복 ID
+       		var newtext='<font color="red">중복 아이디입니다.</font>';
+       			$("#idcheck").text('');
+         		$("#idcheck").show();
+         		$("#idcheck").append(newtext);
+           		$("#username").val().focus();
+           		return false;
+ 	     
+       	  }else{	//사용 가능한 ID
+       		var newtext='<font color="blue">사용가능한 아이디입니다.</font>';
+       		$("#idcheck").text('');
+       		$("#idcheck").show();
+       		$("#idcheck").append(newtext);
+       		$("#username").focus();
+       	  }  	    	  
+         }
+         ,
+     	  error:function(e){
+     		  alert("data error"+e);
+     	  } 
+     
+     });
+ };
 
 
 
