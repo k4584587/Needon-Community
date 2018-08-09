@@ -91,7 +91,7 @@
 		<fmt:formatDate value="${b.last_date}" pattern="yyyy-MM-dd HH:mm"/>
 		</td>
 		<td>${b.enabled }</td>
-		<td>롤</td>
+		<%-- <td>${b.getUserRole.getRole() }</td> --%>
 	</tr>
 	</c:forEach>
 </table>
