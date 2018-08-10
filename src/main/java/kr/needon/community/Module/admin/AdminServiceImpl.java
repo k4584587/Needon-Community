@@ -70,15 +70,11 @@ public class AdminServiceImpl implements AdminService {
 
 		System.out.println("userList start");
 		// 롤 리스트로 받아오기
-		/*
-		 * for(int i=0; i<userList.size(); i++) { String
-		 * role=userDao.getUserRole(userList.get(i).getUsername()).getRole();
-		 * roleList.add(role); System.out.println(i+"번째 롤:"+role); }
-		 */
+		
 		for (int i = 0; i < userList.size(); i++) {
 			UserRole userRole = userDao.getUserRole(userList.get(i).getUsername());
 			userList.get(i).setGetUserRole(Arrays.asList(userRole));
-			System.out.println(i+"번째 userRole:"+userList.get(i).getGetUserRole());
+			
 		}
 
 		resultMap.put("page", page);
