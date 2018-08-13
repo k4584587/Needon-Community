@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<style>
+	.input-group {
+		width: 35%;
+	}
+</style>
 <div class=""
 	style="background-color: white; height: 150px; margin-bottom: 10px;">
 	구글광고</div>
@@ -50,9 +55,29 @@
 <!-- 게시판 목록 끝 -->
 
 <!-- 검색 처리 시작 -->
-<form
-	action="<c:url value="/board/${category }/list?page=${pageMaker.cri.page }" />"
-	align=center>
+<center>
+<form class="input-group" style="margin-bottom: 10px;">
+	<div class="input-group-prepend">
+		<span>
+			<select class="form-control" name="search">
+		<option value="subject"
+				<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
+		<option value="content"
+				<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
+		<option value="wr_nick"
+				<c:if test="${search=='wr_nick'}">selected="selected" </c:if>>작성자</option>
+		<option value="subcon"
+				<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
+	</select>
+		</span>
+	</div>
+	<input type="text" class="form-control" name="keyword">
+	<div class="input-group-append">
+		<span><input type="submit" class="btn btn-success" value="검색"></span>
+	</div>
+</form>
+</center>
+<%--<form action="<c:url value="/board/${category }/list?page=${pageMaker.cri.page }" />" align=center>
 	<select name="search">
 		<option value="subject"
 			<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
@@ -62,15 +87,27 @@
 			<c:if test="${search=='wr_nick'}">selected="selected" </c:if>>작성자</option>
 		<option value="subcon"
 			<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
-	</select> <input type="text" name="keyword"> <input type="submit"
-		value="검색">
-</form>
+	</select> <input type="text" name="keyword"> <input type="submit" value="검색">
+</form>--%>
 <!-- 검색 처리 끝 -->
 
 <!-- 페이징 처리 시작 -->
 <%-- ${pageMaker } <br>
 ${pageMaker.cri.page} --%>
 
+<center>
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">뒤료</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">다음</a>
+        </li>
+    </ul>
+</center>
 <div align=center>
 	<c:if test="${empty keyword}">
 		<c:if test="${pageMaker.cri.page != 1 }">
