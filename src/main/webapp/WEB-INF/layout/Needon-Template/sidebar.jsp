@@ -16,10 +16,8 @@
                             <%--회원가입 구현되면 여기는 프로필 사진이 오는곳으로 수정바람--%>
                         <c:choose>
                             <c:when test="${username.profile eq null}">
-                                    <div>
-                                        <%--프로필 사진이 등록안될때--%>
-                                        프로필 사진이 없음
-                                    </div>
+                                            <%--프로필 사진이 등록안될때--%>
+                                        <img style="background-size: cover;margin-bottom: 10px;" width="70" class="rounded" src="<c:url value="/resources/img/profile_img.png" />">
                             </c:when>
                             <c:otherwise>
                                 <div>

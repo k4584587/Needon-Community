@@ -107,10 +107,10 @@
                         <input name="username" id ="username" type="text" class="form-control" placeholder="아이디" required>
                         <div class="input-group-append">
                             <button class="btn btn-lg btn-success btn-block" onclick="id_check()">중복확인</button>
-                            <div id="idcheck"></div>
                         </div>
                     </div>
-                        <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
+                    <div id="idcheck" style="margin-bottom: 10px"></div>
+                    <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
                         <input type="text" id="inputEmail" class="form-control" placeholder="닉네임" name="nick" required>
 
                         <input type="password" id="inputPassword" class="form-control" placeholder="패스워드" name="password" required>
@@ -224,7 +224,7 @@
  	var memid=$("#username").val();  
  	//입력글자 길이 체크
  	if($.trim($("#username").val()).length < 4){
- 		var newtext='<font color="red">아이디는 4자 이상이어야 합니다.</font>';
+ 		var newtext='<div style="color: red">아이디는 4자 이상이어야 합니다.</div>';
  		$("#idcheck").text('');
  		$("#idcheck").show();
  		$("#idcheck").append(newtext); 
@@ -233,7 +233,7 @@
  	};
  	//입력글자 길이 체크
  	if($.trim($("#username").val()).length >12){
- 		var newtext='<font color="red">아이디는 12자 이하이어야 합니다.</font>';
+ 		var newtext='<div color="red">아이디는 12자 이하이어야 합니다.</div>';
  		$("#idcheck").text('');
  		$("#idcheck").show();
  		$("#idcheck").append(newtext); 
@@ -242,7 +242,7 @@
  	};
  	 //입력아이디 유효성 검사
  	if(!(validate_userid(memid))){
- 		var newtext='<font color="red">아이디는 영문소문자,숫자,_ 조합만 가능합니다.</font>';
+ 		var newtext='<div color="red">아이디는 영문소문자,숫자,_ 조합만 가능합니다.</div>';
  		$("#idcheck").text('');
  		$("#idcheck").show();
  		$("#idcheck").append(newtext);
@@ -263,7 +263,7 @@
 //       console.log("AJAX 호츨 데이터 ==> " + data.body);
 //    	 console.log("중복체크 ajax실행");
        	 if(data==1){	//중복 ID
-       		var newtext='<font color="red">중복 아이디입니다.</font>';
+       		var newtext='<div style="color:red;">중복 아이디입니다.</div>';
        			$("#idcheck").text('');
          		$("#idcheck").show();
          		$("#idcheck").append(newtext);
@@ -271,7 +271,7 @@
            		return false;
  	     
        	  }else{	//사용 가능한 ID
-       		var newtext='<font color="blue">사용가능한 아이디입니다.</font>';
+       		var newtext='<div style="color:blue;">사용가능한 아이디입니다.</div>';
        		$("#idcheck").text('');
        		$("#idcheck").show();
        		$("#idcheck").append(newtext);
