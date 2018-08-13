@@ -88,4 +88,17 @@ public class AdminServiceImpl implements AdminService {
 		return resultMap;
 
 	}
+	
+	//유저 정보 하나 갖고오기
+	@Override
+	public Member findUser(String username) throws Exception {
+		// TODO Auto-generated method stub
+		Member user=userDao.getFindUser(username);
+		UserRole userRole = userDao.getUserRole(username);
+		List<UserRole> roleList = new ArrayList<UserRole>();
+		roleList.add(userRole);
+		user.setGetUserRole(roleList);
+		
+		return user;
+	}
 }

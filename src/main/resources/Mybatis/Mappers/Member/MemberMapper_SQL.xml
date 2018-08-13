@@ -57,7 +57,7 @@
 		FROM
 			nb_member
 		WHERE 
-			no >=((#{page}-1)*#{limit}) and no <=(#{page}*#{limit})
+			no >=((#{page}-1)*#{limit}+1) and no <=(#{page}*#{limit})
 		]]>
 	</select>
 	

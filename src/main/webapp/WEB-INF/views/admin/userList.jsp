@@ -91,7 +91,20 @@
 		<fmt:formatDate value="${b.last_date}" pattern="yyyy-MM-dd HH:mm"/>
 		</td>
 		<td>${b.enabled }</td>
-		<td>${b.getUserRole.get(0).role }</td> 
+		
+		<td>
+		<c:choose>
+		<c:when test="${b.getUserRole.get(0).role eq 'ROLE_ADMIN'}">
+			관리자
+		</c:when>
+		<c:when test="${b.getUserRole.get(0).role eq 'ROLE_USER'}">
+			일반
+		</c:when>
+		</c:choose>
+		</td>
+		<td>
+		<input type="button" value="수정" onClick="location.href='admin/userModifyForm?username=${b.username}'">
+		</td>
 	</tr>
 	</c:forEach>
 </table>

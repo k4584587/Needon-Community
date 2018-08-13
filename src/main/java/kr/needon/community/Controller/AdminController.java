@@ -1,7 +1,9 @@
 package kr.needon.community.Controller;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Module.admin.AdminService;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,11 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Module.admin.AdminService;
 
 //=====================================
 // 	클래스 설명 : 홈페이지 관리자 컨트롤러 클래스
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	
 	
 
     @GetMapping("/")
@@ -46,6 +48,30 @@ public class AdminController {
     	model.addAllAttributes(userList);
     	return "admin/userList";
     	
+    }
+    
+    //관리자가 유저 정보 수정 폼으로 이동
+    @RequestMapping(value="/userModifyForm")
+    public String userModifyForm(HttpServletRequest request, Model model)
+    		throws Exception{
+    	
+    	System.out.println("userModifyForm");
+    	String username = request.getParameter("username");
+    	
+    	Member user = adminService.findUser(username);
+    	System.out.println("유저 : " + user);
+    	
+    	model.addAttribute("user",user);
+    	model.addAttribute("role", user.getGetUserRole().get(0).getRole());
+    	
+    	
+    	return "admin/userModifyForm";
+    }
+    
+    //유저 정보 수정 완료
+    @RequestMapping(value="/userModify_ok", method=RequestMethod.POST)
+    public String userModify_ok() {
+    	return "";
     }
    
 
