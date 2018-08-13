@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import kr.needon.community.Model.Menu;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +36,10 @@ public class SampleExampleDAOImpl implements SampleExampleDAO {
 	public void sampleInsert(Sample sample) {
 		// TODO Auto-generated method stub
 		session.insert(namespace + ".sampleInsert",sample);
+	}
+
+	@Override
+	public List<Menu> getMenuList(Menu menu) {
+		return session.selectList(namespace+".getMenuList", menu);
 	}
 }

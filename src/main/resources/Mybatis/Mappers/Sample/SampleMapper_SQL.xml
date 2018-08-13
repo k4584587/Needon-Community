@@ -30,4 +30,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
+	<select id="getMenuList" resultType="Menu">
+
+		SELECT
+			*
+		FROM
+			nb_menu_list
+		/*WHERE
+			main_count = 1;*/
+
+	</select>
+
+
 </mapper>
