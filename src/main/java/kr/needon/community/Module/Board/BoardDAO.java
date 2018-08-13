@@ -18,6 +18,8 @@ public interface BoardDAO {
 	
 	public List<Board> listPage(Criteria cri)throws Exception;
 	
+	public List<Board> replyList(int no)throws Exception;
+	
 	public Board view(Board board)throws Exception;
 	
 	public int getListCount(Criteria cri) throws Exception;

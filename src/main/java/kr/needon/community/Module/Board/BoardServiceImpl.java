@@ -100,5 +100,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.getListCount(cri);
 	}
+	
+	/*게시판 댓글 목록*/
+	@Override
+	public List<Board> replyList(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyList(no);
+	}
 
 }

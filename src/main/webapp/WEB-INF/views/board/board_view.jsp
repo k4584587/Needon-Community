@@ -1,14 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<sec:authentication property="principal" var="user"/>
+
+<script>
+$(function() {
+	console.log("javascript load")
+	$('#repInsert').click(function() {
+			if (!frm.replytext.value) {
+				alert('댓글 입력후에 클릭하시오');
+				frm.replytext.focus();
+				return false;
+			}
+			var frmData = $('form').serialize();
+			$.ajax({
+		         type:"POST",
+		         /*url:"./jsp/member/member_idcheck.jsp",*/
+		         url:"<c:url value='/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }' />",     
+		         data: {"memid":memid},   
+		         success: function (data) { 
+		        	 alert("test");
+		         }
+	});
+});  
+});  
+</script>
 <h1 align=center>게시판 조회</h1>
 <table align="center" border=1>
 	<tr>
 		<th>제목</th>
 		<td>${board.subject }</td>
 		<th>작성자</th>
-		<td>작성자</td>
+		<td>${board.wr_nick }</td>
 	</tr>
 	<tr>
 		<th>IP</th>
@@ -44,3 +70,27 @@
 	<textarea rows="2" cols="50" name="replytext"></textarea>
 	<input type="button" value="확인" id="repInsert">
 </form>
+
+<div class="container" align="center">
+		<h2 class="text-primary">댓글</h2>
+		<table class="table table-bordered">
+			<tr>
+				<td>작성자</td>
+				<td>내용</td>
+				<td>수정일</td>
+				<td></td>
+			</tr>
+			<c:forEach var="rb" items="${list}">
+				<tr>
+					<td>${rb.cm_nick}</td>
+					<td id="td_${rb.cm_no}">${rb.cm_body}</td>
+					<td>${rb.cm_regdate }</td>
+					<td id="btn_${rb.cm_no}">
+						<c:if test="${rb.cm_nick==board.wr_nick }">
+							<input type="button" value="수정" class="edit1" id="${rb.cm_no}">
+							<input type="button" value="삭제"	onclick="del(${rb.cm_no},${rb.cm_no})">
+						</c:if></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
