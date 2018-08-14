@@ -15,4 +15,6 @@ public interface SampleExampleDAO {
     public List<Menu> getMenuList(Menu menu);
     public List<Menu> getSubCategoryList(Menu menu);
 
+    public void categoryADD(Menu menu);
+
 }

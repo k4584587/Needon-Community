@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import kr.needon.community.Model.Menu;
 import org.springframework.stereotype.Service;
 
 import kr.needon.community.Model.Sample;
@@ -40,6 +41,16 @@ public class SampleServiceImpl implements SampleService {
 		return true;
 	}
 
-	
+	@Override
+	public Boolean categoryADD(Menu menu) {
+
+		try {
+			dao.categoryADD(menu);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
 
 }

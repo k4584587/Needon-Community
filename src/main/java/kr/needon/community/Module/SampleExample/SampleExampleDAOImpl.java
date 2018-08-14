@@ -47,4 +47,9 @@ public class SampleExampleDAOImpl implements SampleExampleDAO {
 	public List<Menu> getSubCategoryList(Menu menu) {
 		return session.selectList(namespace + ".getSubCategoryList", menu);
 	}
+
+	@Override
+	public void categoryADD(Menu menu) {
+		session.insert(namespace + ".categoryADD", menu);
+	}
 }
