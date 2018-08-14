@@ -31,7 +31,7 @@ ${fn:length(new_notice)}
                                     <a href="#">게시판 제목</a>
                                 </span>
                     <span style="float: right;">
-                                    <a href="#">더보기</a>
+                                    <a href="<c:url value="/board/notice/list"/>">더보기</a>
                                 </span>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -65,7 +65,7 @@ ${fn:length(new_notice)}
                                     <a href="#">게시판 제목</a>
                                 </span>
                     <span style="float: right;">
-                                    <a href="#">더보기</a>
+                                    <a href="<c:url value="/board/freeboard/list"/>">더보기</a>
                                 </span>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -80,149 +80,6 @@ ${fn:length(new_notice)}
                                         <span style="float: right;">${freeboard.register_date }</span>
                     </li>
                   </c:forEach>
-                </ul>
-            </div>
-        </div>
-        <!-- 최신글 끝 -->
-
-        <!-- 최신글 시작 { -->
-        <div class="col-6" style="padding-right: 0; margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="#">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <span class="badge badge-success">베스트</span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- 최신글 끝 -->
-        <!-- 최신글 시작 -->
-        <div class="col-6" style="margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="#">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- 최신글 끝 -->
-        <!-- 최신글 시작 { -->
-        <div class="col-6" style="padding-right: 0; margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="#">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <span class="badge badge-success">베스트</span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- 최신글 끝 -->
-        <!-- 최신글 시작 -->
-        <div class="col-6" style="margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="#">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
                 </ul>
             </div>
         </div>
