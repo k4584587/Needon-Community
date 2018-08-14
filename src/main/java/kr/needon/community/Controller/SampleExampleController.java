@@ -61,6 +61,9 @@ public class SampleExampleController {
 		List<Menu> getMenuList = dao.getMenuList(menu);
 		model.addAttribute("menu_list",getMenuList);
 
+		List<Menu> getSubCategoryList = dao.getSubCategoryList(menu);
+		model.addAttribute("sub_list",getSubCategoryList);
+
 		return "/admin/menu_list";
 	}
 
