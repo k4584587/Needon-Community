@@ -1,5 +1,7 @@
 package kr.needon.community.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
 import kr.needon.community.Module.admin.AdminService;
 
 //=====================================
@@ -70,8 +75,39 @@ public class AdminController {
     
     //유저 정보 수정 완료
     @RequestMapping(value="/userModify_ok", method=RequestMethod.POST)
-    public String userModify_ok() {
-    	return "";
+    public String userModify_ok(@RequestParam("img") MultipartFile mf, Model model, Member member,HttpServletRequest request)
+    		throws Exception {
+    	System.out.println("usermodify_ok");
+    	
+    	String password=request.getParameter("password");
+    	String role=request.getParameter("role");
+    	
+    	
+    	//롤 설정
+    	UserRole userRole=new UserRole();
+    	userRole.setRole(role);
+    	userRole.setUsername(member.getUsername());
+    	List<UserRole> roleList = new ArrayList<UserRole>();
+    	roleList.add(userRole);
+    	
+    	member.setPassword(password);
+    	member.setGetUserRole(roleList);
+    	
+    	int result=0;
+    	//수정값 저장
+    	result=adminService.modifyTheUser(member);
+    	if(result == 0)
+    		System.out.println("실패");
+    	else
+    		System.out.println("성공");
+    	
+    	//롤값은 따로 저장
+    	adminService.modifyTheUserRole(userRole);
+    	
+    	
+    	
+    	
+    	return "redirect:admin/userList";
     }
    
 

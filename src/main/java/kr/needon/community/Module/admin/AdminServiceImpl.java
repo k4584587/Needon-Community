@@ -101,4 +101,18 @@ public class AdminServiceImpl implements AdminService {
 		
 		return user;
 	}
+	
+	@Override
+	public int modifyTheUser(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return adminDao.modifyTheUser(member);
+	}
+	
+	@Override
+	public void modifyTheUserRole(UserRole role) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("adminService");
+		adminDao.modifyTheUserRole(role);
+	}
 }

@@ -96,6 +96,11 @@ public class Member implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public boolean getEnabled() {
+		return this.enabled;
+	}
+
 
 
 

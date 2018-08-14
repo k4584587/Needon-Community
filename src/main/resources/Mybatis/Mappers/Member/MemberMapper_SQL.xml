@@ -79,5 +79,25 @@
 		WHERE username = #{username};
 	
 	</update>
+	
+	<update id="modifyTheUser">
+		UPDATE
+			nb_member
+		SET
+			name=#{name},nick=#{nick},phone=#{phone},birth=#{birth},sex=#{sex},email=#{email},
+			post=#{post},address1=#{address1},address2=#{address2},profile=#{profile},photo=#{photo},
+			enabled=#{enabled}
+		WHERE
+			username=#{username}
+	</update>
+	
+	<update id="modifyTheUserRole">
+		UPDATE
+			nb_member
+		SET
+			role=#{role}
+		WHERE
+			username=#{username}
+	</update>
 
 </mapper>

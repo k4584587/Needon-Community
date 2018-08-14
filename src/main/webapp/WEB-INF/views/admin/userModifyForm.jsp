@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>회원 수정 폼</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="<%=request.getContextPath() %>/resources/js/member.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	//우편번호, 주소 Daum API
@@ -24,9 +23,14 @@
 </head>
 <body>
 	
-	<form name="f" method="post" action=<c:url value="/admin/userModify_ok"/> onsubmit="return check()" 
+	<form name="f" method="post" action=<c:url value="/admin/userModify_ok"/> " 
 			enctype="multipart/form-data"> 
 			
+			<input type="hidden" name="username" value="${user.username }"/>
+			<input type="hidden" name="password" value="${user.password }"/>
+			<%-- <input type="hidden" name="register_date" value="${user.register_date }"/>
+			<input type="hidden" name="last_date" value="${user.last_date }"/> --%>
+			<input type="hidden" name="follow" value="${user.follow }"/>
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
@@ -72,9 +76,10 @@
 			<tr>
 				<th >프로필사진</th>
 				<td  ><input type="file" id="photo" name="img" /></td>
+				
 				<th>권한</th>
 				<td>
-				<select id="role" title="권한">
+				<select id="role" name="role" title="권한">
 					<option value="ROLE_ADMIN" <c:if test="${role eq 'ROLE_ADMIN' }">selected</c:if>>관리자</option>
 					<option value="ROLE_USER" <c:if test="${role eq 'ROLE_USER' }">selected</c:if>>회원</option>
 				
@@ -84,7 +89,7 @@
 			<tr >
 				<th>성별</th>
 				<td>
-				<select id="sex" title="성별">
+				<select id="sex" name="sex" title="성별">
 					<option value="1" <c:if test="${user.sex eq '1' }">selected</c:if>>남자</option>
 					<option value="0" <c:if test="${user.sex eq '0' }">selected</c:if>>여자</option>
 				
@@ -94,7 +99,7 @@
 			
 				<th>메일확인여부</th>
 				<td>
-				<select id="email_ck" title="메일확인여부">
+				<select id="email_ck" name="email_ck" title="메일확인여부">
 					<option value="1" <c:if test="${user.email_ck eq '1' }">selected</c:if>>수신</option>
 					<option value="0" <c:if test="${user.email_ck eq '0' }">selected</c:if>>거부</option>
 				</select>
@@ -104,21 +109,34 @@
 			<tr>
 			<th>메세지확인여부</th>
 				<td>
-				<select id="msg_ck" title="메세지확인여부">
+				<select id="msg_ck" name="msg_ck" title="메세지확인여부">
 					<option value="1" <c:if test="${user.msg_ck eq '1' }">selected</c:if>>수신</option>
 					<option value="0" <c:if test="${user.msg_ck eq '0' }">selected</c:if>>거부</option>
 				</select>
 				</td>
 			<th>활성화</th>
 				<td>
-				<select id="enabled" title="활성화">
+				<select id="enabled" name="enabled" title="활성화">
 					<option value="true" <c:if test="${user.enabled eq 'true' }">selected</c:if>>활성</option>
 					<option value="false" <c:if test="${user.enabled eq 'false' }">selected</c:if>>휴면</option>
 				</select>
 				</td>
 			
 			</tr>
+			<tr>
+				<th>팔로우</th>
+				<td>${user.follow }</td>
 			
+				<th>레벨</th>
+				<td>${user.level }</td>
+			</tr>
+			<tr>
+				<th>exp</th>
+				<td>${user.exp }</td>
+				<th>포인트</th>
+				<td>${user.point }</td>
+			
+			</tr>
 			
 		</table>
 

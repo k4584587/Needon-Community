@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
 
 //=====================================
 //클래스 설명 : 관리자 DAO 클래스
@@ -27,6 +28,20 @@ public class AdminDAOImpl implements AdminDAO{
 	//유저리스트 받아오기
 	public List<Member> getUserList( Map<String,Integer> param) throws Exception{
 		return session.selectList("Member.getUserList", param);
+	}
+	
+	@Override
+	public int modifyTheUser(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return session.update("Member.modifyTheUser", member);
+	}
+	
+	@Override
+	public void modifyTheUserRole(UserRole role) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("adminDAO");
+		session.update("modifyTheUserRole",role);
 	}
 
 	
