@@ -2,14 +2,18 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false" %> 
 <sec:authentication property="principal" var="user" />
 ${user }test<br>
 <br>
+${fn:length(new_notice)}
+<br>
 
-<c:forEach items="${new_notice}" var="freeboard">
+<br>
+
+<c:forEach items="${new_notice}" var="notice">
     ${freeboard.subject}<br>
-    ${freeboard.register_date}
 </c:forEach>
 
 <!-- 슬라이드 끝 } -->
@@ -31,26 +35,24 @@ ${user }test<br>
                                 </span>
                 </div>
                 <ul class="list-group list-group-flush">
+                <c:choose>
+				<c:when test="${fn:length(new_notice) != 0 }">
+                   <c:forEach items="${new_notice}" var="notice">
                     <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
                         <span>
-                                        <span class="badge badge-success">베스트</span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
+                                        <!-- <span class="badge badge-success">베스트</span> -->
+                                        <a href="<c:url value='/board/view?no=${notice.no }&category=notice'/>"> 
+                                        ${notice.subject}</a>
                                         <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
+                                        <span style="float: right;">${notice.register_date }</span>
                     </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
+                  </c:forEach>
+                  </c:when>
+                   <c:otherwise>
+                   
+							<span class="p-3">작성된 글이 없습니다.</span>
+					</c:otherwise>
+                  </c:choose>
                 </ul>
             </div>
         </div>
@@ -67,25 +69,17 @@ ${user }test<br>
                                 </span>
                 </div>
                 <ul class="list-group list-group-flush">
+                   <c:forEach items="${new_freeboard}" var="freeboard">
                     <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
                         <span>
-                                        <a href="#">게시판 최신글 제목... (1)</a>
+                                        <!-- <span class="badge badge-success">베스트</span> -->
+                                        <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> 
+                                        ${freeboard.subject}</a>
+                                        <%-- <a href="#"> ${freeboard.subject}</a> --%>
                                         <span style="color: red;">New</span>
-                                        <span style="float: right;">18-02-01 13:00</span>
+                                        <span style="float: right;">${freeboard.register_date }</span>
                     </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (3)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <!-- 게시판 제목이 10글자가 넘으면 ... 으로 대처 -->
-                        <span>
-                                        <a href="#">게시판 최신글 제목... (10)</a>
-                                        <span style="float: right;">18-02-01 13:00</span>
-                    </li>
+                  </c:forEach>
                 </ul>
             </div>
         </div>
