@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@ page session="false" %> 
 <sec:authentication property="principal" var="user" />
 ${user }test<br>
@@ -44,7 +46,12 @@ ${fn:length(new_notice)}
                                         <a href="<c:url value='/board/view?no=${notice.no }&category=notice'/>"> 
                                         ${notice.subject}</a>
                                         <span style="color: red;">New</span>
-                                        <span style="float: right;">${notice.register_date }</span>
+                                        <span style="float: right;">
+                                        <fmt:formatDate pattern="MM-dd"
+										value="${notice.register_date}"/>
+                                        <%-- ${noticeq.register_date } --%>
+                                        </span> 
+                                            
                     </li>
                   </c:forEach>
                   </c:when>
@@ -77,7 +84,10 @@ ${fn:length(new_notice)}
                                         ${freeboard.subject}</a>
                                         <%-- <a href="#"> ${freeboard.subject}</a> --%>
                                         <span style="color: red;">New</span>
-                                        <span style="float: right;">${freeboard.register_date }</span>
+                                        <span style="float: right;">
+                                        <fmt:formatDate pattern="MM-dd"
+										value="${freeboard.register_date}"/>
+                                        </span>
                     </li>
                   </c:forEach>
                 </ul>
