@@ -103,7 +103,7 @@
 		</c:choose>
 		</td>
 		<td>
-		<input type="button" value="수정" onClick="location.href='admin/userModifyForm?username=${b.username}'">
+		<input type="button" value="수정" onClick="location.href='/community/admin/userModifyForm?username=${b.username}'">
 		</td>
 	</tr>
 	</c:forEach>
@@ -114,14 +114,14 @@
 	</c:if> --%>
 	
 	<c:if test="${page>1}">
-		<a href="admin/userList?page=${page-1 }">[이전]</a>	
+		<a href="/community/admin/userList?page=${page-1 }">[이전]</a>	
 	</c:if>
 	<c:forEach var="a" begin="${startpage }" end="${endpage }">
 		<c:if test="${a==page }">
 			[${a }]
 		</c:if>
 		<c:if test="${a != page }">
-			<a href="admin/userList?page=${a }">[${a }]</a>
+			<a href="/community/admin/userList?page=${a }">[${a }]</a>
 		</c:if>
 	</c:forEach>
 	
@@ -129,7 +129,7 @@
 	[다음]
 	</c:if> --%>
 	<c:if test="${page<maxpage }">
-		<a href="admin/userList?page=${page+1 }">[다음]</a>
+		<a href="/community/admin/userList?page=${page+1 }">[다음]</a>
 	</c:if>
 		
 </center>
