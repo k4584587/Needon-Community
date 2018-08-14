@@ -80,7 +80,7 @@
 	
 	</update>
 	
-<<<<<<< HEAD
+
 	<update id="modifyTheUser">
 		UPDATE
 			nb_member
@@ -99,14 +99,15 @@
 			role=#{role}
 		WHERE
 			username=#{username}
-=======
+	</update>
+
 	<update id="getUserUpdate">
 		UPDATE 
 			`nb_member` 
 		SET 
 			`phone`=#{phone},`email`=#{email}, `address1`=#{address1}, `address2`=#{address2}, `post`=#{post}, `profile`=#{profile} 
 		WHERE  `no`=#{no};
->>>>>>> 17396fb4b4e2c4b12bab2893c26da97e537766d7
+
 	</update>
 
 </mapper>
