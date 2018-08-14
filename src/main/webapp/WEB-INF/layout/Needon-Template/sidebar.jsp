@@ -28,7 +28,7 @@
                         </c:choose>
                     </div>
                     <div class="col-auto">
-                        <div>${user.nick} 님 <a href="#">내정보</a></div>
+                        <div>${user.nick} 님 <a href="<c:url value="/user/myinfo"/>">내정보</a></div>
                         <div><a href="#"><b>${user.point} 포인트</b>&nbsp;&nbsp;<b>내 블로그</b></a> <a
                                 href="#"><b>쪽지(0)</b></a></div>
                     </div>

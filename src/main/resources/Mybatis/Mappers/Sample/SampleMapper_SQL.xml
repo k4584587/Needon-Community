@@ -36,10 +36,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			*
 		FROM
 			nb_menu_list
-		/*WHERE
-			main_count = 1;*/
+		WHERE
+			main_count = 1;
 
 	</select>
 
+	<select id="getSubCategoryList" resultType="Menu">
+
+			SELECT
+				*
+			FROM
+				nb_menu_list
+			WHERE
+				sub_count = 1;
+
+	</select>
 
 </mapper>

@@ -42,4 +42,9 @@ public class SampleExampleDAOImpl implements SampleExampleDAO {
 	public List<Menu> getMenuList(Menu menu) {
 		return session.selectList(namespace+".getMenuList", menu);
 	}
+
+	@Override
+	public List<Menu> getSubCategoryList(Menu menu) {
+		return session.selectList(namespace + ".getSubCategoryList", menu);
+	}
 }

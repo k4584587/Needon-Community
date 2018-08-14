@@ -13,5 +13,6 @@ public interface SampleExampleDAO {
     public void sampleInsert(Sample sample);
 
     public List<Menu> getMenuList(Menu menu);
+    public List<Menu> getSubCategoryList(Menu menu);
 
 }

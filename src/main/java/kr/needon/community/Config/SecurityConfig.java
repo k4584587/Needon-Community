@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/board/write_from").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers("/user/myinfo").hasAnyRole("ADMIN","USER");
 
         http
         	.csrf().disable();
