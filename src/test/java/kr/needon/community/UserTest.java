@@ -1,19 +1,19 @@
 package kr.needon.community;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.UserRole;
-import kr.needon.community.Module.User.UserDAOImpl;
-import lombok.extern.java.Log;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
-import java.util.List;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
+import kr.needon.community.Module.User.UserDAOImpl;
+import lombok.extern.java.Log;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -74,6 +74,22 @@ public class UserTest {
     	
     	int result =userDAO.id_check("test");
     	System.out.println("result===>"+result);
+    	
+    }
+    
+    @Test
+    public void update() {
+    	Member member = new Member();
+    	member.setNo(26);
+    	member.setPhone("010-2828-2828");
+    	member.setEmail("abcd@abcd.com");
+    	member.setAddress1("3");
+    	member.setAddress2("수정");
+    	member.setProfile("수정");
+    	
+    	userDAO.getUserUpdate(member);
+    	
+    	System.out.println("수정되 값>>>>>>>>>>>>>>>>>"+member.toString());
     	
     }
     

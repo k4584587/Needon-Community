@@ -79,5 +79,13 @@
 		WHERE username = #{username};
 	
 	</update>
+	
+	<update id="getUserUpdate">
+		UPDATE 
+			`nb_member` 
+		SET 
+			`phone`=#{phone},`email`=#{email}, `address1`=#{address1}, `address2`=#{address2}, `post`=#{post}, `profile`=#{profile} 
+		WHERE  `no`=#{no};
+	</update>
 
 </mapper>

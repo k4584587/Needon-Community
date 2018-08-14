@@ -37,7 +37,7 @@
 		<tr>
 			<th>핸드폰</th>
 			<td>
-     			<select name="Phone1" required = "required">
+     			<select name="Phone1" id="Phone1"required = "required">
       				<option vlaue="">=번호선택=</option>
       				<option value="010" <c:if test="${Phone1 == '010' }">${'selected' }</c:if>>010</option>
       				<option value="011" <c:if test="${Phone1 == '011' }">${'selected' }</c:if>>011</option>
@@ -62,9 +62,9 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-     			<input type="text" name="email2" name="email2" value="${email1 }" required = "required">
+     			<input type="text" name="email1"  id="email1" value="${email1 }" required = "required">
      			@ 
-				<select name="email2" onchange="domain_list()" required = "required">
+				<select name="email2" id="email2" onchange="domain_list()" required = "required">
     			  <option value="">=이메일선택=</option>
       			  <option value="daum.net"  <c:if test="${email2 == 'daum.net'}">${'selected'} </c:if>>daum.net</option>
       			  <option value="nate.com"  <c:if test="${email2 == 'nate.com'}">${'selected'} </c:if>>nate.com</option>

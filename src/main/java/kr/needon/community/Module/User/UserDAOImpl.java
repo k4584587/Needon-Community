@@ -1,12 +1,13 @@
 package kr.needon.community.Module.User;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.UserRole;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
 
 //=====================================
 //클래스 설명 : 회원관리 DAO 클래스
@@ -57,5 +58,11 @@ public class UserDAOImpl implements UserDAO {
 		if (member != null)
 			re = 1; 	// 중복id
 		return re;
+	}
+
+	@Override
+	public void getUserUpdate(Member member) {
+		// TODO Auto-generated method stub
+		session.update(namespace+".getUserUpdate",member);
 	}
 }
