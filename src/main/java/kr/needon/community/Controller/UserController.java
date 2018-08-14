@@ -6,14 +6,18 @@ import kr.needon.community.Module.User.UserService;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -45,6 +49,14 @@ public class UserController {
 	public String UserLogin() {
 
 		return "user/login"; // titles 안쓴 jsp 로그인 페이지
+	}
+	
+	@RequestMapping(value="/myinfo")
+	public String myinfo() {
+		
+		System.out.println("myinfo>>>>>>>>>>>>>>success!");
+		
+		return "user/myForm";
 	}
 
 
@@ -336,6 +348,88 @@ public class UserController {
 		return "/msg";
     	
     }
+    
+    @RequestMapping("/myinfo_check")
+    public String myinfo_check() {
+    	
+    	System.out.println("myinfo_check>>>>>>>>>>>>>success");
+    	
+    	return "/user/my_check";
+    }
+    
+    @RequestMapping(value="/check_result",  method =  RequestMethod.POST)
+    public String check_result(Member member, Model model){
+    	
+    	System.out.println("check_result>>>>>>>>>>>>>>>success!!");
+    	
+    	 Member login_user = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	
+    	System.out.println("username>>>>>>>"+login_user.getUsername());
+    	
+    	Member get_member = dao.getFindUser(login_user.getUsername());
+    	
+    	try {
+    		boolean result = passwordEncoder.matches(member.getPassword(),get_member.getPassword());
+    		if(!result) {
+    			
+    			model.addAttribute("msg","비밀번호가 틀립니다");
+    			return "/alert";
+    		}else {
+    			model.addAttribute("msg","확인 완료");
+    			model.addAttribute("url","/user/my_modify");
+    		}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			model.addAttribute("msg","인증 실패");
+			
+		}
+    	
+    	return "/msg";
+    }
+    
+    @RequestMapping(value="/my_modify")
+    public String my_modify(Member member, Model model) throws Exception{
+    	
+    	System.out.println("my_modify>>>>>>>>>>>success!!");
+    	
+    	 Member login_user = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	 
+    	 Member get_member = dao.getFindUser(login_user.getUsername());
+    	 
+    	 //핸드폰, 이메일 , 주소
+    	 
+    	 String Phone = get_member.getPhone();
+    	 StringTokenizer st01 = new StringTokenizer(Phone, "-");
+    	 String Phone1 = st01.nextToken(); 
+    	 String Phone2 = st01.nextToken(); 
+    	 String Phone3 = st01.nextToken(); 
+    	
+    	 String email = get_member.getEmail();
+    	 StringTokenizer st02 = new StringTokenizer(email,"@");
+    	 String email1 = st02.nextToken();
+    	 String email2 = st02.nextToken();
+    	 
+    	 model.addAttribute("Phone1", Phone1);
+    	 model.addAttribute("Phone2", Phone2);
+    	 model.addAttribute("Phone3", Phone3);
+    	 model.addAttribute("email1",email1);
+    	 model.addAttribute("email2",email2);
+    	 
+    	return"/user/my_modify";
+    }
+    
+    @RequestMapping(value="/my_update")
+    public String my_update() {
+    	
+    	System.out.println("my_update>>>>>>>>>>>>>success!!");		
+    	
+    	return"";
+    }
+    
+    
+    
 
 
 }
