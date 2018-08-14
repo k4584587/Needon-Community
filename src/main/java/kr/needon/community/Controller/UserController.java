@@ -366,9 +366,10 @@ public class UserController {
     	
     	System.out.println("username>>>>>>>"+login_user.getUsername());
     	
-    	Member get_member = dao.getFindUser(login_user.getUsername());
-    	
     	try {
+    		
+    		Member get_member = dao.getFindUser(login_user.getUsername());
+    		
     		boolean result = passwordEncoder.matches(member.getPassword(),get_member.getPassword());
     		if(!result) {
     			
@@ -419,7 +420,7 @@ public class UserController {
     }
     
     @RequestMapping(value="/my_update",  method =  RequestMethod.POST)
-    public String my_update(Member member, Model model, HttpServletRequest request){
+    public String my_update(Member member, Model model, HttpServletRequest request)throws Exception{
     	
     	System.out.println("my_update>>>>>>>>>>>>>success!!");
     	

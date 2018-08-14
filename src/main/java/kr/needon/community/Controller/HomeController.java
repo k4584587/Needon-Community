@@ -19,9 +19,15 @@ public class HomeController {
 	public String home(Model model, Board board, Criteria cri) throws Exception {
 
 		cri.setCategory("freeboard");
-		cri.setPerPageNum(10);
+		cri.setPerPageNum(5);
+		cri.setPage(1);
+		model.addAttribute("new_freeboard",boardService.listpage(cri));
+		
+		cri.setCategory("notice");
+		cri.setPerPageNum(5);
 		cri.setPage(1);
 		model.addAttribute("new_notice",boardService.listpage(cri));
+		
 		
 		return "home";
 	}
