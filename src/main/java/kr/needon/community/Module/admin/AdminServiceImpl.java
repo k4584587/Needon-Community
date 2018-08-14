@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
 		Map<String, Integer> param = new HashMap<String, Integer>();
 
 		int page = 1;
-		int limit = 20;// 한 화면에 출력할 유저 수
+		int limit = 10;// 한 화면에 출력할 유저 수
 
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));

@@ -50,6 +50,7 @@ public class AdminController {
     	
     	
     	Map<String,Object> userList = adminService.user_List(request, response);
+    	System.out.println(userList);
     	model.addAllAttributes(userList);
     	return "admin/userList";
     	
