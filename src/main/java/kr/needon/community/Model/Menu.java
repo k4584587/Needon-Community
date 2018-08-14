@@ -15,6 +15,7 @@ public class Menu {
     private int sub_category_count;
     private int new_tab_count;
     private int main_category_id;
+    private int insert_count;
     private Timestamp register_date;
 
 

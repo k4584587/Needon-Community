@@ -52,4 +52,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 
+	<insert id="categoryADD">
+
+		  <if test="insert_count eq 0">
+			  INSERT INTO  nb_menu_list (category_name, category_link, new_tab_count, main_count) VALUES (#{category_name}, #{category_link}, #{new_tab_count},#{main_count});
+		  </if>
+
+	</insert>
+
 </mapper>
