@@ -41,7 +41,7 @@
                        </c:choose>                 
                                         <span style="color: red;">New</span>
                                         <span style="float: right;">
-                                        <fmt:formatDate pattern="HH:mm"
+                                        <fmt:formatDate pattern="MM-dd"
 										value="${notice.register_date}"/>
                                         <%-- ${noticeq.register_date } --%>
                                         </span> 
