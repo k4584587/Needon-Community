@@ -32,6 +32,7 @@
 		<td>마지막로그인</td>
 		<td>활성화</td>
 		<td>권한</td>
+		<td>관리</td>
 	</tr>
 	
 	<!-- 화면 출력 번호 변수 정의 -->
@@ -103,7 +104,7 @@
 		</c:choose>
 		</td>
 		<td>
-		<input type="button" value="수정" onClick="location.href='/community/admin/userModifyForm?username=${b.username}'">
+		<input type="button" value="수정" onClick="location.href='<c:url value='/admin/userModifyForm?username=${b.username}' />'">
 		</td>
 	</tr>
 	</c:forEach>
@@ -114,7 +115,7 @@
 	</c:if> --%>
 	
 	<c:if test="${page>1}">
-		<a href="/community/admin/userList?page=${page-1 }">[이전]</a>	
+		<a href="<c:url value="/admin/userList?page=${page-1 }" />">[이전]</a>
 	</c:if>
 	<c:forEach var="a" begin="${startpage }" end="${endpage }">
 		<c:if test="${a==page }">
