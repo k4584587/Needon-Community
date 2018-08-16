@@ -4,20 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ page session="false" %> 
-<sec:authentication property="principal" var="user" />
-${user }test<br>
-<br>
-${fn:length(new_notice)}
-<br>
-
-<br>
-
-<c:forEach items="${new_notice}" var="notice">
-    ${freeboard.subject}<br>
-</c:forEach>
-
 <!-- 슬라이드 끝 } -->
 <div class="col" style="margin-bottom: 400px;">
     <div class="" style="background-color: white; height:150px;margin-bottom: 10px;">
