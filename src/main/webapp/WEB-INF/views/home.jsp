@@ -55,7 +55,7 @@ ${fn:length(new_notice)}
                        </c:choose>                 
                                         <span style="color: red;">New</span>
                                         <span style="float: right;">
-                                        <fmt:formatDate pattern="MM-dd HH:mm"
+                                        <fmt:formatDate pattern="HH:mm"
 										value="${notice.register_date}"/>
                                         <%-- ${noticeq.register_date } --%>
                                         </span> 
