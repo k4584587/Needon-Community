@@ -22,8 +22,10 @@ public class Board {
 	private String cm_nick;
 	private Timestamp cm_regdate;
 	private String cm_body;
+	private int cm_count;
 	private int cm_good;
 	private int cm_bad;
+	private String cm_password;
 	private int parent;
 	private int cm_level;
 	private int read_count;

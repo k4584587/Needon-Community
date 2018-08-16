@@ -18,7 +18,7 @@ public interface BoardService {
 	
 	public List<Board> listpage(Criteria cri)throws Exception;
 	
-	public List<Board> replyList(int no)throws Exception;
+	public List<Board> replyList(Board board)throws Exception;
 	
 	public boolean insert(HttpServletRequest request, Board board)throws Exception;
 	

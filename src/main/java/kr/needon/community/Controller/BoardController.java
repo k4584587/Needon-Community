@@ -58,8 +58,8 @@ public class BoardController {
 
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
-		//board.setNo(board.getNo());
-		//model.addAttribute("list", service.replyList(board.getNo()));
+		model.addAttribute("comment", service.replyList(board));
+		System.out.println("result===============> "+service.replyList(board));
 		service.viewCount(board);
 
 		return "board_view";

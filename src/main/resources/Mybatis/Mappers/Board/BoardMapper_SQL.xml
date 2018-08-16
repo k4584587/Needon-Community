@@ -19,8 +19,9 @@
 				subject like CONCAT ('%', #{keyword}, '%') or
 				content like CONCAT ('%', #{keyword}, '%')
 			</if>
-			
-		</where> order by no desc, register_date desc
+			cm_count = 0	
+		</where> 
+		order by no desc, register_date desc
 		limit #{pageStart}, #{perPageNum};
 	</select>
 	
@@ -38,7 +39,8 @@
 				subject like CONCAT ('%', #{keyword}, '%') or
 				content like CONCAT ('%', #{keyword}, '%')
 			</if>
-		</where>;
+			cm_count = 0
+		</where>
 	</select>
 	
 	<update id="viewcount" parameterType="int">
@@ -62,7 +64,7 @@
 	</update>
 	
 	<select id="replylist" resultType="Board">
-		select cm_nick, cm_no, cm_body, cm_regdate from nb_board_freeboard
+		select cm_nick, cm_no, cm_body, cm_regdate, cm_password from nb_board_${category}
 		where no = #{no} order by cm_no;
 	</select>
 	<insert id="replyinsert" >

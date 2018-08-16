@@ -75,9 +75,9 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	/*게시판 댓글 목록*/
 	@Override
-	public List<Board> replyList(int no) throws Exception {
+	public List<Board> replyList(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+".replylist", no);
+		return session.selectList(namespace+".replylist", board);
 	}
 
 }

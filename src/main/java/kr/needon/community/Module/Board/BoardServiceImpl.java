@@ -103,9 +103,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	/*게시판 댓글 목록*/
 	@Override
-	public List<Board> replyList(int no) throws Exception {
+	public List<Board> replyList(Board board) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.replyList(no);
+		return dao.replyList(board);
 	}
 
 }
