@@ -39,15 +39,23 @@ ${fn:length(new_notice)}
                 <ul class="list-group list-group-flush">
                 <c:choose>
 				<c:when test="${fn:length(new_notice) != 0 }">
-                   <c:forEach items="${new_notice}" var="notice">
+                   <c:forEach items="${new_notice}" var="notice" varStatus="status">
                     <li class="list-group-item">
-                        <span>
-                                        <!-- <span class="badge badge-success">베스트</span> -->
-                                        <a href="<c:url value='/board/view?no=${notice.no }&category=notice'/>"> 
+                    	<c:choose>
+                    		<c:when test="${fn:length(notice.subject) > 11 }">
+                    		<a href="<c:url value="/board/view?no=${notice.no }&category=notice" />">
+                    				<c:out value="${fn:substring(notice.subject,0,10) }">
+                    				</c:out>....
+                    				</a> 
+                    		</c:when>
+                    		<c:otherwise>    
+                    				<a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> 
                                         ${notice.subject}</a>
+                            </c:otherwise>
+                       </c:choose>                 
                                         <span style="color: red;">New</span>
                                         <span style="float: right;">
-                                        <fmt:formatDate pattern="MM-dd"
+                                        <fmt:formatDate pattern="MM-dd HH:mm"
 										value="${notice.register_date}"/>
                                         <%-- ${noticeq.register_date } --%>
                                         </span> 
@@ -76,12 +84,20 @@ ${fn:length(new_notice)}
                                 </span>
                 </div>
                 <ul class="list-group list-group-flush">
-                   <c:forEach items="${new_freeboard}" var="freeboard">
+                   <c:forEach items="${new_freeboard}" var="freeboard" varStatus="status">
                     <li class="list-group-item">
-                        <span>
-                                        <!-- <span class="badge badge-success">베스트</span> -->
-                                        <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> 
+                        <c:choose>
+                        	<c:when test="${fn:length(freeboard.subject) > 11 }">
+                        		<a href="<c:url value="/board/view?no=${freeboard.no }&category=notice" />">
+                        		<c:out value="${fn:substring(freeboard.subject,0,10)})">
+                        		</c:out>....
+                        		</a>
+                        	</c:when>
+                        	<c:otherwise>
+                        			<a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> 
                                         ${freeboard.subject}</a>
+                            </c:otherwise>
+                       </c:choose>
                                         <%-- <a href="#"> ${freeboard.subject}</a> --%>
                                         <span style="color: red;">New</span>
                                         <span style="float: right;">
