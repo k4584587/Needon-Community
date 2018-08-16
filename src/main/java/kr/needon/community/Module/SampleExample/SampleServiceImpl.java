@@ -47,8 +47,22 @@ public class SampleServiceImpl implements SampleService {
 		try {
 			dao.categoryADD(menu);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public Boolean top_categoryDelete(int id) {
+
+		try{
+			dao.top_categoryDelete(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
 		return true;
 	}
 

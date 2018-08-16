@@ -1,10 +1,13 @@
 package kr.needon.community.Model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
 public class Menu {
 
     private int id;
@@ -18,5 +21,19 @@ public class Menu {
     private int insert_count;
     private Timestamp register_date;
 
-
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", category_name='" + category_name + '\'' +
+                ", category_link='" + category_link + '\'' +
+                ", main_count=" + main_count +
+                ", sub_count=" + sub_count +
+                ", sub_category_count=" + sub_category_count +
+                ", new_tab_count=" + new_tab_count +
+                ", main_category_id=" + main_category_id +
+                ", insert_count=" + insert_count +
+                ", register_date=" + register_date +
+                '}';
+    }
 }

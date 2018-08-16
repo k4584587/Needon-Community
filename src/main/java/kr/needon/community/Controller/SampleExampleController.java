@@ -1,18 +1,30 @@
 package kr.needon.community.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import kr.needon.community.Model.Menu;
 import kr.needon.community.Module.SampleExample.SampleExampleDAO;
+import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import kr.needon.community.Model.Sample;
 import kr.needon.community.Module.SampleExample.SampleServiceImpl;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.CookieGenerator;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,7 +35,7 @@ public class SampleExampleController {
 	private SampleServiceImpl service;
 
 	@Autowired
-	SampleExampleDAO dao;
+	SampleExampleDAOImpl dao;
 	
 	@RequestMapping("/list")
 	public String ListExample(Model model) { //리스트 출력 예제
@@ -75,11 +87,37 @@ public class SampleExampleController {
 		menu.setInsert_count(0);
 		if(service.categoryADD(menu)) {
 			model.addAttribute("msg","성공적으로 추가 되었습니다.");
+			return "1";
+
 		} else {
 			model.addAttribute("msg","메뉴 추가 실패!");
 			return "0";
 		}
-		return menu.toString();
+	}
+
+	@GetMapping(value = "/api/menu_list", produces = "text/html; charset=UTF-8")
+	public @ResponseBody String GetMenuListJson(Menu menu, Model model) {
+
+
+		List<Menu> getMenuListJson = dao.getMenuList(menu);
+
+
+		Gson gson = new Gson();
+		String jsonPlace = gson.toJson(getMenuListJson);
+
+		model.addAttribute("test_list",getMenuListJson);
+
+		return jsonPlace;
+	}
+
+	@PostMapping(value = "/top_menu.delete",  produces = "text/html; charset=UTF-8")
+	public  @ResponseBody String TopMenuDelete(int id) {
+
+		if(service.top_categoryDelete(id)) {
+			return "1";
+		} else {
+			return "2";
+		}
 	}
 
 }

@@ -55,9 +55,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="categoryADD">
 
 		  <if test="insert_count eq 0">
-			  INSERT INTO  nb_menu_list (category_name, category_link, new_tab_count, main_count) VALUES (#{category_name}, #{category_link}, #{new_tab_count},#{main_count});
+			  INSERT INTO  nb_menu_list (category_name, category_link, new_tab_count, main_count,sub_category_count) VALUES (#{category_name}, #{category_link}, #{new_tab_count},#{main_count},#{sub_category_count});
 		  </if>
 
 	</insert>
+
+	<delete id="top_categoryDelete">
+			DELETE FROM
+				nb_menu_list
+			WHERE
+				id = #{id};
+
+			ALTER TABLE  nb_menu_list AUTO_INCREMENT=1;
+	</delete>
 
 </mapper>

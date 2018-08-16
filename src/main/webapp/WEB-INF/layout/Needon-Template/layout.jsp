@@ -15,6 +15,7 @@
 <tiles:insertAttribute name="head" />
 <!-- 메인 해드 끝 -->
 
+
 	<style>
 
 
@@ -125,5 +126,34 @@
 	<tiles:insertAttribute name="footer" />
 	<!-- 풋더 끝 } -->
 </body>
-  
+
+<script>
+
+   /* $(document).ready(function() {
+
+        console.log("ajax load!!");
+        get_menu_list_json();
+
+    });
+
+    function get_menu_list_json() {
+        $.ajax({
+            url: "<c:url value='/sample/api/menu_list' />",
+            method: 'GET',
+            cache: true,
+            type: 'json',
+            contentType: "application/json",
+            success: function (result) {
+
+
+                console.log("ajax load!!!");
+                console.log("menu data ==> " + result.toString());
+
+
+            }
+        })
+    }*/
+
+</script>
+
 </html>

@@ -16,5 +16,6 @@ public interface SampleExampleDAO {
     public List<Menu> getSubCategoryList(Menu menu);
 
     public void categoryADD(Menu menu);
+    public void top_categoryDelete(int id);
 
 }

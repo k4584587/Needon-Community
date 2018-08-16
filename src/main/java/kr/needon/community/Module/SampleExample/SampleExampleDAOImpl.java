@@ -52,4 +52,9 @@ public class SampleExampleDAOImpl implements SampleExampleDAO {
 	public void categoryADD(Menu menu) {
 		session.insert(namespace + ".categoryADD", menu);
 	}
+
+	@Override
+	public void top_categoryDelete(int id) {
+		session.delete(namespace+ ".top_categoryDelete", id);
+	}
 }
