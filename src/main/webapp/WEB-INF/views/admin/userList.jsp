@@ -121,7 +121,7 @@
 			[${a }]
 		</c:if>
 		<c:if test="${a != page }">
-			<a href="/community/admin/userList?page=${a }">[${a }]</a>
+			<a href="<c:url value="/admin/userList?page=${a }" />">[${a }]</a>
 		</c:if>
 	</c:forEach>
 	
@@ -129,7 +129,7 @@
 	[다음]
 	</c:if> --%>
 	<c:if test="${page<maxpage }">
-		<a href="/community/admin/userList?page=${page+1 }">[다음]</a>
+		<a href="<c:url value="/admin/userList?page=${page+1 }" />">[다음]</a>
 	</c:if>
 		
 </center>
