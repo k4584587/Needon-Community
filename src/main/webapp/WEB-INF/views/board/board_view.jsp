@@ -46,7 +46,7 @@ $(function() {
 		<th colspan="4">내용</th>
 	</tr>
 	<tr>
-		<td colspan="4"><pre>${board.content }</pre></td>
+		<td colspan="4"><div align="left">${board.content }</div></td>
 	</tr>
 	<tr>
 		<td colspan="4" align=center><input type="button" value="수정"
