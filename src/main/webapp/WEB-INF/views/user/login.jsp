@@ -59,7 +59,7 @@
 </style>
 <center style="margin-top: 10px;">
     <div class="login-form">
-
+        <i class=fa fa-circle-o-notch fa-spin'></i>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -89,7 +89,7 @@
                             <input type="checkbox" value="remember-me" style="margin-top: 10px"> 자동로그인
                         </label>
                     </div>
-                    <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+                        <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
                     <hr>
                     <a style="float: left!important;"  href="#" onclick="psw_find()">비밀번호 찾기</a>
                     <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>
@@ -119,7 +119,7 @@
                         <label>프로필 사진</label>
                         <input type="file" id="img" name="img" class="form-control" placeholder="프로필 사진">
                         <br>
-                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="회원가입">
+                        <button id="btn-join" type="submit" class="btn btn-lg btn-primary btn-block">회원가입</button>
                 </form>
             </div>
         </div>
@@ -129,6 +129,18 @@
 <script>
 
     $(document).ready(function () {
+
+
+            $("form").submit(function(){
+                $("#btn-login").prop('disabled', true);
+                $("#btn-join").prop('disabled', true);
+
+                $("#btn-login").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 로그인중...");
+                $("#btn-join").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 회원가입중...");
+            });
+
+
+
         //한글입력 안되게 처리
         $("input[name=username]").keyup(function (event) {
             if (!(event.keyCode >= 37 && event.keyCode <= 40)) {

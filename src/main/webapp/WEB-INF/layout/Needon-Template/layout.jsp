@@ -129,30 +129,15 @@
 
 <script>
 
-   /* $(document).ready(function() {
-
-        console.log("ajax load!!");
-        get_menu_list_json();
-
-    });
-
-    function get_menu_list_json() {
-        $.ajax({
-            url: "<c:url value='/sample/api/menu_list' />",
-            method: 'GET',
-            cache: true,
-            type: 'json',
-            contentType: "application/json",
-            success: function (result) {
+    $(document).ready(function () {
 
 
-                console.log("ajax load!!!");
-                console.log("menu data ==> " + result.toString());
+        $("form").submit(function(){
+            $("#btn-logout").prop('disabled', true);
 
-
-            }
-        })
-    }*/
+            $("#btn-logout").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 로그아웃 중...");
+        });
+	});
 
 </script>
 

@@ -18,7 +18,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int member_Join(Member member) {
 		// TODO Auto-generated method stub
-		return userDAO.member_Join(member);
+		try {
+			userDAO.member_Join(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+		return 1;
 	}
 	
 	@Override

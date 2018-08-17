@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<sec:authentication property="principal" var="user"/>
+
 
 <script>
 $(function() {
@@ -63,14 +62,18 @@ $(function() {
 <p>
 <div id="slist"></div>
 <p>
-<form name="frm" id="frm" align=center>
-	<input type="hidden" name="cm_password" value="${user.password }">
-	<input type="hidden" name="replyer" value="${board.wr_nick}"> <input
-		type="hidden" name="no" value="${board.no}"> 
-		댓글 :
-	<textarea rows="2" cols="50" name="replytext"></textarea>
-	<input type="button" value="확인" id="repInsert">	
-</form>
+	<%--로그인 안할시에는 댓글등록 표시 안함--%>
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="user"/>
+		<form name="frm" id="frm" align=center>
+			<input type="hidden" name="cm_password" value="${user.password }">
+			<input type="hidden" name="replyer" value="${board.wr_nick}"> <input
+				type="hidden" name="no" value="${board.no}">
+			댓글 :
+			<textarea rows="2" cols="50" name="replytext"></textarea>
+			<input type="button" value="확인" id="repInsert">
+		</form>
+		</sec:authorize>
 
 <div class="container" align="center">
 		<h2 class="text-primary">댓글</h2>

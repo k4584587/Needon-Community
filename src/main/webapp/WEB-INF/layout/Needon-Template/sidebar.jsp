@@ -35,7 +35,7 @@
                 </div>
                 <form action="<c:url value="/logout" />" method="post" style="margin-bottom: 10px;">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <button type="submit" class="btn btn-primary btn-block">로그아웃</button>
+                    <button id="btn-logout" type="submit" class="btn btn-primary btn-block">로그아웃</button>
                 </form>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <a href="<c:url value="/admin/" />" class="btn btn-danger btn-block" style="color: white">관리자</a>

@@ -90,9 +90,29 @@ public class UserController {
 
 		// 사진 없으면 null
 		if (size == 0) {
-			filename = "null";
 
-		} else {
+			//password 암호화
+			member.setPassword(passwordEncoder.encode(member.getPassword()));
+
+//			String birth1 = request.getParameter("birth1").trim();
+//			String birth2 = request.getParameter("birth2").trim();
+//			String birth = birth1 + "-" + birth2;
+
+
+			member.setPhoto(null);
+			member.setBirth("");
+			member.setAddress1("");
+			member.setAddress2("");
+
+			int out = service.member_Join(member);
+
+			if (out == 1)
+				System.out.println("성공");
+			model.addAttribute("msg","회원가입되었습니다.");
+			model.addAttribute("url","/");
+
+
+	} else {
 
 			int result = 0;
 
@@ -126,6 +146,7 @@ public class UserController {
 //			String birth1 = request.getParameter("birth1").trim();
 //			String birth2 = request.getParameter("birth2").trim();
 //			String birth = birth1 + "-" + birth2;
+
 
 			member.setPhoto(mf.getBytes());
 			member.setBirth("");
