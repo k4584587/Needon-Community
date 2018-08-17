@@ -1,5 +1,6 @@
 package kr.needon.community.Module.admin;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,4 +21,5 @@ public interface AdminService {
 	
 	public int modifyTheUser(Member member) throws Exception;
 	public void modifyTheUserRole(UserRole role) throws Exception;
+	public Map<String,Object> getFindUserList(HttpServletRequest request, Map<String,Object> keys) throws Exception; 
 }

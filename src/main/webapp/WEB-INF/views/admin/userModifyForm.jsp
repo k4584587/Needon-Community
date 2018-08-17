@@ -23,7 +23,7 @@
 </head>
 <body>
 	
-	<form name="f" method="post" action=<c:url value="/admin/userModify_ok"/> " 
+	<form name="f" method="post" action=<c:url value="/admin/userModify_ok"/> 
 			enctype="multipart/form-data"> 
 			
 			<input type="hidden" name="username" value="${user.username }"/>

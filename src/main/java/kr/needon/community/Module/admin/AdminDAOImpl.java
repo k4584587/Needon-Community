@@ -1,5 +1,6 @@
 package kr.needon.community.Module.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +42,22 @@ public class AdminDAOImpl implements AdminDAO{
 	public void modifyTheUserRole(UserRole role) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("adminDAO");
-		session.update("modifyTheUserRole",role);
+		session.update("Member.modifyTheUserRole",role);
+	}
+	
+	@Override
+	public List<Member> getFindUsers(Map<String, Object> keys) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("DAOgetFindUsers");
+	
+		return session.selectList("Admin.getFindUser", keys);
 	}
 
+	@Override
+	public int getFindListCount(Map<String,Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("DAO getFindListCount");
+		return session.selectOne("Admin.getFindListCount",param);
+	}
 	
 }

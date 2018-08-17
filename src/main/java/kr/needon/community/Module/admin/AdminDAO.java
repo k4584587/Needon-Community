@@ -19,4 +19,8 @@ public interface AdminDAO {
 	public int modifyTheUser(Member member) throws Exception;
 	//유저 한명 수정할 때 롤 값도 수정
 	public void modifyTheUserRole(UserRole role) throws Exception;
+	
+	public List getFindUsers(Map<String,Object> keys) throws Exception;
+	
+	public int getFindListCount(Map<String,Object> param) throws Exception;
 }

@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유저 목록</title>
+<title>검색 결과</title>
 </head>
 <body>
+<center>
+<b>검색 결과</b><br>
+</center>
 유저 수 : ${listcount }
 <table border=1 align=center >
 	<tr>
@@ -141,7 +144,6 @@
 		<option value="nick" >닉네임</option>
 		<option value="phone" >핸드폰</option>
 		<option value="email" >이메일</option>
-		
 	</select>
 	<input type="text" name="keyword">
 	<input type="submit" value="검색"	>

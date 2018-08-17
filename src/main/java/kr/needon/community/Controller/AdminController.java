@@ -1,6 +1,7 @@
 package kr.needon.community.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,19 +39,19 @@ public class AdminController {
     public String AdminMain() {
 
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("로그인한 사용자 ==> " + member.toString());
+        //System.out.println("로그인한 사용자 ==> " + member.toString());
 
-        return "redirect:/admin/userList";
+        return "redirect:userList";
     }
     
     //유저목록 출력
     @RequestMapping(value="/userList")
     public String userList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
-    	Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	//Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
     	
     	Map<String,Object> userList = adminService.user_List(request, response);
-    	System.out.println(userList);
+    	//System.out.println(userList);
     	model.addAllAttributes(userList);
     	return "admin/userList";
     	
@@ -61,11 +62,11 @@ public class AdminController {
     public String userModifyForm(HttpServletRequest request, Model model)
     		throws Exception{
     	
-    	System.out.println("userModifyForm");
+    	//System.out.println("userModifyForm");
     	String username = request.getParameter("username");
     	
     	Member user = adminService.findUser(username);
-    	System.out.println("유저 : " + user);
+    	//System.out.println("유저 : " + user);
     	
     	model.addAttribute("user",user);
     	model.addAttribute("role", user.getGetUserRole().get(0).getRole());
@@ -108,8 +109,30 @@ public class AdminController {
     	
     	
     	
-    	return "redirect:admin/userList";
+    	return "redirect:userList";
     }
+    
+    //검색에 맞는 유저 리스트 갖고 오기
+    @RequestMapping(value="/search", method=RequestMethod.POST)
+    public String search(Model model, HttpServletRequest request) throws Exception{
+    	System.out.println("user search");
+    	String keyfield=request.getParameter("keyfield");
+    	String keyword=request.getParameter("keyword");
+    	
+    	Map<String,Object> keys = new HashMap<String,Object>();
+    	keys.put("keyfield", keyfield);
+    	keys.put("keyword", keyword);
+    /*	System.out.println("in controller <keyfield>:"+keys.get("keyfield"));
+    	System.out.println("in controller <keyword>:"+keys.get("keyword"));
+    	*/
+    	
+    	Map<String,Object> findUserSet = new HashMap<String,Object>();
+    	findUserSet = adminService.getFindUserList(request,keys);
+    	model.addAllAttributes(findUserSet);
+    	//System.out.println(findUserList);
+    	return "admin/findUserList";
+    }
+    
    
 
 }
