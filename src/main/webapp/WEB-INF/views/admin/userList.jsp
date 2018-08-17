@@ -6,8 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유저 목록</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	function check(){
+		if($.trim($("#keyword").val())==""){
+		alert("검색어를 입력하세요");
+		$("#keyword").val("").focus();
+		return false;
+		}
+	}
+</script>
 </head>
+<title>유저 목록</title>
 <body>
 유저 수 : ${listcount }
 <table border=1 align=center >
@@ -143,8 +153,8 @@
 		<option value="email" >이메일</option>
 		
 	</select>
-	<input type="text" name="keyword">
-	<input type="submit" value="검색"	>
+	<input type="text" name="keyword" id="keyword">
+	<input type="submit" value="검색" onclick="return check()"	>
 </form>
 </body>
 </html>
