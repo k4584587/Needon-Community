@@ -48,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM
 				nb_menu_list
 			WHERE
-				sub_count = 1;
+				sub_count = 1
+			ORDER BY id DESC;
 
 	</select>
 
@@ -68,5 +69,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 			ALTER TABLE  nb_menu_list AUTO_INCREMENT=1;
 	</delete>
+
+	<insert id="sub_MenuADD">
+
+		UPDATE
+			nb_menu_list
+		SET
+			sub_category_count = 1
+		WHERE
+			id = #{main_category_id};
+
+		INSERT INTO  nb_menu_list
+			(main_category_id, category_name, category_link, new_tab_count, sub_count, main_count,sub_category_count)
+		VALUES
+			(#{main_category_id}, #{category_name}, #{category_link}, #{new_tab_count},#{sub_count},0,0);
+</insert>
 
 </mapper>

@@ -57,33 +57,33 @@ ${menu_count}
         <tbody id="${category.id}_category">
         <th><input type="text" value="${category.category_name}"></th>
         <th><input type="text" value="${category.category_link}"></th>
-        <th><select>
-            <option>
-                사용함
-            </option>
-            <option>
+        <th><select id="new_tab_count" name="new_tab_count">
+            <option value="0" <c:if test="${category.new_tab_count eq 0}">selected</c:if>>
                 사용안함
+            </option>
+            <option value="1" <c:if test="${category.new_tab_count eq 1}">selected</c:if>>
+                사용함
             </option>
         </select></th>
         <th><input type="text"></th>
         <th>
-            <button onclick="category_add(${category.id})">추가</button>
+            <button onclick="sub_category_add(${category.id})">추가</button>
             <button onclick="topMenu_delete(${category.id})">삭제</button>
         </th>
         </tbody>
         <c:if test="${category.sub_category_count eq 1}">
             <c:forEach items="${sub_list}" var="sub">
-                <c:if test="${sub.main_category_id == category.id}">
+                <c:if test="${sub.main_category_id eq category.id}">
                     <tbody id="${sub.main_category_id}_sub_category">
                     <tr>
                         <th>ㄴ<input type="text" value="${sub.category_name}"></th>
                         <th><input type="text" value="${sub.category_link}"></th>
-                        <th><select>
-                            <option>
-                                사용함
-                            </option>
-                            <option>
+                        <th><select id="sub_new_tab_count" name="new_tab_count">
+                            <option value="0">
                                 사용안함
+                            </option>
+                            <option value="1">
+                                사용함
                             </option>
                         </select></th>
                         <th><input type="text"></th>
@@ -99,7 +99,7 @@ ${menu_count}
 </table>
 
 
-<div id="test"></div>
+
 <script>
 
     function subMenu_delete(div_id, id) {
@@ -108,13 +108,13 @@ ${menu_count}
         $.ajax({
             type: 'POST',
             url: "<c:url value='/sample/top_menu.delete' />",
-            data: {id : id},
-            success : function(result) {
+            data: {id: id},
+            success: function (result) {
                 console.log("처리결과 ==> " + result);
 
-                if(result == 1) {
-                    console.log("#"+div_id+"_sub_category" + " 삭제됨");
-                    $("#"+div_id+"_sub_category").remove();
+                if (result == 1) {
+                    console.log("#" + div_id + "_sub_category" + " 삭제됨");
+                    $("#" + div_id + "_sub_category").remove();
                     alert("메뉴가 삭제되었습니다.");
                 } else {
                     alert("삭제 실패!");
@@ -130,52 +130,89 @@ ${menu_count}
         console.log(id + " 번째 삭제를 클릭함");
 
         $.ajax({
-           type: 'POST',
+            type: 'POST',
             url: "<c:url value='/sample/top_menu.delete' />",
-            data: {id : id},
-            success : function(result) {
-               console.log("처리결과 ==> " + result);
+            data: {id: id},
+            success: function (result) {
+                console.log("처리결과 ==> " + result);
 
-               if(result == 1) {
-                   $("#"+id+"_category").remove();
-                   alert("메뉴가 삭제되었습니다.");
-               } else {
-                   alert("삭제 실패!");
-               }
+                if (result == 1) {
+                    $("#" + id + "_category").remove();
+                    alert("메뉴가 삭제되었습니다.");
+                } else {
+                    alert("삭제 실패!");
+                }
 
             }
         });
 
     }
 
+
     $('#category > tbody:last').css("background-color", "red");
 
-    function category_add(category_id) {
+    function sub_category_add(category_id) {
         console.log("category add click");
 
-        var sub_category = "<tbody id=\""+category_id+"_sub_category\">\n" +
-            "<form>" +
-            "    <tr><th>ㄴ<input type=\"text\"></th>\n" +
-            "        <th><input type=\"text\"></th>\n" +
-            "        <th><select>\n" +
-            "            <option>\n" +
-            "                사용함\n" +
-            "            </option>\n" +
-            "            <option>\n" +
-            "                사용안함\n" +
-            "            </option>\n" +
-            "        </select></th>\n" +
-            "        <th><input type=\"text\"></th>\n" +
-            "        <th>\n" +
-            "            <button>삭제</button>\n" +
-            "            <button onclick='category_add(category_id + 1)'>등록</button>\n" +
-            "        </th>\n" +
-            "    </tr>\n" +
-            "    </form>" +
-            "</tbody>";
+        var sub_category =
+            "<tbody id=\""+category_id+"_sub_category\">\n" +
+            "<tr>\n" +
+            "    <input type=\"hidden\" id=\"main_category_id\" name=\"main_category_id\" value=\""+category_id+"\">\n" +
+            "    <input type=\"hidden\" id=\"sub_category_count\" name=\"sub_category_count\" value=\"1\">\n" +
+            "    <input type=\"hidden\" id=\"sub_count\" name=\"sub_count\" value=\"1\">\n" +
+            "    <th>ㄴ<input type=\"text\" id=\"category_name\" name=\"category_name\"></th>\n" +
+            "    <th><input type=\"text\" id=\"category_link\" name=\"category_link\"></th>\n" +
+            "    <th><select id=\"new_tab_count\" name=\"new_tab_count\">\n" +
+            "        <option value=\"0\">사용안함</option>\n" +
+            "        <option value=\"1\">사용함</option>\n" +
+            "    </select></th>\n" +
+            "    <th><input type=\"text\"></th>\n" +
+            "\n" +
+            "    <th>\n" +
+            "        <button disabled>삭제</button>\n" +
+            "        <button id=\"save-btn\" onclick=\"sub_insert("+category_id+")\">등록</button>\n" +
+            "    </th>\n" +
+            "</tr>\n" +
+            "</tbody>\n";
 
         $("#category > #" + category_id + "_category").after(sub_category);
     }
+
+    function sub_insert(category_id) {
+        console.log(category_id + "의 서브카테고리 추가 버튼 클릭함");
+
+        var main_category_id =  $("input[id='main_category_id']").val();
+        var sub_category_count =  $("input[id='sub_category_count']").val();
+        var sub_count =  $("input[id='sub_count']").val();
+
+        var category_name =  $("input[id='category_name']").val();
+        var category_link =  $("input[id='category_link']").val();
+        var new_tab_count =  $("select[id='new_tab_count']").val();
+
+        console.log("main_category_id ==> " + main_category_id);
+        console.log("sub_category_count ==> " + sub_category_count);
+        console.log("sub_count ==> " + sub_count);
+
+        console.log("category_name ==> " + category_name);
+        console.log("category_link ==> " + category_link);
+        console.log("new_tab_count ==> " + new_tab_count);
+
+        $.ajax({
+            type: "POST",
+            url: "<c:url value="/sample/sub_insert" />",
+            data: {main_category_id:main_category_id, sub_category_count:sub_category_count, sub_count:sub_count,category_name:category_name,category_link:category_link,new_tab_count:new_tab_count},
+            success: function (result) {
+                console.log("result ==> " + result);
+                if(result == 1) {
+                    alert("서브 메뉴가 등록되었습니다.");
+                    $("#save-btn").remove();
+                } else {
+                    alert("서브 메뉴 등록 실패");
+                }
+            }
+        });
+    }
+
 
     function category_insert(id) {
 
@@ -188,12 +225,11 @@ ${menu_count}
             url: "<c:url value='/sample/menu_add' />",
             data: new_category_date,
             success: function (result) {
-
                 if (result == 1) {
                     console.log("new_menu_form ajax result ==> " + result);
                     console.log("category name ==> " + new_category_date.category_name);
 
-                    var list_add_html = "<tbody id=\""+id+"_category\">\n" +
+                    var list_add_html = "<tbody id=\"" + id + "_category\">\n" +
                         "        <tr><th><input type=\"text\" value=\"" + new_category_date.category_name + "\"></th>\n" +
                         "        <th><input type=\"text\" value=\"" + new_category_date.category_link + "\"></th>\n" +
                         "        <th><select>\n" +
@@ -206,8 +242,8 @@ ${menu_count}
                         "        </select></th>\n" +
                         "        <th><input type=\"text\"></th>\n" +
                         "        <th>\n" +
-                        "            <button onclick=\"category_add(7)\">추가</button>\n" +
-                        "            <button onclick=\"topMenu_delete(1)\">삭제</button>\n" +
+                        "            <button onclick=\"category_add("+id+")\" disabled>추가</button>\n" +
+                        "            <button onclick=\"topMenu_delete(1)\" disabled>삭제</button>\n" +
                         "        </th>\n" +
                         "        </tr></tbody>";
 
@@ -299,7 +335,7 @@ ${menu_count}
                 </div>
                 <div class="row">
                     <div class="col-3" style="margin-bottom: 20px!important;">
-                         서브 카테고리
+                        서브 카테고리
                     </div>
                     <div class="col-auto">
                         <select class="form-control" name="sub_category_count">
@@ -315,10 +351,7 @@ ${menu_count}
                 <input type="hidden" name="main_count" value="1">
             </div>
             <div class="modal-footer">
-
-                    <button type="button" class="btn btn-primary" onclick="category_insert(1)">등록</button>
-
-
+                <button type="button" class="btn btn-primary" onclick="category_insert(1)">등록</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
         </form>
