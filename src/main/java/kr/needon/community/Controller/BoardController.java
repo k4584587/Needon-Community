@@ -1,11 +1,7 @@
 package kr.needon.community.Controller;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.PageMaker;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import lombok.extern.java.Log;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,8 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.PageMaker;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import lombok.extern.java.Log;
 
 //=====================================
 //	클래스 설명 : 게시판 컨트롤러 클래스
@@ -140,6 +142,17 @@ public class BoardController {
 			model.addAttribute("msg", "수정이 실패했습니다.");
 		}
 		return "/msg";
+	}
+	
+	/*댓글 추가*/
+	@RequestMapping(value = "/repInsert", method = RequestMethod.POST)
+	public @ResponseBody String  repInsert(Board board) throws Exception{
+		if(service.repInsert(board)) {
+			return board.toString();
+		}
+		else {
+			return "2";
+		}		
 	}
 
 }

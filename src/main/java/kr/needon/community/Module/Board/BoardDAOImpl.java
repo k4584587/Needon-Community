@@ -79,5 +79,12 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".replylist", board);
 	}
+	
+	/*댓글 추가*/
+	@Override
+	public void repInsert(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".replyinsert", board);
+	}
 
 }

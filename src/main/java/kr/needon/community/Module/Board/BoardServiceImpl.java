@@ -107,5 +107,18 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.replyList(board);
 	}
+	
+	/*댓글 추가*/
+	@Override
+	public boolean repInsert(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.repInsert(board);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

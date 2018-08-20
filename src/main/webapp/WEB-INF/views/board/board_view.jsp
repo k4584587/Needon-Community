@@ -6,22 +6,38 @@
 
 
 <script>
+
 $(function() {
 	console.log("javascript load")
 	$('#repInsert').click(function() {
-			if (!frm.replytext.value) {
+			if (!frm.cm_body.value) {
 				alert('댓글 입력후에 클릭하시오');
 				frm.replytext.focus();
-				return false;
+				return false;  
 			}
 			var frmData = $('form').serialize();
+			console.log("frmData " +  frmData.toString());   
+			
+			var cm_nick = $("input[name= 'cm_nick' ]").val();
+			var cm_body = $("textarea[name= 'cm_body' ]").val();
+			var cm_regdate = $("input[name= 'cm_regdate' ]").val();
+			 
+			var insertHTML = "<tr>"+
+				"<td>"+cm_nick+"</td>"+
+				"<td>"+cm_body+"</td>"+
+				"<td>"+cm_regdate+"</td>"+
+				"<td>"+
+				"</td>"+
+			"</tr>";	
+			   
 			$.ajax({
 		         type:"POST",
-		         /*url:"./jsp/member/member_idcheck.jsp",*/
-		         url:"<c:url value='/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }' />",     
+		         url:"<c:url value='/board/repInsert'/>",
 		         data: frmData,   
-		         success: function (data) { 
-		        	 alert("test");
+		         success: function (result) {
+		        	$("#comment_data > tbody > tr:last").after(insertHTML); 
+		        	 alert(result);
+		        	 frm.cm_body.value = '';
 		         }
 	});
 });  
@@ -67,17 +83,19 @@ $(function() {
 		<sec:authentication property="principal" var="user"/>
 		<form name="frm" id="frm" align=center>
 			<input type="hidden" name="cm_password" value="${user.password }">
-			<input type="hidden" name="replyer" value="${board.wr_nick}"> <input
-				type="hidden" name="no" value="${board.no}">
+			<input type="hidden" name="cm_nick" value="${board.wr_nick}"> <input
+				type="hidden" name="parent" value="${param.no}">
+			<input type="hidden" name="category" value="${param.category }">
+			<input type="hidden" name="cm_regdate" value="${board.cm_regdate }"/>
 			댓글 :
-			<textarea rows="2" cols="50" name="replytext"></textarea>
+			<textarea rows="2" cols="50" name="cm_body"></textarea>
 			<input type="button" value="확인" id="repInsert">
 		</form>
 		</sec:authorize>
 
 <div class="container" align="center">
 		<h2 class="text-primary">댓글</h2>
-		<table class="table table-bordered">
+		<table id="comment_data" class="table table-bordered">
 			<tr>
 				<td>작성자</td>
 				<td>내용</td>
@@ -85,14 +103,14 @@ $(function() {
 				<td></td>
 			</tr>
 			<c:forEach var="rb" items="${comment}">
-				<tr>
+				<tr id="comment_list">
 					<td>${rb.cm_nick}</td>
-					<td id="td_${rb.cm_no}">${rb.cm_body}</td>
+					<td>${rb.cm_body}</td>
 					<td>${rb.cm_regdate }</td>
-					<td id="btn_${rb.cm_no}">
+					<td>
 						<c:if test="${rb.cm_password eq board.wr_password }">
-							<input type="button" value="수정" class="edit1" id="${rb.cm_no}">
-							<input type="button" value="삭제"	onclick="del(${rb.cm_no},${rb.cm_no})">
+							<input type="button" value="수정" class="edit1" id="${rb.no}">
+							<input type="button" value="삭제"	onclick="del(${rb.no},${rb.no})">
 						</c:if></td>
 				</tr>
 			</c:forEach>

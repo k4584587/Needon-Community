@@ -29,4 +29,6 @@ public interface BoardDAO {
 	public void delete(Board board)throws Exception;
 	
 	public void modify(Board board)throws Exception;
+	
+	public void repInsert(Board board)throws Exception;
 }

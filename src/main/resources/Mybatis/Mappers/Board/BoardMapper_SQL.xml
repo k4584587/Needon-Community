@@ -64,16 +64,13 @@
 	</update>
 	
 	<select id="replylist" resultType="Board">
-		select cm_nick, cm_no, cm_body, cm_regdate, cm_password from nb_board_${category}
-		where no = #{no} order by cm_no;
+		select no, cm_nick, cm_body, cm_regdate, cm_password from nb_board_${category}
+		where parent = #{no} and cm_count=1 order by no;
 	</select>
 	<insert id="replyinsert" >
-		<selectKey keyProperty="no" order="BEFORE" resultType="int">
-			select nvl(max(cm_no),0) + 1 from nb_board_${category}
-		</selectKey>
-		insert into nb_board_${category} (no, cm_no, cm_body,
-			cm_nick) values (#{no},#{cm_no},#{cm_body},
-			#{cm_nick})
+		insert into nb_board_${category} (parent, cm_body, cm_password,
+			cm_nick, cm_count) values (#{parent},#{cm_body}, #{cm_password},
+			#{cm_nick}, 1)
 	</insert>
 	<update id="replyupdate" >
 		update nb_board_${category} set cm_body=#{cm_body},
