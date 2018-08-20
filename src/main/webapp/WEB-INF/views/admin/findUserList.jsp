@@ -128,14 +128,14 @@
 	</c:if> --%>
 	
 	<c:if test="${page>1}">
-		<a href="<c:url value="/admin/userList?page=${page-1 }" />">[이전]</a>
+		<a href="<c:url value="/admin/search?keyword=${keyword }&keyfield=${keyfield }&page=${page-1 }" />">[이전]</a>
 	</c:if>
 	<c:forEach var="a" begin="${startpage }" end="${endpage }">
 		<c:if test="${a==page }">
 			[${a }]
 		</c:if>
 		<c:if test="${a != page }">
-			<a href="<c:url value="/admin/userList?page=${a }" />">[${a }]</a>
+			<a href="<c:url value="/admin/search?keyword=${keyword }&keyfield=${keyfield }&page=${a }" />">[${a }]</a>
 		</c:if>
 	</c:forEach>
 	
@@ -143,7 +143,8 @@
 	[다음]
 	</c:if> --%>
 	<c:if test="${page<maxpage }">
-		<a href="<c:url value="/admin/userList?page=${page+1 }" />">[다음]</a>
+		<a href="<c:url value="/admin/search?keyword=${keyword }&keyfield=${keyfield }&page=${page+1 }" />">[다음]</a>
+	
 	</c:if>
 		
 </center>

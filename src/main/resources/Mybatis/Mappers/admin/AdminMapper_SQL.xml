@@ -4,7 +4,8 @@
  
 <mapper namespace="Admin">
 
-<select id="getFindUser" parameterType="String" resultType="Member">
+<select id="getFindUser" parameterType="hashmap" resultType="Member">
+
 	SELECT
 		*
 	FROM
@@ -23,8 +24,11 @@
 		phone like CONCAT('%',#{keyword},'%')
 	</if>
 	<if test='keyfield == "email"'>
-		email like CONCAT('%',#{keyword},'%')
+		email like CONCAT('%',#{keyword},'%') 
 	</if>
+	<![CDATA[
+		and no >=((#{page}-1)*#{limit}+1) and no <=(#{page}*#{limit})
+		]]>
 			
 </select>
 

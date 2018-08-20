@@ -132,6 +132,7 @@ public class AdminServiceImpl implements AdminService {
 				if (request.getParameter("page") != null) {
 					page = Integer.parseInt(request.getParameter("page"));
 				}
+				System.out.println("페이지: "+page);
 
 				param.put("page", page);
 				param.put("limit", limit);
@@ -176,6 +177,8 @@ public class AdminServiceImpl implements AdminService {
 				resultMap.put("maxpage", maxpage);
 				resultMap.put("listcount", listcount);
 				resultMap.put("userList", userList);
+				resultMap.put("keyword", keys.get("keyword"));
+				resultMap.put("keyfield", keys.get("keyfield"));
 
 				return resultMap;
 			

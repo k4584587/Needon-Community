@@ -115,7 +115,7 @@ public class AdminController {
     //검색에 맞는 유저 리스트 갖고 오기
     @RequestMapping(value="/search", method=RequestMethod.POST)
     public String search(Model model, HttpServletRequest request) throws Exception{
-    	System.out.println("user search");
+    	System.out.println("user search post");
     	String keyfield=request.getParameter("keyfield");
     	String keyword=request.getParameter("keyword");
     	
@@ -130,6 +130,23 @@ public class AdminController {
     	findUserSet = adminService.getFindUserList(request,keys);
     	model.addAllAttributes(findUserSet);
     	//System.out.println(findUserList);
+    	return "admin/findUserList";
+    }
+    
+    @RequestMapping(value="/search")
+    public String search2(Model model, HttpServletRequest request) throws Exception{
+    	System.out.println("user search get");
+    	
+    	String keyfield=request.getParameter("keyfield");
+    	String keyword=request.getParameter("keyword");
+    	
+    	Map<String,Object> keys = new HashMap<String,Object>();
+    	keys.put("keyfield", keyfield);
+    	keys.put("keyword", keyword);
+    	Map<String,Object> findUserSet = new HashMap<String,Object>();
+    	findUserSet = adminService.getFindUserList(request,keys);
+    	model.addAllAttributes(findUserSet);
+    	
     	return "admin/findUserList";
     }
     
