@@ -12,4 +12,5 @@ public interface SampleService {
 	public Boolean sampleInsert(Sample sample);
 	public Boolean categoryADD(Menu menu);
 	public Boolean top_categoryDelete(int id);
+	public Boolean sub_MenuADD(Menu menu);
 }

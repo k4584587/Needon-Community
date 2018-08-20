@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class Menu {
 
     private int id;
+    private int menu_id;
     private String category_name;
     private String category_link;
     private int main_count;

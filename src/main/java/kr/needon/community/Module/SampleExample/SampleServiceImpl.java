@@ -66,5 +66,16 @@ public class SampleServiceImpl implements SampleService {
 		return true;
 	}
 
+	@Override
+	public Boolean sub_MenuADD(Menu menu) {
 
+		try{
+			dao.sub_MenuADD(menu);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 }

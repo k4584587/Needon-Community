@@ -120,4 +120,16 @@ public class SampleExampleController {
 		}
 	}
 
+	@PostMapping(value = "/sub_insert",  produces = "text/html; charset=UTF-8")
+	public  @ResponseBody String Sub_Insert(Menu menu) {
+
+		System.out.println("서브메뉴 ==> " + menu.toString());
+
+		if(service.sub_MenuADD(menu)) {
+			return "1";
+		} else {
+			return "2";
+		}
+	}
+
 }

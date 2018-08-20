@@ -14,7 +14,7 @@
     FROM
     nb_menu_list
     WHERE
-    main_count = 1;
+    main_count = 1
 </sql:query>
 
 <sql:query dataSource="${datasource}" var="sub_menu">
@@ -23,7 +23,8 @@
     FROM
     nb_menu_list
     WHERE
-    sub_count = 1;
+    sub_count = 1
+    ORDER BY FIELD(menu_id,menu_id);
 </sql:query>
 
 <!-- 메뉴비 사직 -->
@@ -35,11 +36,13 @@
                     <c:choose>
                         <c:when test="${top.sub_category_count eq 1}">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01"
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${top.category_name}</a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                        <c:forEach items="${sub_menu.rows}" var="sub_down">
-                                            <a class="dropdown-item" href="<c:url value="${sub_down.category_link}" />">${sub_down.category_name}</a>
+                                            <c:forEach items="${sub_menu.rows}" var="sub_down">
+                                                <c:if test="${sub_down.main_category_id eq top.id}">
+                                                    <a class="dropdown-item" href="<c:url value="${sub_down.category_link}" />">${sub_down.category_name}</a>
+                                                </c:if>
                                         </c:forEach>
                                     </div>
                                 </li>
