@@ -1,13 +1,12 @@
 package kr.needon.community.Config;
 
-//=====================================
-// 	클래스 설명 : 시큐리티 설정 클래스
-//	작성자 : 김현우
-//=====================================
+import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import kr.needon.community.Module.User.UserSecurityService;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +20,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+//=====================================
+// 	클래스 설명 : 시큐리티 설정 클래스
+//	작성자 : 김현우
+//=====================================
+
+
+import kr.needon.community.Module.User.UserSecurityService;
+import lombok.extern.java.Log;
 
 @Log
 @Configuration
@@ -51,7 +55,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/board/write_from").hasAnyRole("ADMIN","USER");
         http.authorizeRequests().antMatchers("/user/myinfo").hasAnyRole("ADMIN","USER");
-
+        
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+     
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("POST");
+        
+        source.registerCorsConfiguration("/**", config);
+        
+        
         http
         	.csrf().disable();
         
