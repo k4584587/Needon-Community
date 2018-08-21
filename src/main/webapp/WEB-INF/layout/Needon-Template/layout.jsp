@@ -110,13 +110,13 @@
 	<div class="container">
 		<div class="row">
 			<!-- 슬라이드 시작 { -->
-			<div class="col-3 left-side">
+			<div class="col-3" style="padding-right: 0px!important;">
 				<tiles:insertAttribute name="sidebar" />
 			</div>
 			<!-- 슬라이드 끝 } -->
   
 			<!-- 내용시작 { -->
-			<div class="col" style="margin-top:10px;">
+			<div class="col" style="margin-top:10px;padding-left: 0px;">
 				<tiles:insertAttribute name="body" />
 			</div>
 			<!-- 내용 끝 } -->
@@ -131,13 +131,21 @@
 
     $(document).ready(function () {
 
+		$("#data_loading").hide();
 
-        $("form").submit(function(){
+        $("#logout-form").submit(function(){
             $("#btn-logout").prop('disabled', true);
 
             $("#btn-logout").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 로그아웃 중...");
         });
-	});
+	})
+
+        .ajaxStart(function(){
+            $('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+        })
+        .ajaxStop(function(){
+            $('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+        });
 
 </script>
 

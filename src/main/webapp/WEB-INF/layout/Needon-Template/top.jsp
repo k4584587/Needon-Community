@@ -8,8 +8,10 @@
 		<span class="logo"> <a href="/"><img
 				src="<c:url value="/resources/img/logo.png" />"></a>
 		</span>
-		<!-- 날짜 출력될 곳 --><span id="date" style="float: right;">날짜</span></h1>
-		<!-- 데이터 출력될 곳 --><ul id="list" style="float: right;">날씨</ul>
+		<img style="float: right" id="data_loading" src="<c:url value="/resources/img/loading.gif" />">
+
+		<!-- 날짜 출력될 곳 --><span id="date" style="float: right;"></span></h1>
+		<!-- 데이터 출력될 곳 --><ul id="list" style="float: right;"></ul>
 	</div>
 </div>
 <!-- 상단 끝 -->

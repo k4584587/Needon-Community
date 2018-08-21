@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 슬라이드 끝 } -->
-<div class="col" style="margin-bottom: 400px;">
+<div class="col">
     <div class="" style="background-color: white; height:150px;margin-bottom: 10px;">
         구글광고
     </div>
@@ -13,85 +13,208 @@
     <div class="row">
         <!-- 최신글 시작 { -->
         <div class="col-6" style="padding-right: 0; margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="<c:url value="/board/notice/list"/>">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                <c:choose>
-				<c:when test="${fn:length(new_notice) != 0 }">
-                   <c:forEach items="${new_notice}" var="notice" varStatus="status">
-                    <li class="list-group-item">
-                    	<c:choose>
-                    		<c:when test="${fn:length(notice.subject) > 11 }">
-                    		<a href="<c:url value="/board/view?no=${notice.no }&category=notice" />">
-                    				<c:out value="${fn:substring(notice.subject,0,10) }">
-                    				</c:out>....
-                    				</a> 
-                    		</c:when>
-                    		<c:otherwise>    
-                    				<a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> 
-                                        ${notice.subject}</a>
-                            </c:otherwise>
-                       </c:choose>                 
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">
-                                        <fmt:formatDate pattern="MM-dd"
-										value="${notice.register_date}"/>
-                                        <%-- ${noticeq.register_date } --%>
-                                        </span> 
-                                            
-                    </li>
-                  </c:forEach>
-                  </c:when>
-                   <c:otherwise>
-                   
-							<span class="p-3">작성된 글이 없습니다.</span>
-					</c:otherwise>
-                  </c:choose>
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_notice) != 0 }">
+                            <c:forEach items="${new_notice}" var="notice" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(notice.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${notice.no }&category=notice" />"> <c:out value="${fn:substring(notice.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> ${notice.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
         <!-- 최신글 끝 -->
         <!-- 최신글 시작 -->
         <div class="col-6" style="margin-bottom: 10px;">
-            <div class="card">
-                <div class="card-header">
-                                <span>
-                                    <a href="#">게시판 제목</a>
-                                </span>
-                    <span style="float: right;">
-                                    <a href="<c:url value="/board/freeboard/list"/>">더보기</a>
-                                </span>
-                </div>
-                <ul class="list-group list-group-flush">
-                   <c:forEach items="${new_freeboard}" var="freeboard" varStatus="status">
-                    <li class="list-group-item">
-                        <c:choose>
-                        	<c:when test="${fn:length(freeboard.subject) > 11 }">
-                        		<a href="<c:url value="/board/view?no=${freeboard.no }&category=notice" />">
-                        		<c:out value="${fn:substring(freeboard.subject,0,10)})">
-                        		</c:out>....
-                        		</a>
-                        	</c:when>
-                        	<c:otherwise>
-                        			<a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> 
-                                        ${freeboard.subject}</a>
-                            </c:otherwise>
-                       </c:choose>
-                                        <%-- <a href="#"> ${freeboard.subject}</a> --%>
-                                        <span style="color: red;">New</span>
-                                        <span style="float: right;">
-                                        <fmt:formatDate pattern="MM-dd"
-										value="${freeboard.register_date}"/>
-                                        </span>
-                    </li>
-                  </c:forEach>
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/freeboard/list?page=1" />">자유게시판</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_freeboard) != 0 }">
+                            <c:forEach items="${new_freeboard}" var="freeboard" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(freeboard.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${freeboard.no }&category=notice" />"> <c:out value="${fn:substring(freeboard.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 최신글 끝 -->
+    </div>
+    <div class="row">
+        <!-- 최신글 시작 { -->
+        <div class="col-6" style="padding-right: 0; margin-bottom: 10px;">
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_notice) != 0 }">
+                            <c:forEach items="${new_notice}" var="notice" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(notice.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${notice.no }&category=notice" />"> <c:out value="${fn:substring(notice.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> ${notice.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 최신글 끝 -->
+        <!-- 최신글 시작 -->
+        <div class="col-6" style="margin-bottom: 10px;">
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/freeboard/list?page=1" />">자유게시판</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_freeboard) != 0 }">
+                            <c:forEach items="${new_freeboard}" var="freeboard" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(freeboard.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${freeboard.no }&category=notice" />"> <c:out value="${fn:substring(freeboard.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 최신글 끝 -->
+    </div>
+    <div class="row">
+        <!-- 최신글 시작 { -->
+        <div class="col-6" style="padding-right: 0; margin-bottom: 10px;">
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_notice) != 0 }">
+                            <c:forEach items="${new_notice}" var="notice" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(notice.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${notice.no }&category=notice" />"> <c:out value="${fn:substring(notice.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> ${notice.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 최신글 끝 -->
+        <!-- 최신글 시작 -->
+        <div class="col-6" style="margin-bottom: 10px;">
+            <div class="lat">
+                <h2 class="lat_title"><a href="<c:url value="/board/freeboard/list?page=1" />">자유게시판</a></h2>
+                <ul>
+                    <c:choose>
+                        <c:when test="${fn:length(new_freeboard) != 0 }">
+                            <c:forEach items="${new_freeboard}" var="freeboard" varStatus="status">
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${fn:length(freeboard.subject) > 11 }">
+                                            <a href="<c:url value="/board/view?no=${freeboard.no }&category=notice" />"> <c:out value="${fn:substring(freeboard.subject,0,10) }"></c:out>....</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span style="color: red;">New</span>
+                                    <span style="float: right;">
+                            <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
+                        </span>
+
+                                </li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>작성된 글이 없습니다.</li>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>

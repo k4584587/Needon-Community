@@ -2,9 +2,18 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<div class="p-3">
+<div style="margin-top: 10px;">
     <sec:authorize access="!isAuthenticated()">
-        <a href="<c:url value="/user/login" />"> <img src="<c:url value="/resources/img/login_btn.png" />"> </a>
+        <div class="card">
+            <div class="card-body">
+                <div onclick="location.href='<c:url value="/user/login" />'" style="cursor: pointer;background-color: #00a7d0; height: 37px; color: white;text-align: center;padding-top: 10px;margin-bottom: 10px;">
+                  <b>니드온 로그인</b>
+                </div>
+                <div>
+                    <span><a href="<c:url value="/user/login#join" />">비밀번호 찾기</a></span>
+                </div>
+            </div>
+        </div>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal" var="user"/>
@@ -33,7 +42,7 @@
                                 href="#"><b>쪽지(0)</b></a></div>
                     </div>
                 </div>
-                <form action="<c:url value="/logout" />" method="post" style="margin-bottom: 10px;">
+                <form id="logout-form" action="<c:url value="/logout" />" method="post" style="margin-bottom: 10px;">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button id="btn-logout" type="submit" class="btn btn-primary btn-block">로그아웃</button>
                 </form>
