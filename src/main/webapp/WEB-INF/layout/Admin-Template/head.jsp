@@ -3,12 +3,14 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<c:url value="/resources/Admin-LTE/bower_components/bootstrap/dist/css/" />
+
 <!-- Bootstrap 3.3.7 -->
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/Admin-LTE/bower_components/bootstrap/dist/css/bootstrap.min.css" />">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/Admin-LTE/bower_components/font-awesome/css/font-awesome.min.css" />">
 <!-- Ionicons -->
-<link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/Admin-LTE/bower_components/Ionicons/css/ionicons.min.css" />">
 <!-- Theme style -->
 <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
