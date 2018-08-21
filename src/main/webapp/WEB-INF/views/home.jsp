@@ -6,8 +6,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 슬라이드 끝 } -->
 <div class="col">
-    <div class="" style="background-color: white; height:150px;margin-bottom: 10px;">
-        구글광고
+    <div class="" style="margin-bottom: 10px;">
+
+        <style>
+            .myAd1290 { max-width: 765px!important; width:765px; }
+        </style>
+
+        <!-- 반응형 광고(1) -->
+        <center>
+            <ins class="adsbygoogle myAd1290"
+                 style="display:block"
+                 data-ad-client="ca-pub-9442764132014732"
+                 data-ad-slot="1288679214"
+                 data-ad-format="auto"></ins>
+        </center>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+
     </div>
 
     <div class="row">

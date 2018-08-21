@@ -19,6 +19,8 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 <!-- insert custom css -->  
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 

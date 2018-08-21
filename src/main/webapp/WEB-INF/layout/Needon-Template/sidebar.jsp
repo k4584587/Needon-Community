@@ -53,4 +53,17 @@
         </div>
         <!-- 로그인 됨 끝 } -->
     </sec:authorize>
+
+
+    <!-- 반응형 광고(1) -->
+    <ins class="adsbygoogle"
+         style="margin-top: 10px; display:block"
+         data-ad-client="ca-pub-9442764132014732"
+         data-ad-slot="1288679214"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
 </div>
