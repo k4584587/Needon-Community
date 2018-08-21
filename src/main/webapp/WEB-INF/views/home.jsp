@@ -57,7 +57,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/notice/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
@@ -91,7 +91,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/freeboard/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
@@ -127,7 +127,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/notice/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
@@ -161,7 +161,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/freeboard/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
@@ -197,7 +197,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/notice/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
@@ -231,7 +231,7 @@
                             <li>작성된 글이 없습니다.</li>
                         </c:otherwise>
                     </c:choose>
-                    <a href="https://secgy.scnu.ac.kr/secgy/bbs/board.php?bo_table=simhwa_repot" class="lt_more"><i class="fas fa-plus"></i></a>
+                    <a href="<c:url value="/board/freeboard/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
                 </ul>
             </div>
         </div>
