@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<footer>
+<footer style="margin-top: 10px;">
 	<center class="p-3">
 		<div style="margin-bottom: 10px;">Needon</div>
 		<div class="row justify-content-center">
