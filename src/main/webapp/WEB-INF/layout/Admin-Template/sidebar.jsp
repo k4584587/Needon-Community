@@ -19,9 +19,10 @@
 	<!-- search form -->
 	<form action="#" method="get" class="sidebar-form">
 		<div class="input-group">
-			<input type="text" name="q" class="form-control" placeholder="Search...">
+			<input type="text" name="q" class="form-control" placeholder="검색">
 			<span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
                 </button>
               </span>
 		</div>
@@ -30,7 +31,7 @@
 	<!-- sidebar menu: : style can be found in sidebar.less -->
 	<ul class="sidebar-menu" data-widget="tree">
 		<li class="header">MAIN NAVIGATION</li>
-		<li class="active treeview">
+		<li class="active treeview menu-open">
 			<a href="#">
 				<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 				<span class="pull-right-container">
@@ -38,8 +39,8 @@
             </span>
 			</a>
 			<ul class="treeview-menu">
-				<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-				<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+				<li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+				<li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
 			</ul>
 		</li>
 		<li class="treeview">
