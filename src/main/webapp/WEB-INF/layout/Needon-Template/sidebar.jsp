@@ -39,7 +39,7 @@
                     <div class="col-auto">
                         <div>${user.nick} 님 <a href="<c:url value="/user/myinfo"/>">내정보</a></div>
                         <div><a href="#"><b>${user.point} 포인트</b>&nbsp;&nbsp;<b>내 블로그</b></a> <a
-                                href="#"><b>쪽지(0)</b></a></div>
+                                href="<c:url value="/message/ms_list" />"><b>쪽지(0)</b></a></div>
                     </div>
                 </div>
                 <form id="logout-form" action="<c:url value="/logout" />" method="post" style="margin-bottom: 10px;">
