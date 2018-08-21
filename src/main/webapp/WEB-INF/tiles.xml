@@ -14,6 +14,17 @@
 		<put-attribute name="footer" value="/WEB-INF/layout/Needon-Template/footer.jsp" />
 	</definition>
 
+	<definition name="admin-theme" template="/WEB-INF/layout/Admin-Template/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/Admin-Template/header.jsp" />
+		<put-attribute name="head" value="/WEB-INF/layout/Admin-Template/head.jsp" />
+		<put-attribute name="top" value="/WEB-INF/layout/Admin-Template/top.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/layout/Admin-Template/menu.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/layout/Admin-Template/sidebar.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/layout/Admin-Template/footer.jsp" />
+	</definition>
+
+
 	<definition name="home" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
@@ -44,6 +55,10 @@
 	
 	<definition name="page_view" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/page/page_view.jsp" />
+	</definition>
+
+	<definition name="admin/main" extends="admin-theme">
+		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp" />
 	</definition>
 
 </tiles-definitions>

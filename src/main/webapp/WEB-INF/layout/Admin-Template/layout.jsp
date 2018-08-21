@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="kr">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,113 +13,23 @@
 <!-- 메인해드시작 -->
 <tiles:insertAttribute name="head" />
 <!-- 메인 해드 끝 -->
-
-	<style>
-
-
-		.pace {
-			-webkit-pointer-events: none;
-			pointer-events: none;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-		}
-
-		.pace-inactive {
-			display: none;
-		}
-
-		.pace .pace-progress {
-			background: #29d;
-			position: fixed;
-			z-index: 2000;
-			top: 0;
-			right: 100%;
-			width: 100%;
-			height: 2px;
-		}
-
-		.pace .pace-progress-inner {
-			display: block;
-			position: absolute;
-			right: 0px;
-			width: 100px;
-			height: 100%;
-			box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-			opacity: 1.0;
-			-webkit-transform: rotate(3deg) translate(0px, -4px);
-			-moz-transform: rotate(3deg) translate(0px, -4px);
-			-ms-transform: rotate(3deg) translate(0px, -4px);
-			-o-transform: rotate(3deg) translate(0px, -4px);
-			transform: rotate(3deg) translate(0px, -4px);
-		}
-
-		.pace .pace-activity {
-			display: block;
-			position: fixed;
-			z-index: 2000;
-			top: 15px;
-			right: 15px;
-			width: 14px;
-			height: 14px;
-			border: solid 2px transparent;
-			border-top-color: #29d;
-			border-left-color: #29d;
-			border-radius: 10px;
-			-webkit-animation: pace-spinner 400ms linear infinite;
-			-moz-animation: pace-spinner 400ms linear infinite;
-			-ms-animation: pace-spinner 400ms linear infinite;
-			-o-animation: pace-spinner 400ms linear infinite;
-			animation: pace-spinner 400ms linear infinite;
-		}
-
-		@-webkit-keyframes pace-spinner {
-			0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
-			100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
-		}
-		@-moz-keyframes pace-spinner {
-			0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
-			100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
-		}
-		@-o-keyframes pace-spinner {
-			0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
-			100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
-		}
-		@-ms-keyframes pace-spinner {
-			0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
-			100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
-		}
-		@keyframes pace-spinner {
-			0% { transform: rotate(0deg); transform: rotate(0deg); }
-			100% { transform: rotate(360deg); transform: rotate(360deg); }
-		}
-
-	</style>
-
 </head>
 
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
 	<!-- 해더 시작 { -->
 	<header>
 		<tiles:insertAttribute name="top" />
 		<tiles:insertAttribute name="menu" />
 	</header>
 	<!-- 해더 끝 } -->
-	<div class="container">
-		<div class="row">
-			<!-- 슬라이드 시작 { -->
-			<div class="col-3 left-side">
-				<tiles:insertAttribute name="sidebar" />
-			</div>
-			<!-- 슬라이드 끝 } -->
-  
-			<!-- 내용시작 { -->
-			<div class="col" style="margin-top:10px;">
-				<tiles:insertAttribute name="body" />
-			</div>
-			<!-- 내용 끝 } -->
-		</div>
+
+	<!-- 내용시작 { -->
+	<div class="col" style="margin-top:10px;">
+		<tiles:insertAttribute name="body" />
 	</div>
+	<!-- 내용 끝 } -->
+
+
 	<!-- 풋더시작 { -->
 	<tiles:insertAttribute name="footer" />
 	<!-- 풋더 끝 } -->
