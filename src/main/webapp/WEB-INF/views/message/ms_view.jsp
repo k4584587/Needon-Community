@@ -25,6 +25,9 @@ ${ms }
 		</table>
 
 		<div id="join_menu" align=center>
+		
+		
+		
 			<input type="submit" value="회원가입" />
 			 <input type="reset" value="취소"
 				onclick="$('#id').focus();" />
