@@ -59,11 +59,14 @@
 
 <script>
 
+    /*메세지창*/
+    function ms_view(no){
+        window.open("<c:url value="/message/ms_view?no=" />"+no+"","메세지 확인","width=400,height=400");
+        $("#message_count").html("0");
+    }
+
 	$(document).ready(function() {
 	    console.log("ajax load!!");
-
-
-
 
 	    $.ajax({
 			type:'GET',
@@ -76,8 +79,10 @@
 
                 $.each(jonData, function(index, item){
 
+
+
                     var message_html = "<li><!-- start message -->\n" +
-                        "\t<a href=\"#\">\n" +
+                        "\t<a href=\"#\" onclick='ms_view("+item.no+")'>\n" +
                         "\t\t<div class=\"pull-left\">\n" +
                         "\t\t\t<img src=\"/resources/img/profile_img.png\" class=\"img-circle\" alt=\"User Image\">\n" +
                         "\t\t</div>\n" +
@@ -90,6 +95,7 @@
                         "</li>";
 
                     $("#message_list:last").append(message_html);
+
 
 					console.log("result ==> " + item.content);
 				})

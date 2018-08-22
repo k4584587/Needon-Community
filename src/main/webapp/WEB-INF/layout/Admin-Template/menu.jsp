@@ -10,15 +10,20 @@
 				   user="admin_project" password="3class"/>
 
 <sql:query dataSource="${datasource}" var="message_count">
-	select
-		*
-	from
+	SELECT
+		COUNT(IF(info_read_count = 1, null, 0)) AS count
+	FROM
 		nb_message
-	where
+	WHERE
 		you = '${user.username}'
-	order by
-		send_date desc;
 </sql:query>
+
+<c:forEach items="${message_count.rows}" var="message">
+		<c:set value="${message.count}" var="message_new_count" />
+</c:forEach>
+
+
+
 
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
@@ -33,10 +38,12 @@
 			<li class="dropdown messages-menu">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<i class="fa fa-envelope-o"></i>
-					<span class="label label-success">4</span>
+					<span class="label label-success" id="message_count">
+						${message_new_count}
+					</span>
 				</a>
 				<ul class="dropdown-menu">
-					<li class="header">새로운 쪽지가 00 개 있습니다.</li>
+					<li class="header">새로운 쪽지가 ${message_new_count} 개 있습니다.</li>
 					<li>
 						<!-- inner menu: contains the actual data -->
 						<ul class="menu" id="message_list">

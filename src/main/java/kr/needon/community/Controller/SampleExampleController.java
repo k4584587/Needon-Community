@@ -145,7 +145,7 @@ public class SampleExampleController {
 		Gson gson = new Gson();
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		mssage.setUsername(member.getUsername());
-
+		mssage.setCount(1);
 		return gson.toJson(messageDAO.getMessagelist(mssage));
 	}
 

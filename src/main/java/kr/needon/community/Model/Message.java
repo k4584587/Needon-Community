@@ -12,6 +12,7 @@ public class Message {
 	private String recv_nick;
 	private String send_nick;
 	private String you;
+	private int count;
 	private Date send_date;
 	private String content;
 	private int read_count;

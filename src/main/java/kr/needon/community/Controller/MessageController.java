@@ -24,7 +24,7 @@ public class MessageController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		ms.setUsername(member.getUsername());
-		
+		ms.setCount(0);
 		model.addAttribute("list",dao.getMessagelist(ms));
 		
 		

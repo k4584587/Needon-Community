@@ -5,14 +5,28 @@
 <mapper namespace="Message">
 	
 	<select id="getMessagelist" resultType="Message">
-		select 
+		<if test="count eq 0">
+			select
 			*
-		from
+			from
 			nb_message
-		where
+			where
 			you = #{username}
-		order by 
+			order by
 			send_date desc;
+		</if>
+		<if test="count == 1 || info_read_count eq 0">
+			select
+			*
+			from
+			nb_message
+			where
+			you = #{username}
+			and
+			info_read_count = 0
+			order by
+			send_date desc;
+		</if>
 	</select>
 	
 	<select id="getMessageView" resultType="Message">
@@ -20,7 +34,7 @@
 			*
 		from
 			nb_message
-		where 
+		where
 			no = #{no};
 	</select>
 	
