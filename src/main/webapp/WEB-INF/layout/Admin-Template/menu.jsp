@@ -3,6 +3,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication property="principal" var="user"/>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
+				   url="jdbc:log4jdbc:mysql://13.125.208.101/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false&autoReconnectForPools=true&autoReconnection=true&testWhileIdle=false"
+				   user="admin_project" password="3class"/>
+
+<sql:query dataSource="${datasource}" var="message_count">
+	select
+		*
+	from
+		nb_message
+	where
+		you = '${user.username}'
+	order by
+		send_date desc;
+</sql:query>
+
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
 	<!-- Sidebar toggle button-->
@@ -19,26 +36,14 @@
 					<span class="label label-success">4</span>
 				</a>
 				<ul class="dropdown-menu">
-					<li class="header">You have 4 messages</li>
+					<li class="header">새로운 쪽지가 00 개 있습니다.</li>
 					<li>
 						<!-- inner menu: contains the actual data -->
-						<ul class="menu">
-							<li><!-- start message -->
-								<a href="#">
-									<div class="pull-left">
-										<img src="<c:url value="/resources/img/profile_img.png" />" class="img-circle" alt="User Image">
-									</div>
-									<h4>
-										Support Team
-										<small><i class="fa fa-clock-o"></i> 5 mins</small>
-									</h4>
-									<p>Why not buy a new awesome theme?</p>
-								</a>
-							</li>
-							<!-- end message -->
+						<ul class="menu" id="message_list">
+
 						</ul>
 					</li>
-					<li class="footer"><a href="#">See All Messages</a></li>
+					<li class="footer"><a href="#">전체 쪽지 보기</a></li>
 				</ul>
 			</li>
 			<!-- Notifications: style can be found in dropdown.less -->

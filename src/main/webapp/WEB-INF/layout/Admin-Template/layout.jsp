@@ -55,5 +55,51 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/resources/Admin_LTE/dist/js/demo.js" />"></script>
 
+
+
+<script>
+
+	$(document).ready(function() {
+	    console.log("ajax load!!");
+
+
+
+
+	    $.ajax({
+			type:'GET',
+			url:"<c:url value="/sample/message/list" />",
+			success: function(result) {
+
+				var jonData = JSON.parse( result );
+
+                console.log("message list ==> " + result);
+
+                $.each(jonData, function(index, item){
+
+                    var message_html = "<li><!-- start message -->\n" +
+                        "\t<a href=\"#\">\n" +
+                        "\t\t<div class=\"pull-left\">\n" +
+                        "\t\t\t<img src=\"/resources/img/profile_img.png\" class=\"img-circle\" alt=\"User Image\">\n" +
+                        "\t\t</div>\n" +
+                        "\t\t<h4>\n" +
+                        "\t\t\t"+item.recv_nick+"\n" +
+                        "\t\t\t<small><i class=\"fa fa-clock-o\"></i> 5 mins</small>\n" +
+                        "\t\t</h4>\n" +
+                        "\t\t<p>"+item.content+"</p>\n" +
+                        "\t</a>\n" +
+                        "</li>";
+
+                    $("#message_list:last").append(message_html);
+
+					console.log("result ==> " + item.content);
+				})
+
+            }
+		})
+
+	})
+
+</script>
+
 </body>
 </html>

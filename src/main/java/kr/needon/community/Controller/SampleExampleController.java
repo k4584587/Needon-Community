@@ -3,7 +3,10 @@ package kr.needon.community.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import kr.needon.community.Model.Member;
 import kr.needon.community.Model.Menu;
+import kr.needon.community.Model.Message;
+import kr.needon.community.Module.Message.MessageDAOImpl;
 import kr.needon.community.Module.SampleExample.SampleExampleDAO;
 import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
 import org.json.JSONArray;
@@ -11,6 +14,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,6 +40,9 @@ public class SampleExampleController {
 
 	@Autowired
 	SampleExampleDAOImpl dao;
+
+	@Autowired
+	MessageDAOImpl messageDAO;
 	
 	@RequestMapping("/list")
 	public String ListExample(Model model) { //리스트 출력 예제
@@ -130,6 +137,16 @@ public class SampleExampleController {
 		} else {
 			return "2";
 		}
+	}
+
+	@GetMapping(value = "/message/list", produces = "text/html; charset=UTF-8")
+	public @ResponseBody String MessageApi(Message mssage) throws Exception {
+
+		Gson gson = new Gson();
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mssage.setUsername(member.getUsername());
+
+		return gson.toJson(messageDAO.getMessagelist(mssage));
 	}
 
 }
