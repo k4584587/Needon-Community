@@ -21,9 +21,9 @@ public class ApiController {
 		StringBuffer response = new StringBuffer();
 		String clientId = "jIMehn5ftjYzRUqqn8mQ";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "WPHycD3kfM";//애플리케이션 클라이언트 시크릿값";
-        int display=1;
+        int display=5;
         try {
-            String text = URLEncoder.encode("뉴스", "UTF-8");
+            String text = URLEncoder.encode("스포츠", "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/search/news.json?query="+text+"&display="+display; // json 결과
            // String apiURL = "https://openapi.naver.com/v1/search/news.xml?query="+ text+"&display="+display; // xml 결과
             URL url = new URL(apiURL);

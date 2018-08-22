@@ -54,9 +54,45 @@
         <!-- 로그인 됨 끝 } -->
     </sec:authorize>
     
-    <div>
+    <!-- 뉴스 -->
+    <!-- 제목 출력 부분 -->
+    
+    <div><h2>news</h2></div>
+    <div id="title"></div>
+     <div>
+    	<script src="<c:url value="/resources/plugins/xdomain/jquery.xdomainajax.js" />"></script>	
+    	<script>
     	
     
+    		$(document).ready(function() {
+    	    console.log("ajax load!!");
+
+    	    $.ajax({
+    			type:'GET',
+    			url:"<c:url value="/api/news" />",  
+    			success: function(result) {
+    				
+    				var newsData = JSON.parse( result );
+    				   
+    				    
+    				for(i=0; i<newsData.display; i++){
+                   	   console.log("title ==>"+newsData.items[i].title);
+                 	   console.log("description ==>"+newsData.items[i].description);
+                 	   console.log("link ==>"+newsData.items[i].link);
+                 	   var url=newsData.items[i].link;
+          			   //$("#title").append("<a href="+url+">"+newsData.items[i].title + "</a><br><br>");
+          			   $("#title").append("<a href="+url+" target='_blank'>"+newsData.items[i].title + "</a><br><br>");
+          			   
+          			  
+             		
+    				};
+                }
+    		})
+
+    	}) 
+    	
+    	
+    	</script>
     </div>
 
 
