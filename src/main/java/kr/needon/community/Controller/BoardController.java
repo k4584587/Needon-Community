@@ -165,5 +165,16 @@ public class BoardController {
 			return "2";
 		}		
 	}
+	
+	/*댓글 삭제*/
+	@RequestMapping(value = "/repDelete", method = RequestMethod.POST)
+	public @ResponseBody String repDelete(Board board) throws Exception{
+		if(service.repDelete(board)) {
+			return "1";
+		}
+		else {
+			return "2";
+		}		
+	}
 
 }

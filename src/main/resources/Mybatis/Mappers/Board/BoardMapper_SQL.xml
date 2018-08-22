@@ -55,7 +55,7 @@
 	
 	<delete id="delete">
 		DELETE FROM nb_board_${category} WHERE no = #{no};
-		ALTER TABLE nb_board_notice AUTO_INCREMENT=1;	
+		ALTER TABLE nb_board_${category} AUTO_INCREMENT=1;	
 	</delete>
 	
 	<update id="modify">
@@ -78,7 +78,8 @@
 			
 	</update>
 	<delete id="replydelete" >
-		delete from nb_board_${category} where cm_no=#{cm_no}
+		delete from nb_board_${category} where no=#{no};
+		ALTER TABLE nb_board_${category} AUTO_INCREMENT=1;	
 	</delete>
 
 </mapper>

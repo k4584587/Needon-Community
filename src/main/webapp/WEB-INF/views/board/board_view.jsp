@@ -90,7 +90,25 @@ function up(id) {	// 확인 버튼
 	         }
 });
 }
+function del(no) {	// 삭제 버튼
+	var formData="no="+no+"&category=${param.category}";
+	$.ajax({
+        type:"POST",
+        url:"<c:url value='/board/repDelete'/>",
+        data: formData,   
+        success: function (result) {
+       	 if(result == 1 ){
+       		 alert("댓글 삭제 성공");
+       	 }else{
+       		 alert("댓글 삭제 실패");
+       	 }
 
+        }
+});
+}
+function lst() {
+	$('#slist').load('/board/view?page=1&no=1&category=freeboard');
+}
 </script>
 <h1 align=center>게시판 조회</h1>
 <table align="center" border=1>
@@ -158,7 +176,7 @@ function up(id) {	// 확인 버튼
 				<td id="btn_${rb.no}"><c:if
 						test="${rb.cm_password eq board.wr_password }">
 						<input type="button" value="수정" class="edit1" id="${rb.no}">
-						<input type="button" value="삭제" onclick="del(${rb.no},${rb.no})">
+						<input type="button" value="삭제" onclick="del(${rb.no})">
 					</c:if></td>
 			</tr>
 		</c:forEach>

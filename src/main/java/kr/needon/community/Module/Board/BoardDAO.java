@@ -33,4 +33,6 @@ public interface BoardDAO {
 	public void repInsert(Board board)throws Exception;
 	
 	public void repUpdate(Board board)throws Exception;
+	
+	public void repDelete(Board board)throws Exception;
 }

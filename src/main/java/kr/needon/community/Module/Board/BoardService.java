@@ -35,4 +35,6 @@ public interface BoardService {
 	public boolean repInsert(Board board)throws Exception;
 	
 	public boolean repUpdate(Board board)throws Exception;
+	
+	public boolean repDelete(Board board)throws Exception;
 }

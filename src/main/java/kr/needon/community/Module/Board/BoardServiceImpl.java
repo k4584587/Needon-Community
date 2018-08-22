@@ -134,4 +134,16 @@ public class BoardServiceImpl implements BoardService {
 		return true;
 	}
 
+	@Override
+	public boolean repDelete(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.repDelete(board);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -93,5 +93,12 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		session.update(namespace+".replyupdate", board);
 	}
+	
+	/*댓글 삭제*/
+	@Override
+	public void repDelete(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".replydelete", board);
+	}
 
 }
