@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -8,13 +9,12 @@
 </head>
 <body>
 
-<form name="f" method="post" action=<c:url value="/user/userJoin_ok"/> onsubmit="return check()" 
-			enctype="multipart/form-data"> 
+<form method="post" action=<c:url value="/message/ms_sendPost"/>> 
 			
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td><input name="username" id="username" size="14" value=1 /> 
+				<td><input name="you" id="you" size="14" /></td> 
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -24,9 +24,9 @@
 		</table>
 
 		<div id="join_menu" align=center>
-			<input type="submit" value="회원가입" />
+			<input type="submit" value="전송" />
 			 <input type="reset" value="취소"
-				onclick="$('#id').focus();" />
+				onclick="$('#username').focus();" />
 		</div>
 	</form>
 

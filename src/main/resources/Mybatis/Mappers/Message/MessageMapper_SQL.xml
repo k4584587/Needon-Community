@@ -46,5 +46,14 @@
 	WHERE
 		  `no`=#{no};
 	</update>
+	
+	<insert id="getMessageSend">
+	INSERT INTO 
+		`nb_message` 
+	( `username`,`you`, `info_read_count`, `content`, `read_count`,`recv_nick`,`send_nick`) 
+		VALUES 
+	(#{username},#{you},#{info_read_count},#{content},#{read_count},#{recv_nick},#{send_nick});
+	
+	</insert>
 
 </mapper>

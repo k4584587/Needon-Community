@@ -34,4 +34,10 @@ public class MessageDAOImpl implements MessageDAO{
 		session.update(namespace+".getMessageUpdate",ms);
 	}
 
+	@Override
+	public void getMessagesend(Message ms) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".getMessageSend",ms);
+	}
+
 }
