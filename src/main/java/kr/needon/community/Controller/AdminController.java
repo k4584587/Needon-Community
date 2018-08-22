@@ -1,5 +1,10 @@
 package kr.needon.community.Controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.needon.community.Model.Member;
@@ -133,6 +139,7 @@ public class AdminController {
     	return "admin/findUserList";
     }
     
+    //검색된 상태에서 다음 페이지 눌렀을떄 화면 처리
     @RequestMapping(value="/search")
     public String search2(Model model, HttpServletRequest request) throws Exception{
     	System.out.println("user search get");
@@ -149,7 +156,4 @@ public class AdminController {
     	
     	return "admin/findUserList";
     }
-    
-   
-
 }
