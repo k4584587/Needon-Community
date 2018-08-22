@@ -33,4 +33,6 @@ public interface BoardService {
 	public boolean modify(HttpServletRequest request, Board board)throws Exception;
 	
 	public boolean repInsert(Board board)throws Exception;
+	
+	public boolean repUpdate(Board board)throws Exception;
 }

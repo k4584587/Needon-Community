@@ -70,11 +70,11 @@
 	<insert id="replyinsert" >
 		insert into nb_board_${category} (parent, cm_body, cm_password,
 			cm_nick, cm_count) values (#{parent},#{cm_body}, #{cm_password},
-			#{cm_nick}, 1)
+			#{cm_nick}, 1);
 	</insert>
 	<update id="replyupdate" >
-		update nb_board_${category} set cm_body=#{cm_body},
-			 where cm_no=#{cm_no} 
+		update nb_board_${category} set cm_body=#{cm_body}
+			 where no=#{no}; 
 			
 	</update>
 	<delete id="replydelete" >

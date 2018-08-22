@@ -120,5 +120,18 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
+	
+	/*댓글 수정*/
+	@Override
+	public boolean repUpdate(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.repUpdate(board);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

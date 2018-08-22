@@ -148,7 +148,18 @@ public class BoardController {
 	@RequestMapping(value = "/repInsert", method = RequestMethod.POST)
 	public @ResponseBody String  repInsert(Board board) throws Exception{
 		if(service.repInsert(board)) {
-			return board.toString();
+			return "1";
+		}
+		else {
+			return "2";
+		}		
+	}
+	
+	/*댓글 수정*/
+	@RequestMapping(value = "/repUpdate", method = RequestMethod.POST)
+	public @ResponseBody String repUpdate(Board board) throws Exception{
+		if(service.repUpdate(board)) {
+			return "1";
 		}
 		else {
 			return "2";
