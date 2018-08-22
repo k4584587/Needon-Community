@@ -38,8 +38,6 @@ import kr.needon.community.Module.admin.AdminService;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
-	
-	
 
     @GetMapping("/")
     public String AdminMain() {
@@ -47,7 +45,7 @@ public class AdminController {
         Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //System.out.println("로그인한 사용자 ==> " + member.toString());
 
-        return "redirect:userList";
+        return "admin/main";
     }
     
     //유저목록 출력

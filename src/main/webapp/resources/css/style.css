@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-    max-width: 1150px!important;
+    width: 1150px;
+    max-width: none !important;
 }
 
 a {

@@ -28,9 +28,9 @@
 </sql:query>
 
 <!-- 메뉴비 사직 -->
-<nav class="navbar navbar-expand-lg navbar-dark blue-theme">
+<nav class="navbar navbar-expand navbar-dark blue-theme">
     <div class="container">
-        <div class="collapse navbar-collapse" id="navbarsExample07">
+        <div class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
                 <c:forEach items="${top_menu.rows}" var="top" varStatus="status">
                     <c:choose>
