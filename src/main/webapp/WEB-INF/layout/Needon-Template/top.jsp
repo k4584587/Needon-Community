@@ -10,8 +10,8 @@
 		</span>
 		<img style="float: right" id="data_loading" src="<c:url value="/resources/img/loading.gif" />">
 
-		<!-- 날짜 출력될 곳 --><span id="date" style="float: right;"></span></h1>
-		<!-- 데이터 출력될 곳 --><ul id="list" style="float: right;"></ul>
+		<!-- 날짜 출력될 곳 --><%--<span id="date" style="float: right;"></span>--%>
+		<!-- 데이터 출력될 곳 --><span id="weather_data" style="float: right!important;"></span>
 	</div>
 </div>
 <!-- 상단 끝 -->
@@ -19,6 +19,7 @@
       <!-- 사용자 스크립트 블록 -->
         <script>        
             $(function() {
+
                 // 페이지 열리면 데이터 로드
                 $.get("http://www.kma.go.kr/XML/weather/sfc_web_map.xml", {}, function(data) {	
 
@@ -34,11 +35,7 @@
                     var dd = weather.attr("day");
                     var hh = weather.attr("hour"); 
                     
-                    $("#date").append("(" + yy + "년 " + mm + "월 " + dd + "일 " + hh + "시)");                  
-                    	
-                    
-
-                    // 시간 출력
+                    $("#date").append("(" + yy + "년 " + mm + "월 " + dd + "일 " + hh + "시)");
 
                     // local 태그의 수 만큼 반복
               	    xml.find("local").each(function() {
@@ -47,15 +44,23 @@
                         var desc = $(this).attr("desc");
                         var ta = $(this).attr("ta");
                         
-                        if(city == '서울'){
+                        if(city == '서울') {
 
-                      		  // 동적요소를 생성하여 <ul>태그 안에 출력
-                      		  var li = $("<li>").html("[" + city + "] " + desc + " / 현재 기온: " + ta);
-                       	     $("#list").append(li);
-              	       } 
-                        
+                            var weather_img;
+                            console.log("서울 날씨 ==> " + desc);
+                            if(desc == '맑음') {
+                                weather_img = "<span class='weather_ico1'></span>" + "<span style='font-size: 15px;'>" + city + " " + ta + " 도 " + desc + "</span>";
+							} else if (desc == '흐림') {
+                                weather_img = "<span class='weather_ico2'></span>" + "<span style='font-size: 15px;'>" + city + " " + ta + " 도 " + desc + "</span>";
+                            } else if (desc == '비') {
+                                weather_img = "<span class='weather_ico3'></span>" + "<span style='font-size: 15px;'>" + city + " " + ta + "도 " + desc + "</span>";
+
+                            }
+                            // 동적요소를 생성하여 <ul>태그 안에 출력
+                            var weather_data = $("<div>").html(weather_img);
+                            $("#weather_data").append(weather_data);
+                        }
                     }); 
                 });
             });
         </script>
-    

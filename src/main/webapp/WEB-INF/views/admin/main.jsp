@@ -182,3 +182,16 @@
 
 </section>
 <!-- /.content -->
+
+<script>
+    $(function () {
+        $('#member_list').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+    })
+</script>

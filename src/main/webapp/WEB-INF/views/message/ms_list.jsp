@@ -27,7 +27,6 @@
 
 <button onClick="ms_send()">글쓰기</button>
 
-${list }
 <table border="1">
 		<tr>
 			<th scope="col">발신자</th>

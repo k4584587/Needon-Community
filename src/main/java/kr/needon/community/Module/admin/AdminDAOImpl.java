@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kr.needon.community.Model.BoTable;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,5 +60,10 @@ public class AdminDAOImpl implements AdminDAO{
 		System.out.println("DAO getFindListCount");
 		return session.selectOne("Admin.getFindListCount",param);
 	}
-	
+
+	@Override
+	public List<BoTable> getBoTable() {
+		return session.selectList("Admin.getBoTable");
+	}
+
 }

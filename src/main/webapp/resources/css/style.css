@@ -110,6 +110,35 @@ tr {
     padding-left:0;
 }
 
+.login-info {
+    font-family: 돋움,Dotum!important;
+    background-color: white;
+    border: 1px solid #dee3eb;
+    margin-bottom: 10px;
+    font-size: 13px!important;
+}
+
+.login-info .profile {
+    padding-right: 0px;
+}
+
+.login-body {
+    margin-bottom: 5px;
+}
+
+.login-body .nick {
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+.login-body .btn-logout {
+    text-align: right;
+    float: right;
+}
+
+.login-body2 {
+    width: 140px;
+}
 /*게시판*/
 .active-pink-2 input[type=text]:focus:not([readonly]) {
     border-bottom: 1px solid #f48fb1;
@@ -179,3 +208,36 @@ tr {
     box-shadow: inset 0 2px 5px  rgba(255,255,255,0.4);}
 .lat .lt_more {position:absolute;top:11px;right:10px;display:block;width:25px;line-height:25px;color:#aaa;border-radius:3px;text-align:center;}
 .lat .lt_more:hover{color:#777}
+
+
+/*날씨*/
+
+/* 맑음 */
+.weather_ico1 {
+    display: inline-block;
+    overflow: hidden;
+    background-image: url("../img/sp_timesquare_v170913a.png");
+    width: 56px;
+    height: 56px;
+    background-position: -65px -68px;
+}
+
+/* 흐림 */
+.weather_ico2 {
+    display: inline-block;
+    overflow: hidden;
+    background-image: url("../img/sp_timesquare_v170913a.png");
+    width: 56px;
+    height: 56px;
+    background-position: -132px -198px;
+}
+
+/* 비 */
+.weather_ico3 {
+    display: inline-block;
+    overflow: hidden;
+    background-image: url("../img/sp_timesquare_v170913a.png");
+    width: 56px;
+    height: 56px;
+    background-position: 0px -265px;
+}

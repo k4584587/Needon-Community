@@ -57,7 +57,9 @@
 
 </select>
 
+<select id="getBoTable" resultType="Botable">
 
+</select>
 
 
 </mapper>

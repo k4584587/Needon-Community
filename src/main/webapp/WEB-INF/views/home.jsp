@@ -13,11 +13,13 @@
         </style>
 
         <!-- 반응형 광고(1) -->
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <center>
             <ins class="adsbygoogle myAd1290"
                  style="display:block"
                  data-ad-client="ca-pub-9442764132014732"
                  data-ad-slot="1288679214"
+
                  data-ad-format="auto"></ins>
         </center>
         <script>

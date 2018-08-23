@@ -99,6 +99,10 @@
 
 </head>
 
+<script>
+    google_adtest = "on";
+</script>
+
 <body>
 	<!-- 해더 시작 { -->
 	<header>
@@ -109,7 +113,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- 슬라이드 시작 { -->
-			<div class="col-3" style="padding-right: 0px!important;">
+			<div class="col-3" style="padding-right: 0px!important;padding-left: 0px;">
 				<tiles:insertAttribute name="sidebar" />
 			</div>
 			<!-- 슬라이드 끝 } -->

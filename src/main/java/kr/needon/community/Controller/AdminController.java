@@ -154,4 +154,11 @@ public class AdminController {
     	
     	return "admin/findUserList";
     }
+
+    @GetMapping("/board_list")
+	public String BoardList() {
+
+    	return "admin/board_list";
+	}
+
 }

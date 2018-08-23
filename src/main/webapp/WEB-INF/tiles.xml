@@ -61,4 +61,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp" />
 	</definition>
 
+	<definition name="admin/board_list" extends="admin-theme">
+		<put-attribute name="body" value="/WEB-INF/views/admin/board_list.jsp" />
+	</definition>
+
 </tiles-definitions>

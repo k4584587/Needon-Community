@@ -11,15 +11,15 @@
 
 <sql:query dataSource="${datasource}" var="message_count">
 	SELECT
-		COUNT(IF(info_read_count = 1, null, 0)) AS count
+	COUNT(IF(info_read_count = 1, null, 0)) AS count
 	FROM
-		nb_message
+	nb_message
 	WHERE
-		you = '${user.username}'
+	you = '${user.username}'
 </sql:query>
 
 <c:forEach items="${message_count.rows}" var="message">
-		<c:set value="${message.count}" var="message_new_count" />
+	<c:set value="${message.count}" var="message_new_count" />
 </c:forEach>
 
 

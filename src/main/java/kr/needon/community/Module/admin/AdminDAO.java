@@ -3,6 +3,7 @@ package kr.needon.community.Module.admin;
 import java.util.List;
 import java.util.Map;
 
+import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.UserRole;
 
@@ -23,4 +24,7 @@ public interface AdminDAO {
 	public List getFindUsers(Map<String,Object> keys) throws Exception;
 	
 	public int getFindListCount(Map<String,Object> param) throws Exception;
+
+	public List<BoTable> getBoTable();
+
 }
