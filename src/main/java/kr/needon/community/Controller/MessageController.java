@@ -63,40 +63,44 @@ public class MessageController {
 	
 
 	@PostMapping(value = "/ms_sendPost")
-	public @ResponseBody String ms_sendPost(HttpServletRequest request, Message ms,Member mb, Model model)throws Exception {
+	public String ms_sendPost(HttpServletRequest request, Message ms, Model model) {
+
+		System.out.println("ms_sendPost>>>>>>>>>>success!!!!");
 		String you = request.getParameter("you");
 		String content = request.getParameter("content");
-		System.out.println("ms_sendPost>>>>>>>>>>success!!!!");
-		System.out.println("ms>>>>>>>>>>"+you+">>>>>>>"+content);
 		
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("mb1시작>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		Member mb1=Udao.getFindUser(you);
-		System.out.println("mb1받음>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		System.out.println("상대방 데이터>>>>>>>>>>>>"+mb1);
 		
 		
-/*		ms.setUsername(member.getUsername());
-		//ms.setYou(mb1.getUsername());
-		System.out.println("대상 데이터 입니다>>>>>>>>>>>>>>"+member);
-		System.out.println("대상 데이터 입니다>>>>>>>>>>>>>>"+ms.getYou());
+		ms.setUsername(member.getUsername());
+		ms.setYou(mb1.getUsername());
 		ms.setSend_nick(member.getNick());
-		//ms.setRecv_nick(mb1.getNick());
+		ms.setRecv_nick(mb1.getNick());
 		ms.setInfo_read_count(0);
 		ms.setRead_count(1);
-		*/
-	
 		
-		//model.addAttribute("test", service.getMessagesend(ms));
+		System.out.println("메세지 데이터>>>>>>>>>>>>"+ms);
+		System.out.println("내 데이터>>>>>>>>>>>>>>>"+member);
+		System.out.println("상대방 데이터>>>>>>>>>>>>"+mb1);
 		
-		/*if(!ms.getYou().equals(Udao.getFindUser(ms.getYou()))) {
+	try {
+		
+		if(!ms.getYou().equals(mb1.getUsername())) {
 			model.addAttribute("msg","해당 아이디가 없습니다.");
 			return"/alert";
 		}else {
+			int result = service.getMessagesend(ms);
+			System.out.println("전송 결과>>>>>>>>>>>>>>>>>>>>>>>>"+result);
 			model.addAttribute("msg","전송완료");
-		}*/
+			return "/popup_msg";
+		}
+	} catch (Exception e) {
+		// TODO: handle exception
+		model.addAttribute("msg","전송 오류");
+	}
 		
-		return ms.toString();
+		return"/msg";
 	}
 	
 	

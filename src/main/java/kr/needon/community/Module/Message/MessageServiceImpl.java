@@ -1,5 +1,6 @@
 package kr.needon.community.Module.Message;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.needon.community.Model.Message;
@@ -7,6 +8,7 @@ import kr.needon.community.Model.Message;
 @Service
 public class MessageServiceImpl implements MessageService{
 	
+	@Autowired
 	private MessageDAO dao;
 
 	@Override
