@@ -110,9 +110,16 @@ public class BoardServiceImpl implements BoardService {
 	
 	/*댓글 추가*/
 	@Override
-	public boolean repInsert(Board board) throws Exception {
+	public boolean repInsert(Board board, HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
 		try {
+
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			if (ip == null)
+				ip = request.getRemoteAddr();
+
+			board.setIp(ip);
+
 			dao.repInsert(board);
 		}catch(Exception e) {
 			e.printStackTrace();

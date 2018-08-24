@@ -141,6 +141,13 @@
 
             $("#btn-logout").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 로그아웃 중...");
         });
+
+        $("#board-write_form").submit(function(){
+            $("#btn-board_write").prop('disabled', true);
+
+            $("#btn-board_write").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n글 작성 중...");
+        });
+
 	})
 
         .ajaxStart(function(){

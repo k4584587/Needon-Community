@@ -52,7 +52,7 @@
                         <span class="nick"><b>관리자 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="/admin/"><b>관리자</b></a> </span>
                     </div>
                     <div class="login-body2">
-                        <span style="margin-right: 5px;"><a href="#" onclick="ms_list()">쪽지 ${message_new_count}개</a> </span> <span>포인트 ${user.point} 점</span>
+                        <span>팔로우 ${user.follow } <a href="#" onclick="ms_list()">쪽지 ${message_new_count}</a> </span> <span>포인트 ${user.point} 점</span>
                     </div>
                     <form id="logout-form" action="<c:url value="/logout" />">
                         <button id="btn-logout" style="margin-top: 10px;" class="btn btn-primary btn-sm">로그아웃</button>
@@ -69,47 +69,6 @@
         <ul id="news_item"></ul>
     </div>
 
-    <%--<!-- 제목 출력 부분 -->
-    
-    <div><h2>news</h2></div>
-    <div id="title"></div>
-     <div>
-
-    	<script>
-    	
-    
-    		$(document).ready(function() {
-    	    console.log("ajax load!!");
-
-    	    $.ajax({
-    			type:'GET',
-    			url:"<c:url value="/api/news" />",  
-    			success: function(result) {
-    				
-    				var newsData = JSON.parse( result );
-    				   
-    				    
-    				for(i=0; i<newsData.display; i++){
-                   	   console.log("title ==>"+newsData.items[i].title);
-                 	   console.log("description ==>"+newsData.items[i].description);
-                 	   console.log("link ==>"+newsData.items[i].link);
-                 	   var url=newsData.items[i].link;
-          			   //$("#title").append("<a href="+url+">"+newsData.items[i].title + "</a><br><br>");
-          			   $("#title").append("<a href="+url+" target='_blank'>"+newsData.items[i].title + "</a><br><br>");
-          			   
-          			  
-             		
-    				};
-                }
-    		})
-
-    	}) 
-    	
-    	
-    	</script>
-    </div>--%>
-
-
     <!-- 반응형 광고(1) -->
     <ins class="adsbygoogle"
          style="margin-top: 10px; display:block"
@@ -121,7 +80,6 @@
     </script>
 
     <script>
-
 
         $(document).ready(function() {
             console.log("ajax load!!");
@@ -135,14 +93,10 @@
 
                     var newsData = JSON.parse( result );
 
-
-
-
-
                     for(i=0; i<newsData.display; i++){
-                        console.log("title ==>"+newsData.items[i].title);
-                        console.log("description ==>"+newsData.items[i].description);
-                        console.log("link ==>"+newsData.items[i].link);
+                        //console.log("title ==>"+newsData.items[i].title);
+                        //console.log("description ==>"+newsData.items[i].description);
+                        //console.log("link ==>"+newsData.items[i].link);
                         var url=newsData.items[i].link;
 
                         var news_item = "<li>\n" +
@@ -150,13 +104,7 @@
                             "            </li>";
 
                         $("#news_item").append(news_item);
-                        //$("#title").append("<a href="+url+">"+newsData.items[i].title + "</a><br><br>");
-
-                        //$("#title").append(list_html);
-
-
-
-                    };
+                    }
                 }
             })
 

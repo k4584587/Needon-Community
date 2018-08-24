@@ -137,7 +137,7 @@ tr {
 }
 
 .login-body2 {
-    width: 140px;
+    width: 160px;
 }
 /*게시판*/
 .active-pink-2 input[type=text]:focus:not([readonly]) {

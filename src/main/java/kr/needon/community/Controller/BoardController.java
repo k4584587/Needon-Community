@@ -146,8 +146,8 @@ public class BoardController {
 	
 	/*댓글 추가*/
 	@RequestMapping(value = "/repInsert", method = RequestMethod.POST)
-	public @ResponseBody String  repInsert(Board board) throws Exception{
-		if(service.repInsert(board)) {
+	public @ResponseBody String  repInsert(Board board, HttpServletRequest request) throws Exception{
+		if(service.repInsert(board, request)) {
 			return "1";
 		}
 		else {

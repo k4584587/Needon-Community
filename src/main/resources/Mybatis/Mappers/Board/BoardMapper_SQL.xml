@@ -64,13 +64,13 @@
 	</update>
 	
 	<select id="replylist" resultType="Board">
-		select no, cm_nick, cm_body, cm_regdate, cm_password from nb_board_${category}
+		select no, cm_nick, cm_body, cm_regdate, cm_password,cm_good,cm_bad from nb_board_${category}
 		where parent = #{no} and cm_count=1 order by no;
 	</select>
 	<insert id="replyinsert" >
 		insert into nb_board_${category} (parent, cm_body, cm_password,
-			cm_nick, cm_count) values (#{parent},#{cm_body}, #{cm_password},
-			#{cm_nick}, 1);
+			cm_nick, cm_count,ip) values (#{parent},#{cm_body}, #{cm_password},
+			#{cm_nick}, 1, #{ip});
 	</insert>
 	<update id="replyupdate" >
 		update nb_board_${category} set cm_body=#{cm_body}
