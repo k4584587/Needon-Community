@@ -10,13 +10,14 @@
                    user="admin_project" password="3class"/>
 
 <sql:query dataSource="${datasource}" var="command_count">
-    select count(*) as count from nb_board_freeboard
+    select count(*) as count from nb_board_${param.category}
     where parent = ${param.no} and cm_count=1 order by no;
 </sql:query>
 
 <c:forEach items="${command_count.rows}" var="comment_count">
     <c:set var="comment_count_" value="${comment_count.count}" ></c:set>
 </c:forEach>
+
 
 <div style="margin-left: 10px;">
 	<header style="background-color: white;border-bottom: 1px solid #b1b1b1;">
@@ -81,14 +82,14 @@
                 ${board.content}
             </div>
             <div class="row justify-content-center" style="background-color: white;margin-right: 0px!important;margin-left: 0px!important; border-left: 1px solid #dee3eb; border-right: 1px solid #dee3eb;">
-                <div class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;margin-right: 10px;cursor: pointer;">
+                <div onclick="bo_good()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;margin-right: 10px;cursor: pointer;">
                     <!-- 좋아요 버튼 -->
-                    <b style="color: red;">${board.bo_good}</b><br>
+                    <b id="bo_good" style="color: red;">${board.bo_good}</b><br>
                     <i class="far fa-thumbs-up"></i>
                 </div>
                     <!-- 싫어요 버튼 -->
-                <div class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
-                    <b style="color: red;">${board.bo_bad}</b><br>
+                <div onclick="bo_bad()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
+                    <b id="bo_bad" style="color: red;">${board.bo_bad}</b><br>
                     <i class="far fa-thumbs-down"></i>
                 </div>
             </div>
@@ -123,7 +124,7 @@
                                 <div class="col">
                                     <div style="width: 100%!important;margin-bottom: 10px;">
                                         <b>${rb.cm_nick}</b> ${rb.cm_regdate}
-                                        <div style="float: right;">신고 삭제</div><br>
+                                        <div style="float: right;">신고 <a href="#" onclick="comment_delete(${rb.no})">삭제</a></div><br>
                                         <div style="float: right;margin-top: 10px;">
                                             <div class="row">
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
@@ -169,16 +170,16 @@
             <!-- 로그인 시 -->
             <form id="board_comment_post" action="#" method="post">
                 <input type="hidden" name="cm_password" value="${user.password }">
-                <input type="hidden" name="cm_nick" value="${board.wr_nick}">
+                <input type="hidden" id="cm_nick" name="cm_nick" value="${board.wr_nick}">
                 <input type="hidden" name="parent" value="${param.no}">
                 <input type="hidden" name="category" value="${param.category }">
-                <input type="hidden" name="cm_regdate" value="${board.cm_regdate }" />
-                <div class="row">
+                <input type="hidden" id="cm_regdate" name="cm_regdate" value="${board.cm_regdate }" />
+                <div class="row" id="comment_input">
                     <div class="col-auto">
-                        <textarea name="cm_body" class="form-control" style="width: 660px!important;height: 113px" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+                        <textarea name="cm_body" id="cm_body" class="form-control" style="width: 660px!important;height: 113px" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>
                     </div>
                     <div class="col-auto">
-                        <button type="button" onclick="comment_post()" class="btn btn-success btn-lg">댓글 쓰기</button>
+                        <button id="btn_comment_submit" type="button" onclick="comment_post()" class="btn btn-success btn-lg" style="height: 110px!important;">댓글 쓰기</button>
                     </div>
                 </div>
             </form>
@@ -187,26 +188,20 @@
     </div>
     <!-- 댓글 작성 끝 -->
 
-
-
 	<script>
 
         (adsbygoogle = window.adsbygoogle || []).push({});
 
+
         var comment_no = "${comment_no}";
+        var comment_no_int = parseInt(comment_no)+1;
 
-        console.log("댓글번호 ==> " + comment_no);
-
-        if(comment_no == "") {
-            console.log("댓글이 없음");
-        } else {
-            console.log("댓글이 있음");
-        }
 
         function comment_post() {
 
             var board_comment_post_data = $("#board_comment_post").serialize();
-            console.log("댓글에서 아작스로 넘어온 데이터들 ==> " + board_comment_post_data.toString());
+            $("#btn_comment_submit").prop('disabled', true);
+            $("#btn_comment_submit").html("<i class=\"fas fa-spinner fa-spin\"></i>" + "등록중");
 
             $.ajax({
                 type: 'POST',
@@ -214,7 +209,39 @@
                 data: board_comment_post_data,
                 success: function (result) {
 
-                    console.log("댓글 내용 ==> " + $("input[name=cm_body]").attr("value"));
+
+
+                    //onsole.log("댓글 내용 ==> " + $("textarea#cm_body").val());
+                    //console.log("댓글 닉네임 ==> " + $("input#cm_nick").val());
+                    //console.log("댓글 작성시간 ==> " + $("input#cm_regdate").val());
+
+                                 var comment_html_none = "<div id='comment_item'>\n" +
+                        "        <div class=\"row p-3 \" style=\"margin-left: 10px; background-color: white;margin-left: 0px!important;margin-right: 0px; \">\n" +
+                        "            <div class=\"col-auto\" style=\"padding-left: 0px!important;\">\n" +
+                        "                <img width=\"58\" src=\"http://localhost:8080/resources/img/profile_img.png\">\n" +
+                        "            </div>\n" +
+                        "            <div class=\"col\">\n" +
+                        "                <div style=\"width: 100%!important;margin-bottom: 10px;\">\n" +
+                        "                    <b>"+$("input#cm_nick").val()+"</b> "+$("input#cm_regdate").val()+"\n" +
+/*
+                        "                    <div style=\"float: right;\">신고 <a href='#' onclick='comment_delete("+eval(next_comment_count()-1)+")'>삭제</a></div><br>\n" +
+*/
+                        // "                    <div style=\"float: right;margin-top: 10px;\">\n" +
+                        // "                        <div class=\"row\">\n" +
+                        // "                            <div class=\"col-auto\" style=\"padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;\">\n" +
+                        // "                                <div class=\"p-2\" style=\"border: 1px solid #bbb;border-right: none;\"><i class=\"far fa-thumbs-up\"></i> <b>0</b> </div>\n" +
+                        // "                            </div>\n" +
+                        // "                            <div class=\"col-auto\" style=\"padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;\">\n" +
+                        // "                                <div class=\"p-2\" style=\"border: 1px solid #bbb;\"><i class=\"far fa-thumbs-down\"></i> <b>0</b> </div>\n" +
+                        // "                            </div>\n" +
+                        // "                        </div>\n" +
+                        // "                    </div>\n" +
+                        "                    <div style=\"width: 630px; margin-top: 10px;\">"+$("textarea#cm_body").val()+"</div>\n" +
+                        "                </div>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "        <hr>\n" +
+                        "    </div>";
 
                     var comment_html = "<div id=\"comment_item\">\n" +
                         "        <div class=\"row p-3 \" style=\"margin-left: 10px; background-color: white;margin-left: 0px!important;margin-right: 0px; \">\n" +
@@ -223,8 +250,8 @@
                         "            </div>\n" +
                         "            <div class=\"col\">\n" +
                         "                <div style=\"width: 100%!important;margin-bottom: 10px;\">\n" +
-                        "                    <b>최고관리자</b> 2018-08-24 16:35:40.0\n" +
-                        "                    <div style=\"float: right;\">신고 삭제</div><br>\n" +
+                        "                    <b>"+$("input#cm_nick").val()+"</b> "+$("input#cm_regdate").val()+"\n" +
+  /*                      "                    <div style=\"float: right;\">신고 <a href='#' onclick='comment_delete("+eval(next_comment_count()-1)+")'>삭제</a></div><br>\n" +
                         "                    <div style=\"float: right;margin-top: 10px;\">\n" +
                         "                        <div class=\"row\">\n" +
                         "                            <div class=\"col-auto\" style=\"padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;\">\n" +
@@ -234,13 +261,14 @@
                         "                                <div class=\"p-2\" style=\"border: 1px solid #bbb;\"><i class=\"far fa-thumbs-down\"></i> <b>0</b> </div>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
-                        "                    </div>\n" +
-                        "                    <div style=\"width: 630px; margin-top: 10px;\">ajax로 댓글 최근등록됨</div>\n" +
+                        "                    </div>\n" +*/
+                        "                    <div style=\"width: 630px; margin-top: 10px;\">"+$("textarea#cm_body").val()+"</div>\n" +
                         "                </div>\n" +
                         "            </div>\n" +
                         "        </div>\n" +
                         "        <hr>\n" +
                         "    </div>";
+
 
                     if(result == 1) {
 
@@ -250,9 +278,17 @@
                             $("#none_comment").remove();
                             $("#comment_list").append(comment_html);
 
+                            $("#btn_comment_submit").prop('disabled', false);
+                            $("#btn_comment_submit").html("댓글 쓰기");
+
                         } else {
-                            alert("댓글 등록 성공!");
-                            $("#comment_item_${comment_no}").append(comment_html);
+                            alert("등록 되었습니다.");
+                            $("#btn_comment_submit").prop('disabled', false);
+                            $("#btn_comment_submit").html("댓글 쓰기");
+
+                            $("#comment_list:last").append(comment_html);
+
+
                         }
 
                     } else {
@@ -260,6 +296,81 @@
                     }
                 }
             })
+        }
+
+        function comment_delete(no) {
+
+            var formData="no="+no+"&category=${param.category}";
+            console.log(no + " 번째의 댓글 삭제 버튼을 클릭함");
+
+
+            if (confirm('정말로 삭제하시겠습니까 ?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<c:url value='/board/repDelete'/>',
+                    data: formData,
+                    success: function (result) {
+
+                        if(result == 1) {
+
+                            alert("삭제 되었습니다.");
+                            $("#comment_item_" + no).remove();
+
+                        } else {
+                            alert("삭제 실패!");
+                        }
+
+                    }
+                })
+            } else {
+                // no click
+            }
+
+        }
+
+        var good_count = ${board.bo_good};
+        var bad_count = ${board.bo_bad};
+
+        var good_count_int = parseInt(good_count)+1;
+        var bad_count_int = parseInt(bad_count)+1;
+
+
+        function bo_good() {
+            console.log("좋아요 버튼 클릭함");
+
+            $.ajax({
+                type: "POST",
+                url: "<c:url value="/board/bo_good" />",
+                data:{"category":"${param.category}","no":"${param.no}"},
+                success: function (result) {
+                    if(result == 1) {
+                        console.log("추천 성공");
+                        $("#bo_good").html(good_count_int++);
+                    } else {
+                        console.log("추천 실패");
+                    }
+                }
+            })
+
+        }
+
+        function bo_bad() {
+            console.log("싫어요 버튼 클릭함");
+
+            $.ajax({
+                type: "POST",
+                url: "<c:url value="/board/bo_bad" />",
+                data:{"category":"${param.category}","no":"${param.no}"},
+                success: function (result) {
+                    if(result == 1) {
+                        console.log("싫어요 성공");
+                        $("#bo_bad").html(bad_count_int++);
+                    } else {
+                        console.log("싫어요 실패");
+                    }
+                }
+            })
+
         }
 
 	</script>

@@ -9,7 +9,7 @@
 	</select> -->
 	
 	<select id="listpage" resultType="Board">
-		select * from nb_board_${category} 
+		select *,(select count(*) comment_count from nb_board_${category} where parent = ${category}.no and cm_count = 1) comment_count from nb_board_${category} ${category}
 		<where>
 		
 			<if test="keyword != null and search!='subcon'">
@@ -81,5 +81,27 @@
 		delete from nb_board_${category} where no=#{no};
 		ALTER TABLE nb_board_${category} AUTO_INCREMENT=1;	
 	</delete>
+
+	<update id="board_vote">
+
+		<if test="count == 0">
+			UPDATE
+				nb_board_${category}
+			SET
+				bo_good =  bo_good + 1
+			WHERE
+				no = #{no}
+		</if>
+
+		<if test="count == 1">
+			UPDATE
+				nb_board_${category}
+			SET
+				bo_bad =  bo_bad + 1
+			WHERE
+				no = #{no}
+		</if>
+
+	</update>
 
 </mapper>

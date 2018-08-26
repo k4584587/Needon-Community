@@ -23,8 +23,7 @@
 </sql:query>
 
 <sql:query dataSource="${datasource}" var="notice_list">
-    select * from nb_board_notice
-    ORDER BY no DESC limit 20
+    select * from nb_board_notice WHERE cm_count = 0 order by no desc limit 5
 </sql:query>
 
 <sql:query dataSource="${datasource}" var="member_count">

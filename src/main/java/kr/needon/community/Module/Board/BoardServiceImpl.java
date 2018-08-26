@@ -153,4 +153,17 @@ public class BoardServiceImpl implements BoardService {
 		return true;
 	}
 
+	@Override
+	public boolean board_vote(Board board) throws Exception {
+
+		try {
+			dao.board_vote(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+
 }

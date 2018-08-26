@@ -35,4 +35,6 @@ public interface BoardDAO {
 	public void repUpdate(Board board)throws Exception;
 	
 	public void repDelete(Board board)throws Exception;
+
+	public void board_vote(Board board)throws Exception;
 }

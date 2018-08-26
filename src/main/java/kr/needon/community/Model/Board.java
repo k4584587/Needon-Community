@@ -24,6 +24,7 @@ public class Board {
 	private int cm_count;
 	private int cm_good;
 	private int cm_bad;
+	private int comment_count;
 	private String cm_password;
 	private int parent;
 	private int cm_level;
@@ -32,6 +33,7 @@ public class Board {
 	private int bo_good;
 	private int bo_bad;
 	private int notice_ck;
+	private int count;
 	private Timestamp register_date;
 	private String category;
 }

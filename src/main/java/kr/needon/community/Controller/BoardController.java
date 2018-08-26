@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
@@ -175,6 +171,29 @@ public class BoardController {
 		else {
 			return "2";
 		}		
+	}
+
+	@PostMapping("/bo_good")
+	public @ResponseBody String bo_good(Board board) throws Exception {
+
+	    board.setCount(0);
+	    if(service.board_vote(board)) {
+	        return "1";
+        } else {
+	        return "0";
+        }
+
+	}
+
+	@PostMapping("/bo_bad")
+	public @ResponseBody String bo_bad(Board board) throws Exception {
+
+		board.setCount(1);
+		if(service.board_vote(board)) {
+			return "1";
+		} else {
+			return "0";
+		}
 	}
 
 }

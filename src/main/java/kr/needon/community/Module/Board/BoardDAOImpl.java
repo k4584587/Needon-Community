@@ -101,4 +101,9 @@ public class BoardDAOImpl implements BoardDAO{
 		session.delete(namespace+".replydelete", board);
 	}
 
+	@Override
+	public void board_vote(Board board) throws Exception {
+		session.update(namespace + ".board_vote", board);
+	}
+
 }
