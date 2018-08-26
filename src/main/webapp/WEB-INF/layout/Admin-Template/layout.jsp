@@ -10,6 +10,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>${ title }</title>
 <tiles:insertAttribute name="head" />
+	<!-- jQuery 3 -->
+	<script src="<c:url value="/resources/Admin_LTE/bower_components/jquery/dist/jquery.min.js" />"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -35,8 +38,6 @@
 
 </div>
 
-<!-- jQuery 3 -->
-<script src="<c:url value="/resources/Admin_LTE/bower_components/jquery/dist/jquery.min.js" />"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<c:url value="/resources/Admin_LTE/bower_components/bootstrap/dist/js/bootstrap.min.js" />"></script>
 <!-- FastClick -->

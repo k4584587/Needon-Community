@@ -65,4 +65,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/board_list.jsp" />
 	</definition>
 
+	<definition name="admin/board_addform" extends="admin-theme">
+		<put-attribute name="body" value="/WEB-INF/views/admin/board_add.jsp" />
+	</definition>
+
 </tiles-definitions>

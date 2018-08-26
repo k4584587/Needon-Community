@@ -27,4 +27,8 @@ public interface AdminDAO {
 
 	public List<BoTable> getBoTable();
 
+	public void AddBoard(BoTable boTable) throws Exception;
+
+	public void BoardDelete(BoTable boTable) throws Exception;
+
 }

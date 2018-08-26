@@ -13,15 +13,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.needon.community.Model.BoTable;
+import kr.needon.community.Module.admin.AdminDAO;
+import kr.needon.community.Module.admin.AdminDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.needon.community.Model.Member;
@@ -36,8 +35,12 @@ import kr.needon.community.Module.admin.AdminService;
 @Controller
 @RequestMapping("/admin/**")
 public class AdminController {
+
 	@Autowired
 	AdminService adminService;
+
+	@Autowired
+	AdminDAOImpl adminDAO;
 
     @GetMapping("/")
     public String AdminMain() {
@@ -156,9 +159,43 @@ public class AdminController {
     }
 
     @GetMapping("/board_list")
-	public String BoardList() {
+	public String BoardList(Model model) {
+
+    	model.addAttribute("board_list", adminDAO.getBoTable());
 
     	return "admin/board_list";
+	}
+
+	@GetMapping("/board_addform")
+	public String board_addform() {
+
+    	return "admin/board_addform";
+	}
+
+	@PostMapping("/board_addpost")
+	public String board_addpost(BoTable boTable,Model model) throws Exception {
+
+    	if(adminService.AddBoard(boTable)) {
+
+    		model.addAttribute("msg","등록되었습니다.");
+		} else {
+			model.addAttribute("msg","등록실패.");
+		}
+
+		model.addAttribute("url","/admin/board_list");
+
+    	return "msg";
+	}
+
+	@PostMapping("/board_delete")
+	public @ResponseBody String board_delete(BoTable boTable) throws Exception {
+
+    	if(adminService.BoardDelete(boTable)) {
+    		return "1";
+		} else {
+    		return "0";
+		}
+
 	}
 
 }

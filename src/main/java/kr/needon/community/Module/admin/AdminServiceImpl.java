@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.needon.community.Model.BoTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -182,5 +183,37 @@ public class AdminServiceImpl implements AdminService {
 
 				return resultMap;
 			
+	}
+
+	@Override
+	public Boolean AddBoard(BoTable boTable) throws Exception {
+
+		try{
+
+			adminDao.AddBoard(boTable);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean BoardDelete(BoTable boTable) throws Exception {
+
+		try {
+
+			adminDao.BoardDelete(boTable);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return false;
+
+		}
+
+		return true;
 	}
 }

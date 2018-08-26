@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.UserRole;
 
@@ -21,5 +22,10 @@ public interface AdminService {
 	
 	public int modifyTheUser(Member member) throws Exception;
 	public void modifyTheUserRole(UserRole role) throws Exception;
-	public Map<String,Object> getFindUserList(HttpServletRequest request, Map<String,Object> keys) throws Exception; 
+	public Map<String,Object> getFindUserList(HttpServletRequest request, Map<String,Object> keys) throws Exception;
+
+	public Boolean AddBoard(BoTable boTable) throws Exception;
+
+	public Boolean BoardDelete(BoTable boTable) throws  Exception;
+
 }

@@ -104,4 +104,13 @@
 
 	</update>
 
+	<select id="getBoardInfo" resultType="BoTable">
+		SELECT
+			*
+		FROM
+			nb_botable
+		WHERE
+			bo_table = #{bo_table}
+	</select>
+
 </mapper>

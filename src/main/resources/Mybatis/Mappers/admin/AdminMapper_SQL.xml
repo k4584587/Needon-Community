@@ -57,9 +57,62 @@
 
 </select>
 
-<select id="getBoTable" resultType="Botable">
+	<select id="getBoTable" resultType="Botable">
+		SELECT
+			*
+		FROM
+			nb_botable
+		ORDER BY
+			no desc;
+	</select>
 
-</select>
+	<insert id="AddBoard">
+		insert into nb_botable
+			(bo_table, bo_title, bo_category, bo_category_count, read_p, write_p, cm_p, down_p,bo_write_role,bo_read_role,bo_info,bo_admin)
+		values
+		(#{bo_table}, #{bo_title}, #{bo_category}, #{bo_category_count}, #{read_p}, #{write_p}, #{cm_p}, #{down_p},#{bo_write_role},#{bo_read_role},#{bo_info},#{bo_admin});
 
+		CREATE TABLE nb_board_${bo_table} (
+	`no` INT(11) NOT NULL AUTO_INCREMENT,
+	`subject` VARCHAR(50) NULL DEFAULT '',
+	`cm_count` INT(11) NOT NULL DEFAULT '0',
+	`content` TEXT NULL,
+	`file` BLOB NULL,
+	`sub_category` VARCHAR(20) NULL DEFAULT NULL,
+	`cm_nick` VARCHAR(30) NULL DEFAULT NULL,
+	`cm_regdate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`cm_body` TEXT NULL,
+	`cm_good` INT(11) NULL DEFAULT '0',
+	`cm_bad` INT(11) NULL DEFAULT '0',
+	`parent` INT(11) NOT NULL DEFAULT '0',
+	`cm_level` INT(11) NULL DEFAULT '0',
+	`read_count` INT(11) NULL DEFAULT '0',
+	`ip` VARCHAR(30) NOT NULL,
+	`bo_good` INT(11) NULL DEFAULT '0',
+	`bo_bad` INT(11) NULL DEFAULT '0',
+	`notice_ck` INT(11) NULL DEFAULT '0',
+	`register_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`wr_nick` VARCHAR(30) NULL DEFAULT '',
+	`wr_password` VARCHAR(255) NULL DEFAULT NULL,
+	`cm_password` VARCHAR(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`no`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DYNAMIC
+AUTO_INCREMENT=6
+;
+
+
+	</insert>
+
+	<delete id="BoardDelete">
+
+		delete from nb_botable where no=#{no};
+		ALTER TABLE nb_botable AUTO_INCREMENT=1;
+
+		DROP TABLE nb_board_${bo_table};
+
+	</delete>
 
 </mapper>

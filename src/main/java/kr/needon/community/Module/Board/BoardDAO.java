@@ -2,6 +2,7 @@ package kr.needon.community.Module.Board;
 
 import java.util.List;
 
+import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
 
@@ -37,4 +38,7 @@ public interface BoardDAO {
 	public void repDelete(Board board)throws Exception;
 
 	public void board_vote(Board board)throws Exception;
+
+	public BoTable getBoardInfo(BoTable boTable);
+
 }

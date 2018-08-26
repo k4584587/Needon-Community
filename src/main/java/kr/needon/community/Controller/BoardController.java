@@ -2,16 +2,14 @@ package kr.needon.community.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.needon.community.Model.*;
+import kr.needon.community.Module.Board.BoardDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.PageMaker;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
 
@@ -28,10 +26,16 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl service;
 
+	@Autowired
+	private BoardDAOImpl dao;
+
 	/* 게시판 목록 */
 	@RequestMapping("/{category}/list")
-	public String board_list(@PathVariable("category") String category, Model model, Board board, Criteria cri)
+	public String board_list(@PathVariable("category") String category, Model model, Board board, Criteria cri, BoTable boTable)
 			throws Exception {
+
+		boTable.setBo_table(category);
+		model.addAttribute("info",dao.getBoardInfo(boTable));
 
 		model.addAttribute("title", "게시판 리스트");
 		model.addAttribute("category", category);

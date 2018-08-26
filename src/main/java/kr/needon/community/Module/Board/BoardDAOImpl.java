@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import kr.needon.community.Model.BoTable;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -104,6 +105,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public void board_vote(Board board) throws Exception {
 		session.update(namespace + ".board_vote", board);
+	}
+
+	@Override
+	public BoTable getBoardInfo(BoTable boTable) {
+		return session.selectOne(namespace + ".getBoardInfo",boTable);
 	}
 
 }

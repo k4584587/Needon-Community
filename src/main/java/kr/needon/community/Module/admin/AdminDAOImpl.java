@@ -66,4 +66,14 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList("Admin.getBoTable");
 	}
 
+	@Override
+	public void AddBoard(BoTable boTable) throws Exception {
+		session.insert("Admin.AddBoard",boTable);
+	}
+
+	@Override
+	public void BoardDelete(BoTable boTable) throws Exception {
+		session.delete("Admin.BoardDelete",boTable);
+	}
+
 }
