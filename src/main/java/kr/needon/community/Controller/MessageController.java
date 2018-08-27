@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.Message;
 import kr.needon.community.Module.Message.MessageDAOImpl;
 import kr.needon.community.Module.Message.MessageServiceImpl;
 import kr.needon.community.Module.User.UserDAOImpl;
+import kr.needon.community.Module.User.UserService;
 
 @Controller
 @RequestMapping("/message/**")
@@ -26,6 +26,9 @@ public class MessageController {
 	
 	@Autowired
 	private UserDAOImpl Udao;
+	
+	@Autowired
+	private UserService Uservice;
 	
 	@Autowired
 	private MessageServiceImpl service;
@@ -63,7 +66,7 @@ public class MessageController {
 	
 
 	@PostMapping(value = "/ms_sendPost")
-	public String ms_sendPost(HttpServletRequest request, Message ms, Model model) {
+	public String ms_sendPost(HttpServletRequest request, Message ms, Model model) throws Exception{
 
 		System.out.println("ms_sendPost>>>>>>>>>>success!!!!");
 		String you = request.getParameter("you");
@@ -74,33 +77,51 @@ public class MessageController {
 		
 		
 		ms.setUsername(member.getUsername());
-		ms.setYou(mb1.getUsername());
 		ms.setSend_nick(member.getNick());
-		ms.setRecv_nick(mb1.getNick());
 		ms.setInfo_read_count(0);
 		ms.setRead_count(1);
 		
+		
+		int check = Uservice.id_check(you);
+		
+		
 		System.out.println("메세지 데이터>>>>>>>>>>>>"+ms);
 		System.out.println("내 데이터>>>>>>>>>>>>>>>"+member);
+		System.out.println("상대방 데이터 check>>>>>>>>>>>>"+check);
 		System.out.println("상대방 데이터>>>>>>>>>>>>"+mb1);
 		
-	try {
-		
-		if(!ms.getYou().equals(mb1.getUsername())) {
-			model.addAttribute("msg","해당 아이디가 없습니다.");
-			return"/alert";
+	
+		if(mb1 == null) {
+			model.addAttribute("msg","id xxxx");
+			return "/alert";
 		}else {
+		if(check==-1) {
+			System.out.println("Errer>>>>>>>>>>>>>>>>>>>>>>>>");
+			model.addAttribute("msg","해당 아이디가 없습니다.");
+			return "/alert";
+		}else {
+			ms.setYou(mb1.getUsername());
+			ms.setRecv_nick(mb1.getNick());
 			int result = service.getMessagesend(ms);
 			System.out.println("전송 결과>>>>>>>>>>>>>>>>>>>>>>>>"+result);
 			model.addAttribute("msg","전송완료");
 			return "/popup_msg";
 		}
-	} catch (Exception e) {
-		// TODO: handle exception
-		model.addAttribute("msg","전송 오류");
-	}
+		}
 		
-		return"/msg";
+	}
+	
+	@RequestMapping(value="/replyForm")
+	public String replyForm(Message ms,@ModelAttribute String name, Model model) {
+		System.out.println("replyForm>>>>>>>>>>>>>>>>>success!!!");
+		
+		
+		
+		System.out.println("data>>>>>>>>>>>>>>>"+name);
+		
+		model.addAttribute("data",ms);
+		
+		return "/message/replyForm";
 	}
 	
 	

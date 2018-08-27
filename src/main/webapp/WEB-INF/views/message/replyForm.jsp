@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<form method="post" action=<c:url value="/message/ms_sendPost"/>> 
+ <script>
+  function ms_close(){
+		 window.close();
+  }
+</script>
+
+${data }
+
+<form > 
 			
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td><input name="you" id="you" size="14" required = "required"/></td> 
+				<td>${data.you }</td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -24,12 +32,13 @@
 		</table>
 
 		<div id="join_menu" align=center>
+		
+		
+		
 			<input type="submit" value="전송" />
-			 <input type="reset" value="취소"
-				onclick="$('#username').focus();" />
+			<button onClick="ms_close()">취소</button>
 		</div>
 	</form>
-
 
 </body>
 </html>
