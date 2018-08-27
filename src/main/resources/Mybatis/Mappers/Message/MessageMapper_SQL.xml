@@ -13,7 +13,8 @@
 			where
 			you = #{username}
 			order by
-			send_date desc;
+			send_date desc
+			limit #{pageStart}, #{perPageNum};
 		</if>
 		<if test="count == 1 || info_read_count eq 0">
 			select
@@ -25,7 +26,8 @@
 			and
 			info_read_count = 0
 			order by
-			send_date desc;
+			send_date desc
+			limit #{pageStart}, #{perPageNum};
 		</if>
 	</select>
 	
@@ -39,6 +41,10 @@
 		order by
 			send_date desc;
 	
+	</select>
+	
+	<select id="listcount" resultType="int" parameterType="Message">
+		select count(*) from nb_message where you = #{username};
 	</select>
 	
 	<select id="getMessageView" resultType="Message">

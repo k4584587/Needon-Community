@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.needon.community.Model.Criteria;
 import kr.needon.community.Model.Message;
 
 @Repository
@@ -45,6 +46,14 @@ public class MessageDAOImpl implements MessageDAO{
 		// TODO Auto-generated method stub
 		session.insert(namespace+".getMessageSend",ms);
 	}
+
+	@Override
+	public int getListCount(Message ms) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".listcount",ms);
+	}
+
+	
 
 
 }

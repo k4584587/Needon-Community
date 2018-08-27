@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.Message;
+import kr.needon.community.Model.MsPageMaker;
+import kr.needon.community.Model.PageMaker;
 import kr.needon.community.Module.Message.MessageDAOImpl;
 import kr.needon.community.Module.Message.MessageServiceImpl;
 import kr.needon.community.Module.User.UserDAOImpl;
@@ -37,11 +38,17 @@ public class MessageController {
 	public String ms_list(Message ms, Model model) throws Exception {
 		
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		ms.setPerPageNum(10);
 		ms.setUsername(member.getUsername());
 		ms.setCount(0);
 		model.addAttribute("list",dao.getMessagelist(ms));
 		
+		
+		MsPageMaker pageMaker = new MsPageMaker();
+		pageMaker.setMs(ms);
+		pageMaker.setTotalCount(dao.getListCount(ms));
+		System.out.println("데이터>>>>>>>>>>>>>>>>>>>"+pageMaker);
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "message/ms_list";
 	}

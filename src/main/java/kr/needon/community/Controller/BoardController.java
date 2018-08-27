@@ -46,6 +46,8 @@ public class BoardController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.getListCount(cri));
+		
+		System.out.println("데이터>>>>>>>>>>>>>>>>>>>"+pageMaker);
 
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("search", cri.getSearch());
