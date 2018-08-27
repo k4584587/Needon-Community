@@ -5,7 +5,11 @@
   Time: PM 5:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -25,7 +29,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/admin/board_addpost" method="post">
+            <form role="form" action="<c:url value="/admin/board_addpost" />" method="post">
                 <!-- text input -->
                 <div class="form-group">
                     <label>게시판 테이블 이름</label>
