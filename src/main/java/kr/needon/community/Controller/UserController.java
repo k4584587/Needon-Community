@@ -56,7 +56,7 @@ public class UserController {
 		
 		System.out.println("myinfo>>>>>>>>>>>>>>success!");
 		
-		return "user/myForm";
+		return "user/myinfo";
 	}
 
 

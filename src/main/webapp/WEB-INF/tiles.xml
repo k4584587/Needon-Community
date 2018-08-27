@@ -69,4 +69,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/board_add.jsp" />
 	</definition>
 
+
+	<definition name="user/myinfo" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/user/myInfo.jsp" />
+	</definition>
+
 </tiles-definitions>

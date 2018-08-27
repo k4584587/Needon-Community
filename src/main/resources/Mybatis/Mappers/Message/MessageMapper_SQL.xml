@@ -5,18 +5,8 @@
 <mapper namespace="Message">
 	
 	<select id="getMessagelist" resultType="Message">
-		<if test="count eq 0">
-			select
-			*
-			from
-			nb_message
-			where
-			you = #{username}
-			order by
-			send_date desc
-			limit #{pageStart}, #{perPageNum};
-		</if>
-		<if test="count == 1 || info_read_count eq 0">
+
+		<if test="count == 0">
 			select
 			*
 			from
@@ -25,6 +15,16 @@
 			you = #{username}
 			and
 			info_read_count = 0
+			order by
+			send_date desc
+		</if>
+		<if test="count == 1">
+			select
+			*
+			from
+			nb_message
+			where
+			you = #{username}
 			order by
 			send_date desc
 			limit #{pageStart}, #{perPageNum};

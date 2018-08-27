@@ -40,7 +40,7 @@ public class MessageController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		ms.setPerPageNum(10);
 		ms.setUsername(member.getUsername());
-		ms.setCount(0);
+		ms.setCount(1);
 		model.addAttribute("list",dao.getMessagelist(ms));
 		
 		

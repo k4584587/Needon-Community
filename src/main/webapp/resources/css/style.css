@@ -111,7 +111,6 @@ tr {
 }
 
 .login-info {
-    font-family: 돋움,Dotum!important;
     background-color: white;
     border: 1px solid #dee3eb;
     margin-bottom: 10px;
@@ -245,12 +244,12 @@ tr {
 
 /*로그인*/
 
-.login-list {
+.btn_user_item .item_list {
     margin-top: 16px;
     padding-left: 20px;
 }
 
-.login-list li {
+.btn_user_item .item_list  li {
 
     list-style: none;
     position:relative;
@@ -259,6 +258,6 @@ tr {
     padding-left:10px;
     position:relative;
 }
-.login-list li:before {
+.btn_user_item .item_list  li:before {
     position: absolute;top: 12px;left: 0px;width: 4px;height: 4px;background: #aaa;content: '';border-radius: 50%;
 }

@@ -88,7 +88,7 @@
                     <i class="far fa-thumbs-up"></i>
                 </div>
                     <!-- 싫어요 버튼 -->
-                <div onclick="bo_bad()1" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
+                <div onclick="bo_bad()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
                     <b id="bo_bad" style="color: red;">${board.bo_bad}</b><br>
                     <i class="far fa-thumbs-down"></i>
                 </div>
@@ -360,7 +360,7 @@
 
         }
 
-        function bo_bad1() {
+        function bo_bad() {
             console.log("싫어요 버튼 클릭함");
 
             $.ajax({

@@ -42,36 +42,36 @@
         </c:forEach>
         <!-- 여기서부턴 로그인 됨 { -->
         <div class="login-info p-3" style="margin-bottom: 0px!important;">
-            <div class="row">
-                <div class="col-xs-auto p-3 profile">
-                    <img width="58" src="<c:url value="/resources/img/profile_img.png" />">
-                </div>
+            <center>
+                <img width="58" src="<c:url value="/resources/img/profile_img.png" />">
+            </center>
+
                 <div class="col-xs-auto p-3">
                     <div class="login-body">
-                        <span class="nick"><b>${user.nick} 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="<c:url value="/admin/" />"><b>관리자</b></a> </span>
+                        <span class="nick"><b>${user.nick} 님</b></span> <span><a href="<c:url value="/user/myinfo" />">내정보</a></span> <span><a style="color: blue;" href="<c:url value="/admin/" />"><b>관리자</b></a> </span>
                     </div>
                     <div class="login-body2">
                         <span>팔로우 ${user.follow } <a href="#" onclick="ms_list()">쪽지 ${message_new_count}</a> </span> <span>포인트 ${user.point} 점</span>
                     </div>
                     <form id="logout-form" action="<c:url value="/logout" />">
-                        <button id="btn-logout" style="margin-top: 10px;" class="btn btn-primary btn-sm">로그아웃</button>
+                        <button id="btn-logout" style="margin-top: 10px;" class="btn btn-primary btn-sm btn-block">로그아웃</button>
                     </form>
                 </div>
-            </div>
+
         </div>
         <div class="" style="background-color: white;border: 1px solid #dee3eb;border-top: none">
            <div class="row" style="width: 100%;margin-left: 0px;margin-right: 0px">
                <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px">
                    <div id="btn_user_info" style="cursor: pointer;margin: 15px;text-align: center;cursor: pointer;">
-                       <div  style="cursor: pointer; style="text-align: center;font-size: 15px;"><i class="fas fa-bell"></i></div>
+                       <div  style="cursor: pointer;text-align: center;font-size: 15px;"><b><i style="color: #b694fa" class="fas fa-bell"></i></b></div>
                        <div  style="cursor: pointer;text-align: center;font-size: 15px;" id="user_info">
                            알림
                        </div>
                    </div>
                </div>
                <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px">
-                   <div style="margin: 15px;text-align: center;cursor: pointer;">
-                       <div style="text-align: center;font-size: 15px;"><i class="fas fa-envelope"></i></div>
+                   <div id="btn_message_list" style="margin: 15px;text-align: center;cursor: pointer;">
+                       <div style="text-align: center;font-size: 15px;"><b><i style="color: #b694fa" class="fas fa-envelope"></i></b></div>
                        <div style="text-align: center;font-size: 15px;">
                            쪽지
                        </div>
@@ -79,20 +79,17 @@
                </div>
                <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;border-right: none;">
                    <div style="margin: 15px;text-align: center;cursor: pointer;">
-                       <div style="text-align: center;font-size: 15px;"><i class="fas fa-envelope"></i></div>
+                       <div style="text-align: center;font-size: 15px;"><b><i style="color: #b694fa" class="fab fa-wordpress"></i></b></div>
                        <div style="text-align: center;font-size: 15px;">
                            블로그
                        </div>
                    </div>
                </div>
            </div>
-            <div id="user_info_" style="border-top: 1px solid #dee3eb;border-bottom: none;">
+            <div class="btn_user_item" id="btn_user_item" style="display:none; border-top: 1px solid #dee3eb;border-bottom: none;">
                 <div style="border-bottom: 1px solid #dee3eb;">
                     <div>
-                        <ul class="login-list">
-                            <li>
-                                test
-                            </li>
+                        <ul class="item_list" id="item_list">
                         </ul>
                     </div>
                 </div>
@@ -121,20 +118,85 @@
 
         $("#user_info_").hide();
 
-
-        $("#info_list").click(function () {
-            console.log("알림버튼 클릭!");
-        });
-
         $(document).ready(function() {
 
             console.log("ajax load!!");
 
+            $("#btn_message_list").click(function () {
 
-            $("#btn_user_info").click(function () {
-                console.log("알림버튼 클릭함");
-                $("#user_info_").toggle();
+                console.log("쪽지 버튼을 클릭함");
+
+                var con = document.getElementById("btn_user_item");
+                if (con.style.display == 'none') {
+                    con.style.display = 'block';
+                    console.log("보임");
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "<c:url value="/sample/message/list" />",
+                        success: function (result) {
+
+                            var jonData = JSON.parse(result);
+
+                            console.log("message list ==> " + result);
+
+                            $.each(jonData, function (index, item) {
+
+                                var item_list = "<li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+
+                                $("#item_list").append(item_list);
+
+                                console.log("result ==> " + item.content);
+                            })
+                        }
+                    })
+
+                } else {
+                    con.style.display = 'none';
+                    console.log("감춤");
+                    $("#item_list").html("");
+                }
             });
+
+
+
+
+
+   /*             $.ajax({
+                    type: 'GET',
+                    url: "<c:url value="/sample/message/list" />",
+                    success: function (result) {
+
+                        var jonData = JSON.parse(result);
+
+                        console.log("message list ==> " + result);
+
+                        $.each(jonData, function (index, item) {
+
+                            var item_list = "<li>\n" + item.content + "</li>";
+
+                            $("#item_list").append(item_list);
+
+                            console.log("result ==> " + item.content);
+                        })
+                    }
+                })
+            });*/
+
+           /* $("#btn_user_info").click(function () {
+
+                var item_list =
+                    "<li>\n" +
+                    "알림\n" +
+                    "</li>" +
+                    "<li>\n" +
+                    "리스트\n" +
+                    "</li>";
+
+                console.log("알림버튼 클릭함");
+                $("#btn_user_item").toggle();
+                $("#item_list").html(item_list);
+            });*/
 
             $("#news_loading").hide();
 
@@ -162,12 +224,12 @@
 
         })
 
-            .ajaxStart(function(){
-                $('#news_loading').show(); //ajax실행시 로딩바를 보여준다.
-            })
-            .ajaxStop(function(){
-                $('#news_loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-            });
+        function view_message(no) {
+            window.open("<c:url value="/message/ms_view?no=" />"+no+"","메세지 확인","width=400,height=400");
+            $("#message_count").html("0");
+        }
+
+
 
     </script>
 
