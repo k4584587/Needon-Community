@@ -13,5 +13,7 @@ public interface MessageDAO {
 	public void getMessageupdate(Message ms)throws Exception;
 	
 	public void getMessagesend(Message ms)throws Exception;
+	
+	public List<Message> getMessagesendlist(String username)throws Exception;
 
 }

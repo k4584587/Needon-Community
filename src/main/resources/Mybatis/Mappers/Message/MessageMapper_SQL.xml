@@ -29,6 +29,18 @@
 		</if>
 	</select>
 	
+	<select id="getMessageSendlist" resultType="Message">
+		select
+			*
+		from
+			nb_message
+		where
+			username = #{username}
+		order by
+			send_date desc;
+	
+	</select>
+	
 	<select id="getMessageView" resultType="Message">
 		select
 			*

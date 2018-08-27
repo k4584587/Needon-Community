@@ -23,6 +23,12 @@ public class MessageDAOImpl implements MessageDAO{
 	}
 
 	@Override
+	public List<Message> getMessagesendlist(String username) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".getMessageSendlist",username);
+	}
+	
+	@Override
 	public Message getMessageview(Message ms) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".getMessageView",ms);
@@ -39,5 +45,6 @@ public class MessageDAOImpl implements MessageDAO{
 		// TODO Auto-generated method stub
 		session.insert(namespace+".getMessageSend",ms);
 	}
+
 
 }

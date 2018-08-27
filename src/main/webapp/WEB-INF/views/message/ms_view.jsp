@@ -37,14 +37,14 @@ ${ms.info_read_count}
   function ms_close(){
 		 window.close();
   }
-</script>
+</script>   
 
-<form action="<c:url value="/message/replyForm" />"  method="get" > 
-			
+<form action="<c:url value="/message/replyForm"/>"  method="post" > 
+			<input type="hidden" name=username value="${ms.username }">
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td>${ms.you }</td>
+				<td>${ms.username }</td>
 			</tr>
 			<tr>
 				<th>내용</th>

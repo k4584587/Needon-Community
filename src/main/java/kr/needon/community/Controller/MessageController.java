@@ -45,6 +45,21 @@ public class MessageController {
 		
 		return "message/ms_list";
 	}
+	@RequestMapping(value = "/send_list")
+	public String send_list(Message ms, Model model) throws Exception {
+		
+		System.out.println("send_list>>>>>>>>>>>>>>>success!!!");
+		
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		String username =member.getUsername();
+		System.out.println("username>>>>>>>>>>>>>>>>"+username);
+		System.out.println("list>>>>>>>>>>>>>"+dao.getMessagesendlist(username));
+		model.addAttribute("list",dao.getMessagesendlist(username));
+		
+		return "message/send_list";
+	}
+	
 	
 	@RequestMapping(value = "/ms_view")
 	public String ms_view(Message ms,Model model) throws Exception {
@@ -92,7 +107,7 @@ public class MessageController {
 		
 	
 		if(mb1 == null) {
-			model.addAttribute("msg","id xxxx");
+			model.addAttribute("msg","상대방 아이디를 정확히 입력하세요");
 			return "/alert";
 		}else {
 		if(check==-1) {
@@ -111,17 +126,66 @@ public class MessageController {
 		
 	}
 	
-	@RequestMapping(value="/replyForm")
-	public String replyForm(Message ms,@ModelAttribute String name, Model model) {
+	@PostMapping(value="/replyForm")
+	public String replyForm(HttpServletRequest request, Model model) {
 		System.out.println("replyForm>>>>>>>>>>>>>>>>>success!!!");
 		
 		
+		String username = request.getParameter("username");
 		
-		System.out.println("data>>>>>>>>>>>>>>>"+name);
+		System.out.println("data>>>>>>>>>>>>>>>"+username);
 		
-		model.addAttribute("data",ms);
+		model.addAttribute("data",username);
 		
 		return "/message/replyForm";
+	}
+	
+	@PostMapping(value="/reply")
+	public String reply(HttpServletRequest request, Message ms, Model model) throws Exception {
+		
+		System.out.println("reply>>>>>>>>>>>>>>>success!!");
+		
+		String you = request.getParameter("username");
+		String content = request.getParameter("content");
+		
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Member mb1=Udao.getFindUser(you);
+		
+		
+		ms.setUsername(member.getUsername());
+		ms.setSend_nick(member.getNick());
+		ms.setInfo_read_count(0);
+		ms.setRead_count(1);
+		
+		
+		int check = Uservice.id_check(you);
+		
+		
+		System.out.println("메세지 데이터>>>>>>>>>>>>"+ms);
+		System.out.println("내 데이터>>>>>>>>>>>>>>>"+member);
+		System.out.println("상대방 데이터 check>>>>>>>>>>>>"+check);
+		System.out.println("상대방 데이터>>>>>>>>>>>>"+mb1);
+		
+	
+		if(mb1 == null) {
+			model.addAttribute("msg","상대방 아이디를 정확히 입력하세요");
+			return "/alert";
+		}else {
+		if(check==-1) {
+			System.out.println("Errer>>>>>>>>>>>>>>>>>>>>>>>>");
+			model.addAttribute("msg","해당 아이디가 없습니다.");
+			return "/alert";
+		}else {
+			ms.setYou(mb1.getUsername());
+			ms.setRecv_nick(mb1.getNick());
+			int result = service.getMessagesend(ms);
+			System.out.println("전송 결과>>>>>>>>>>>>>>>>>>>>>>>>"+result);
+			model.addAttribute("msg","전송완료");
+			return "/popup_msg";
+		}
+		}
+		
+		
 	}
 	
 	

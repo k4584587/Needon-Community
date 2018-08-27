@@ -17,12 +17,13 @@
 
 ${data }
 
-<form > 
+<form action="<c:url value="/message/reply"/>" method="post" >
+	<input type="hidden"  name="username" value="${data}" > 
 			
 		<table border=1 align=center>
 			<tr>
 				<th>아이디</th>
-				<td>${data.you }</td>
+				<td>${data}</td>
 			</tr>
 			<tr>
 				<th>내용</th>
