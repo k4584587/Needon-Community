@@ -82,13 +82,13 @@
                 ${board.content}
             </div>
             <div class="row justify-content-center" style="background-color: white;margin-right: 0px!important;margin-left: 0px!important; border-left: 1px solid #dee3eb; border-right: 1px solid #dee3eb;">
-                <div onclick="bo_good()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;margin-right: 10px;cursor: pointer;">
+                <div onclick="bo_good1()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;margin-right: 10px;cursor: pointer;">
                     <!-- 좋아요 버튼 -->
                     <b id="bo_good" style="color: red;">${board.bo_good}</b><br>
                     <i class="far fa-thumbs-up"></i>
                 </div>
                     <!-- 싫어요 버튼 -->
-                <div onclick="bo_bad()" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
+                <div onclick="bo_bad()1" class="col-auto p-3" style="text-align: center;font-size: 15px;border: 1px solid #dee3eb;cursor: pointer;">
                     <b id="bo_bad" style="color: red;">${board.bo_bad}</b><br>
                     <i class="far fa-thumbs-down"></i>
                 </div>
@@ -128,10 +128,10 @@
                                         <div style="float: right;margin-top: 10px;">
                                             <div class="row">
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
-                                                    <div class="p-2" style="border: 1px solid #bbb;border-right: none;"><i class="far fa-thumbs-up"></i> <b>${rb.cm_good}</b> </div>
+                                                    <div onclick="cm_good1(${rb.no})" class="p-2" style="border: 1px solid #bbb;border-right: none;"><i class="far fa-thumbs-up"></i> <b id="cm_good" style="color: red;">${rb.cm_good} </b> </div>
                                                 </div>
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
-                                                    <div class="p-2" style="border: 1px solid #bbb;"><i class="far fa-thumbs-down"></i> <b>${rb.cm_bad}</b> </div>
+                                                    <div onclick="cm_bad1(${rb.no})"class="p-2" style="border: 1px solid #bbb;"><i class="far fa-thumbs-down"></i> <b id="cm_bad" style="color: red;">${rb.cm_bad}</b> </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -333,9 +333,15 @@
 
         var good_count_int = parseInt(good_count)+1;
         var bad_count_int = parseInt(bad_count)+1;
+        
+        var cm_good = ${board.cm_good};
+        var cm_bad = ${board.cm_bad};
+
+        var cm_good_int = parseInt(cm_good)+1;
+        var cm_bad_int = parseInt(cm_bad)+1;
 
 
-        function bo_good() {
+        function bo_good1() {
             console.log("좋아요 버튼 클릭함");
 
             $.ajax({
@@ -354,7 +360,7 @@
 
         }
 
-        function bo_bad() {
+        function bo_bad1() {
             console.log("싫어요 버튼 클릭함");
 
             $.ajax({
@@ -372,6 +378,44 @@
             })
 
         }
+        
+            function cm_good1(no) {
+                console.log("좋아요 버튼 클릭함");
+
+                $.ajax({
+                    type: "POST",
+                    url: "<c:url value="/board/cm_good" />",
+                    data:{"category":"${param.category}","no":no},
+                    success: function (result) {
+                        if(result == 1) {
+                            console.log("추천 성공");
+                            $("#cm_good").html(cm_good_int++);
+                        } else {
+                            console.log("추천 실패");
+                        }
+                    }
+                })
+
+            }
+            
+                function cm_bad1(no) {
+                    console.log("싫어요 버튼 클릭함");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "<c:url value="/board/cm_bad" />",
+                        data:{"category":"${param.category}","no":no},
+                        success: function (result) {
+                            if(result == 1) {
+                                console.log("싫어요 성공");
+                                $("#cm_bad").html(cm_bad_int++);
+                            } else {
+                                console.log("싫어요 실패");
+                            }
+                        }
+                    })
+
+                }
 
 	</script>
 

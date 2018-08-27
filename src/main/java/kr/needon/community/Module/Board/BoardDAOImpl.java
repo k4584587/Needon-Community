@@ -112,4 +112,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return session.selectOne(namespace + ".getBoardInfo",boTable);
 	}
 
+	@Override
+	public void comment_vote(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".comment_vote", board);
+	}
+
 }

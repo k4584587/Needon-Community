@@ -39,4 +39,6 @@ public interface BoardService {
 	public boolean repDelete(Board board)throws Exception;
 
 	public boolean board_vote(Board board) throws Exception;
+	
+	public boolean comment_vote(Board board) throws Exception;
 }

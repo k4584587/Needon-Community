@@ -201,5 +201,28 @@ public class BoardController {
 			return "0";
 		}
 	}
+	
+	@PostMapping("/cm_good")
+	public @ResponseBody String cm_good(Board board) throws Exception {
+		
+		board.setCount(0);
+		if(service.comment_vote(board)) {
+			return "1";
+		} else {
+			return "0";
+		}
+		
+	}
+	
+	@PostMapping("/cm_bad")
+	public @ResponseBody String cm_bad(Board board) throws Exception {
+		
+		board.setCount(1);
+		if(service.comment_vote(board)) {
+			return "1";
+		} else {
+			return "0";
+		}
+	}
 
 }

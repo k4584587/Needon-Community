@@ -103,6 +103,28 @@
 		</if>
 
 	</update>
+	
+	<update id="comment_vote">
+
+		<if test="count == 0">
+			UPDATE
+				nb_board_${category}
+			SET
+				cm_good =  cm_good + 1
+			WHERE
+				no = #{no}
+		</if>
+
+		<if test="count == 1">
+			UPDATE
+				nb_board_${category}
+			SET
+				cm_bad =  cm_bad + 1
+			WHERE
+				no = #{no}
+		</if>
+
+	</update>
 
 	<select id="getBoardInfo" resultType="BoTable">
 		SELECT

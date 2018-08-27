@@ -38,6 +38,8 @@ public interface BoardDAO {
 	public void repDelete(Board board)throws Exception;
 
 	public void board_vote(Board board)throws Exception;
+	
+	public void comment_vote(Board board)throws Exception;
 
 	public BoTable getBoardInfo(BoTable boTable);
 
