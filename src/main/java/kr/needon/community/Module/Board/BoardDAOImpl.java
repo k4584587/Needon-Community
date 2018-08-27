@@ -101,17 +101,19 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		session.delete(namespace+".replydelete", board);
 	}
-
+	
+	/*게시판 좋아요 및 싫어요*/
 	@Override
 	public void board_vote(Board board) throws Exception {
 		session.update(namespace + ".board_vote", board);
 	}
-
+	
 	@Override
 	public BoTable getBoardInfo(BoTable boTable) {
 		return session.selectOne(namespace + ".getBoardInfo",boTable);
 	}
-
+	
+	/*댓글 좋아요 및 싫어요*/
 	@Override
 	public void comment_vote(Board board) throws Exception {
 		// TODO Auto-generated method stub

@@ -140,7 +140,8 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
-
+	
+	/*댓글 삭제*/
 	@Override
 	public boolean repDelete(Board board) throws Exception {
 		// TODO Auto-generated method stub
@@ -152,7 +153,8 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
-
+	
+	/*게시판 좋아요 및 싫어요*/
 	@Override
 	public boolean board_vote(Board board) throws Exception {
 
@@ -165,7 +167,8 @@ public class BoardServiceImpl implements BoardService {
 
 		return true;
 	}
-
+	
+	/*댓글 좋아요 및 싫어요*/
 	@Override
 	public boolean comment_vote(Board board) throws Exception {
 		// TODO Auto-generated method stub

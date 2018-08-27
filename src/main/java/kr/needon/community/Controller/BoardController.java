@@ -178,7 +178,8 @@ public class BoardController {
 			return "2";
 		}		
 	}
-
+	
+	/*게시판 좋아요*/
 	@PostMapping("/bo_good")
 	public @ResponseBody String bo_good(Board board) throws Exception {
 
@@ -190,7 +191,8 @@ public class BoardController {
         }
 
 	}
-
+	
+	/*게시판 싫어요*/
 	@PostMapping("/bo_bad")
 	public @ResponseBody String bo_bad(Board board) throws Exception {
 
@@ -202,6 +204,7 @@ public class BoardController {
 		}
 	}
 	
+	/*댓글 좋아요*/
 	@PostMapping("/cm_good")
 	public @ResponseBody String cm_good(Board board) throws Exception {
 		
@@ -214,6 +217,7 @@ public class BoardController {
 		
 	}
 	
+	/*댓글 싫어요*/
 	@PostMapping("/cm_bad")
 	public @ResponseBody String cm_bad(Board board) throws Exception {
 		
