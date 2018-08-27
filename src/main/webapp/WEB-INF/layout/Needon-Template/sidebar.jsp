@@ -6,8 +6,6 @@
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
                    url="jdbc:log4jdbc:mysql://13.125.208.101/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false&autoReconnectForPools=true&autoReconnection=true&testWhileIdle=false"
                    user="admin_project" password="3class"/>
-
-
 <script src="<c:url value="/resources/plugins/xdomain/jquery.xdomainajax.js" />"></script>
 <script>
     function ms_list(){
@@ -43,14 +41,14 @@
             <c:set value="${message.count}" var="message_new_count" />
         </c:forEach>
         <!-- 여기서부턴 로그인 됨 { -->
-        <div class="login-info p-3">
+        <div class="login-info p-3" style="margin-bottom: 0px!important;">
             <div class="row">
                 <div class="col-xs-auto p-3 profile">
                     <img width="58" src="<c:url value="/resources/img/profile_img.png" />">
                 </div>
                 <div class="col-xs-auto p-3">
                     <div class="login-body">
-                        <span class="nick"><b>관리자 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="<c:url value="/admin/" />"><b>관리자</b></a> </span>
+                        <span class="nick"><b>${user.nick} 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="<c:url value="/admin/" />"><b>관리자</b></a> </span>
                     </div>
                     <div class="login-body2">
                         <span>팔로우 ${user.follow } <a href="#" onclick="ms_list()">쪽지 ${message_new_count}</a> </span> <span>포인트 ${user.point} 점</span>
@@ -58,6 +56,45 @@
                     <form id="logout-form" action="<c:url value="/logout" />">
                         <button id="btn-logout" style="margin-top: 10px;" class="btn btn-primary btn-sm">로그아웃</button>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="" style="background-color: white;border: 1px solid #dee3eb;border-top: none">
+           <div class="row" style="width: 100%;margin-left: 0px;margin-right: 0px">
+               <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px">
+                   <div id="btn_user_info" style="cursor: pointer;margin: 15px;text-align: center;cursor: pointer;">
+                       <div  style="cursor: pointer; style="text-align: center;font-size: 15px;"><i class="fas fa-bell"></i></div>
+                       <div  style="cursor: pointer;text-align: center;font-size: 15px;" id="user_info">
+                           알림
+                       </div>
+                   </div>
+               </div>
+               <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px">
+                   <div style="margin: 15px;text-align: center;cursor: pointer;">
+                       <div style="text-align: center;font-size: 15px;"><i class="fas fa-envelope"></i></div>
+                       <div style="text-align: center;font-size: 15px;">
+                           쪽지
+                       </div>
+                   </div>
+               </div>
+               <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;border-right: none;">
+                   <div style="margin: 15px;text-align: center;cursor: pointer;">
+                       <div style="text-align: center;font-size: 15px;"><i class="fas fa-envelope"></i></div>
+                       <div style="text-align: center;font-size: 15px;">
+                           블로그
+                       </div>
+                   </div>
+               </div>
+           </div>
+            <div id="user_info_" style="border-top: 1px solid #dee3eb;border-bottom: none;">
+                <div style="border-bottom: 1px solid #dee3eb;">
+                    <div>
+                        <ul class="login-list">
+                            <li>
+                                test
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,8 +119,22 @@
 
     <script>
 
+        $("#user_info_").hide();
+
+
+        $("#info_list").click(function () {
+            console.log("알림버튼 클릭!");
+        });
+
         $(document).ready(function() {
+
             console.log("ajax load!!");
+
+
+            $("#btn_user_info").click(function () {
+                console.log("알림버튼 클릭함");
+                $("#user_info_").toggle();
+            });
 
             $("#news_loading").hide();
 

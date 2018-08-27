@@ -241,3 +241,24 @@ tr {
     height: 56px;
     background-position: 0px -265px;
 }
+
+
+/*로그인*/
+
+.login-list {
+    margin-top: 16px;
+    padding-left: 20px;
+}
+
+.login-list li {
+
+    list-style: none;
+    position:relative;
+    line-height:18px;
+    padding:3px 0;
+    padding-left:10px;
+    position:relative;
+}
+.login-list li:before {
+    position: absolute;top: 12px;left: 0px;width: 4px;height: 4px;background: #aaa;content: '';border-radius: 50%;
+}
