@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-xs-auto p-3">
                     <div class="login-body">
-                        <span class="nick"><b>관리자 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="/admin/"><b>관리자</b></a> </span>
+                        <span class="nick"><b>관리자 님</b></span> <span>내정보</span> <span><a style="color: blue;" href="<c:url value="/admin/" />"><b>관리자</b></a> </span>
                     </div>
                     <div class="login-body2">
                         <span>팔로우 ${user.follow } <a href="#" onclick="ms_list()">쪽지 ${message_new_count}</a> </span> <span>포인트 ${user.point} 점</span>
