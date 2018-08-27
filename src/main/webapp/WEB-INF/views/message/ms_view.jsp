@@ -33,8 +33,13 @@ ${ms.info_read_count}
 	</sql:update>
 </c:if>
 
+ <script>
+  function ms_close(){
+		 window.close();
+  }
+</script>
 
-<form > 
+<form action="<c:url value="/message/replyForm" />"  method="get" > 
 			
 		<table border=1 align=center>
 			<tr>
@@ -52,9 +57,8 @@ ${ms.info_read_count}
 		
 		
 		
-			<input type="submit" value="회원가입" />
-			 <input type="reset" value="취소"
-				onclick="$('#id').focus();" />
+			<input type="submit" value="답장" />
+			<button onClick="ms_close()">취소</button>
 		</div>
 	</form>
 
