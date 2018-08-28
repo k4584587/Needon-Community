@@ -2,6 +2,7 @@ package kr.needon.community.Module.SampleExample;
 
 import java.util.List;
 
+import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Menu;
 import kr.needon.community.Model.Sample;
 

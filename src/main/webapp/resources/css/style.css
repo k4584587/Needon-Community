@@ -25,6 +25,10 @@ header {
     color: rgb(255, 255, 255)!important;
 }
 
+.navbar-expand .navbar-nav .nav-link {
+    padding-right: 40px;
+}
+
 .blue-theme {
     background-color: #b694fa!important;
 }
@@ -208,8 +212,42 @@ tr {
 .lat .lt_more {position:absolute;top:11px;right:10px;display:block;width:25px;line-height:25px;color:#aaa;border-radius:3px;text-align:center;}
 .lat .lt_more:hover{color:#777}
 
+.lat_photo {
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #c6cacc;
+    background: #fff;
+}
 
-/*날씨*/
+.lat_photo .lat_photo_title {
+    display: block;
+    padding: 0 20px;
+    line-height: 45px;
+    font-size: 1.083em;
+    border-bottom: 1px solid #e2e2e2;
+    color: #253dbe;
+    background: #fcfcfc;
+}
+
+.lat_photo .lt_more {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    display: block;
+    width: 25px;
+    line-height: 25px;
+    color: #aaa;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.lat_photo .lat_photo_ul {
+    position:relative;line-height:18px;padding:3px 0;padding-left:10px;position:relative
+}
+
+
+    /*날씨*/
 
 /* 맑음 */
 .weather_ico1 {

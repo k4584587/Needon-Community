@@ -1,10 +1,15 @@
 package kr.needon.community.Module.SampleExample;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import kr.needon.community.Model.BoTable;
+import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Menu;
+import kr.needon.community.Module.admin.AdminDAOImpl;
+import kr.needon.community.Module.admin.AdminServiceImpl;
 import org.springframework.stereotype.Service;
 
 import kr.needon.community.Model.Sample;
@@ -14,6 +19,9 @@ public class SampleServiceImpl implements SampleService {
 
 	@Inject
 	private SampleExampleDAOImpl dao;
+
+	@Inject
+	private AdminDAOImpl adminDAO;
 	
 	public void selectOneItem(Sample sample) {
 		// TODO Auto-generated method stub
@@ -78,4 +86,6 @@ public class SampleServiceImpl implements SampleService {
 
 		return true;
 	}
+
+
 }

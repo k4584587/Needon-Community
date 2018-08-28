@@ -3,12 +3,12 @@ package kr.needon.community.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.Menu;
-import kr.needon.community.Model.Message;
+import kr.needon.community.Model.*;
 import kr.needon.community.Module.Message.MessageDAOImpl;
 import kr.needon.community.Module.SampleExample.SampleExampleDAO;
 import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
+import kr.needon.community.Module.admin.AdminDAOImpl;
+import kr.needon.community.Module.admin.AdminServiceImpl;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import kr.needon.community.Model.Sample;
 import kr.needon.community.Module.SampleExample.SampleServiceImpl;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.CookieGenerator;
@@ -43,6 +42,9 @@ public class SampleExampleController {
 
 	@Autowired
 	MessageDAOImpl messageDAO;
+
+	@Autowired
+	AdminDAOImpl adminDAO;
 	
 	@RequestMapping("/list")
 	public String ListExample(Model model) { //리스트 출력 예제
@@ -148,6 +150,21 @@ public class SampleExampleController {
 
 		mssage.setCount(0);
 		return gson.toJson(messageDAO.getMessagelist(mssage));
+	}
+
+	@RequestMapping("/test/test")
+	public @ResponseBody String test(BoTable botable, Board board) {
+		List<BoTable> getBoardlist = adminDAO.getBoTable();
+
+		List<Board> getBoardSearch = dao.getSearch(board);
+
+		for(BoTable board_info : getBoardlist) {
+			System.out.println("게시판 테이블 ==> " + "nb_board_" + board_info.getBo_table());
+
+
+		}
+
+		return getBoardlist.toString();
 	}
 
 }

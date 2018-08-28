@@ -28,7 +28,7 @@
 </sql:query>
 
 <!-- 메뉴비 사직 -->
-<nav class="navbar navbar-expand navbar-dark blue-theme">
+<nav class="navbar navbar-expand navbar-dark blue-theme" style="height: 50px;">
     <div class="container">
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">

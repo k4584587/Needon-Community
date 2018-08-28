@@ -3,6 +3,8 @@ package kr.needon.community.Model;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 //=====================================
 //클래스 설명 : 게시판 DTO 클래스
@@ -34,6 +36,8 @@ public class Board {
 	private int bo_bad;
 	private int notice_ck;
 	private int count;
+	private String keyword;
 	private Timestamp register_date;
 	private String category;
+	List<String> table_list = new ArrayList<String>();
 }
