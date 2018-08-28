@@ -59,6 +59,27 @@
 		</c:choose>
 </table>
 
+<!-- 페이지 처리 시작  -->
+				<c:if test="${pageMaker.ms.page != 1 }">
+					<a	 href="<c:url value="/message/send_list${pageMaker.uri(pageMaker.start)}"/>">&laquo;
+						처음</a>
+				</c:if>
+				
+				<c:if test="${pageMaker.startPage >= 11 }">
+					<a href="<c:url value="/message/send_list${pageMaker.uri(pageMaker.start)}"/>">&lt;
+						이전</a>
+				</c:if>
+				
+				<c:forEach var="a" begin="${pageMaker.startPage }" end="${pageMaker.totalPage }">
+					<a href="<c:url value="/message/send_list${pageMaker.uri(a)}"/>">${a }</a>
+				</c:forEach>
+				
+				<c:if test="${pageMaker.next  }">
+					<a href="<c:url value="/message/send_list${pageMaker.uri(pageMaker.totalPage + 1)} "/>">다음
+						&gt;</a>
+					<a href="<c:url value="/message/send_list${pageMaker.uri(pageMaker.endPage)}"/>">&raquo;
+						마지막</a>
+				</c:if>
 
 </body>
 </html>

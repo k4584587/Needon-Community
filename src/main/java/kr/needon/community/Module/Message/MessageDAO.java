@@ -15,8 +15,10 @@ public interface MessageDAO {
 	
 	public void getMessagesend(Message ms)throws Exception;
 	
-	public List<Message> getMessagesendlist(String username)throws Exception;
+	public List<Message> getMessagesendlist(Message ms)throws Exception;
 	
 	public int getListCount(Message ms) throws Exception;
+	
+	public int getSendListCount(Message ms) throws Exception;
 
 }

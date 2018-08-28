@@ -327,6 +327,7 @@ public class UserController {
     	return "/msg";
     }
     
+    //비밀번호 수정
     @RequestMapping(value="/psw_change", method =  RequestMethod.POST)
     public String psw_change(Member member,HttpServletRequest request,Model model, String password,String password2) throws Exception{
     	
@@ -370,6 +371,7 @@ public class UserController {
     	
     }
     
+    // 내정보 확인
     @RequestMapping("/myinfo_check")
     public String myinfo_check() {
     	
@@ -378,6 +380,7 @@ public class UserController {
     	return "/user/my_check";
     }
     
+    // 내정보 수정을 위한 비밀 번호 체크
     @RequestMapping(value="/check_result",  method =  RequestMethod.POST)
     public String check_result(Member member, Model model){
     	
@@ -411,6 +414,7 @@ public class UserController {
     	return "/msg";
     }
     
+    // 내정보 확인
     @RequestMapping(value="/my_modify")
     public String my_modify(Member member, Model model) throws Exception{
     	
@@ -440,6 +444,7 @@ public class UserController {
     	return"/user/my_modify";
     }
     
+    //내정보 수정
     @RequestMapping(value="/my_update",  method =  RequestMethod.POST)
     public String my_update(Member member, Model model, HttpServletRequest request)throws Exception{
     	

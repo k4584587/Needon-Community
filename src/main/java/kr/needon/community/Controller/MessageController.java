@@ -18,6 +18,11 @@ import kr.needon.community.Module.Message.MessageServiceImpl;
 import kr.needon.community.Module.User.UserDAOImpl;
 import kr.needon.community.Module.User.UserService;
 
+//=====================================
+//클래스 설명 : 쪽지 컨트롤러 클래스
+//작성자 : 박건우
+//=====================================
+
 @Controller
 @RequestMapping("/message/**")
 public class MessageController {
@@ -34,6 +39,7 @@ public class MessageController {
 	@Autowired
 	private MessageServiceImpl service;
 	
+	//받은 쪽지 리스트
 	@RequestMapping(value = "/ms_list")
 	public String ms_list(Message ms, Model model) throws Exception {
 		
@@ -52,6 +58,8 @@ public class MessageController {
 		
 		return "message/ms_list";
 	}
+	
+	//보낸 쪽지 리스트
 	@RequestMapping(value = "/send_list")
 	public String send_list(Message ms, Model model) throws Exception {
 		
@@ -59,15 +67,22 @@ public class MessageController {
 		
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		String username =member.getUsername();
-		System.out.println("username>>>>>>>>>>>>>>>>"+username);
-		System.out.println("list>>>>>>>>>>>>>"+dao.getMessagesendlist(username));
-		model.addAttribute("list",dao.getMessagesendlist(username));
+		ms.setUsername(member.getUsername()); 
+		System.out.println("list>>>>>>>>>>>>>"+dao.getMessagesendlist(ms));
+		ms.setPerPageNum(10);
+		model.addAttribute("list",dao.getMessagesendlist(ms));
+		
+		MsPageMaker pageMaker = new MsPageMaker();
+		pageMaker.setMs(ms);
+		pageMaker.setTotalCount(dao.getSendListCount(ms));
+		System.out.println("데이터>>>>>>>>>>>>>>>>>>>"+pageMaker);
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "message/send_list";
 	}
 	
 	
+	//쪽지 정보 확인
 	@RequestMapping(value = "/ms_view")
 	public String ms_view(Message ms,Model model) throws Exception {
 		
@@ -78,6 +93,7 @@ public class MessageController {
 		return "message/ms_view";
 	}
 	
+	//쪽지 전송 폼 이동
 	@RequestMapping(value = "/ms_send")
 	public String ms_send() {
 		
@@ -86,7 +102,7 @@ public class MessageController {
 		return "message/ms_send";
 	}
 	
-
+	//쪽지 전송
 	@PostMapping(value = "/ms_sendPost")
 	public String ms_sendPost(HttpServletRequest request, Message ms, Model model) throws Exception{
 
@@ -133,6 +149,7 @@ public class MessageController {
 		
 	}
 	
+	// 쪽지 답장 폼 이동
 	@PostMapping(value="/replyForm")
 	public String replyForm(HttpServletRequest request, Model model) {
 		System.out.println("replyForm>>>>>>>>>>>>>>>>>success!!!");
@@ -147,6 +164,7 @@ public class MessageController {
 		return "/message/replyForm";
 	}
 	
+	//쪽지 답장 전송
 	@PostMapping(value="/reply")
 	public String reply(HttpServletRequest request, Message ms, Model model) throws Exception {
 		

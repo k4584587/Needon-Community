@@ -24,9 +24,9 @@ public class MessageDAOImpl implements MessageDAO{
 	}
 
 	@Override
-	public List<Message> getMessagesendlist(String username) throws Exception {
+	public List<Message> getMessagesendlist(Message ms) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+".getMessageSendlist",username);
+		return session.selectList(namespace+".getMessageSendlist",ms);
 	}
 	
 	@Override
@@ -51,6 +51,12 @@ public class MessageDAOImpl implements MessageDAO{
 	public int getListCount(Message ms) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".listcount",ms);
+	}
+
+	@Override
+	public int getSendListCount(Message ms) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".sendlistcount",ms);
 	}
 
 	

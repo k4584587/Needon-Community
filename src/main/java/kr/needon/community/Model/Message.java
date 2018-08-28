@@ -4,6 +4,11 @@ import java.util.Date;
 
 import lombok.Data;
 
+//=====================================
+//클래스 설명 : 쪽지 DTO 클래스
+//작성자 : 박건우
+//=====================================
+
 @Data
 public class Message {
 	

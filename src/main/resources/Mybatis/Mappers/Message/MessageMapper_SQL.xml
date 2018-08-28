@@ -39,12 +39,16 @@
 		where
 			username = #{username}
 		order by
-			send_date desc;
-	
+			send_date desc
+		limit #{pageStart}, #{perPageNum};
 	</select>
 	
 	<select id="listcount" resultType="int" parameterType="Message">
 		select count(*) from nb_message where you = #{username};
+	</select>
+	
+	<select id="sendlistcount" resultType="int" parameterType="Message">
+		select count(*) from nb_message where username = #{username};
 	</select>
 	
 	<select id="getMessageView" resultType="Message">
