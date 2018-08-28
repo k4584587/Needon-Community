@@ -151,6 +151,5 @@
 	location.href='<c:out value="${pageContext.request.contextPath}"/>${url}';
 </script>
 
-
 </body>
 </html>

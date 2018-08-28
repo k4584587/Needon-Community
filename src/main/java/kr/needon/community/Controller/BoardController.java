@@ -1,19 +1,31 @@
 package kr.needon.community.Controller;
 
 import java.io.FileOutputStream;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.needon.community.Model.*;
-import kr.needon.community.Module.Board.BoardDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.needon.community.Model.BoTable;
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.PageMaker;
+import kr.needon.community.Module.Board.BoardDAOImpl;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
 
@@ -62,8 +74,14 @@ public class BoardController {
 
 	/* 게시판 조회 */
 	@RequestMapping("/view")
-	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model, HttpSession session) throws Exception {
 
+		String fileName = (String)session.getAttribute("fileName");
+		int fileSize = (int)session.getAttribute("fileSize");
+		
+		model.addAttribute("fileName", fileName);
+		model.addAttribute("fileSize", fileSize);
+		
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
 		model.addAttribute("comment", service.replyList(board));
@@ -99,12 +117,36 @@ public class BoardController {
 		String fileName = mf.getOriginalFilename();
 		int fileSize = (int) mf.getSize();
 		// mf.transferTo(new File("/gov/"+fileName));
-		System.out.println("filename==========>"+fileName);
-		System.out.println("fileSize============>"+fileSize);
+	
+			System.out.println("filename==========>"+fileName);
+			System.out.println("fileSize============>"+fileSize);	
+		
+		
+		/*int result;
+		if(fileSize > 10000000) {
+			System.out.println("if문 작동");
+			result = 1;
+			model.addAttribute("result", result);
+			System.out.println("아 좀 제발 ㅡㅡ >>>>>>>>>>>>>>>>>>"+result);
+			return "/board/uploadResult";
+		}*/
 
 		String path = session.getServletContext().getRealPath("/upload");
 		System.out.println("path:" + path);
+		
+		String file[] = new String[2];
 
+		StringTokenizer st = new StringTokenizer(fileName, ".");
+		file[0] = st.nextToken();
+		file[1] = st.nextToken();
+		
+		FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
+		fos.write(mf.getBytes());
+		fos.close();
+		
+		session.setAttribute("fileName", fileName);
+		session.setAttribute("fileSize", fileSize);
+		
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
 		} else {
@@ -245,5 +287,16 @@ public class BoardController {
 			return "0";
 		}
 	}
+	
+	/*파일 다운로드*/
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+		public String download(Board board, int page, HttpSession session, Model model) throws Exception {
+			
+			
+			model.addAttribute("url", "/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
+			
+			model.addAttribute("msg", "다운로드 완료");
+			return "/msg";
+		}		
 
 }
