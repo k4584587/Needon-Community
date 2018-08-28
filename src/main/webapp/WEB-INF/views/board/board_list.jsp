@@ -54,7 +54,7 @@
 						<th scope="row">
 							<c:out value="${num}" /> <c:set var="num" value="${num-1}" />
 						</th>
-						<td style="text-align:left;"><a href="<c:url value="/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }" />">${list.subject}</a> [${list.comment_count}]</td>
+						<td style="text-align:left;"><a href="<c:url value="/board/view${pageMaker.uri(pageMaker.cri.page) }&no=${list.no }&category=${category }" />">${list.subject}</a> <span style="color: red;">[${list.comment_count}]</span></td>
 						<td>${list.wr_nick}</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ list.register_date }" /></td>
 						<td>${list.bo_good}</td>
