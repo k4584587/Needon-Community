@@ -60,7 +60,7 @@
             <div class="p-3" style="border: 1px solid #dee3eb;background-color: white">
                 <div class="row">
                     <div class="col-auto">
-                        <img width="110" src="http://localhost:8080/resources/img/profile_img.png">
+                        <img width="110" src="<c:url value="/resources/img/profile_img.png"/>">
                     </div>
                     <div class="col">
                         <div class="board-head_btn">
@@ -128,10 +128,10 @@
                                         <div style="float: right;margin-top: 10px;">
                                             <div class="row">
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
-                                                    <div onclick="cm_good1(${rb.no})" class="p-2" style="border: 1px solid #bbb;border-right: none;"><i class="far fa-thumbs-up"></i> <b id="cm_good" style="color: red;">${rb.cm_good} </b> </div>
+                                                    <div onclick="cm_good1(${rb.no}, ${rb.cm_good })" class="p-2" style="border: 1px solid #bbb;border-right: none;"><i class="far fa-thumbs-up"></i> <b id="cm_good" style="color: red;">${rb.cm_good} </b> </div>
                                                 </div>
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
-                                                    <div onclick="cm_bad1(${rb.no})"class="p-2" style="border: 1px solid #bbb;"><i class="far fa-thumbs-down"></i> <b id="cm_bad" style="color: red;">${rb.cm_bad}</b> </div>
+                                                    <div onclick="cm_bad1(${rb.no}, ${rb.cm_bad })"class="p-2" style="border: 1px solid #bbb;"><i class="far fa-thumbs-down"></i> <b id="cm_bad" style="color: red;">${rb.cm_bad}</b> </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -334,11 +334,9 @@
         var good_count_int = parseInt(good_count)+1;
         var bad_count_int = parseInt(bad_count)+1;
         
-        var cm_good = ${board.cm_good};
+        //var cm_good = ${board.cm_good};
         var cm_bad = ${board.cm_bad};
 
-        var cm_good_int = parseInt(cm_good)+1;
-        var cm_bad_int = parseInt(cm_bad)+1;
 
 
         function bo_good1() {
@@ -379,17 +377,20 @@
 
         }
         
-            function cm_good1(no) {
+            function cm_good1(no, good_count) {
                 console.log("좋아요 버튼 클릭함");
+                console.log("댓글 좋아요 갯수" +good_count);
+                //var cm_good_int = parseInt(cm_good);
 
                 $.ajax({
                     type: "POST",
                     url: "<c:url value="/board/cm_good" />",
                     data:{"category":"${param.category}","no":no},
+                    cache: false,
                     success: function (result) {
                         if(result == 1) {
                             console.log("추천 성공");
-                            $("#cm_good").html(cm_good_int++);
+                            $("#cm_good").html(Number(good_count)+1);
                         } else {
                             console.log("추천 실패");
                         }
@@ -398,22 +399,24 @@
 
             }
             
-                function cm_bad1(no) {
+                function cm_bad1(no, bad_count) {
                     console.log("싫어요 버튼 클릭함");
-
-                    $.ajax({
+					
+                    bad_count = document.getElementById("cm_bad"); 
+                    console.log("개수"+Number(bad_count));
+                    /* $.ajax({
                         type: "POST",
                         url: "<c:url value="/board/cm_bad" />",
                         data:{"category":"${param.category}","no":no},
                         success: function (result) {
                             if(result == 1) {
                                 console.log("싫어요 성공");
-                                $("#cm_bad").html(cm_bad_int++);
+                                $("#cm_bad").html(bad_count++);
                             } else {
                                 console.log("싫어요 실패");
                             }
                         }
-                    })
+                    }) */
 
                 }
 

@@ -9,7 +9,7 @@
 	</select> -->
 	
 	<select id="listpage" resultType="Board">
-		select *,(select count(*) comment_count from nb_board_${category} where parent = ${category}.no and cm_count = 1) comment_count from nb_board_${category} ${category}
+		select *, (select count(*) comment_count from nb_board_${category} where parent = ${category}.no and cm_count = 1) comment_count from nb_board_${category} ${category}
 		<where>
 		
 			<if test="keyword != null and search!='subcon'">
@@ -19,7 +19,7 @@
 				subject like CONCAT ('%', #{keyword}, '%') or
 				content like CONCAT ('%', #{keyword}, '%')
 			</if>
-			cm_count = 0	
+			and subject is not null
 		</where> 
 		order by no desc, register_date desc
 		limit #{pageStart}, #{perPageNum};
@@ -39,7 +39,7 @@
 				subject like CONCAT ('%', #{keyword}, '%') or
 				content like CONCAT ('%', #{keyword}, '%')
 			</if>
-			cm_count = 0
+			and subject is not null
 		</where>
 	</select>
 	

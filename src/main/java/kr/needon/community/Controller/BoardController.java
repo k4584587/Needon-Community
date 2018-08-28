@@ -1,6 +1,9 @@
 package kr.needon.community.Controller;
 
+import java.io.FileOutputStream;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import kr.needon.community.Model.*;
 import kr.needon.community.Module.Board.BoardDAOImpl;
@@ -9,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
@@ -78,7 +82,12 @@ public class BoardController {
 
 	/* 게시판 글쓰기 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page, Model model)
+	public String board_write_post(@ModelAttribute Board board,
+											HttpServletRequest request, 
+											int page, 
+											Model model,
+											@RequestParam("img") MultipartFile mf,
+											HttpSession session)
 			throws Exception {
 
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
@@ -86,7 +95,15 @@ public class BoardController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
+		
+		String fileName = mf.getOriginalFilename();
+		int fileSize = (int) mf.getSize();
+		// mf.transferTo(new File("/gov/"+fileName));
+		System.out.println("filename==========>"+fileName);
+		System.out.println("fileSize============>"+fileSize);
 
+		String path = session.getServletContext().getRealPath("/upload");
+		System.out.println("path:" + path);
 
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");

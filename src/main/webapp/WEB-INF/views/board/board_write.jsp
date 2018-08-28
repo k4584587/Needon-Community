@@ -19,7 +19,7 @@
 	<div style="margin-top: 10px;" class="alert alert-secondary" role="alert">
 		<b>공지사항 글쓰기</b>
 	</div>
-	<form id="board-write_form" action="<c:url value="/board/write" />" method="post">
+	<form id="board-write_form" action="<c:url value="/board/write" />" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="wr_nick" value="${user.nick }" />
 		<input type="hidden" name="wr_password" value="${user.password }" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -47,6 +47,12 @@
 		<div style="margin-top: 10px; background-color: white;">
 			<textarea name="content" id="content" rows="10" style="background-color: white; width: 100%; height: 412px;"></textarea>
 		</div>
+		<table class="table table-bordered">
+				<tr>
+					<th>파일</th>
+					<td><input type="file" name="img"></td>
+				</tr>
+		</table>
 		<div style="margin-top: 10px;" align="center">
 			<button id="btn-board_write" class="btn btn-success">작성하기</button> <button class="btn btn-warning">취소</button>
 		</div>
