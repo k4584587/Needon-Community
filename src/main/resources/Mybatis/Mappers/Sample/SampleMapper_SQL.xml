@@ -85,4 +85,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(#{main_category_id}, #{category_name}, #{category_link}, #{new_tab_count},#{sub_count},0,0);
 </insert>
 
+	<select id="getSearch" resultType="Board">
+		SELECT * FROM
+		<foreach collection="table_list" item="type"  open="(" close=")" separator="UNION">
+			SELECT * FROM nb_board_${type}
+
+		</foreach>
+		AS t where t.subject like CONCAT ('%', #{keyword}, '%')
+	<!--SELECT * FROM
+		(
+		<foreach collection="table_list" item="type"  open="(" close=")" separator=",">
+			SELECT * FROM nb_board_${type}
+		</foreach>
+		)
+		AS t where t.subject like CONCAT ('%', 's', '%')-->
+	</select>
+
 </mapper>

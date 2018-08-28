@@ -239,4 +239,22 @@
         </div>
         <!-- 최신글 끝 -->
     </div>
+    <div class="lat_photo">
+        <h2 class="lat_photo_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
+        <ul class="lat_photo_ul">
+            <c:choose>
+                <c:when test="${fn:length(new_notice) != 0 }">
+                    <c:forEach items="${new_notice}" var="notice" varStatus="status">
+                        <li class="lat_photo_li">
+                            <a><img src="https://via.placeholder.com/128"> </a>
+                        </li>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <li>작성된 글이 없습니다.</li>
+                </c:otherwise>
+            </c:choose>
+            <a href="<c:url value="/board/notice/list?page=1" />" class="lt_more"><i class="fas fa-plus"></i></a>
+        </ul>
+    </div>
 </div>
