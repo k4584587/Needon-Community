@@ -77,7 +77,7 @@ public class SampleTest {
 
         Board board = new Board();
 
-        board.setKeyword("test");
+        board.setKeyword("t");
         dao.getSearch(board);
 
     }
