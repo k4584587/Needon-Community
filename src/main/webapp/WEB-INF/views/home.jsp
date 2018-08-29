@@ -46,7 +46,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${notice.no }&category=notice'/>"> ${notice.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${notice.comment_count}]
+                                    </c:choose> <span style="color: red;">[${notice.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
@@ -80,7 +80,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${freeboard.comment_count}]
+                                    </c:choose> <span style="color: red;">[${freeboard.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
@@ -116,7 +116,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> ${notice.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${notice.comment_count}]
+                                    </c:choose> <span style="color: red;">[${notice.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
@@ -150,7 +150,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${freeboard.comment_count}]
+                                    </c:choose> <span style="color: red;">[${freeboard.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
@@ -186,7 +186,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${notice.no }&category=freeboard'/>"> ${notice.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${notice.comment_count}]
+                                    </c:choose> <span style="color: red;">[${notice.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${notice.register_date}"/>
@@ -220,7 +220,7 @@
                                         <c:otherwise>
                                             <a href="<c:url value='/board/view?no=${freeboard.no }&category=freeboard'/>"> ${freeboard.subject}</a>
                                         </c:otherwise>
-                                    </c:choose> [${freeboard.comment_count}]
+                                    </c:choose> <span style="color: red;">[${freeboard.comment_count}]</span>
                                     <span style="color: red;">New</span>
                                     <span style="float: right;">
                             <fmt:formatDate pattern="MM-dd" value="${freeboard.register_date}"/>
