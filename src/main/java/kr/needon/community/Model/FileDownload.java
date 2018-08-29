@@ -11,6 +11,6 @@ public class FileDownload {
 	private String bo_subject;
 	private String bo_encode;
 	private int bo_download;
-	private byte[] bo_filesize;
+	private int bo_filesize;
 	private Timestamp bo_datetime;
 }

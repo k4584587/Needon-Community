@@ -2,6 +2,8 @@ package kr.needon.community.Module.Board;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -179,6 +181,19 @@ public class BoardServiceImpl implements BoardService {
 			return false;
 		}
 
+		return true;
+	}
+	
+	/*파일 업로드*/
+	@Override
+	public boolean file_upload(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.file_upload(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 

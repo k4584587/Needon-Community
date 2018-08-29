@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.PageMaker;
 import kr.needon.community.Module.Board.BoardDAOImpl;
@@ -50,6 +52,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardDAOImpl dao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	/* 게시판 목록 */
 	@RequestMapping("/{category}/list")
@@ -125,7 +130,8 @@ public class BoardController {
 											int page, 
 											Model model,
 											@RequestParam("file_name") MultipartFile mf,
-											HttpSession session)
+											HttpSession session,
+											FileDownload file)
 			throws Exception {
 
 		model.addAttribute("board_page",1);
@@ -137,7 +143,12 @@ public class BoardController {
 		board.setWr_password(member.getPassword());
 		
 		String fileName = mf.getOriginalFilename();
+		file.setBo_subject(fileName);
+		file.setBo_no(board.getNo());
+		file.setBo_table(board.getCategory());
+		file.setBo_encode(passwordEncoder.encode(fileName));
 		int fileSize = (int) mf.getSize();
+		file.setBo_filesize(fileSize);
 		// mf.transferTo(new File("/gov/"+fileName));
 	
 			System.out.println("filename==========>"+fileName);
@@ -156,12 +167,12 @@ public class BoardController {
 		String path = session.getServletContext().getRealPath("/upload");
 		System.out.println("path:" + path);
 		
-		String file[] = new String[2];
+		String file1[] = new String[2];
 		
 		try {			
 			StringTokenizer st = new StringTokenizer(fileName, ".");
-			file[0] = st.nextToken();
-			file[1] = st.nextToken();
+			file1[0] = st.nextToken();
+			file1[1] = st.nextToken();
 		
 		FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
 		fos.write(mf.getBytes());
@@ -176,6 +187,7 @@ public class BoardController {
 		board.setFilename(fileName);
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
+			service.file_upload(file);
 		} else {
 			model.addAttribute("msg", "등록이 실패했습니다.");
 		}
@@ -361,6 +373,13 @@ public class BoardController {
 
 		model.addAttribute("msg", "다운로드 완료");
 		return "/msg";
+	}
+	
+	/*파일 업로드*/
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String Upload(FileDownload file) {
+		
+		return "s";
 	}
 
 }

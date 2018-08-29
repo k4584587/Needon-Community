@@ -5,6 +5,7 @@ import java.util.List;
 import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 인터페이스
@@ -14,6 +15,8 @@ import kr.needon.community.Model.Criteria;
 public interface BoardDAO {
 	
 	public void insert (Board board)throws Exception;
+	
+	public void file_upload(FileDownload file)throws Exception;
 	
 	//public List<Board> list(Board board)throws Exception;
 	

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 
 //=====================================
 //클래스 설명 : 게시판 Service 인터페이스
@@ -21,6 +22,8 @@ public interface BoardService {
 	public List<Board> replyList(Board board)throws Exception;
 	
 	public boolean insert(HttpServletRequest request, Board board)throws Exception;
+	
+	public boolean file_upload(FileDownload file)throws Exception;
 	
 	public Board view(Board board)throws Exception;
 	

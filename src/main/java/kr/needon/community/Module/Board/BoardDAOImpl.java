@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 클래스
@@ -118,6 +119,13 @@ public class BoardDAOImpl implements BoardDAO{
 	public void comment_vote(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		session.update(namespace+".comment_vote", board);
+	}
+	
+	/*파일 업로드*/
+	@Override
+	public void file_upload(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".file_upload", file);
 	}
 
 }
