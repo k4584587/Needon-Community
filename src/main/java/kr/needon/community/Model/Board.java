@@ -18,7 +18,7 @@ public class Board {
 	private String content;
 	private String wr_nick;
 	private String wr_password;
-	private byte[] file;
+	private String filename;
 	private String sub_category;
 	private String cm_nick;
 	private Timestamp cm_regdate;

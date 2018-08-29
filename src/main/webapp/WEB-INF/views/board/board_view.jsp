@@ -102,7 +102,7 @@
             <hr>
             <div class="row">
                 <div class="col">
-                    <button onclick="location.href='<c:url value="/board/write_from?page=1&category=${param.category}" />'" class="btn btn-success">글쓰기</button> <button class="btn btn-success">글 수정</button> <button onclick="location.href='<c:url  value="/board/delete_form?page=${param.page }&no=${board.no}&category=${param.category }" />'"  class="btn btn-danger">글 삭제</button>
+                    <button onclick="location.href='<c:url value="/board/write_from?page=1&category=${param.category}" />'" class="btn btn-success">글쓰기</button> <button class="btn btn-success">글 수정</button> <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
                     <div style="float: right">
                         <button onclick="location.href='<c:url value="/board/${param.category}/list" />'" class="btn btn-success">목록으로</button>
                     </div>
@@ -421,6 +421,26 @@
                         }
                     }) */
 
+                }
+                function delete1(no){
+                	if(confirm("정말로 삭제하시겠습니까 ?")){
+                	$.ajax({
+                        type: "POST",
+                        url: "<c:url value="/board/delete" />",
+                        data:{"category":"${param.category}","no":no,"page":"${param.page}"},
+                        cache: false,
+                        success: function (result) {
+                            if(result == 1) {
+                                console.log("삭제 성공");
+                                alert("삭제 되었습니다.");
+                                location.href = "<c:url value="/board/${param.category}/list?page=${param.page}" />";
+                            } else {
+                                console.log("삭제 실패");
+                            }
+                        }
+                    })
+                		
+                	}
                 }
 
 	</script>

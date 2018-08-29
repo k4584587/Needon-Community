@@ -50,7 +50,7 @@
 		<table class="table table-bordered">
 				<tr>
 					<th>파일</th>
-					<td><input type="file" name="img"></td>
+					<td><input type="file" name="file_name"></td>
 				</tr>
 		</table>
 		<div style="margin-top: 10px;" align="center">

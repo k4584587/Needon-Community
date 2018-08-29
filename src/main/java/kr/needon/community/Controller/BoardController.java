@@ -117,7 +117,7 @@ public class BoardController {
 											HttpServletRequest request, 
 											int page, 
 											Model model,
-											@RequestParam("img") MultipartFile mf,
+											@RequestParam("file_name") MultipartFile mf,
 											HttpSession session)
 			throws Exception {
 
@@ -164,6 +164,7 @@ public class BoardController {
 		session.setAttribute("fileName", fileName);
 		session.setAttribute("fileSize", fileSize);
 		
+		board.setFilename(fileName);
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
 		} else {
@@ -184,17 +185,15 @@ public class BoardController {
 
 	/* 게시판 삭제 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String board_delete_post(Board board, int page, Model model) throws Exception {
+	public @ResponseBody String board_delete_post(Board board, int page, Model model) throws Exception {
 
 		log.info("delete.....");
-		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
 
 		if (service.delete(board)) {
-			model.addAttribute("msg", "글이 삭제 되었습니다.");
+			return "1";
 		} else {
-			model.addAttribute("msg", "삭제를 실패했습니다.");
+			return "2";
 		}
-		return "/msg";
 	}
 
 	/* 게시판 수정폼 */
