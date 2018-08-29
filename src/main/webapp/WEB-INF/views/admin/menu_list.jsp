@@ -35,16 +35,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
-${sub_list}
-<br><br>
-${menu_list}
-<br><br>
-<sql:query dataSource="${datasource}" var="menu_count">
-    SELECT count(*) count FROM nb_menu_list
-</sql:query>
-${menu_count}
-<br><br>
 <table id="category">
     <thead>
     <th>메뉴명</th>

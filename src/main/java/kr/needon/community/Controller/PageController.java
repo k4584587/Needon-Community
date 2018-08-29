@@ -4,6 +4,7 @@ import kr.needon.community.Model.Board;
 import kr.needon.community.Module.Page.PageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,6 +37,12 @@ public class PageController {
 	public String AccessDenied() { // 권한이 없을시 보여줄 페이지
 
 		return "page/accessDenied";
+	}
+
+	@GetMapping("/category/1")
+	public String BoardInfoPage() {
+
+		return "";
 	}
 	
 	

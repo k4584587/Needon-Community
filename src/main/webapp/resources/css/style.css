@@ -177,6 +177,10 @@ tr {
     color: #f48fb1;
 }
 
+.dropdown-item {
+    font-size: 13px!important;
+}
+
 
 /*최신글 스킨*/
 

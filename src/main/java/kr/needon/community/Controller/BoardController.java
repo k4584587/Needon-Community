@@ -82,7 +82,7 @@ public class BoardController {
 
 	/* 게시판 조회 */
 	@RequestMapping("/view")
-	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model, HttpSession session) throws Exception {
+	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model, HttpSession session,BoTable boTable) throws Exception {
 
 		model.addAttribute("board_page",1);
 
@@ -96,7 +96,9 @@ public class BoardController {
 			fileSize = 0;
 		}
 
-		
+
+		boTable.setBo_table(board.getCategory());
+		model.addAttribute("info",dao.getBoardInfo(boTable));
 		model.addAttribute("fileName", fileName);
 		model.addAttribute("fileSize", fileSize);
 		
@@ -113,7 +115,7 @@ public class BoardController {
 	@RequestMapping("/write_from")
 	public String board_write(Model model, Board board) throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		return "board_write";
 	}
@@ -128,7 +130,7 @@ public class BoardController {
 											HttpSession session)
 			throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
 
@@ -186,7 +188,7 @@ public class BoardController {
 	@RequestMapping(value = "/delete_form", method = RequestMethod.GET)
 	public String board_delete(int no, Model model) throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		log.info("delete_form.....");
 		model.addAttribute("no", no);
@@ -198,7 +200,7 @@ public class BoardController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public @ResponseBody String board_delete_post(Board board, int page, Model model) throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		log.info("delete.....");
 
@@ -213,7 +215,7 @@ public class BoardController {
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
 	public String board_modify(Board board, Model model) throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
@@ -225,7 +227,7 @@ public class BoardController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String board_modify_post(HttpServletRequest request, Board board, Model model, int page) throws Exception {
 
-		model.addAttribute("board_page",1);
+		model.addAttribute("board_page",0);
 
 		model.addAttribute("board", board);
 		model.addAttribute("url", "/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
