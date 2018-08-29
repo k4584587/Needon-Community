@@ -20,6 +20,7 @@ public class BoTable {
     private int write_p;
     private int cm_p;
     private int down_p;
+    private int category_no;
     private Timestamp register_date;
 
 }

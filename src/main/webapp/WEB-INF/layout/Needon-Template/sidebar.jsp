@@ -97,6 +97,26 @@
         </div>
         <!-- 로그인 됨 끝 } -->
     </sec:authorize>
+
+    <c:if test="${board_page eq 1}">
+        <c:if test="${info.category_no != 0}">
+            <sql:query dataSource="${datasource}" var="sidebar_category">
+                SELECT
+                *
+                from
+                nb_menu_list
+                where
+                main_category_id = ${info.category_no}
+            </sql:query>
+            <div class="list-group" style="margin-top: 10px;">
+                <c:forEach items="${sidebar_category.rows}" var="sidebar_menu">
+                    <a href="<c:url value="${sidebar_menu.category_link}" />" class="list-group-item">${sidebar_menu.category_name}</a>
+                </c:forEach>
+            </div>
+        </c:if>
+    </c:if>
+
+
     <!-- 뉴스 -->
     <div class="lat" style="margin-top: 10px;">
         <h2 class="lat_title">뉴스</h2>
@@ -104,18 +124,8 @@
         <ul id="news_item"></ul>
     </div>
 
-    <div class="list-group">
-        <a href="#" class="list-group-item active">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-        <a href="#" class="list-group-item">Link</a>
-    </div>
+
+
 
     <!-- 반응형 광고(1) -->
     <ins class="adsbygoogle"
