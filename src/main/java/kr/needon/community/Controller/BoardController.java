@@ -148,14 +148,18 @@ public class BoardController {
 		System.out.println("path:" + path);
 		
 		String file[] = new String[2];
-
-		StringTokenizer st = new StringTokenizer(fileName, ".");
-		file[0] = st.nextToken();
-		file[1] = st.nextToken();
+		
+		try {			
+			StringTokenizer st = new StringTokenizer(fileName, ".");
+			file[0] = st.nextToken();
+			file[1] = st.nextToken();
 		
 		FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
 		fos.write(mf.getBytes());
 		fos.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		session.setAttribute("fileName", fileName);
 		session.setAttribute("fileSize", fileSize);
