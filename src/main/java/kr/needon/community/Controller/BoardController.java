@@ -7,8 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,6 +56,9 @@ public class BoardController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 
 	/* 게시판 목록 */
 	@RequestMapping("/{category}/list")
@@ -121,6 +124,7 @@ public class BoardController {
 		
 		board.setCategory(board.getCategory());
 		model.addAttribute("last", service.last_no(board));
+		System.out.println("Path==============>위치=========>>"+uploadPath);
 
 		return "board_write";
 	}
@@ -148,29 +152,18 @@ public class BoardController {
 		file.setBo_no(board.getNo());
 		file.setBo_subject(fileName);
 		file.setBo_table(board.getCategory());
-		file.setBo_encode(passwordEncoder.encode(fileName));
+		String saveName = passwordEncoder.encode(fileName)+"_"+fileName;
+		file.setBo_encode(saveName);
+		
 		int fileSize = (int) mf.getSize();
 		file.setBo_filesize(fileSize);
 		// mf.transferTo(new File("/gov/"+fileName));
 	
-			System.out.println("filename==========>"+fileName);
+			System.out.println("filename==========>"+saveName);
 			System.out.println("fileSize============>"+fileSize);	
 		
-		
-		/*int result;
-		if(fileSize > 10000000) {
-			System.out.println("if문 작동");
-			result = 1;
-			model.addAttribute("result", result);
-			System.out.println("아 좀 제발 ㅡㅡ >>>>>>>>>>>>>>>>>>"+result);
-			return "/board/uploadResult";
-		}*/
-
-		String path = session.getServletContext().getRealPath("/upload");
-		System.out.println("path:" + path);
-		
 		try {			
-		FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
+		FileOutputStream fos = new FileOutputStream(uploadPath + "/" + saveName);
 		fos.write(mf.getBytes());
 		fos.close();
 		}catch(Exception e) {
