@@ -121,6 +121,9 @@ public class BoardController {
 	public String board_write(Model model, Board board) throws Exception {
 
 		model.addAttribute("board_page",0);
+		
+		board.setCategory(board.getCategory());
+		model.addAttribute("last", service.last_no(board));
 
 		return "board_write";
 	}
@@ -187,9 +190,9 @@ public class BoardController {
 		session.setAttribute("fileSize", fileSize);
 		
 		board.setFilename(fileName);
-		if (service.insert(request, board)) {
+
+		if (service.insert(request, board) && service.file_upload(file)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
-			service.file_upload(file);
 		} else {
 			model.addAttribute("msg", "등록이 실패했습니다.");
 		}

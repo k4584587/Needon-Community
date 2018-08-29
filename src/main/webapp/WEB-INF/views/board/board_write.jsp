@@ -9,7 +9,6 @@
 	src='<c:url value="/resources/smarteditor/js/service/HuskyEZCreator.js" />'
 	charset="utf-8"></script>
 
-
 <div style="margin-left: 10px;">
 	<header style="background-color: white;border-bottom: 1px solid #b1b1b1;">
 		<div class="p-3 board_head">
@@ -25,12 +24,13 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="category" value="${param.category }" />
 		<input type="hidden" name="page" value="${param.page}" />
+		<input type="hidden" name="no" value="${last.no}" />
 		<div style="margin-top: 10px;margin-left: 100px;">
 			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-auto">
 					<b>옵션</b>
 				</div>
-				<div class="col-auto">
+				<div class="col-auto">   
 					<input type="checkbox"> 공지
 					<input type="checkbox"> 비밀글
 				</div>

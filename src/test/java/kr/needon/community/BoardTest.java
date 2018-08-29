@@ -2,6 +2,7 @@ package kr.needon.community;
 
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 import kr.needon.community.Module.Board.BoardDAOImpl;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import lombok.extern.java.Log;
@@ -56,6 +57,30 @@ public class BoardTest {
 
 		Boolean result = service.insert(request,board);
 		System.out.println("결과 ==> " + result);
+	}
+	
+	@Test
+	public void file() throws Exception{
+		FileDownload file = new FileDownload();
+		
+		file.setBo_subject("subject");
+		file.setBo_table("free");
+		file.setBo_download(0);
+		file.setBo_filesize(1);
+		file.setBo_no(1);
+		file.setBo_encode("sfaasvasv");
+		
+		Boolean result = service.file_upload(file);
+		System.out.println("결과==>"+result);
+	}
+	@Test
+	public void last_no()throws Exception{
+		Board board = new Board();
+		board.setNo(10);
+		board.setCategory("freeboard");
+		
+		service.last_no(board);
+		System.out.println("결과==>"+board.getNo());
 	}
 	
 	

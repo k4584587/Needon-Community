@@ -192,9 +192,16 @@ public class BoardServiceImpl implements BoardService {
 			dao.file_upload(file);
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("error ==> " + e);
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Board last_no(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.last_no(board);
 	}
 
 }

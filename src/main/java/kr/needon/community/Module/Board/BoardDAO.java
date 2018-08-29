@@ -18,6 +18,8 @@ public interface BoardDAO {
 	
 	public void file_upload(FileDownload file)throws Exception;
 	
+	public Board last_no(Board board)throws Exception;
+	
 	//public List<Board> list(Board board)throws Exception;
 	
 	public List<Board> listPage(Criteria cri)throws Exception;

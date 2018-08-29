@@ -48,9 +48,18 @@
 		where no=#{no};
 	</update>
 	
+	<select id="last_no" resultType="Board">
+		SELECT  (no+1) as no FROM nb_board_${category} ORDER BY no DESC LIMIT 1;
+	</select>
+	
 	<insert id="insert">
 		INSERT INTO nb_board_${category} (subject, content, filename, ip,wr_nick,wr_password)
 		VALUES (#{subject}, #{content}, #{filename}, #{ip}, #{wr_nick},#{wr_password});
+	</insert>
+	
+	<insert id="file_upload">
+		insert into nb_board_file (bo_table, bo_no, bo_subject, bo_encode, bo_download, bo_filesize) values 
+		(#{bo_table}, #{bo_no}, #{bo_subject}, #{bo_encode}, #{bo_download}, #{bo_filesize});	
 	</insert>
 	
 	<delete id="delete">
@@ -135,9 +144,5 @@
 			bo_table = #{bo_table}
 	</select>
 	
-	<insert id="file_upload">
-		insert into nb_board_file values 
-		(#{bo_table}, #{bo_no}, #{bo_subject}, #{bo_encode}, #{bo_download}, #{bo_filesize});
-	</insert>
 
 </mapper>

@@ -21,6 +21,8 @@ public interface BoardService {
 	
 	public List<Board> replyList(Board board)throws Exception;
 	
+	public Board last_no(Board board)throws Exception;
+	
 	public boolean insert(HttpServletRequest request, Board board)throws Exception;
 	
 	public boolean file_upload(FileDownload file)throws Exception;

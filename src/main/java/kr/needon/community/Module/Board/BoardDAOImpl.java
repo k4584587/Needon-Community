@@ -127,5 +127,12 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		session.insert(namespace+".file_upload", file);
 	}
+	
+	/*마지막 번호 구하기*/
+	@Override
+	public Board last_no(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".last_no", board);
+	}
 
 }

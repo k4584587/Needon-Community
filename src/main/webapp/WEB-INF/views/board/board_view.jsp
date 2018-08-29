@@ -98,11 +98,11 @@
             </div>
             <div class="p-2 board-share_btn" style="border: 1px solid #dee3eb;border-top-color: white;background-color: white;">
                 <span style="margin-right: 5px;"><i style="font-size: 35px;color: #006dbf;" class="fab fa-twitter"></i> </span><span><i style="font-size: 35px;color: #3b5998;" class="fab fa-facebook"></i></span>
-            </div>
+            </div>     
             <hr>
             <div class="row">
                 <div class="col">
-                    <button onclick="location.href='<c:url value="/board/write_from?page=1&category=${param.category}" />'" class="btn btn-success">글쓰기</button> <button class="btn btn-success">글 수정</button> <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
+                    <button onclick="location.href='<c:url value="/board/write_from?page=${param.page }&category=${param.category}" />'" class="btn btn-success">글쓰기</button> <button class="btn btn-success">글 수정</button> <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
                     <div style="float: right">
                         <button onclick="location.href='<c:url value="/board/${param.category}/list" />'" class="btn btn-success">목록으로</button>
                     </div>
