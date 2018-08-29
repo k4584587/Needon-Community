@@ -6,7 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.StringTokenizer;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,25 +88,21 @@ public class BoardController {
 
 	/* 게시판 조회 */
 	@RequestMapping("/view")
-	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model, HttpSession session,BoTable boTable) throws Exception {
+	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model,
+			HttpSession session, BoTable boTable, FileDownload file) throws Exception {
 
 		model.addAttribute("board_page",1);
-
-		int fileSize;
-		String fileName;
-		try{
-			  fileName = (String)session.getAttribute("fileName");
-			 fileSize = (int)session.getAttribute("fileSize");
-		} catch (NullPointerException e) {
-			fileName = null;
-			fileSize = 0;
-		}
-
+		
+		file.setCategory(board.getCategory());
+		file.setBo_no(board.getNo());
+		
+		// 쿼리에서 불러온 List
+		List<FileDownload> file_list = service.file_list(file);
+		 
+		model.addAttribute("test", file_list);
 
 		boTable.setBo_table(board.getCategory());
 		model.addAttribute("info",dao.getBoardInfo(boTable));
-		model.addAttribute("fileName", fileName);
-		model.addAttribute("fileSize", fileSize);
 		
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
@@ -148,8 +145,8 @@ public class BoardController {
 		board.setWr_password(member.getPassword());
 		
 		String fileName = mf.getOriginalFilename();
-		file.setBo_subject(fileName);
 		file.setBo_no(board.getNo());
+		file.setBo_subject(fileName);
 		file.setBo_table(board.getCategory());
 		file.setBo_encode(passwordEncoder.encode(fileName));
 		int fileSize = (int) mf.getSize();
@@ -172,13 +169,7 @@ public class BoardController {
 		String path = session.getServletContext().getRealPath("/upload");
 		System.out.println("path:" + path);
 		
-		String file1[] = new String[2];
-		
 		try {			
-			StringTokenizer st = new StringTokenizer(fileName, ".");
-			file1[0] = st.nextToken();
-			file1[1] = st.nextToken();
-		
 		FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
 		fos.write(mf.getBytes());
 		fos.close();
@@ -186,11 +177,8 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		session.setAttribute("fileName", fileName);
-		session.setAttribute("fileSize", fileSize);
+		//board.setFilename(fileName);
 		
-		board.setFilename(fileName);
-
 		if (service.insert(request, board) && service.file_upload(file)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
 		} else {

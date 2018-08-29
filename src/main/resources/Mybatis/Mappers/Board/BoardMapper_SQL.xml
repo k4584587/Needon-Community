@@ -52,9 +52,13 @@
 		SELECT  (no+1) as no FROM nb_board_${category} ORDER BY no DESC LIMIT 1;
 	</select>
 	
+	<select id="file_list" resultType="FileDownload">
+		select * from nb_board_file where bo_table = #{category} and bo_no = #{bo_no};
+	</select>
+	
 	<insert id="insert">
-		INSERT INTO nb_board_${category} (subject, content, filename, ip,wr_nick,wr_password)
-		VALUES (#{subject}, #{content}, #{filename}, #{ip}, #{wr_nick},#{wr_password});
+		INSERT INTO nb_board_${category} (subject, content, ip, wr_nick, wr_password)
+		VALUES (#{subject}, #{content}, #{ip}, #{wr_nick}, #{wr_password});
 	</insert>
 	
 	<insert id="file_upload">

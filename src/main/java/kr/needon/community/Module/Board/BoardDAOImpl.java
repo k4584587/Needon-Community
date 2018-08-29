@@ -134,5 +134,12 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".last_no", board);
 	}
+	
+	/*파일 리스트 구하기*/
+	@Override
+	public List<FileDownload> file_list(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".file_list", file);
+	}
 
 }

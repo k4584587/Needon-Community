@@ -13,4 +13,5 @@ public class FileDownload {
 	private int bo_download;
 	private int bo_filesize;
 	private Timestamp bo_datetime;
+	private String category;
 }

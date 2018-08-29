@@ -83,6 +83,15 @@ public class BoardTest {
 		System.out.println("결과==>"+board.getNo());
 	}
 	
+	@Test
+	public void file_list()throws Exception{
+		FileDownload file = new FileDownload();
+		file.setBo_no(41);
+		file.setCategory("freeboard");
+		List<FileDownload> file_list = service.file_list(file);
+		System.out.println("결과==>"+file_list);
+	}
+	
 	
 	
 }

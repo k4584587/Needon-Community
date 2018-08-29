@@ -68,9 +68,11 @@
                             <button class="btn btn-primary">작성글 보기</button> <button class="btn btn-success">쪽지 보내기</button> <button class="btn btn-success">블로그 보기</button>
                         </div>
                         <div style="margin-top: 10px;">
-                            <div style="margin-bottom: 10px;"><span>출석일수 : <b>000 일</b></span> | <span><b>Lv.100</b></span> 
-                            <a href="<c:url value="/board/download?fname=${fileName }&page=${param.page}&no=${param.no }&category=${param.category } "/>" style="float: right;">${fileName }</a>
-                            <span style="float: none;"><c:if test="${fileSize != 0 }">파일크기 : ${fileSize }</c:if></span></div>
+                            <div style="margin-bottom: 10px;"><span>출석일수 : <b>000 일</b></span> | <span><b>Lv.100</b></span>
+                            <c:forEach items="${test }" var="a">														 
+                            <a href="<c:url value="/board/download?fname=${a.bo_subject }&page=${param.page}&no=${param.no }&category=${param.category } "/>" style="float: right;">${a.bo_subject }</a>
+                            <span style="float: none;"><c:if test="${a.bo_filesize != 0 }">파일크기 : ${a.bo_filesize }</c:if></span></div>
+                            </c:forEach>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Exp. 75 %</div>
                             </div>

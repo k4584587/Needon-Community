@@ -21,6 +21,7 @@ public interface BoardDAO {
 	public Board last_no(Board board)throws Exception;
 	
 	//public List<Board> list(Board board)throws Exception;
+	public List<FileDownload> file_list(FileDownload file)throws Exception;
 	
 	public List<Board> listPage(Criteria cri)throws Exception;
 	

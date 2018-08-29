@@ -19,6 +19,8 @@ public interface BoardService {
 	
 	public List<Board> listpage(Criteria cri)throws Exception;
 	
+	public List<FileDownload> file_list(FileDownload file)throws Exception;
+	
 	public List<Board> replyList(Board board)throws Exception;
 	
 	public Board last_no(Board board)throws Exception;

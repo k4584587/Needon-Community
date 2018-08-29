@@ -197,11 +197,19 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
-
+	
+	/*마지막 번호 구하기*/
 	@Override
 	public Board last_no(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.last_no(board);
+	}
+	
+	/*파일 리스트 구하기*/
+	@Override
+	public List<FileDownload> file_list(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.file_list(file);
 	}
 
 }
