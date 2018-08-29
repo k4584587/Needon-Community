@@ -1,6 +1,11 @@
 package kr.needon.community.Controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -295,15 +301,46 @@ public class BoardController {
 		}
 	}
 	
-	/*파일 다운로드*/
+	/* 파일 다운로드 */
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-		public String download(Board board, int page, HttpSession session, Model model) throws Exception {
-			
-			
-			model.addAttribute("url", "/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
-			
-			model.addAttribute("msg", "다운로드 완료");
-			return "/msg";
-		}		
+	public String download(Board board, int page,
+			HttpServletRequest request, Model model, HttpServletResponse response) throws Exception {
+
+		String fname = request.getParameter("fname");
+		System.out.println("fname = " + fname);
+		
+		String DownloadPath = request.getRealPath("upload");
+		String path = DownloadPath + "\\" + fname;
+		System.out.println("path=" + path);
+		
+		File file = new File(path);
+		String downName = file.getName(); //다운로드 받을 파일명을 절대경로로  구해옴
+
+		// 이 부분이 한글 파일명이 깨지는 것을 방지해 줍니다
+		downName = new String(downName.getBytes("utf-8"), "iso-8859-1");
+
+		// octet-stream은 8비트로 된 일련의 데이터를 뜻합니다. 지정되지 않은 파일 형식을 의미합니다. 
+		// response.setHeader("Content-Type", "application/octet-stream");
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + downName + "\"");
+
+		FileInputStream in = null;
+		OutputStream out = null;
+		try {
+			in = new FileInputStream(file);
+			out = response.getOutputStream();
+			FileCopyUtils.copy(in, out);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("url",
+				"/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
+
+		model.addAttribute("msg", "다운로드 완료");
+		return "/msg";
+	}
 
 }
