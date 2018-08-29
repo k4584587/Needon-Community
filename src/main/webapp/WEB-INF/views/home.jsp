@@ -240,13 +240,21 @@
         <!-- 최신글 끝 -->
     </div>
     <div class="lat_photo">
-        <h2 class="lat_photo_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
-        <ul class="lat_photo_ul">
+        <h2 class="lat_title"><a href="<c:url value="/board/notice/list?page=1" />">공지사항</a></h2>
+        <ul>
             <c:choose>
                 <c:when test="${fn:length(new_notice) != 0 }">
                     <c:forEach items="${new_notice}" var="notice" varStatus="status">
-                        <li class="lat_photo_li">
-                            <a><img src="https://via.placeholder.com/128"> </a>
+                        <li>
+                            <c:choose>
+                                <c:when test="${fn:length(notice.subject) > 11 }">
+                                    <a href="<c:url value="/board/view?no=${notice.no }&category=notice" />"> <c:out value="${fn:substring(notice.subject,0,10) }"></c:out>....</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="#"><img src="https://via.placeholder.com/128"></a>
+                                </c:otherwise>
+                            </c:choose>
+
                         </li>
                     </c:forEach>
                 </c:when>
