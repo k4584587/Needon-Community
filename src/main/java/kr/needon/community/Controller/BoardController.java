@@ -75,9 +75,16 @@ public class BoardController {
 	/* 게시판 조회 */
 	@RequestMapping("/view")
 	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model, HttpSession session) throws Exception {
+		int fileSize;
+		String fileName;
+		try{
+			  fileName = (String)session.getAttribute("fileName");
+			 fileSize = (int)session.getAttribute("fileSize");
+		} catch (NullPointerException e) {
+			fileName = null;
+			fileSize = 0;
+		}
 
-		String fileName = (String)session.getAttribute("fileName");
-		int fileSize = (int)session.getAttribute("fileSize");
 		
 		model.addAttribute("fileName", fileName);
 		model.addAttribute("fileSize", fileSize);
