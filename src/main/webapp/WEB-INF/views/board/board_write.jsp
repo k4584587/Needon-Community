@@ -51,8 +51,8 @@
 			<textarea name="content" id="content" rows="10"
 				style="background-color: white; width: 100%; height: 412px;"></textarea>
 		</div>
-		<button type="button" id="fedit" class="btn btn-danger"
-			style="margin: 10px 0px;">파일 추가</button>
+		<button type="button" id="fedit" class="btn btn-danger" style="margin: 10px 0px;">파일 추가</button>
+		<button type="button" id="fdelete" class="btn btn-secondary" style="margin-left: 10px">파일 삭제</button>	
 		<table class="table table-bordered" id="flist">
 			<tr>
 				<th>파일</th>
@@ -100,14 +100,23 @@
 </script>
 <script>
 	$(function() {
-		var num = 5;
-		$("#fedit").click(function() {
-				num--;
+		var num = 4;
+		$("#fedit").click(function() {				
+				console.log("추가"+num);
 				if (num > 0) {
+					num--;
 					$("#flist:last").append("<tbody><tr><th>파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
 				}else if (num == 0) {
 					$("#end").html("최대 5개까지만 등록할 수 있습니다.");
 					}
+			})
+		$("#fdelete").click(function() {				
+			console.log("삭제"+num);
+				if (num >= 0 && num < 3) {
+					$("#flist > tbody:last > tr:last").remove();	
+					num++;
+					$("#end").hide();
+				}
 			})
 	});
 </script>
