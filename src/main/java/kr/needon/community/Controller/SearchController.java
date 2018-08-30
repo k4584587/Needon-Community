@@ -8,10 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.PageMaker;
+import kr.needon.community.Model.SPageMaker;
 import kr.needon.community.Module.Board.BoardServiceImpl;
 import kr.needon.community.Module.Search.SearchDAO;
 
@@ -30,30 +29,29 @@ public class SearchController {
 	public String search(HttpServletRequest request,Criteria cri, Board board, Model model)throws Exception {
 		
 		System.out.println("search>>>>>>>>>>>success!!");
-		System.out.println("search>>>>>>>>>>>success!!");
-		System.out.println("search>>>>>>>>>>>success!!");
-		System.out.println("search>>>>>>>>>>>success!!");
 		
 		String keyword = request.getParameter("keyword");
 		
 		System.out.println("keyword>>>>>>>>>>>>>>>>>>>"+keyword);
-		System.out.println("keyword>>>>>>>>>>>>>>>>>>>"+keyword);
-		System.out.println("keyword>>>>>>>>>>>>>>>>>>>"+keyword);
-		System.out.println("keyword>>>>>>>>>>>>>>>>>>>"+keyword);
 		
 		model.addAttribute("key",keyword);
 		
-		//cri.setPerPageNum(10);
-		//cri.setKeyword(keyword);
+		board.setPerPageNum(10);
 		board.setKeyword(keyword);
-		System.out.println("list>>>>>>>>>>>>>"+dao.getSearch(board));
+		System.out.println("dao list>>>>>>>>>>>>>"+dao.getSearch(board));
+		System.out.println("dao list>>>>>>>>>>>>>"+dao.getSearch(board));
+		System.out.println("dao list>>>>>>>>>>>>>"+dao.getSearch(board));
+		System.out.println("dao list>>>>>>>>>>>>>"+dao.getSearch(board));
 		model.addAttribute("list",dao.getSearch(board));
 		
+		SPageMaker pageMaker = new SPageMaker();
+		pageMaker.setBoard(board);
+		pageMaker.setTotalCount(dao.getListCount(board));
 		
-		/*PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.getListCount(cri));
-		*/
+		System.out.println("페이지 데이터>>>>>>>>>>>>>>>>"+pageMaker);
+		model.addAttribute("pageMaker",pageMaker);
+		
+		
 		
 		return "/search/searchForm";
 	}

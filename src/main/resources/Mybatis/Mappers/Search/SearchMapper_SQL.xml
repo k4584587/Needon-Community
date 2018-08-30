@@ -13,7 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 		 AS t where t.subject like CONCAT ('%', #{keyword}, '%') or
 		 	            t.content like CONCAT ('%', #{keyword}, '%')
-		
+		 	            order by no desc, register_date desc
+		 	            limit #{pageStart}, #{perPageNum};
 		<!--  <where>
 			 <if test="keyword != null and search!='subcon'">
 				${search} like CONCAT ('%', #{keyword}, '%')
@@ -35,16 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT * FROM nb_board_${type}
 		</foreach>
 		
-		<where>
-			<if test="keyword != null and search !='subcon'">
-				${search} like CONCAT ('%', #{keyword}, '%')
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				subject like CONCAT ('%', #{keyword}, '%') or
-				content like CONCAT ('%', #{keyword}, '%')
-			</if>
-			and subject is not null
-		</where>
+		 AS t where t.subject like CONCAT ('%', #{keyword}, '%') or
+		 	            t.content like CONCAT ('%', #{keyword}, '%')
+		 	            order by no desc, register_date desc
+		 	            
 	</select>
 
 </mapper>

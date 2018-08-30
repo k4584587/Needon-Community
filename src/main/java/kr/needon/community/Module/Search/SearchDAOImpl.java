@@ -47,9 +47,9 @@ public class SearchDAOImpl implements SearchDAO{
 
 
 	/* 게시판 총 갯수 */
-	public int getListCount(Criteria cri) throws Exception {
+	public int getListCount(Board board) throws Exception {
 	
-		return session.selectOne(namespace+".listcount", cri);
+		return session.selectOne(namespace+".listcount", board);
 
 	}
 }
