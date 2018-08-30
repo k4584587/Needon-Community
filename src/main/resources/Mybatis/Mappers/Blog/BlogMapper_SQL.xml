@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Blog">
+
+	
+	<select id="getBlogInfo" resultType="Blog">
+		SELECT
+			*
+		FROM
+			nb_blog
+		WHERE
+			user_no = #{username}
+	</select>
+
+	<select id="getBlogTimeLine" resultType="Board">
+		SELECT
+		  *
+		FROM
+		  nb_blog_${username}
+		ORDER BY
+			no
+		DESC
+	</select>
+
+	<insert id="timeLineInsert">
+		INSERT INTO nb_blog_test
+			(subject, content, ip)
+		VALUES
+			(#{subject}, #{content}, '0.0.0.0');
+	</insert>
+
+	<select id="getTimeLineView" resultType="Board">
+		SELECT
+			*
+		FROM
+			nb_blog_${username}
+		WHERE
+			no = #{no}
+	</select>
+
+</mapper>

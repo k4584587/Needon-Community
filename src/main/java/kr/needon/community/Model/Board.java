@@ -41,6 +41,7 @@ public class Board {
 	private String category;
 	private int page;
 	private int perPageNum;
+	private String username;
 	List<String> table_list = new ArrayList<String>();
 	
 	public Board() {

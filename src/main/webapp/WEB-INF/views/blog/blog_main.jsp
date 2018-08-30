@@ -31,6 +31,10 @@
     .blog .profile {
         margin-bottom: 10px;
     }
+
+    #news_loading {
+        display: none;
+    }
 </style>
 
 <div style="margin-left: 10px;" class="blog">
@@ -41,7 +45,7 @@
                     <h4>
                         <c:choose>
                             <c:when test="${blog_info.blog_title eq null}">
-                                ${user.nick} 님의 블로그
+                                ${user_info.nick} 님의 블로그
                             </c:when>
                             <c:otherwise>
                                 ${blog_info.blog_title}
@@ -55,7 +59,11 @@
         </div>
     </div>
     <div>
-        <textarea class="form-control" style="margin-bottom: 10px;">test</textarea>
+        <form id="timeLineInsertForm" action="<c:url value="/blog/timeline_post" />" method="post">
+            <input type="text" name="subject" class="form-control" placeholder="글 제목" style="margin-bottom: 10px">
+            <textarea name="content" class="form-control" style="margin-bottom: 10px;">test</textarea>
+            <button type="button" onclick="timeLineInsert()" class="btn btn-success" style="margin-bottom: 10px;">글 등록</button>
+        </form>
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="background-color: #d4d4d4!important;">
@@ -65,30 +73,12 @@
             <li class="breadcrumb-item active" aria-current="page">게임</li>
         </ol>
     </nav>
-    <div class="row" style="background-color: white;margin-left: 0px;margin-right: 0px;">
-        <div class="col-8 p-3">
-            <div class="profile">
-                10분전
-            </div>
-            <div class="category">
-                <a href="#">잡담</a>
-            </div>
-            <div class="subject" style="margin-bottom: 10px;">
-                <a href="#" data-toggle="modal" data-target="#exampleModalCenter">제목제목제목제목제목제목제목제목제목제목제목제목제목제목</a>
-            </div>
-            <div class="content">
-                <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </a>
-            </div>
-            <div style="margin-top: 10px;color: #959595"><span>공감 10</span> <span>댓글 10</span></div>
-        </div>
-        <div class="col p-3" style="text-align: right">
-           <img src="https://via.placeholder.com/165">
-        </div>
+    <div id="blog_timeline">
+        <center>
+            <img id="news_loading" src="<c:url value="/resources/img/loading.gif" />">
+        </center>
+
     </div>
-    <hr>
 </div>
 
 <!-- Post View Modal -->
@@ -96,7 +86,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">제목....</h5>
+                <h5 class="modal-title" id="timeline_title">제목....</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -108,4 +98,146 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $.ajax({
+            type: 'POST',
+            url: '<c:url value="/blog/getTimeLineView" />',
+        })
+    </script>
+
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        console.log("ajax load!!");
+
+        $.ajax({
+            type: 'POST',
+            url: '<c:url value="/blog/time_line" />',
+            data:{"username":"${user.username}"},
+            success: function (result) {
+                console.log("blog timeline list ==> " + result);
+
+                var jonData = JSON.parse(result);
+
+                $.each(jonData, function (index, item) {
+                    timeline_html = "<div class=\"row\" style=\"background-color: white;margin-left: 0px;margin-right: 0px;margin-bottom: 10px;\" id=\"blog_timeline\">\n" +
+                        "        <div class=\"col-8 p-3\">\n" +
+                        "            <div class=\"profile\">\n" +
+                        "                10분전\n" +
+                        "            </div>\n" +
+                        "            <div class=\"category\">\n" +
+                        "                <a href=\"#\">잡담</a>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"subject\" style=\"margin-bottom: 10px;\">\n" +
+                        "                <a onclick='timeline_view("+item.no+")' href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">"+item.subject+"</a>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"content\">\n" +
+                        "                <a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">\n" + item.content +
+                        "                </a>\n" +
+                        "            </div>\n" +
+                        "            <div style=\"margin-top: 10px;color: #959595\"><span>공감 0</span> <span>댓글 "+item.cm_count+"</span></div>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"col p-3\" style=\"text-align: right\">\n" +
+                        "           <img src=\"https://via.placeholder.com/165\">\n" +
+                        "        </div>\n" +
+                        "    </div>";
+
+                    $("#blog_timeline:last").append(timeline_html);
+                });
+
+
+
+
+            }
+        })
+    })
+
+    function timeLineInsert() { // 타임라인 글 추가
+        var form_json = JSON.stringify($("#timeLineInsertForm").serializeObject());
+        var jsonData = JSON.parse(form_json);
+
+        console.log("글 등록버튼 누름!!");
+        console.log("form data ==> " + form_json.toString());
+
+        console.log("제목 ==> " + jsonData.subject);
+        console.log("내용 ==> " + jsonData.content);
+
+        $.ajax({
+            type: 'POST',
+            url: '<c:url value="/blog/timeline_post" />',
+            data: jsonData,
+            success: function (result) {
+
+                if(result == 1) {
+
+                    var timeline_insert_html = "<div class=\"row\" style=\"background-color: white;margin-left: 0px;margin-right: 0px;margin-bottom: 10px;\" id=\"blog_timeline\">\n" +
+                        "    <div class=\"col-8 p-3\">\n" +
+                        "        <div class=\"profile\">\n" +
+                        "            10분전\n" +
+                        "        </div>\n" +
+                        "        <div class=\"category\">\n" +
+                        "            <a href=\"#\">잡담</a>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"subject\" style=\"margin-bottom: 10px;\">\n" +
+                        "            <a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">"+jsonData.subject+"</a>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"content\">\n" +
+                        "            <a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">\n" +
+                        " "+jsonData.content+"            </a>\n" +
+                        "        </div>\n" +
+                        "        <div style=\"margin-top: 10px;color: #959595\"><span>공감 10</span> <span>댓글 10</span></div>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"col p-3\" style=\"text-align: right\">\n" +
+                        "        <img src=\"https://via.placeholder.com/165\">\n" +
+                        "    </div>\n" +
+                        "</div>";
+
+                    $("#blog_timeline:first").before(timeline_insert_html);
+                    console.log("등록성공!");
+
+
+
+                } else {
+                    console.log("등록실패!");
+                }
+            }
+        });
+
+
+       /* var subject = $("input[name=subject]").val();
+        var content = $("textarea.content").val();
+        console.log("제목 ==> " + subject);
+        console.log("내용 ==> " + content);*/
+
+    }
+
+
+    function timeline_view(num) {
+        console.log("타임라인 뷰 데이터 번호 ==> " + num);
+        $("#timeline_title").html("test " + num);
+    }
+
+    $.fn.serializeObject = function()
+
+    {
+
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+</script>
