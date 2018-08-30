@@ -21,6 +21,8 @@ public interface BoardService {
 	
 	public List<FileDownload> file_list(FileDownload file)throws Exception;
 	
+	public FileDownload file_down(FileDownload file)throws Exception;
+	
 	public List<Board> replyList(Board board)throws Exception;
 	
 	public Board last_no(Board board)throws Exception;

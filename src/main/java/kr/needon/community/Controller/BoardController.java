@@ -152,7 +152,8 @@ public class BoardController {
 		file.setBo_no(board.getNo());
 		file.setBo_subject(fileName);
 		file.setBo_table(board.getCategory());
-		String saveName = passwordEncoder.encode(fileName)+"_"+fileName;
+		String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
+		String saveName = passwordEncoder.encode(fileName)+sub;
 		file.setBo_encode(saveName);
 		
 		int fileSize = (int) mf.getSize();
@@ -322,12 +323,18 @@ public class BoardController {
 	/* 파일 다운로드 */
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public String download(Board board, int page,
-			HttpServletRequest request, Model model, HttpServletResponse response) throws Exception {
-
-		String fname = request.getParameter("fname");
+			HttpServletRequest request, Model model, HttpServletResponse response, FileDownload file1) throws Exception {
+		
+		file1.setBo_table(board.getCategory());
+		file1.setBo_no(board.getNo());
+		file1 = service.file_down(file1);
+		//String fname = request.getParameter("fname");
+		//down.setBo_no(board.getNo());
+		String fname = file1.getBo_encode();
 		System.out.println("fname = " + fname);
 		
-		String DownloadPath = request.getRealPath("upload");
+		//String DownloadPath = request.getRealPath("upload");
+		String DownloadPath = uploadPath;
 		String path = DownloadPath + "\\" + fname;
 		System.out.println("path=" + path);
 		
@@ -340,7 +347,7 @@ public class BoardController {
 		// octet-stream은 8비트로 된 일련의 데이터를 뜻합니다. 지정되지 않은 파일 형식을 의미합니다. 
 		// response.setHeader("Content-Type", "application/octet-stream");
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + downName + "\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + file1.getBo_subject() + "\"");
 
 		FileInputStream in = null;
 		OutputStream out = null;

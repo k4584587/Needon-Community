@@ -56,6 +56,14 @@
 		select * from nb_board_file where bo_table = #{category} and bo_no = #{bo_no};
 	</select>
 	
+	<select id="file_down" resultType="FileDownload">
+		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table};
+	</select>
+	
+	<update id = "down_count">
+		update nb_board_file set bo_download = bo_download+1 where bo_no=#{bo_no};
+	</update>
+	
 	<insert id="insert">
 		INSERT INTO nb_board_${category} (subject, content, ip, wr_nick, wr_password)
 		VALUES (#{subject}, #{content}, #{ip}, #{wr_nick}, #{wr_password});

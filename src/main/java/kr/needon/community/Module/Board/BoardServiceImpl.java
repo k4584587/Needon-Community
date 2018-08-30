@@ -211,5 +211,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.file_list(file);
 	}
+	
+	/*파일 다운로드*/
+	@Override
+	public FileDownload file_down(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.file_down(file);
+	}
 
 }
