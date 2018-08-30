@@ -78,7 +78,7 @@
                    </div>
                </div>
                <div class="col" style="border-right: 1px solid #dee3eb;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;border-right: none;">
-                   <div style="margin: 15px;text-align: center;cursor: pointer;">
+                   <div id="btn_myblog" style="margin: 15px;text-align: center;cursor: pointer;">
                        <div style="text-align: center;font-size: 15px;"><b><i style="color: #b694fa" class="fab fa-wordpress"></i></b></div>
                        <div style="text-align: center;font-size: 15px;">
                            블로그
@@ -145,6 +145,100 @@
 
             console.log("ajax load!!");
 
+            $("#btn_user_info").click(function () {
+
+                console.log("알림 버튼을 클릭함");
+
+                var con = document.getElementById("btn_user_item");
+                if (con.style.display == 'none') {
+                    con.style.display = 'block';
+                    console.log("보임");
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "<c:url value="/sample/message/list" />",
+                        success: function (result) {
+
+                            var jonData = JSON.parse(result);
+
+                            console.log("message list ==> " + result);
+
+                            console.log("쪽지 갯수  ==> " + result.toString().length);
+
+                            if(result.toString().length > 3) {
+                                console.log("쪽지 있음");
+                            } else {
+                                console.log("쪽지 없음");
+                                $("#item_list").append("<p><b>새로운 알림이 없습니다.</b></p>");
+                            }
+
+                            $.each(jonData, function (index, item) {
+
+                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+
+                                $("#item_list").append(item_list);
+
+                                console.log("result ==> " + item.content);
+                            })
+                        }
+                    })
+
+                } else {
+                    con.style.display = 'none';
+                    console.log("감춤");
+                    $("#item_list").html("");
+                }
+            });
+
+
+
+            $("#btn_myblog").click(function () {
+
+                console.log("쪽지 버튼을 클릭함");
+
+                var con = document.getElementById("btn_user_item");
+                if (con.style.display == 'none') {
+                    con.style.display = 'block';
+                    console.log("보임");
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "<c:url value="/sample/message/list" />",
+                        success: function (result) {
+
+                            var jonData = JSON.parse(result);
+
+                            console.log("message list ==> " + result);
+
+                            console.log("쪽지 갯수  ==> " + result.toString().length);
+
+                            if(result.toString().length > 3) {
+                                console.log("쪽지 있음");
+                            } else {
+                                console.log("쪽지 없음");
+                                $("#item_list").append("<p><b>팔로우된 블로거 들의 최신글이 없습니다.</b></p>"+
+                                "<br><p><a href='<c:url value="/blog/${user.username}" />'>내 블로그</a></p>"
+                                );
+                            }
+
+                            $.each(jonData, function (index, item) {
+
+                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+
+                                $("#item_list").append(item_list);
+
+                                console.log("result ==> " + item.content);
+                            })
+                        }
+                    })
+
+                } else {
+                    con.style.display = 'none';
+                    console.log("감춤");
+                    $("#item_list").html("");
+                }
+            });
+
             $("#btn_message_list").click(function () {
 
                 console.log("쪽지 버튼을 클릭함");
@@ -163,9 +257,18 @@
 
                             console.log("message list ==> " + result);
 
+                            console.log("쪽지 갯수  ==> " + result.toString().length);
+
+                            if(result.toString().length > 3) {
+                                console.log("쪽지 있음");
+                            } else {
+                                console.log("쪽지 없음");
+                                $("#item_list").append("<p><b>새로운 쪽지가 없습니다.</b></p>");
+                            }
+
                             $.each(jonData, function (index, item) {
 
-                                var item_list = "<li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
 
                                 $("#item_list").append(item_list);
 
@@ -180,7 +283,6 @@
                     $("#item_list").html("");
                 }
             });
-
 
 
 

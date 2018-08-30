@@ -55,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/board/write_from").hasAnyRole("ADMIN","USER");
         http.authorizeRequests().antMatchers("/user/myinfo").hasAnyRole("ADMIN","USER");
-        
+        http.authorizeRequests().antMatchers("/blog/**").hasAnyRole("ADMIN","USER");
+
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
      

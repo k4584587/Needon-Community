@@ -2,6 +2,8 @@ package kr.needon.community.Module.Page;
 
 import javax.inject.Inject;
 
+import kr.needon.community.Model.BoTable;
+import kr.needon.community.Model.Menu;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +23,10 @@ public class PageDAOImpl implements PageDAO{
 		return session.selectOne(namespace+".pageView",board);
 	}
 
-	
-	
+	@Override
+	public BoTable menu_info(Menu menu) throws Exception {
+		return session.selectOne(namespace + ".menu_info", menu);
+	}
+
 
 }
