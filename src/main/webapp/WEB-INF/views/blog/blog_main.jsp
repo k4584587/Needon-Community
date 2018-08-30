@@ -79,6 +79,8 @@
         </center>
 
     </div>
+    <span id="more_btn_ajax"></span>
+    <%--<button class="btn btn-primary btn-sm btn-block" id="more_btn">더보기</button>--%>
 </div>
 
 <!-- Post View Modal -->
@@ -98,25 +100,20 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $.ajax({
-            type: 'POST',
-            url: '<c:url value="/blog/getTimeLineView" />',
-        })
-    </script>
-
 </div>
 
 
 <script>
+
+
+
     $(document).ready(function() {
         console.log("ajax load!!");
 
         $.ajax({
             type: 'POST',
             url: '<c:url value="/blog/time_line" />',
-            data:{"username":"${user.username}"},
+            data:{"username":"${user_info.username}","count":0},
             success: function (result) {
                 console.log("blog timeline list ==> " + result);
 
@@ -145,12 +142,11 @@
                         "        </div>\n" +
                         "    </div>";
 
+                    var more_btn = "<button onclick='more_btn("+item.no+")' class=\"btn btn-primary btn-sm btn-block\" id=\"more_btn\">더보기</button>";
+
+                    $("#more_btn_ajax").html(more_btn);
                     $("#blog_timeline:last").append(timeline_html);
                 });
-
-
-
-
             }
         })
     })
@@ -206,23 +202,76 @@
             }
         });
 
-
-       /* var subject = $("input[name=subject]").val();
-        var content = $("textarea.content").val();
-        console.log("제목 ==> " + subject);
-        console.log("내용 ==> " + content);*/
-
     }
 
 
-    function timeline_view(num) {
-        console.log("타임라인 뷰 데이터 번호 ==> " + num);
-        $("#timeline_title").html("test " + num);
+    function timeline_view(no) {
+        console.log("타임라인 뷰 데이터 번호 ==> " + no);
+        $("#timeline_title").html("test " + no);
+
+        $.ajax({
+            type: 'POST',
+            url: '<c:url value="/blog/getTimeLineView" />',
+            data: {"username":"${user_info.username}","no":no},
+            success: function (result) {
+                console.log("데이터 ==>" + result)
+            }
+        });
     }
 
-    $.fn.serializeObject = function()
 
-    {
+
+    function more_btn(no) {
+        console.log("더보기 버튼 클릭 ==> " + no);
+
+        $.ajax({
+            type: 'POST',
+            url: '<c:url value="/blog/time_line" />',
+            data:{"username":"${user.username}","count":1,"no":no},
+            success: function (result) {
+                console.log("blog timeline list ==> " + result);
+
+                var jonData = JSON.parse(result);
+
+                $.each(jonData, function (index, item) {
+                    timeline_html = "<div class=\"row\" style=\"background-color: white;margin-left: 0px;margin-right: 0px;margin-bottom: 10px;\" id=\"blog_timeline\">\n" +
+                        "        <div class=\"col-8 p-3\">\n" +
+                        "            <div class=\"profile\">\n" +
+                        "                10분전\n" +
+                        "            </div>\n" +
+                        "            <div class=\"category\">\n" +
+                        "                <a href=\"#\">잡담</a>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"subject\" style=\"margin-bottom: 10px;\">\n" +
+                        "                <a onclick='timeline_view(" + item.no + ")' href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">" + item.subject + "</a>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"content\">\n" +
+                        "                <a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">\n" + item.content +
+                        "                </a>\n" +
+                        "            </div>\n" +
+                        "            <div style=\"margin-top: 10px;color: #959595\"><span>공감 0</span> <span>댓글 " + item.cm_count + "</span></div>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"col p-3\" style=\"text-align: right\">\n" +
+                        "           <img src=\"https://via.placeholder.com/165\">\n" +
+                        "        </div>\n" +
+                        "    </div>";
+
+                    var more_btn = "<button onclick='more_btn(" + item.no + ")' class=\"btn btn-primary btn-sm btn-block\" id=\"more_btn\">더보기</button>";
+
+                    $("#more_btn_ajax").html(more_btn);
+                    $("#blog_timeline:last").append(timeline_html);
+
+                    if(item.no == 1) {
+                      $("#more_btn").remove();
+                    }
+
+                });
+            }
+        });
+
+    }
+
+    $.fn.serializeObject = function() {
 
         var o = {};
         var a = this.serializeArray();

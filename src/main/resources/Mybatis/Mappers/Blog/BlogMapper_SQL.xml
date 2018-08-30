@@ -15,13 +15,31 @@
 	</select>
 
 	<select id="getBlogTimeLine" resultType="Board">
-		SELECT
-		  *
-		FROM
-		  nb_blog_${username}
-		ORDER BY
+		<if test="count == 0">
+			SELECT
+			*
+			FROM
+			nb_blog_${username}
+			ORDER BY
 			no
-		DESC
+			DESC limit 10;
+		</if>
+
+		<if test="count == 1">
+			<![CDATA[
+			SELECT
+			*
+			FROM
+			nb_blog_${username}
+			WHERE
+			no < #{no}
+			ORDER BY
+			no
+			DESC limit 10;
+			]]>
+		</if>
+
+
 	</select>
 
 	<insert id="timeLineInsert">
