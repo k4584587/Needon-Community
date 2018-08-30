@@ -149,4 +149,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return session.selectOne(namespace+".file_down", file);
 	}
 
+	@Override
+	public void down_count(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".down_count", file);
+	}
+
 }

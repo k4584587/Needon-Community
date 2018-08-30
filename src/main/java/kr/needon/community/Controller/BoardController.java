@@ -360,7 +360,9 @@ public class BoardController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		service.down_count(file1);
+		
 		model.addAttribute("url",
 				"/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
 

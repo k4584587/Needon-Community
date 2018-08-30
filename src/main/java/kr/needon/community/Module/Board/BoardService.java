@@ -23,6 +23,8 @@ public interface BoardService {
 	
 	public FileDownload file_down(FileDownload file)throws Exception;
 	
+	public void down_count(FileDownload file)throws Exception;
+	
 	public List<Board> replyList(Board board)throws Exception;
 	
 	public Board last_no(Board board)throws Exception;

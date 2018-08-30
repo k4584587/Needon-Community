@@ -218,5 +218,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.file_down(file);
 	}
+	
+	/*다운로드 횟수*/
+	@Override
+	public void down_count(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		dao.down_count(file);
+	}
 
 }
