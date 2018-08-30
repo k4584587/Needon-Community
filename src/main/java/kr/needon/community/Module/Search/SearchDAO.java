@@ -9,6 +9,6 @@ public interface SearchDAO {
 	
 	public List<Board> getSearch(Board board);
 	
-	public int getListCount(Criteria cri) throws Exception;
+	public int getListCount(Board board) throws Exception;
 
 }
