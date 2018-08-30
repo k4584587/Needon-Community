@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Search">
+
+	<select id="getSearch" resultType="Board">
+		SELECT * FROM
+		<foreach collection="table_list" item="type"  open="(" close=")" separator="UNION">
+			SELECT * FROM nb_board_${type}
+
+		</foreach>
+		 AS t where t.subject like CONCAT ('%', #{keyword}, '%') or
+		 	            t.content like CONCAT ('%', #{keyword}, '%')
+		
+		<!--  <where>
+			 <if test="keyword != null and search!='subcon'">
+				${search} like CONCAT ('%', #{keyword}, '%')
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				subject like CONCAT ('%', #{keyword}, '%') or
+				content like CONCAT ('%', #{keyword}, '%')
+			</if>
+			and subject is not null
+		</where> -->
+		
+		<!-- order by no desc, register_date desc
+		limit #{pageStart}, #{perPageNum}; -->
+	</select>
+	
+	<select id="listcount" resultType="int">
+		select count(no) from
+		<foreach collection="table_list" item="type"  open="(" close=")" separator="UNION">
+			SELECT * FROM nb_board_${type}
+		</foreach>
+		
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like CONCAT ('%', #{keyword}, '%')
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				subject like CONCAT ('%', #{keyword}, '%') or
+				content like CONCAT ('%', #{keyword}, '%')
+			</if>
+			and subject is not null
+		</where>
+	</select>
+
+</mapper>

@@ -6,6 +6,7 @@
 <!DOCTYPE>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
@@ -19,6 +20,7 @@
 </script>
 
 <button onClick="location.href=' <c:url value="/message/ms_list" />'">수신 메세지</button>
+
 <table border="1">
 		<tr>
 			<th scope="col">수신자</th>
