@@ -78,6 +78,7 @@ public class SampleTest {
         Board board = new Board();
 
         board.setKeyword("t");
+        System.out.println("key>>>>>>>>>>>>>>>"+board.getKeyword());
         dao.getSearch(board);
 
     }

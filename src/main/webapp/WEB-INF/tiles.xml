@@ -57,6 +57,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/page/page_view.jsp" />
 	</definition>
 
+	<definition name="board_page" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/page/board_page.jsp" />
+	</definition>
+
 	<definition name="admin/main" extends="admin-theme">
 		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp" />
 	</definition>
@@ -72,6 +76,11 @@
 
 	<definition name="user/myinfo" extends="tilesbase">
 		<put-attribute name="body" value="/WEB-INF/views/user/myInfo.jsp" />
+	</definition>
+
+
+	<definition name="blog/main" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/blog/blog_main.jsp" />
 	</definition>
 
 </tiles-definitions>

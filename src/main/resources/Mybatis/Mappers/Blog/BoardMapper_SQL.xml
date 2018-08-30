@@ -2,20 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Page">
+<mapper namespace="Blog">
 
-	<select id="pageView" resultType="Board">
-		select * from nb_board_${category} where no = 1;
-	</select>
 	
-	<select id="menu_info" resultType="Menu">
+	<select id="getBlogInfo" resultType="Blog">
 		SELECT
 			*
 		FROM
-			nb_menu_list
+			nb_blog
 		WHERE
-			id = #{id};
+			user_no = #{user_no}
 	</select>
+
 	
+
 
 </mapper>

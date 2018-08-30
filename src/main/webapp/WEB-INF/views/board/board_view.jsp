@@ -65,7 +65,7 @@
                     </div>
                     <div class="col">
                         <div class="board-head_btn">
-                            <button class="btn btn-primary">작성글 보기</button> <button class="btn btn-success">쪽지 보내기</button> <button class="btn btn-success">블로그 보기</button>
+                            <button class="btn btn-primary">작성글 보기</button> <button class="btn btn-success">쪽지 보내기</button> <button class="btn btn-success">블로그 보기</button> <button class="btn btn-success">팔로우하기</button> <button class="btn btn-success">구독하기</button>
                         </div>
                         <div style="margin-top: 10px;">
                             <div style="margin-bottom: 10px;"><span>출석일수 : <b>000 일</b></span> | <span><b>Lv.100</b></span>
