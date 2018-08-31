@@ -59,7 +59,7 @@
             <form class="form-inline my-2 my-md-0" action=<c:url value="/search/view" /> method="get">
                 <input class="form-control" type="text" placeholder="검색" name="keyword"
                        aria-label="Search">
-               <input type="submit" value="검색">
+               <%--<input type="submit" value="검색">--%>
             </form>
         </div>
     </div>

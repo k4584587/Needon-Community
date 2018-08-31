@@ -21,6 +21,8 @@
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
+<script type="text/javascript" src='<c:url value="/resources/smarteditor/js/service/HuskyEZCreator.js" />' charset="utf-8"></script>
+
 <!-- insert custom css -->  
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 

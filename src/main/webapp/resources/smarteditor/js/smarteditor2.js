@@ -6568,13 +6568,13 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		if(sLineBreaker == "BR"){
 			this.sLineBreaker = "BR";
 		}else{
-			this.sLineBreaker = "P";
+			this.sLineBreaker = "BR";
 		}
 		
 		this.htBrowser = jindo.$Agent().navigator();
 		
 		// [SMARTEDITORSUS-227] IE 인 경우에도 에디터 Enter 처리 로직을 사용하도록 수정
-		if(this.htBrowser.opera && this.sLineBreaker == "P"){
+		if(this.htBrowser.opera && this.sLineBreaker == "BR"){
 			this.$ON_MSG_APP_READY = function(){};
 		}
 
