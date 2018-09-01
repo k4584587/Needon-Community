@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="google-site-verification" content="63JHl_hVJLCZoFOGXyYliDBgAW2p1fr8iZtirkRH3UI" />
 <title>${ title }</title>
 
 <!-- 메인해드시작 -->

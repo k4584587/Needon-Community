@@ -2,6 +2,7 @@
 /* NHN Web Standardization Team (http://html.nhndesign.com/) HHJ 090226 */
 /* COMMON */
 body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_editor2 h3,#smart_editor2 h4,#smart_editor2 h5,#smart_editor2 h6,#smart_editor2 ul,#smart_editor2 ol,#smart_editor2 li,#smart_editor2 dl,#smart_editor2 dt,#smart_editor2 dd,#smart_editor2 table,#smart_editor2 th,#smart_editor2 td,#smart_editor2 form,#smart_editor2 fieldset,#smart_editor2 legend,#smart_editor2 input,#smart_editor2 textarea,#smart_editor2 button,#smart_editor2 select{margin:0;padding:0}
+#smart_editor2{margin-right:1px!important;min-width:100px!important}
 #smart_editor2,#smart_editor2 h1,#smart_editor2 h2,#smart_editor2 h3,#smart_editor2 h4,#smart_editor2 h5,#smart_editor2 h6,#smart_editor2 input,#smart_editor2 textarea,#smart_editor2 select,#smart_editor2 table,#smart_editor2 button{font-family:'돋움',Dotum,Helvetica,sans-serif;font-size:12px;color:#666}
 #smart_editor2 span,#smart_editor2 em{font-size:12px}
 #smart_editor2 em,#smart_editor2 address{font-style:normal}
@@ -71,7 +72,9 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_alert_btns .se2_confirm{background-position:-369px -434px}
 #smart_editor2 .se2_alert_btns .se2_cancel{background-position:-419px -434px}
 /* TEXT_TOOLBAR */
-#smart_editor2 .se2_text_tool{position:relative;clear:both;z-index:30;padding:4px 0 4px 3px;background:#f4f4f4 url("../../img/bg_text_tool.gif") 0 0 repeat-x;border-bottom:1px solid #b5b5b5;*zoom:1}
+/*#smart_editor2 .se2_text_tool{position:relative;clear:both;z-index:30;padding:4px 0 4px 3px;background:#f4f4f4 url("../../img/bg_text_tool.gif") 0 0 repeat-x;border-bottom:1px solid #b5b5b5;*zoom:1}*/
+#smart_editor2 .se2_text_tool{position:relative;clear:both;z-index:30;padding:4px 15px 4px 3px;background:#f4f4f4 url("../img/bg_text_tool.gif") 0 0 repeat-x;border-bottom:1px solid #b5b5b5;*zoom:1}
+
 #smart_editor2 .se2_text_tool:after{content:"";display:block;clear:both}
 #smart_editor2 .se2_text_tool ul{float:left;display:inline;margin-right:3px;padding-left:1px;white-space:nowrap}
 #smart_editor2 .se2_text_tool li{_display:inline;float:left;position:relative;z-index:30}

@@ -32,8 +32,7 @@ public class PageController {
 	private PageDAOImpl pageDAO;
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String page_view(Board board ,
-			                        Model model)throws Exception {
+	public String page_view(Board board, Model model)throws Exception {
 		
 		board.setCategory(board.getCategory());
 		

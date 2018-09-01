@@ -71,7 +71,7 @@
 			</a>
 			<ul class="treeview-menu">
 				<li><a href="<c:url value="/admin/board_list" />"><i class="fa fa-circle-o"></i> 게시판 관리</a></li>
-
+				<li><a href="<c:url value="/admin/board_list" />"><i class="fa fa-circle-o"></i> 페이지 관리</a></li>
 			</ul>
 		</li>
 	</ul>

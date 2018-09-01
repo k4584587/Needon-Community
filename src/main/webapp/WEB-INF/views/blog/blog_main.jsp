@@ -68,7 +68,7 @@
                    style="margin-bottom: 10px" required>
             <div style="background-color: white; margin-bottom: 10px;">
                         <textarea name="content" id="smarteditor" class="form-control"
-                                  style="margin-bottom: 10px;background-color: white" placeholder="글 내용"
+                                  style="margin-bottom: 10px;background-color: white;width: 100%;" placeholder="글 내용"
                                   required></textarea>
             </div>
 

@@ -37,7 +37,8 @@ function createSEditor2(elIRField, htParams, elSeAppContainer){
 	htParams.I18N_LOCALE = htParams.I18N_LOCALE || "ko_KR";
 
 	var oEditor = new nhn.husky.HuskyCore(htParams);
-	oEditor.registerPlugin(new nhn.husky.CorePlugin(htParams?htParams.fOnAppLoad:null));	
+    oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer)); // 사진
+    oEditor.registerPlugin(new nhn.husky.CorePlugin(htParams?htParams.fOnAppLoad:null));
 	oEditor.registerPlugin(new nhn.husky.StringConverterManager());
 	if(htParams.bSkipXssFilter !== true){
 		// 보안 필터링 플러그인 (TODO:소스분리 및 블랙리스트 옵션 추가)
