@@ -8,7 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
+                   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
+                   user="admin_project" password="3class"/>
 
+<sql:query dataSource="${datasource}" var="post_count">
+    SELECT no FROM nb_blog_${user_info.username} ORDER BY no DESC limit 1 ;
+</sql:query>
+
+<c:forEach items="${post_count.rows}" var="count_result">
+    <c:set var="last_count" value="${count_result.no}"/>
+</c:forEach>
 <style>
 
     .main_profile {
@@ -63,7 +74,6 @@
     <sec:authorize access="isAuthenticated()">
         <form id="timeLineInsertForm" action="<c:url value="/blog/timeline_post" />" method="post">
 
-
             <input type="text" id="subject" name="subject" class="form-control" placeholder="글 제목"
                    style="margin-bottom: 10px" required>
             <div style="background-color: white; margin-bottom: 10px;">
@@ -73,9 +83,7 @@
             </div>
 
 
-            <button type="button" id="timeLineInsert" class="btn btn-success btn-block" style="margin-bottom: 10px;">글
-                등록
-            </button>
+            <button type="button" id="timeLineInsert" class="btn btn-success btn-block" style="margin-bottom: 10px;">글 등록</button>
         </form>
     </sec:authorize>
 
@@ -88,9 +96,6 @@
         </ol>
     </nav>
     <div id="blog_timeline">
-        <center>
-            <img id="news_loading" src="<c:url value="/resources/img/loading.gif" />">
-        </center>
 
     </div>
     <span id="more_btn_ajax"></span>
@@ -115,8 +120,16 @@
     </div>
 </div>
 
-
 <script>
+
+    var last_no = ${last_count};
+
+    function test() {
+
+        last_no += 1;
+
+        console.log("번호 ==> " +last_no);
+    }
 
 
     //스마트에디터 적용
@@ -146,6 +159,14 @@
         $("#timeLineInsert").click(function () {
             console.log("글쓰기 버튼 클릭함");
 
+            $("#timeLineInsert").prop('disabled', true);
+            $("#timeLineInsert").html("<i class=\"fas fa-spinner fa-spin\"></i>\n" + "\n 글 등록 중...");
+
+
+            last_no += 1;
+
+            console.log("글 등록 번호 ==> " + last_no);
+
             var subject = $("#subject").val();
             var content_body = editor_object.getById["smarteditor"].getIR();
             console.log("제목 ==> " + subject);
@@ -167,29 +188,32 @@
                         varContent = removeStyleAndImage(varContent, '<span', ';">', '</span>');  // 스마트에디터 내부의 스타일 제거
 
                         var timeline_insert_html = "<div class=\"row\" style=\"background-color: white;margin-left: 0px;margin-right: 0px;margin-bottom: 10px;\" id=\"blog_timeline\">\n" +
-                            "        <div class=\"col-8 p-3\">\n" +
-                            "            <div class=\"profile\">\n" +
-                            "                10분전\n" +
-                            "            </div>\n" +
-                            "            <div class=\"category\">\n" +
-                            "                <a href=\"#\">잡담</a>\n" +
-                            "            </div>\n" +
-                            "            <div class=\"subject\" style=\"margin-bottom: 10px;\">\n" +
-                            "                <a onclick='post_view(" + 0 + ")' href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">" + subject + "</a>\n" +
-                            "            </div>\n" +
-                            "            <div class=\"content\">\n" +
-                            "                <a href=\"#\" onclick='post_view(" + 0 + ")' data-toggle=\"modal\" data-target=\"#exampleModalCenter\">\n" + varContent +
-                            "                </a>\n" +
-                            "            </div>\n" +
-                            "            <div style=\"margin-top: 10px;color: #959595\"><span>공감 0</span> <span>댓글 " + 0 + "</span></div>\n" +
+                            "    <div class=\"col-8 p-3\">\n" +
+                            "        <div class=\"profile\">\n" +
+                            "            10분전\n" +
                             "        </div>\n" +
-                            "        <div class=\"col p-3\" style=\"text-align: right\">\n" +
-                            "           <img src=\"https://via.placeholder.com/165\">\n" +
+                            "        <div class=\"category\">\n" +
+                            "            <a href=\"#\">잡담</a>\n" +
                             "        </div>\n" +
-                            "    </div>";
+                            "        <div class=\"subject\" style=\"margin-bottom: 10px;\">\n" +
+                            "            <a onclick=\"post_view("+last_no+")\" href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">"+subject+"</a>\n" +
+                            "        </div>\n" +
+                            "        <div class=\"content\">\n" +
+                            "            <a href=\"#\" onclick=\"post_view("+last_no+")\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">\n" +
+                            ""+varContent+"</a>\n" +
+                            "        </div>\n" +
+                            "        <div style=\"margin-top: 10px;color: #959595\"><span>공감 0</span> <span>댓글 0</span></div>\n" +
+                            "    </div>\n" +
+                            "    <div class=\"col p-3\" style=\"text-align: right\">\n" +
+                            "        <img src=\"https://via.placeholder.com/165\">\n" +
+                            "    </div>\n" +
+                            "</div>\n";
 
-                        $("#blog_timeline:first").before(timeline_insert_html);
+                        $("#blog_timeline").prepend(timeline_insert_html);
                         console.log("등록성공!");
+
+                        $("#timeLineInsert").prop('disabled', false);
+                        $("#timeLineInsert").html("글 등록");
 
                     } else {
                         console.log("등록실패!");
@@ -200,8 +224,6 @@
         </sec:authorize>
 
         </sec:authorize>
-
-
 
         //타임라인 글 가져오기
         $(document).ready(function () {
@@ -217,7 +239,6 @@
                     var jonData = JSON.parse(result);
 
                     $.each(jonData, function (index, item) {
-
                         varContent = item.content;
 
                         varContent = removeStyleAndImage(varContent, '<img src=', '">', '');      // 스마트에디터 내부의 이미지 제거

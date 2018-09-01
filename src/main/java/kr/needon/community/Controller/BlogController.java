@@ -4,13 +4,14 @@ import com.google.gson.Gson;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Module.Blog.BlogDAOImpl;
-import kr.needon.community.Module.Blog.BlogService;
 import kr.needon.community.Module.Blog.BlogServiceImpl;
 import kr.needon.community.Module.User.UserDAOImpl;
-import kr.needon.community.Module.User.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -29,7 +30,7 @@ public class BlogController {
     private BlogServiceImpl service;
 
     @RequestMapping("/{username}")
-    public String BlogHome(@PathVariable("username") String username, Model model) {
+    public String BlogHome(@PathVariable("username") String username, Model model,Board board) {
 
 
         Member user_info = userDAO.getFindUser(username);
