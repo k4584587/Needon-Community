@@ -115,13 +115,7 @@ public class BoardController {
 
 	/* 게시판 글쓰기 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String board_write_post(@ModelAttribute Board board,
-											HttpServletRequest request, 
-											int page, 
-											Model model,
-											@RequestParam("file_name") MultipartFile mf,
-											HttpSession session,
-											FileDownload file)
+	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page, Model model, @RequestParam("file_name") MultipartFile mf, HttpSession session, FileDownload file)
 			throws Exception {
 
 		model.addAttribute("board_page",0);
@@ -131,34 +125,40 @@ public class BoardController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
-		
-		String fileName = mf.getOriginalFilename();
-		file.setBo_no(board.getNo());
-		file.setBo_subject(fileName);
-		file.setBo_table(board.getCategory());
-		String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
-		String saveName = passwordEncoder.encode(fileName)+sub;
-		file.setBo_encode(saveName);
-		
-		int fileSize = (int) mf.getSize();
-		file.setBo_filesize(fileSize);
-		// mf.transferTo(new File("/gov/"+fileName));
-	
+
+		if(mf.isEmpty() == false) {
+			System.out.println("파일이 존제함");
+			String fileName = mf.getOriginalFilename();
+			file.setBo_no(board.getNo());
+			file.setBo_subject(fileName);
+			file.setBo_table(board.getCategory());
+			String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
+			String saveName = passwordEncoder.encode(fileName)+sub;
+			file.setBo_encode(saveName);
+
+			int fileSize = (int) mf.getSize();
+			file.setBo_filesize(fileSize);
+			// mf.transferTo(new File("/gov/"+fileName));
+
 			System.out.println("filename==========>"+saveName);
-			System.out.println("fileSize============>"+fileSize);	
-		
-		try {			
-		FileOutputStream fos = new FileOutputStream(uploadPath + "/" + saveName);
-		fos.write(mf.getBytes());
-		fos.close();
-		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("fileSize============>"+fileSize);
+
+			try {
+				FileOutputStream fos = new FileOutputStream(uploadPath + "/" + saveName);
+				service.file_upload(file);
+				fos.write(mf.getBytes());
+				fos.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
+
+
 		
-		//board.setFilename(fileName);
-		
-		if (service.insert(request, board) && service.file_upload(file)) {
+		if (service.insert(request, board)) {
+
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
+
 		} else {
 			model.addAttribute("msg", "등록이 실패했습니다.");
 		}

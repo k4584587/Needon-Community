@@ -1,12 +1,11 @@
 package kr.needon.community.Module.Board;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
 import kr.needon.community.Model.FileDownload;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 //=====================================
 //클래스 설명 : 게시판 Service 인터페이스
@@ -18,6 +17,8 @@ public interface BoardService {
 	//public List<Board> list(Board board)throws Exception;
 	
 	public List<Board> listpage(Criteria cri)throws Exception;
+
+	public List<Board> getNew_board(Board board);
 	
 	public List<FileDownload> file_list(FileDownload file)throws Exception;
 	

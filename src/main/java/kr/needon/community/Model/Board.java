@@ -23,6 +23,7 @@ public class Board {
 	private String cm_nick;
 	private Timestamp cm_regdate;
 	private String cm_body;
+	private String img_src;
 	private int cm_count;
 	private int cm_good;
 	private int cm_bad;

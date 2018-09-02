@@ -1,12 +1,10 @@
 package kr.needon.community.Module.SampleExample;
 
 
-import java.util.List;
-
-import kr.needon.community.Model.BoTable;
-import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Menu;
 import kr.needon.community.Model.Sample;
+
+import java.util.List;
 
 public interface SampleExampleDAO {
 
@@ -21,6 +19,6 @@ public interface SampleExampleDAO {
     public void top_categoryDelete(int id);
     public void sub_MenuADD(Menu menu);
 
-    public List<Board> getSearch(Board board);
+
 
 }

@@ -1,18 +1,14 @@
 package kr.needon.community.Controller;
 
-import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Menu;
-import kr.needon.community.Module.Board.BoardDAOImpl;
 import kr.needon.community.Module.Page.PageDAOImpl;
 import kr.needon.community.Module.Page.PageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 
@@ -56,7 +52,7 @@ public class PageController {
 
 		return "board_page";
 	}
-	
+
 	
 
 }

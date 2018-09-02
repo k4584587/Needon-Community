@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-                   url="jdbc:log4jdbc:mysql://13.125.208.101/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false&autoReconnectForPools=true&autoReconnection=true&testWhileIdle=false"
+                   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
                    user="admin_project" password="3class"/>
 
 <sql:query dataSource="${datasource}" var="command_count">
@@ -42,7 +42,7 @@
     <article>
   
         <div class="board-view">
-            <div class="subject p-3" style="background-color: white; border-bottom: 1px solid #b1b1b1; font-size: 22px;">
+            <div class="subject p-3" style="background-color: white; border-bottom: 1px solid #b1b1b1; font-size: 22px;height: 100%!important;">
                 <b>${board.subject} <span style="color: blue;">[${comment_count_}]</span></b>
             </div>
             <div class="board-info p-2" style="background-color: #f5f5f5;color: #333;border: 1px solid #dee3eb;">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="p-3" style="border: 1px solid #dee3eb;background-color: white">
+            <div class="p-3" style="border: 1px solid #dee3eb;background-color: white;height: 100%!important;">
                 <div class="row">
                     <div class="col-auto">
                         <img width="110" src="<c:url value="/resources/img/profile_img.png"/>">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="board-body p-4" style="background-color: white;width: 100%; height: 412px;border: 1px solid #dee3eb;border-bottom-color: white;">
+            <div class="board-body p-4" style="background-color: white;width: 100%; height: 100%!important;border: 1px solid #dee3eb;border-bottom-color: white;">
                 ${board.content}
             </div>
             <div class="row justify-content-center" style="background-color: white;margin-right: 0px!important;margin-left: 0px!important; border-left: 1px solid #dee3eb; border-right: 1px solid #dee3eb;">

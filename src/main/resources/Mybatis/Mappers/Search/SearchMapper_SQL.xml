@@ -15,19 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	            t.content like CONCAT ('%', #{keyword}, '%')
 		 	            order by no desc, register_date desc
 		 	            limit #{pageStart}, #{perPageNum};
-		<!--  <where>
-			 <if test="keyword != null and search!='subcon'">
-				${search} like CONCAT ('%', #{keyword}, '%')
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				subject like CONCAT ('%', #{keyword}, '%') or
-				content like CONCAT ('%', #{keyword}, '%')
-			</if>
-			and subject is not null
-		</where> -->
-		
-		<!-- order by no desc, register_date desc
-		limit #{pageStart}, #{perPageNum}; -->
+
 	</select>
 	
 	<select id="listcount" resultType="int">

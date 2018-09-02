@@ -10,6 +10,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+
+<sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
+                   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
+                   user="admin_project" password="3class"/>
+
+<sql:query dataSource="${datasource}" var="top_menu">
+    SELECT
+    *
+    FROM
+    nb_menu_list
+    WHERE
+    main_count = 1
+</sql:query>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -86,6 +100,14 @@
                     <select name="bo_write_role" style="width: 200px;" class="form-control">
                         <option value="role_user">사용자</option>
                         <option value="role_admin">관리자</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>상위 메뉴</label>
+                    <select name="category_no" style="width: 200px;" class="form-control">
+                        <c:forEach items="${top_menu.rows}" var="top">
+                            <option value="${top.id}">${top.category_name}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <button class="btn btn-success">등록하기</button>

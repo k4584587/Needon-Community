@@ -42,7 +42,16 @@
 			and subject is not null
 		</where>
 	</select>
-	
+
+	<select id="getNew_board" resultType="Board">
+		SELECT * FROM
+		<foreach collection="table_list" item="type"  open="(" close=")" separator="UNION">
+			SELECT * FROM nb_board_${type}
+		</foreach>
+		AS t
+		ORDER BY t.register_date DESC limit 5
+	</select>
+
 	<update id="viewcount" parameterType="int">
 		update nb_board_${category} set read_count=read_count+1
 		where no=#{no};

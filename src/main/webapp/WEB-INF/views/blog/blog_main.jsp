@@ -187,6 +187,7 @@
                         varContent = removeStyleAndImage(varContent, '<p', ';">', '</p>');  // 스마트에디터 내부의 스타일 제거
                         varContent = removeStyleAndImage(varContent, '<span', ';">', '</span>');  // 스마트에디터 내부의 스타일 제거
 
+
                         var timeline_insert_html = "<div class=\"row\" style=\"background-color: white;margin-left: 0px;margin-right: 0px;margin-bottom: 10px;\" id=\"blog_timeline\">\n" +
                             "    <div class=\"col-8 p-3\">\n" +
                             "        <div class=\"profile\">\n" +
@@ -229,6 +230,7 @@
         $(document).ready(function () {
             console.log("ajax load!!");
 
+
             $.ajax({
                 type: 'POST',
                 url: '<c:url value="/blog/time_line" />',
@@ -240,6 +242,11 @@
 
                     $.each(jonData, function (index, item) {
                         varContent = item.content;
+
+                        var img_tag = $(item.content).find('img').attr('src');
+
+                        console.log("이미지 링크 ==> " + img_tag);
+
 
                         varContent = removeStyleAndImage(varContent, '<img src=', '">', '');      // 스마트에디터 내부의 이미지 제거
                         varContent = removeStyleAndImage(varContent, '<br', ';">');    // 스마트에디터 내부의 스타일 제거
@@ -264,7 +271,7 @@
                             "            </div>\n" +
                              "            <div style=\"margin-top: 10px;color: #959595\"><span>공감 0</span> <span>댓글 " + item.cm_count + "</span></div>\n" +
                             "        </div>\n" +
-                            "        <div class=\"col p-3\" style=\"text-align: right\">\n" +
+                            "        <div class=\"col p-3\" style=\"text-align: right\">\n" 
                             "           <img src=\"https://via.placeholder.com/165\">\n" +
                             "        </div>\n" +
                             "    </div>";

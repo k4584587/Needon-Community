@@ -1,11 +1,8 @@
 package kr.needon.community.Controller;
 
-import java.util.Random;
-import java.util.StringTokenizer;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import kr.needon.community.Model.Member;
+import kr.needon.community.Module.User.UserDAOImpl;
+import kr.needon.community.Module.User.UserService;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Module.User.UserDAOImpl;
-import kr.needon.community.Module.User.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Random;
+import java.util.StringTokenizer;
 
 //=====================================
 //클래스 설명 : 회원관리 컨트롤러 클래스
@@ -47,6 +45,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/login")
 	public String UserLogin() {
+
 
 		return "user/login"; // titles 안쓴 jsp 로그인 페이지
 	}

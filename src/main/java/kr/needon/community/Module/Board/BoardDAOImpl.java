@@ -1,17 +1,14 @@
 package kr.needon.community.Module.Board;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import kr.needon.community.Model.BoTable;
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.FileDownload;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.FileDownload;
+import java.util.List;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 클래스
@@ -113,7 +110,12 @@ public class BoardDAOImpl implements BoardDAO{
 	public BoTable getBoardInfo(BoTable boTable) {
 		return session.selectOne(namespace + ".getBoardInfo",boTable);
 	}
-	
+
+	@Override
+	public List<Board> getNew_board(Board board) {
+		return session.selectList(namespace + ".getNew_board", board);
+	}
+
 	/*댓글 좋아요 및 싫어요*/
 	@Override
 	public void comment_vote(Board board) throws Exception {

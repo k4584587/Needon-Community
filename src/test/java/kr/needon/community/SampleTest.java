@@ -1,12 +1,9 @@
 package kr.needon.community;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import kr.needon.community.Model.BoTable;
-import kr.needon.community.Model.Board;
-import kr.needon.community.Module.SampleExample.SampleExampleDAO;
+import kr.needon.community.Model.Sample;
 import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
+import kr.needon.community.Module.SampleExample.SampleServiceImpl;
 import kr.needon.community.Module.admin.AdminDAOImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.needon.community.Model.Sample;
-import kr.needon.community.Module.SampleExample.SampleServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
@@ -72,15 +69,5 @@ public class SampleTest {
 
     }
 
-    @Test
-    public void SiteSearch() {
-
-        Board board = new Board();
-
-        board.setKeyword("t");
-        System.out.println("key>>>>>>>>>>>>>>>"+board.getKeyword());
-        dao.getSearch(board);
-
-    }
 
 }

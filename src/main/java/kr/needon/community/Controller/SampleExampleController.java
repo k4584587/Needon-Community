@@ -1,33 +1,20 @@
 package kr.needon.community.Controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import kr.needon.community.Model.*;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.Menu;
+import kr.needon.community.Model.Message;
+import kr.needon.community.Model.Sample;
 import kr.needon.community.Module.Message.MessageDAOImpl;
-import kr.needon.community.Module.SampleExample.SampleExampleDAO;
 import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
+import kr.needon.community.Module.SampleExample.SampleServiceImpl;
 import kr.needon.community.Module.admin.AdminDAOImpl;
-import kr.needon.community.Module.admin.AdminServiceImpl;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import kr.needon.community.Module.SampleExample.SampleServiceImpl;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.CookieGenerator;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -152,19 +139,5 @@ public class SampleExampleController {
 		return gson.toJson(messageDAO.getMessagelist(mssage));
 	}
 
-	@RequestMapping("/test/test")
-	public @ResponseBody String test(BoTable botable, Board board) {
-		List<BoTable> getBoardlist = adminDAO.getBoTable();
-
-		List<Board> getBoardSearch = dao.getSearch(board);
-
-		for(BoTable board_info : getBoardlist) {
-			System.out.println("게시판 테이블 ==> " + "nb_board_" + board_info.getBo_table());
-
-
-		}
-
-		return getBoardlist.toString();
-	}
 
 }

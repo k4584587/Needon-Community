@@ -1,18 +1,13 @@
 package kr.needon.community.Module.SampleExample;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import kr.needon.community.Model.BoTable;
-import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Menu;
+import kr.needon.community.Model.Sample;
 import kr.needon.community.Module.admin.AdminDAOImpl;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kr.needon.community.Model.Sample;
+import javax.inject.Inject;
+import java.util.List;
 
 @Repository
 public class SampleExampleDAOImpl implements SampleExampleDAO {
@@ -70,22 +65,5 @@ public class SampleExampleDAOImpl implements SampleExampleDAO {
 		session.insert(namespace + ".sub_MenuADD", menu);
 	}
 
-	@Override
-	public List<Board> getSearch(Board board) {
 
-		List<BoTable> getBoardTableList = adminDAO.getBoTable();
-
-		List<String> list = new ArrayList<String>();
-
-		for(BoTable getBoardTable : getBoardTableList) {
-			System.out.println("테이블 리스트 ==> " + getBoardTable.getBo_table());
-			list.add(getBoardTable.getBo_table());
-		}
-
-		board.setTable_list(list);
-
-		System.out.println("테이블 리스트 ==> " + list.toString());
-
-		return session.selectList(namespace + ".getSearch",board);
-	}
 }

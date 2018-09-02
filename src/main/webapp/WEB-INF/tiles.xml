@@ -83,4 +83,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/blog/blog_main.jsp" />
 	</definition>
 
+	<definition name="search/search_list" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/search/search_list.jsp" />
+	</definition>
+
 </tiles-definitions>

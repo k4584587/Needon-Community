@@ -1,11 +1,11 @@
 package kr.needon.community.Module.Board;
 
-import java.util.List;
-
 import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Board;
 import kr.needon.community.Model.Criteria;
 import kr.needon.community.Model.FileDownload;
+
+import java.util.List;
 
 //=====================================
 //클래스 설명 : 게시판 DAO 인터페이스
@@ -52,5 +52,7 @@ public interface BoardDAO {
 	public void comment_vote(Board board)throws Exception;
 
 	public BoTable getBoardInfo(BoTable boTable);
+
+	public List<Board> getNew_board(Board board);
 
 }

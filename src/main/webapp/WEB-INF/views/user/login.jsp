@@ -61,7 +61,7 @@
     <div class="login-form">
         <i class=fa fa-circle-o-notch fa-spin'></i>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="width: 370px!important;">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#login">로그인</a>
             </li>
@@ -84,12 +84,7 @@
                     <c:if test="${ param.error != null}">
                         <div class="error">아이디 또는 비밀번호를 다시 확인해 주세요.</div>
                     </c:if>
-                    <div class="checkbox mb-3">
-                        <label style="float: left!important;">
-                            <input type="checkbox" value="remember-me" style="margin-top: 10px"> 자동로그인
-                        </label>
-                    </div>
-                        <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+                        <button style="margin-top: 10px;" id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
                     <hr>
                     <a style="float: left!important;"  href="#" onclick="psw_find()">비밀번호 찾기</a>
                     <p class="mt-5 mb-3 text-muted">&copy; Needon 2018</p>

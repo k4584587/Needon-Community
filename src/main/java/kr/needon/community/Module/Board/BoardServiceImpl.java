@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //=====================================
 //클래스 설명 : 게시판 Service 클래스
@@ -25,7 +27,54 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> listpage(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listPage(cri);
+
+		List<Board> getBoardlist = dao.listPage(cri);
+		for(Board getBoard : getBoardlist) {
+
+			String str = getBoard.getContent();
+			Pattern nonValidPattern = Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+			int imgCnt = 0;
+			String content = "";
+			Matcher matcher = nonValidPattern.matcher(str);
+			while (matcher.find()) {
+				content = matcher.group(1);
+				imgCnt++;
+				if(imgCnt == 1){
+					break;
+				}
+			}
+
+			getBoard.setImg_src(content);
+
+		}
+
+		return getBoardlist;
+	}
+
+	@Override
+	public List<Board> getNew_board(Board board) {
+
+		List<Board> getNew_board = dao.getNew_board(board);
+		for(Board getBoard : getNew_board) {
+
+			String str = getBoard.getContent();
+			Pattern nonValidPattern = Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+			int imgCnt = 0;
+			String content = "";
+			Matcher matcher = nonValidPattern.matcher(str);
+			while (matcher.find()) {
+				content = matcher.group(1);
+				imgCnt++;
+				if(imgCnt == 1){
+					break;
+				}
+			}
+
+			getBoard.setImg_src(content);
+
+		}
+
+		return getNew_board;
 	}
 
 	/* 게시판 글쓰기 */

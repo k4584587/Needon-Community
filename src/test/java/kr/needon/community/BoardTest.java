@@ -16,7 +16,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,6 +34,9 @@ public class BoardTest {
 	
 	@Autowired
 	private BoardDAOImpl dao;
+
+	@Autowired
+	private BoardServiceImpl boardService;
 
 	@Before
 	public void setUp() throws Exception {
@@ -91,7 +97,63 @@ public class BoardTest {
 		List<FileDownload> file_list = service.file_list(file);
 		System.out.println("결과==>"+file_list);
 	}
-	
-	
+
+	@Test
+	public void BoardListSelect() throws Exception {
+
+		Criteria cri = new Criteria();
+
+		cri.setCategory("freeboard");
+		cri.setPerPageNum(5);
+		cri.setPage(1);
+		boardService.listpage(cri);
+
+
+
+
+	}
+
+
+	@Test
+	public void BoardView() throws Exception {
+
+		Board board = new Board();
+
+		board.setCategory("freeboard");
+		board.setNo(97);
+		Board view = service.view(board);
+
+
+		String str = view.getContent();
+		Pattern nonValidPattern = Pattern
+				.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+		int imgCnt = 0;
+		String content = "";
+		Matcher matcher = nonValidPattern.matcher(str);
+		while (matcher.find()) {
+			content = matcher.group(1);
+			imgCnt++;
+			if(imgCnt == 1){
+				break;
+			}
+		}
+
+
+
+		System.out.println("이미지 ==> " + content);
+
+	}
+
+	@Test
+	public void TestBoardNewList() {
+		Board board = new Board();
+
+		List<String> list = new ArrayList<String>();
+		list.add("freeboard");
+		list.add("notice");
+
+		board.setTable_list(list);
+		dao.getNew_board(board);
+	}
 	
 }

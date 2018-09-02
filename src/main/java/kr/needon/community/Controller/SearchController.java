@@ -1,18 +1,17 @@
 package kr.needon.community.Controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import kr.needon.community.Model.Board;
+import kr.needon.community.Model.Criteria;
+import kr.needon.community.Model.SPageMaker;
+import kr.needon.community.Module.Board.BoardServiceImpl;
+import kr.needon.community.Module.Search.SearchDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.needon.community.Model.Board;
-import kr.needon.community.Model.Criteria;
-import kr.needon.community.Model.SPageMaker;
-import kr.needon.community.Module.Board.BoardServiceImpl;
-import kr.needon.community.Module.Search.SearchDAO;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/search/**")
@@ -53,7 +52,7 @@ public class SearchController {
 
 
 
-		return "/search/searchForm";
+		return "search/search_list";
 	}
 
 
