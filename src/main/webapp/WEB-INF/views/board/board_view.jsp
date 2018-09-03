@@ -8,7 +8,7 @@
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
                    url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
                    user="admin_project" password="3class"/>
-
+${pwd }
 <sql:query dataSource="${datasource}" var="command_count">
     select count(*) as count from nb_board_${param.category}
     where parent = ${param.no} and cm_count=1 order by no;
@@ -106,7 +106,11 @@
                 <div class="col">
                     <button onclick="location.href='<c:url value="/board/write_form?page=${param.page }&category=${param.category}" />'" class="btn btn-success">글쓰기</button>
                     <button class="btn btn-success" onclick="location.href='<c:url value="/board/modify_form?page=${param.page }&category=${param.category}&no=${param.no }" />'" >글 수정</button> 
+                    <sec:authorize access="isAuthenticated()">
+                    
                     <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
+                    
+                    </sec:authorize>   
                     <div style="float: right">
                         <button onclick="location.href='<c:url value="/board/${param.category}/list" />'" class="btn btn-success">목록으로</button>
                     </div>

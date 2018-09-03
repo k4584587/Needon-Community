@@ -80,6 +80,14 @@ public class BoardController {
 		
 		model.addAttribute("board_page",1);
 		
+		/*Board bd = service.view(board);
+		System.out.println("게시판 정보 >>>>>>>>>>>>>>>>"+bd);
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(member.getPassword() == bd.getWr_password()) {			
+			model.addAttribute("result", 1);
+		}else {
+			model.addAttribute("result", 2);
+		}*/
 		file.setCategory(board.getCategory());
 		file.setBo_no(board.getNo());
 		
@@ -115,7 +123,7 @@ public class BoardController {
 
 	/* 게시판 글쓰기 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page, Model model, @RequestParam("file_name") MultipartFile mf, HttpSession session, FileDownload file)
+	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page, Model model, @RequestParam("file_name") List<MultipartFile> mf1, FileDownload file)
 			throws Exception {
 
 		model.addAttribute("board_page",0);
@@ -125,7 +133,8 @@ public class BoardController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
-
+		
+		for(MultipartFile mf : mf1) {
 		if(mf.isEmpty() == false) {
 			System.out.println("파일이 존제함");
 			String fileName = mf.getOriginalFilename();
@@ -157,6 +166,7 @@ public class BoardController {
 				e.printStackTrace();
 			}
 		}
+	}
 
 
 		
@@ -175,7 +185,6 @@ public class BoardController {
 	public @ResponseBody String board_delete_post(Board board, int page, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
 
 		model.addAttribute("board_page",0);
-		
 		//파일 기본경로
         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("filePath================================>\n"+dftFilePath);
