@@ -139,7 +139,7 @@ ${pwd }
                                 <div class="col">
                                     <div style="width: 100%!important;margin-bottom: 10px;">
                                         <b>${rb.cm_nick}</b> ${rb.cm_regdate}
-                                        <div style="float: right;">신고 <a href="#" onclick="comment_delete(${rb.no})">삭제</a></div><br>
+                                        <div style="float: right;"> <a href="#" onclick="comment_delete(${rb.no})">삭제</a></div><br>
                                         <div style="float: right;margin-top: 10px;">
                                             <div class="row">
                                                 <div class="col-auto" style="padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;">
@@ -229,34 +229,7 @@ ${pwd }
                     //onsole.log("댓글 내용 ==> " + $("textarea#cm_body").val());
                     //console.log("댓글 닉네임 ==> " + $("input#cm_nick").val());
                     //console.log("댓글 작성시간 ==> " + $("input#cm_regdate").val());
-
-                                 var comment_html_none = "<div id='comment_item'>\n" +
-                        "        <div class=\"row p-3 \" style=\"margin-left: 10px; background-color: white;margin-left: 0px!important;margin-right: 0px; \">\n" +
-                        "            <div class=\"col-auto\" style=\"padding-left: 0px!important;\">\n" +
-                        "                <img width=\"58\" src=\"http://localhost:8080/resources/img/profile_img.png\">\n" +
-                        "            </div>\n" +
-                        "            <div class=\"col\">\n" +
-                        "                <div style=\"width: 100%!important;margin-bottom: 10px;\">\n" +
-                        "                    <b>"+$("input#cm_nick").val()+"</b> "+$("input#cm_regdate").val()+"\n" +
-/*
-                        "                    <div style=\"float: right;\">신고 <a href='#' onclick='comment_delete("+eval(next_comment_count()-1)+")'>삭제</a></div><br>\n" +
-*/
-                        // "                    <div style=\"float: right;margin-top: 10px;\">\n" +
-                        // "                        <div class=\"row\">\n" +
-                        // "                            <div class=\"col-auto\" style=\"padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;\">\n" +
-                        // "                                <div class=\"p-2\" style=\"border: 1px solid #bbb;border-right: none;\"><i class=\"far fa-thumbs-up\"></i> <b>0</b> </div>\n" +
-                        // "                            </div>\n" +
-                        // "                            <div class=\"col-auto\" style=\"padding-right: 0px!important;padding-left: 0px!important;cursor: pointer;\">\n" +
-                        // "                                <div class=\"p-2\" style=\"border: 1px solid #bbb;\"><i class=\"far fa-thumbs-down\"></i> <b>0</b> </div>\n" +
-                        // "                            </div>\n" +
-                        // "                        </div>\n" +
-                        // "                    </div>\n" +
-                        "                    <div style=\"width: 630px; margin-top: 10px;\">"+$("textarea#cm_body").val()+"</div>\n" +
-                        "                </div>\n" +
-                        "            </div>\n" +
-                        "        </div>\n" +
-                        "        <hr>\n" +
-                        "    </div>";
+                          
 
                     var comment_html = "<div id=\"comment_item\">\n" +
                         "        <div class=\"row p-3 \" style=\"margin-left: 10px; background-color: white;margin-left: 0px!important;margin-right: 0px; \">\n" +
@@ -438,7 +411,7 @@ ${pwd }
                 	if(confirm("정말로 삭제하시겠습니까 ?")){
                 	$.ajax({
                         type: "POST",
-                        url: "<c:url value="/board/delete" />",
+                        url: "<c:url value="/board/delete1" />",
                         data:{"category":"${param.category}","no":no,"page":"${param.page}"},
                         cache: false,
                         success: function (result) {

@@ -191,7 +191,7 @@ public class BoardController {
 	}
 
 	/* 게시판 삭제 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete1", method = RequestMethod.POST)
 	public @ResponseBody String board_delete_post(Board board, int page, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
 
 		model.addAttribute("board_page",0);
@@ -230,7 +230,12 @@ public class BoardController {
 		model.addAttribute("board_page",0);
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
-		model.addAttribute("filename", file.getBo_subject());
+		file.setBo_no(board.getNo());
+		file.setCategory(board.getCategory());
+		// 쿼리에서 불러온 List
+		List<FileDownload> file_list = service.file_list(file);
+		System.out.println("file_list>>>>>>>>>"+file_list);
+		model.addAttribute("test", file_list);
 		boTable.setBo_table(board.getCategory());
 		model.addAttribute("info",dao.getBoardInfo(boTable));
 

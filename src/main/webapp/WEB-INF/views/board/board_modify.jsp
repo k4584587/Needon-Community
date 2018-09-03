@@ -18,6 +18,7 @@
 	<div style="margin-top: 10px;" class="alert alert-secondary"
 		role="alert">
 		<b>${info.bo_title } 글쓰기</b>
+		${ test}
 	</div>
 	<form id="board-write_form" action="<c:url value="/board/modify" />"
 		method="post" enctype="multipart/form-data">
@@ -57,8 +58,11 @@
 		<button type="button" id="fdelete" class="btn btn-secondary" style="margin-left: 10px">파일 삭제</button>	
 		<table class="table table-bordered" id="flist">
 			<tr>
+			<c:forEach items="${test }" var="a">			${a.bo_subject }		
+			</c:forEach>
 				<th>파일</th>
-				<td><input type="file" name="file_name" id="file_name" value="${filename }"></td>
+				<td><input type="file" name="file_name" id="file_name"></td>
+				<%-- <div id="fname">${a.bo_subject }</div> --%>
 				<b><div id="end" style="color: red; font-size: 15px;"></div></b>
 			</tr>
 		</table>
