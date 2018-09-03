@@ -72,10 +72,10 @@
 	</table>
 	<div>
 		<span>
-			<button class="btn btn-info"  onClick="location= '<c:url value="/board/write_from?page=${pageMaker.cri.page }&category=${category }"/>'">글쓰기</button>
+			<button class="btn btn-info"  onClick="location= '<c:url value="/board/write_form?page=${pageMaker.cri.page }&category=${category }"/>'">글쓰기</button>
 		</span>
 		<span style="float: right;">
-			<button class="btn btn-info"  onClick="location= '<c:url value="/board/write_from?page=${pageMaker.cri.page }&category=${category }"/>'">배스트</button>
+			<button class="btn btn-info"  onClick="location= '<c:url value="/board/write_form?page=${pageMaker.cri.page }&category=${category }"/>'">배스트</button>
 			<button class="btn btn-info"  onClick="location= '<c:url value="/board/${category }/list?page=1"/>'">목록</button>
 		</span>
 	</div>

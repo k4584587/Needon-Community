@@ -101,7 +101,7 @@ public class BoardController {
 	}
 
 	/* 게시판 글쓰는 폼 */
-	@RequestMapping("/write_from")
+	@RequestMapping("/write_form")
 	public String board_write(Model model, Board board) throws Exception {
 
 		model.addAttribute("board_page",0);
@@ -142,9 +142,14 @@ public class BoardController {
 
 			System.out.println("filename==========>"+saveName);
 			System.out.println("fileSize============>"+fileSize);
-
+			//파일 기본경로
+            String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+            System.out.println("filePath================================>\n"+dftFilePath);
+            //파일 기본경로 _ 상세경로
+            String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/";
+            System.out.println("filePath================================>\n"+filePath);
 			try {
-				FileOutputStream fos = new FileOutputStream(uploadPath + "/" + saveName);
+				FileOutputStream fos = new FileOutputStream(filePath + saveName);
 				service.file_upload(file);
 				fos.write(mf.getBytes());
 				fos.close();
@@ -194,12 +199,13 @@ public class BoardController {
 
 	/* 게시판 수정폼 */
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
-	public String board_modify(Board board, Model model) throws Exception {
+	public String board_modify(Board board, Model model, FileDownload file) throws Exception {
 
 		model.addAttribute("board_page",0);
 
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
+		model.addAttribute("filename", file.getBo_subject());
 
 		return "board_modify";
 	}
@@ -317,12 +323,19 @@ public class BoardController {
 		String fname = file1.getBo_encode();
 		System.out.println("fname = " + fname);
 		
-		//String DownloadPath = request.getRealPath("upload");
-		String DownloadPath = uploadPath;
-		String path = DownloadPath + "\\" + fname;
-		System.out.println("path=" + path);
+		//파일 기본경로
+        String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        //파일 기본경로 _ 상세경로
+        String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/" + fname;
+        
+		//String DownloadPath = uploadPath;
+		//String path = DownloadPath + "\\" + fname;
+		System.out.println("path=" + filePath);
 		
-		File file = new File(path);
+		File file = new File(filePath);
+		if(!file.exists()) {
+            file.mkdirs();
+        }
 		String downName = file.getName(); //다운로드 받을 파일명을 절대경로로  구해옴
 
 		// 이 부분이 한글 파일명이 깨지는 것을 방지해 줍니다

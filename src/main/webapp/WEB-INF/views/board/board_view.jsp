@@ -104,7 +104,9 @@
             <hr>
             <div class="row">
                 <div class="col">
-                    <button onclick="location.href='<c:url value="/board/write_from?page=${param.page }&category=${param.category}" />'" class="btn btn-success">글쓰기</button> <button class="btn btn-success">글 수정</button> <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
+                    <button onclick="location.href='<c:url value="/board/write_form?page=${param.page }&category=${param.category}" />'" class="btn btn-success">글쓰기</button>
+                    <button class="btn btn-success" onclick="location.href='<c:url value="/board/modify_form?page=${param.page }&category=${param.category}&no=${param.no }" />'" >글 수정</button> 
+                    <button onclick="delete1(${board.no})" class="btn btn-danger">글 삭제</button>
                     <div style="float: right">
                         <button onclick="location.href='<c:url value="/board/${param.category}/list" />'" class="btn btn-success">목록으로</button>
                     </div>

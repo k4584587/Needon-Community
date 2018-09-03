@@ -16,6 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -75,6 +77,12 @@ public class BoardTest {
 		file.setBo_filesize(1);
 		file.setBo_no(1);
 		file.setBo_encode("sfaasvasv");
+		//파일 기본경로
+        String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        System.out.println("filePath================================>\n"+dftFilePath);
+        //파일 기본경로 _ 상세경로
+      /*  String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/";
+        System.out.println("filePath================================>\n"+filePath);*/
 		
 		Boolean result = service.file_upload(file);
 		System.out.println("결과==>"+result);

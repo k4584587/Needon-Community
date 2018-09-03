@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-test =====> ${last.no}
 
-<c:if test="${last.no eq null}">
-	값이 Null임
-</c:if>
 <sec:authentication property="principal" var="user" />
 <script type="text/javascript"
 	src='<c:url value="/resources/smarteditor/js/service/HuskyEZCreator.js" />'
@@ -30,6 +26,7 @@ test =====> ${last.no}
 			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="category" value="${param.category }" /> <input
 			type="hidden" name="page" value="${param.page}" />
+		<input type="hidden" name="no" value="${last.no }"/>
 		<c:if test="${last.no eq null}">
 				<input type="hidden" name="no" value="1" />
 		</c:if>
