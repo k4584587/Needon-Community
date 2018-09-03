@@ -43,7 +43,7 @@
 	</select>
 
 	<insert id="timeLineInsert">
-		INSERT INTO nb_blog_test
+		INSERT INTO nb_blog_${username}
 			(subject, content, ip)
 		VALUES
 			(#{subject}, #{content}, '0.0.0.0');

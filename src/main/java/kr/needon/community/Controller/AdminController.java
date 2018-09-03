@@ -1,21 +1,12 @@
 package kr.needon.community.Controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import kr.needon.community.Model.BoTable;
-import kr.needon.community.Module.admin.AdminDAO;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.Menu;
+import kr.needon.community.Model.UserRole;
+import kr.needon.community.Module.SampleExample.SampleExampleDAOImpl;
 import kr.needon.community.Module.admin.AdminDAOImpl;
+import kr.needon.community.Module.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.UserRole;
-import kr.needon.community.Module.admin.AdminService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //=====================================
 // 	클래스 설명 : 홈페이지 관리자 컨트롤러 클래스
@@ -41,6 +35,9 @@ public class AdminController {
 
 	@Autowired
 	AdminDAOImpl adminDAO;
+
+	@Autowired
+	SampleExampleDAOImpl dao;
 
     @GetMapping("/")
     public String AdminMain() {
@@ -60,7 +57,7 @@ public class AdminController {
     	Map<String,Object> userList = adminService.user_List(request, response);
     	//System.out.println(userList);
     	model.addAllAttributes(userList);
-    	return "admin/userList";
+    	return "admin/user_list";
     	
     }
     
@@ -79,7 +76,7 @@ public class AdminController {
     	model.addAttribute("role", user.getGetUserRole().get(0).getRole());
     	
     	
-    	return "admin/userModifyForm";
+    	return "admin/user_modify";
     }
     
     //유저 정보 수정 완료
@@ -198,4 +195,17 @@ public class AdminController {
 
 	}
 
+	@RequestMapping("/menu_list") //메뉴 추가
+	public String MenuList(Menu menu, Model model) {
+
+		List<Menu> getMenuList = dao.getMenuList(menu);
+		model.addAttribute("menu_list",getMenuList);
+
+		List<Menu> getSubCategoryList = dao.getSubCategoryList(menu);
+		model.addAttribute("sub_list",getSubCategoryList);
+
+		return "admin/menu_list";
+	}
+
 }
+

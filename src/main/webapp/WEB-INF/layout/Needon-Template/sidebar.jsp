@@ -9,7 +9,7 @@
 <script src="<c:url value="/resources/plugins/xdomain/jquery.xdomainajax.js" />"></script>
 <script>
     function ms_list(){
-        window.open("<c:url value="/message/ms_list" />","쪽지","width=400,height=400");
+        window.open("<c:url value="/message/ms_list" />","쪽지","width=690,height=500");
     }
 </script>
 
