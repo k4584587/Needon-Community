@@ -17,9 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -208,8 +206,8 @@ public class BoardTest {
 	public void down()throws Exception{
 		FileDownload file = new FileDownload();
 		file.setBo_table("freeboard");
-		file.setBo_no(28);
-		file.setBo_subject("Hydrangeas.jpg");
+		file.setBo_no(4);
+		file.setBo_subject("스크린샷 2018-09-04 오전 3.28.15.png");
 		file = service.file_down(file);
 		Board board = new Board();
 		

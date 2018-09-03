@@ -78,8 +78,8 @@
 	</update>
 	
 	<insert id="insert">
-		INSERT INTO nb_board_${category} (subject, content, ip, wr_nick, wr_password)
-		VALUES (#{subject}, #{content}, #{ip}, #{wr_nick}, #{wr_password});
+		INSERT INTO nb_board_${category} (subject, content, ip, wr_nick, wr_password,wr_username)
+		VALUES (#{subject}, #{content}, #{ip}, #{wr_nick}, #{wr_password}, #{wr_username});
 	</insert>
 	
 	<insert id="file_upload">

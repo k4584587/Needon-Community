@@ -32,10 +32,7 @@
 	}
 </style>
 <script>
-    /*메세지창*/
-    function ms_send(){
-        window.open("ms_send","메세지 전송","width=400,height=400");
-    }
+
 </script>
 
 <script>
@@ -55,7 +52,7 @@
 	<div class="col-auto">${user.nick} 님의 쪽지함</div>
 </div>
 <div class="row" style="background-color: black;">
-	<div class="col p-2" style="color: white;text-align: center;"><a href="<c:url value="/message/ms_list" />" class="send_link">받은 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a href="<c:url value="/message/send_list" />" class="send_link">보낸 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a class="send_link" onClick="ms_send()" href="#">쪽지 쓰기</a></div>
+	<div class="col p-2" style="color: white;text-align: center;"><a href="<c:url value="/message/ms_list" />" class="send_link">받은 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a href="<c:url value="/message/send_list" />" class="send_link">보낸 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a class="send_link" href="<c:url value="/message/ms_send" />">쪽지 쓰기</a></div>
 </div>
 	<table class="table table-striped table-hover">
 		<tr>
@@ -71,7 +68,7 @@
 				<tr>
 					<td>${msg.send_nick }</td>
 
-					<td style="cursor: pointer" onClick="ms_view(${msg.no})" >
+					<td style="cursor: pointer" onClick="location.href='<c:url value="/message/ms_view?no=${msg.no}" />'" >
 
 						<c:choose>
 							<c:when test="${fn:length(msg.content) > 11 }">

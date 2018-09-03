@@ -1,8 +1,9 @@
 package kr.needon.community;
 
-import java.util.Arrays;
-import java.util.List;
-
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
+import kr.needon.community.Module.User.UserDAOImpl;
+import lombok.extern.java.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.UserRole;
-import kr.needon.community.Module.User.UserDAOImpl;
-import lombok.extern.java.Log;
+import java.util.Arrays;
+import java.util.List;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -64,7 +63,8 @@ public class UserTest {
     @Test
     public void UserFindCount() {
 
-        List<Member> getLogin = userDAO.getUserLogin("1");
+
+        List<Member> getLogin = userDAO.getUserLogin("test");
 
         System.out.println("회원찾음 " + getLogin.size());
     }

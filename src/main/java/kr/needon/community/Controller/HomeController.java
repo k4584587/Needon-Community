@@ -21,11 +21,15 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Board board, Criteria cri) throws Exception {
 
-
+        cri.setCategory("pc_news");
+        cri.setPerPageNum(5);
+        cri.setPage(1);
+        model.addAttribute("pc_news",boardService.listpage(cri));
 
 		//pc 카테고리 최신글
 		List<String> pc_category = new ArrayList<String>();
 		pc_category.add("pc_hw");
+        pc_category.add("pc_news");
 		pc_category.add("pc_game");
 		pc_category.add("online_game");
 		pc_category.add("inde_game");
@@ -35,7 +39,7 @@ public class HomeController {
 		model.addAttribute("new_pc",boardService.getNew_board(board));
 
 
-		//콘솔 카테고리 최신글
+		//게임 뉴스 최신글
 		List<String> game_category = new ArrayList<String>();
 		game_category.add("ps4_info");
 		game_category.add("switch_info");

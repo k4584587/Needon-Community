@@ -272,7 +272,7 @@ public class UserController {
 			email.addTo(mail, charSet);
 			email.setFrom(fromEmail, fromName, charSet);
 			email.setSubject(subject);
-			email.setHtmlMsg("<p align = 'center'>NeedOn 사이트 비밀번호 찾기 암호 입니다.</p><br>" 
+			email.setHtmlMsg("<p align = 'center'>Needon 사이트 비밀번호 찾기 암호 입니다.</p><br>"
 							 + "<div align='center'> 인증번호 : " + a + "</div>");
 			email.send();
 			
@@ -440,7 +440,7 @@ public class UserController {
     	 model.addAttribute("email1",email1);
     	 model.addAttribute("email2",email2);
     	 
-    	return"/user/my_modify";
+    	return"user/my_modify";
     }
     
     //내정보 수정

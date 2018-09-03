@@ -6,20 +6,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-				   url="jdbc:log4jdbc:mysql://13.125.208.101/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false&autoReconnectForPools=true&autoReconnection=true&testWhileIdle=false"
+				   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
 				   user="admin_project" password="3class"/>
-<!DOCTYPE >
+
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>쪽지 보기</title>
+<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
-
-${ms }
-
-${ms.info_read_count}
-
 <c:if test="${ms.info_read_count eq 0}">
 	<sql:update dataSource="${datasource}">
 		UPDATE
@@ -37,9 +34,49 @@ ${ms.info_read_count}
   function ms_close(){
 		 window.close();
   }
-</script>   
+</script>
+<style>
+	body {
+		font-size: 13px;
+	}
 
-<form action="<c:url value="/message/replyForm"/>"  method="post" > 
+	table {
+		font-size: 13px!important;
+	}
+
+	.send_link {
+		color: white;
+	}
+
+	.send_link:hover {
+		color:white;
+	}
+</style>
+<div style="height: 5px;background-color: black;margin-bottom: 10px;"></div>
+<div style="margin-left: 5px;">
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-auto">
+			<img width="65" src="<c:url value="/resources/img/profile_img.png" />">
+		</div>
+		<div class="col-auto">${user.nick} 님의 받은 쪽지 보기</div>
+	</div>
+	<div class="row" style="background-color: black;">
+		<div class="col p-2" style="color: white;text-align: center;"><a href="<c:url value="/message/ms_list" />" class="send_link">받은 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a href="<c:url value="/message/send_list" />" class="send_link">보낸 쪽지함</a></div><div class="col p-2" style="color: white;text-align: center"><a class="send_link" onClick="ms_send()" href="#">쪽지 쓰기</a></div>
+	</div>
+	<div class="p-2" style="background-color: #fafafa;border-bottom: 1px solid #eee">
+		보낸사람 <b>${ms.username }</b>
+	</div>
+	<div class="p-3" style="border-bottom: 1px solid #eee;">
+		test
+	</div>
+	<div style="margin-top: 10px;">
+		<input type="submit" class="btn btn-success btn-sm" value="답장" />
+		<button class="btn btn-secondary btn-sm" onClick="ms_close()">취소</button>
+	</div>
+</div>
+
+<%--
+<form action="<c:url value="/message/replyForm"/>"  method="post" >
 			<input type="hidden" name=username value="${ms.username }">
 		<table border=1 align=center>
 			<tr>
@@ -61,6 +98,7 @@ ${ms.info_read_count}
 			<button onClick="ms_close()">취소</button>
 		</div>
 	</form>
+--%>
 
 
 </body>

@@ -36,7 +36,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardDAOImpl dao;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -59,7 +59,7 @@ public class BoardController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.getListCount(cri));
-		
+
 		System.out.println("데이터>>>>>>>>>>>>>>>>>>>"+pageMaker);
 
 		model.addAttribute("pageMaker", pageMaker);
@@ -73,7 +73,7 @@ public class BoardController {
 	@RequestMapping("/view")
 	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model,
 			HttpSession session, BoTable boTable, FileDownload file) throws Exception {
-		
+
 		model.addAttribute("board_page",1);
 		
 		/*Board bd = service.view(board);
@@ -86,15 +86,15 @@ public class BoardController {
 		}*/
 		file.setCategory(board.getCategory());
 		file.setBo_no(board.getNo());
-		
+
 		// 쿼리에서 불러온 List
 		List<FileDownload> file_list = service.file_list(file);
-		 
+
 		model.addAttribute("test", file_list);
 
 		boTable.setBo_table(board.getCategory());
 		model.addAttribute("info",dao.getBoardInfo(boTable));
-		
+
 		model.addAttribute("title", "게시판 조회");
 		model.addAttribute("board", service.view(board));
 		model.addAttribute("comment", service.replyList(board));
@@ -109,7 +109,7 @@ public class BoardController {
 	public String board_write(Model model, Board board, BoTable boTable) throws Exception {
 
 		model.addAttribute("board_page",0);
-		
+
 		board.setCategory(board.getCategory());
 		model.addAttribute("last", service.last_no(board));
 		boTable.setBo_table(board.getCategory());
@@ -121,79 +121,81 @@ public class BoardController {
 	/* 게시판 글쓰기 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request,
-			int page, Model model, 
+			int page, Model model,
 			@RequestParam("file_name") MultipartFile[] mf1, FileDownload file)
 			throws Exception {
 
-		
+
 		System.out.println("게시판 글쓰기 호출");
 		model.addAttribute("board_page",0);
-		
+
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
 
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
-		
+
 			for(MultipartFile mf : mf1) {
-				System.out.println("리스트 이름 출력 확인==============>"+mf.getOriginalFilename());
-				if(mf.isEmpty() == false) {
+				System.out.println("리스트 이름 출력 확인==============>" + mf.getOriginalFilename());
+				if (mf.isEmpty() == false) {
 					System.out.println("파일이 존제함");
-			String fileName = mf.getOriginalFilename();
-			file.setBo_no(board.getNo());
-			file.setBo_subject(fileName);
-			file.setBo_table(board.getCategory());
-			String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String today= formatter.format(new java.util.Date());
-			String saveName = today+"_"+UUID.randomUUID().toString()+sub;
-			file.setBo_encode(saveName);
-			
-			int fileSize = (int) mf.getSize();
-			file.setBo_filesize(fileSize);
-			// mf.transferTo(new File("/gov/"+fileName));
+					String fileName = mf.getOriginalFilename();
+					file.setBo_no(board.getNo());
+					file.setBo_subject(fileName);
+					file.setBo_table(board.getCategory());
+					String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					String today = formatter.format(new java.util.Date());
+					String saveName = today + "_" + UUID.randomUUID().toString() + sub;
+					file.setBo_encode(saveName);
 
-			System.out.println("filename==========>"+saveName);
-			System.out.println("fileSize============>"+fileSize);
-			
-			//파일 기본경로
-            String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-            System.out.println("filePath================================>\n"+dftFilePath);
-            //파일 기본경로 _ 상세경로
-            String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" +today+"\\";
-            System.out.println("filePath================================>\n"+filePath);
-            System.out.println("fileCreate=============================>\n"+filePath + saveName);
-            File dir = new File(filePath);
-    		if(!dir.exists()) {
-                dir.mkdirs();
-            }
-            try {
-				FileOutputStream fos = new FileOutputStream(filePath + saveName);
-				service.file_upload(file);
-				fos.write(mf.getBytes());
-				fos.close();
-			}catch(Exception e) {
-				e.printStackTrace();
+					int fileSize = (int) mf.getSize();
+					file.setBo_filesize(fileSize);
+					// mf.transferTo(new File("/gov/"+fileName));
+
+					System.out.println("filename==========>" + saveName);
+					System.out.println("fileSize============>" + fileSize);
+
+					//파일 기본경로
+					String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+					System.out.println("filePath================================>\n" + dftFilePath);
+					//파일 기본경로 _ 상세경로
+					String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" + today + "\\";
+					System.out.println("filePath================================>\n" + filePath);
+					System.out.println("fileCreate=============================>\n" + filePath + saveName);
+					File dir = new File(filePath);
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					try {
+						FileOutputStream fos = new FileOutputStream(filePath + saveName);
+						service.file_upload(file);
+						fos.write(mf.getBytes());
+						fos.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
-		}
-	}
 
-
-		
 		if (service.insert(request, board)) {
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
+			model.addAttribute("url", "/board/" + board.getCategory() + "/list");
 
 		} else {
 			model.addAttribute("msg", "등록이 실패했습니다.");
+			model.addAttribute("url", "/board/" + board.getCategory() + "/list");
+
 		}
 		return "/msg";
 	}
 
 	/* 게시판 삭제 */
 	@RequestMapping(value = "/delete1", method = RequestMethod.POST)
-	public @ResponseBody String board_delete_post(Board board, int page, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
+	public @ResponseBody String board_delete_post(Board board, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
 
-		model.addAttribute("board_page",0);
+		System.out.println("삭제 호출함");
+
 		//파일 기본경로
         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("filePath================================>\n"+dftFilePath);
@@ -212,12 +214,14 @@ public class BoardController {
      			file.delete();
      		}
      	}
-        
+
 		log.info("delete.....");
 
 		if (service.delete(board)) {
+			System.out.println("삭제 성공");
 			return "1";
 		} else {
+			System.out.println("삭제 실패");
 			return "2";
 		}
 	}

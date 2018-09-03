@@ -18,10 +18,16 @@
 		}).open()
 	}
 </script>
-     
-  <form method="post" action=<c:url value="/user/my_update"/> onsubmit="return check()" 
-			enctype="multipart/form-data">
-     <table boder="1" align=center>
+
+<style>
+	td {
+		text-align: left!important;
+	}
+</style>
+
+<div style="margin-left: 10px;">
+	<form method="post" action="<c:url value="/user/my_update"/>" onsubmit="return check()" enctype="multipart/form-data">
+	<table class="table table-hover" boder="1" align=center>
 		<tr>
 			<th>아이디</th>
 			<td>${user.username}</td>
@@ -37,19 +43,19 @@
 		<tr>
 			<th>핸드폰</th>
 			<td>
-     			<select name="Phone1" id="Phone1"required = "required">
-      				<option vlaue="">=번호선택=</option>
-      				<option value="010" <c:if test="${Phone1 == '010' }">${'selected' }</c:if>>010</option>
-      				<option value="011" <c:if test="${Phone1 == '011' }">${'selected' }</c:if>>011</option>
-      				<option value="016" <c:if test="${Phone1 == '016' }">${'selected' }</c:if>>016</option>
-      				<option value="017" <c:if test="${Phone1 == '017' }">${'selected' }</c:if>>017</option>
-      				<option value="018" <c:if test="${Phone1 == '018' }">${'selected' }</c:if>>018</option>
-     			</select>
-     			-
-     			<input name="Phone2" id="Phone2" size="4" maxlength="4" value="${Phone2}" required = "required"/>
-     			-
-     			<input name="Phone3" id="Phone3" size="4" maxlength="4" value="${Phone3}" required = "required"/>
-     		</td>
+				<select name="Phone1" id="Phone1"required = "required">
+					<option vlaue="">=번호선택=</option>
+					<option value="010" <c:if test="${Phone1 == '010' }">${'selected' }</c:if>>010</option>
+					<option value="011" <c:if test="${Phone1 == '011' }">${'selected' }</c:if>>011</option>
+					<option value="016" <c:if test="${Phone1 == '016' }">${'selected' }</c:if>>016</option>
+					<option value="017" <c:if test="${Phone1 == '017' }">${'selected' }</c:if>>017</option>
+					<option value="018" <c:if test="${Phone1 == '018' }">${'selected' }</c:if>>018</option>
+				</select>
+				-
+				<input class="text" name="Phone2" id="Phone2" size="4" maxlength="4" value="${Phone2}" required = "required"/>
+				-
+				<input name="Phone3" id="Phone3" size="4" maxlength="4" value="${Phone3}" required = "required"/>
+			</td>
 		</tr>
 		<tr>
 			<th>생년월일</th>
@@ -62,50 +68,47 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-     			<input type="text" name="email1"  id="email1" value="${email1 }" required = "required">
-     			@ 
+				<input type="text" name="email1"  id="email1" value="${email1 }" required = "required">
+				@
 				<select name="email2" id="email2" onchange="domain_list()" required = "required">
-    			  <option value="">=이메일선택=</option>
-      			  <option value="daum.net"  <c:if test="${email2 == 'daum.net'}">${'selected'} </c:if>>daum.net</option>
-      			  <option value="nate.com"  <c:if test="${email2 == 'nate.com'}">${'selected'} </c:if>>nate.com</option>
-      			  <option value="naver.com" <c:if test="${email2 == 'naver.com'}">${'selected'} </c:if>>naver.com</option>
-      			  <option value="hotmail.com" <c:if test="${email2 == 'hotmail.com'}">${'selected'} </c:if>>hotmail.com</option>
-      			  <option value="gmail.com" <c:if test="${email2 == 'gmail.com'}">${'selected'} </c:if>>gmail.com</option>
-      			  <option value="0">직접입력</option>
-     			</select>
-     		</td>
+					<option value="">=이메일선택=</option>
+					<option value="daum.net"  <c:if test="${email2 == 'daum.net'}">${'selected'} </c:if>>daum.net</option>
+					<option value="nate.com"  <c:if test="${email2 == 'nate.com'}">${'selected'} </c:if>>nate.com</option>
+					<option value="naver.com" <c:if test="${email2 == 'naver.com'}">${'selected'} </c:if>>naver.com</option>
+					<option value="hotmail.com" <c:if test="${email2 == 'hotmail.com'}">${'selected'} </c:if>>hotmail.com</option>
+					<option value="gmail.com" <c:if test="${email2 == 'gmail.com'}">${'selected'} </c:if>>gmail.com</option>
+					<option value="0">직접입력</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
-     <th>우편번호</th>
-     <td>
-      	<input name="post" id="post" size="5" readonly onclick="post_search()" value="${user.post}" required = "required"/>
-		<input type="button" value="우편번호검색" onclick="openDaumPostcode()" /></td>
-     </td>
-    </tr>
-    
-    <tr>
-     <th>주소</th>
-     <td>
-      <input name="address1" id="address1" size="50" readonly value="${user.address1}" onclick="post_search()" required = "required"/>
-     </td>
-    </tr>
-    
-    <tr>
-     <th>나머지 주소</th>
-     <td>
-      <input name="address2" id="address2" size="37"  value="${user.address2}" required = "required"/>
-     </td>
-    </tr>
+			<th>우편번호</th>
+			<td>
+				<input name="post" id="post" size="5" readonly onclick="post_search()" value="${user.post}" required = "required"/>
+				<input type="button" value="우편번호검색" onclick="openDaumPostcode()" /></td>
+			</td>
+		</tr>
+
+		<tr>
+			<th>주소</th>
+			<td>
+				<input name="address1" id="address1" size="50" readonly value="${user.address1}" onclick="post_search()" required = "required"/>
+			</td>
+		</tr>
+
+		<tr>
+			<th>나머지 주소</th>
+			<td>
+				<input name="address2" id="address2" size="37"  value="${user.address2}" required = "required"/>
+			</td>
+		</tr>
 		<tr>
 			<th>프로필</th>
 			<td><input type="text" name="profile" id="profile" size="50"  value="${user.profile}" required = "required"/></td>
 		</tr>
-		<tr>
-			<td rowspan=2>
-				<input type="submit" value="수정" />
-				<a href="<c:url value="/"/>">홈</a>
-			</td>
-		</tr>
-		
-   </table>
- </form>
+	</table>
+		<input class="btn btn-success btn-sm" type="submit" value="수정" />
+		<input onclick="location.href='<c:url value="/" />'" class="btn btn-success btn-sm" type="button" value="취소" />
+	</form>
+</div>
+

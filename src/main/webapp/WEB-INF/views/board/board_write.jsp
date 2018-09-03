@@ -21,6 +21,7 @@
 	</div>
 	<form id="board-write_form" action="<c:url value="/board/write" />"
 		method="post" enctype="multipart/form-data">
+		<input type="hidden" name="wr_username" value="${user.username}"/>
 		<input type="hidden" name="wr_nick" value="${user.nick }" /> <input
 			type="hidden" name="wr_password" value="${user.password }" /> <input
 			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

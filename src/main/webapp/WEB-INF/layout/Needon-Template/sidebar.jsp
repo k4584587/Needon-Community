@@ -11,7 +11,14 @@
     function ms_list(){
         window.open("<c:url value="/message/ms_list" />","쪽지","width=690,height=500");
     }
+
+    function psw_find(){
+        window.open("<c:url value="/user/psw_find"/>","비번찾기","width=400,height=400");
+    }
+
 </script>
+
+
 
 <div style="margin-top: 10px;">
     <sec:authorize access="!isAuthenticated()">
@@ -21,7 +28,7 @@
                   <b>니드온 로그인</b>
                 </div>
                 <div>
-                    <span><a href="<c:url value="/user/login#join" />">비밀번호 찾기</a></span>
+                    <span><a href="#" onclick="psw_find()">비밀번호 찾기</a></span>
                 </div>
             </div>
         </div>

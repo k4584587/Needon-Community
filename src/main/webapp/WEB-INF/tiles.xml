@@ -57,6 +57,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/page/board_page.jsp" />
 	</definition>
 
+	<definition name="user/my_modify" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/user/my_modify.jsp" />
+	</definition>
+
 	<definition name="admin/main" extends="admin-theme">
 		<put-attribute name="body" value="/WEB-INF/views/admin/main.jsp" />
 	</definition>
