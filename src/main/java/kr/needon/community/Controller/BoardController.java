@@ -187,6 +187,8 @@ public class BoardController {
      	List<FileDownload> file_list = service.file_list(file1);
      	for(FileDownload getfile : file_list) {
      		File file = new File(filePath+getfile.getBo_encode());
+     		System.out.println("FileList===============>"+getfile);
+     		service.file_delete(getfile);
      		//파일 삭제 처리
      		if(file.exists()) {
      			file.delete();

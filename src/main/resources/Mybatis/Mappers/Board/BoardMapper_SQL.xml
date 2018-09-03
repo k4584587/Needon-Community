@@ -65,6 +65,10 @@
 		select * from nb_board_file where bo_table = #{category} and bo_no = #{bo_no};
 	</select>
 	
+	<delete id="file_delete">
+		delete from nb_board_file where bo_table = #{bo_table} and bo_no = #{bo_no};
+	</delete>
+	
 	<select id="file_down" resultType="FileDownload">
 		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table};
 	</select>

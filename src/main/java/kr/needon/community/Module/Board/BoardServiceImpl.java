@@ -274,5 +274,18 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		dao.down_count(file);
 	}
+	
+	/*DB에서 첨부파일 삭제*/
+	@Override
+	public boolean file_delete(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.file_delete(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

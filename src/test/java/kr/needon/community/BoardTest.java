@@ -169,7 +169,7 @@ public class BoardTest {
 	public void listTest()throws Exception{
 		FileDownload file = new FileDownload();
 		file.setCategory("freeboard");		
-		file.setBo_no(21);
+		file.setBo_no(22);
 		
 		// 쿼리에서 불러온 List
 				List<FileDownload> file_list = service.file_list(file);
@@ -184,7 +184,8 @@ public class BoardTest {
 		     		System.out.println("fileName===========>"+getfile.getBo_encode());
 		     		System.out.println("fileName===========>"+getfile.getBo_encode());
 		     		System.out.println("fileName===========>"+getfile.getBo_encode());
-		  
+		     		System.out.println("fileName===========>"+getfile);
+		     		service.file_delete(getfile);
 		     		File file1 = new File(filePath+getfile.getBo_encode());
 		     		System.out.println("file!!!!!!!"+file1);
 		     		if(file1.exists()) {
