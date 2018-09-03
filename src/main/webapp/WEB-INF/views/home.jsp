@@ -182,7 +182,7 @@
                                             </a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="<c:url value='/board/view?no=${new_pc.no }&category=freeboard'/>"> ${new_pc.subject}</a>
+                                            <a href="<c:url value='/board/view?no=${new_pc.no }&category=${new_pc.category}'/>"> ${new_pc.subject}</a>
                                         </c:otherwise>
                                     </c:choose> <span style="color: red;">[${new_pc.comment_count}]</span>
                                     <span style="float: right;">

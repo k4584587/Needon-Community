@@ -69,6 +69,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/userModifyForm.jsp" />
 	</definition>
 
+	<definition name="admin/page_list" extends="admin-theme">
+		<put-attribute name="body" value="/WEB-INF/views/admin/page_list.jsp" />
+	</definition>
+
+	<definition name="admin/page_add" extends="admin-theme">
+		<put-attribute name="body" value="/WEB-INF/views/admin/page_add.jsp" />
+	</definition>
+
 	<definition name="admin/menu_list" extends="admin-theme">
 		<put-attribute name="body" value="/WEB-INF/views/admin/menu_list.jsp" />
 	</definition>

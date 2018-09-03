@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-${count }
-<script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-<script
-        src="//code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
+<!doctype html>
+<html>
+<head>
+    <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
 <script>
     paceOptions = {
         // Disable the 'elements' source
@@ -18,6 +21,11 @@ ${count }
     }
 </script>
 <style>
+
+    body {
+        font-size: 13px;
+    }
+
     .pace.pace-inactive {
         display: none;
     }
@@ -164,91 +172,45 @@ ${count }
  }
 </script>
 <body>
-  <c:if test="${count eq 0}"> 
-  ${count }
-    <h2>비밀번호 찾기 </h2>
-    <form method="post" action="<c:url value="/user/psw_check" />"
-  		onsubmit="return check()">  
-  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-   <table id="pwd_t">
-    <tr>
-     <th>아이디</th>
-     <td><input name="username" id="id" size="14" class="input_box" />
-            <span id="username_input_error"></span>
-     </td>
-    </tr>
-    
-    <tr>
-     <th>이메일</th>
-     <td><input name="email" id="email" size="14" class="input_box" />
-     		<span id="email_input_error"></span>
-     </td>
-    </tr>
-    
-   </table>
-    <input type="submit" value="찾기" class="input_button" />
-    <input type="reset" value="취소" class="input_button"  onclick="$('#id').focus();"/>
-    <input type="button" value="닫기" class="input_button" onclick="self.close();" />
-  </form>
+<c:if test="${count eq 0}">
+      <div class="p-3" style="background-color: #f5f5f5;border: 1px solid transparent;"><b>비밀번호 찾기</b></div>
+      <div class="p-3">
+          <div style="margin-bottom: 15px;">회원가입 시 등록하신 아이디와 이메일 주소를 입력해 주세요. 해당 이메일로 아이디와 비밀번호 정보를 보내드립니다.</div>
+          <form method="post" action="<c:url value="/user/psw_check" />">
+              <input style="margin-bottom: 20px;" type="text" name="username" id="id" class="form-control" placeholder="아이디" required />
+              <span id="username_input_error"></span>
+              <input style="margin-bottom: 20px;" type="email" name="email" id="email" size="14" class="form-control" placeholder="이메일" required />
+              <span id="email_input_error"></span>
+              <input type="submit" value="찾기" class="btn btn-success btn-sm" />
+              <input type="reset" value="취소" class="btn btn-warning btn-sm"  onclick="$('#id').focus();"/>
+              <input type="button" value="닫기" class="btn btn-primary btn-sm" onclick="self.close();" />
+          </form>
+      </div>
 </c:if>
-  
+
 <c:if test="${count eq  1}">
-${count }
-${psw_check }
-
-  ${check_no }
-  	<h2>암호 확인 </h2>
-  <form method="post" action="<c:url value="/user/check_ok" />">
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  <input type="hidden" name="username" value=${psw_check }>
-  
-   <table>
-    <tr>
-     <th>암호</th>
-     <td>
-      <input type="text" name="number2"/>
-     </td>
-    </tr>
-    
-   </table>
-    <input type="submit" value="확인" class="input_button" />
-      <input type="button" value="닫기" class="input_button" onclick="self.close();" />
-  </form>	
-  </c:if>
-  
-  
-  
-  
-  
-  <c:if test="${count eq 2}">
-  ${id }
-  ${count }
-  <h2> 비밀번호 변경 </h2>
-  <form method="post" action="<c:url value="/user/psw_change" />">
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  <input type="hidden" name="username" value=${id }>
-  
-   <table>
-    <tr>
-     <th>새 비밀번호</th>
-     <td>
-      <input type="password" name="password"/>
-     </td>
-    </tr>    
-    <tr>
-     <th>비밀번호 확인</th>
-     <td>
-      <input type="password" name="password2"/>
-     </td>
-    </tr>
-    
-   </table>
-     <input type="submit" value="수정" class="input_button" />
-     <input type="reset" value="취소" class="input_button"  onclick="$('#id').focus();"/>
-     <input type="button" value="닫기" class="input_button" onclick="self.close();" />
-      
-  </form>
-  </c:if>
-  
-
+    <div class="p-3" style="background-color: #f5f5f5;border: 1px solid transparent;"><b>비밀번호 찾기</b></div>
+    <div class="p-3">
+        <div style="margin-bottom: 15px;">이메일로 발송된 인증번호를 입력해주세요.</div>
+        <form method="post" action="<c:url value="/user/check_ok" />">
+            <input style="margin-bottom: 20px;" type="text" name="number2" class="form-control" placeholder="인증번호"/>
+            <input type="submit" value="확인" class="btn btn-success btn-sm" />
+            <input type="button" value="닫기" class="btn btn-warning btn-sm" onclick="self.close();" />
+        </form>
+    </div>
+</c:if>
+<c:if test="${count eq 2}">
+    <div class="p-3" style="background-color: #f5f5f5;border: 1px solid transparent;"><b>비밀번호 찾기</b></div>
+    <div class="p-3">
+        <div style="margin-bottom: 15px;">새 비밀번호를 입력해주세요.</div>
+        <form method="post" action="<c:url value="/user/psw_change" />">
+            <input style="margin-bottom: 20px;" class="form-control" type="password" name="password" placeholder="새 비밀번호"/>
+            <input style="margin-bottom: 20px;" class="form-control" type="password" name="password2" placeholder="비밀번호 확인"/>
+            <input type="submit" value="확인" class="btn btn-success btn-sm" />
+            <input type="reset" value="취소" class="btn btn-danger btn-sm"  onclick="$('#id').focus();"/>
+            <input type="button" value="닫기" class="btn btn-secondary btn-sm" onclick="self.close();" />
+        </form>
+    </div>
+</c:if>
 </body>
+</html>

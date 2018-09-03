@@ -1,21 +1,15 @@
 package kr.needon.community.Module.admin;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import kr.needon.community.Model.BoTable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.UserRole;
 import kr.needon.community.Module.User.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 //=====================================
 //클래스 설명 : 관리자 service 클래스
@@ -212,6 +206,19 @@ public class AdminServiceImpl implements AdminService {
 			e.printStackTrace();
 			return false;
 
+		}
+
+		return true;
+	}
+
+	@Override
+	public Boolean PageInsert(BoTable boTable) throws Exception {
+
+		try {
+			adminDao.PageInsert(boTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 
 		return true;

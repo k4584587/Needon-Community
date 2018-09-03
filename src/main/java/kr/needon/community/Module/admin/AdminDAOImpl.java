@@ -1,16 +1,14 @@
 package kr.needon.community.Module.admin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import kr.needon.community.Model.BoTable;
+import kr.needon.community.Model.Member;
+import kr.needon.community.Model.UserRole;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.needon.community.Model.Member;
-import kr.needon.community.Model.UserRole;
+import java.util.List;
+import java.util.Map;
 
 //=====================================
 //클래스 설명 : 관리자 DAO 클래스
@@ -74,6 +72,11 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void BoardDelete(BoTable boTable) throws Exception {
 		session.delete("Admin.BoardDelete",boTable);
+	}
+
+	@Override
+	public void PageInsert(BoTable boTable) throws Exception {
+		session.insert("Admin.PageInsert",boTable);
 	}
 
 }

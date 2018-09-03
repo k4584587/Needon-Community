@@ -19,7 +19,6 @@
 <c:forEach items="${user_count.rows}" var="no_count">
     <c:set var="lat_user_count" value="${no_count.no +1}"/>
 </c:forEach>
-test ==> ${lat_user_count}
 <html>
 <head>
     <title>Title</title>

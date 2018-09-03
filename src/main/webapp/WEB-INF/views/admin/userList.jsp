@@ -174,7 +174,7 @@
 						</div>
 					</div>
 
-					<%--<select name="keyfield">
+					<select name="keyfield">
 						<option value="username" selected>아이디</option>
 						<option value="name" >이름</option>
 						<option value="nick" >닉네임</option>
@@ -183,7 +183,7 @@
 
 					</select>
 					<input type="text" name="keyword" id="keyword">
-					<input type="submit" value="검색" onclick="return check()">--%>
+					<input type="submit" value="검색" onclick="return check()">
 				</form>
 			</center>
 

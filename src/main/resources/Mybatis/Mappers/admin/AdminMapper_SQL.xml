@@ -114,4 +114,21 @@ AUTO_INCREMENT=6;
 
 	</delete>
 
+	<insert id="PageInsert">
+		INSERT INTO nb_bopage (`bo_table`, `bo_title`, `category_no`) VALUES (#{bo_table}, #{bo_title}, #{category_no});
+
+		CREATE TABLE nb_page_${bo_table} (
+			`no` INT(11) NOT NULL AUTO_INCREMENT,
+			`content` TEXT NULL,
+			`register_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+			PRIMARY KEY (`no`)
+		)
+		COLLATE='utf8_general_ci'
+		ENGINE=InnoDB
+		ROW_FORMAT=DYNAMIC
+		AUTO_INCREMENT=1;
+
+
+	</insert>
+
 </mapper>

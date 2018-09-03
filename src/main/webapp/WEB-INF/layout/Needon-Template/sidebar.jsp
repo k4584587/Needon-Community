@@ -174,7 +174,8 @@
 
                             $.each(jonData, function (index, item) {
 
-                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+                                var item_list = "<li>\n" + item.content + "</li>";
+                                /*var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";*/
 
                                 $("#item_list").append(item_list);
 
@@ -266,9 +267,13 @@
                                 $("#item_list").append("<p><b>새로운 쪽지가 없습니다.</b></p>");
                             }
 
+
+                            var new_count = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
                             $.each(jonData, function (index, item) {
 
-                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+                                var item_list = "<li>\n" + item.content + "</li>";
+
+                                $("#item_list").append(item_list);
 
                                 $("#item_list").append(item_list);
 

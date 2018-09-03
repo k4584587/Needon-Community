@@ -1,11 +1,11 @@
 package kr.needon.community.Module.admin;
 
-import java.util.List;
-import java.util.Map;
-
 import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.UserRole;
+
+import java.util.List;
+import java.util.Map;
 
 //=====================================
 //클래스 설명 : 관리자 DAO 인터페이스
@@ -30,5 +30,7 @@ public interface AdminDAO {
 	public void AddBoard(BoTable boTable) throws Exception;
 
 	public void BoardDelete(BoTable boTable) throws Exception;
+
+	public void PageInsert(BoTable boTable) throws Exception;
 
 }
