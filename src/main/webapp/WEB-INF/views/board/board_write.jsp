@@ -26,7 +26,9 @@
 			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="category" value="${param.category }" /> <input
 			type="hidden" name="page" value="${param.page}" />
-		<input type="hidden" name="no" value="${last.no }"/>
+		<c:if test="${last.no != null}">
+			<input type="hidden" name="no" value="${last.no }"/>
+		</c:if>
 		<c:if test="${last.no eq null}">
 				<input type="hidden" name="no" value="1" />
 		</c:if>
