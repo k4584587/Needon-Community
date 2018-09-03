@@ -69,7 +69,7 @@
 		<c:when test="${fn:length(list) != 0 }">
 			<c:forEach items="${list }" var="msg" varStatus="status">
 				<tr>
-					<td>${msg.send_nick }</td>
+					<td>${msg.recv_nick }</td>
 
 					<td style="cursor: pointer" onClick="ms_view(${msg.no})" >
 
