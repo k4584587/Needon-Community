@@ -150,7 +150,8 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".file_down", file);
 	}
-
+	
+	/*파일 다운로드 횟수*/
 	@Override
 	public void down_count(FileDownload file) throws Exception {
 		// TODO Auto-generated method stub

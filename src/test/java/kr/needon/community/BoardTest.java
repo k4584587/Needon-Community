@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,6 +163,34 @@ public class BoardTest {
 
 		board.setTable_list(list);
 		dao.getNew_board(board);
+	}
+	
+	@Test
+	public void listTest()throws Exception{
+		FileDownload file = new FileDownload();
+		file.setCategory("freeboard");		
+		file.setBo_no(21);
+		
+		// 쿼리에서 불러온 List
+				List<FileDownload> file_list = service.file_list(file);
+				//List<FileDownload> file_list = service.file_list(file1);
+				//파일 기본경로
+		       
+		        //파일 기본경로 _ 상세경로
+		        String filePath = "D:\\stsworkspace\\project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Needon-Community\\resources\\file_upload\\";
+		     	for(FileDownload getfile : file_list) {
+		     		System.out.println("fileName===========>"+getfile.getBo_encode());
+		     		System.out.println("fileName===========>"+getfile.getBo_encode());
+		     		System.out.println("fileName===========>"+getfile.getBo_encode());
+		     		System.out.println("fileName===========>"+getfile.getBo_encode());
+		     		System.out.println("fileName===========>"+getfile.getBo_encode());
+		  
+		     		File file1 = new File(filePath+getfile.getBo_encode());
+		     		System.out.println("file!!!!!!!"+file1);
+		     		if(file1.exists()) {
+		     			file1.delete();
+		     		}
+		     	}
 	}
 	
 }

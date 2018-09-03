@@ -22,7 +22,7 @@
 <div style="margin-left: 10px;">
 	<header style="background-color: white;border-bottom: 1px solid #b1b1b1;">
 		<div class="p-3 board_head">
-			<h3>공지사항</h3>
+			<h3>${info.bo_title }</h3>
 		</div>
 	</header>
 

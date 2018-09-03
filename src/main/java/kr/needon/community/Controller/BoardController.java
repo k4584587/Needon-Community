@@ -77,7 +77,7 @@ public class BoardController {
 	@RequestMapping("/view")
 	public String board_view(Board board, @ModelAttribute("cri") Criteria cri, Model model,
 			HttpSession session, BoTable boTable, FileDownload file) throws Exception {
-
+		
 		model.addAttribute("board_page",1);
 		
 		file.setCategory(board.getCategory());
@@ -170,24 +170,29 @@ public class BoardController {
 		return "/msg";
 	}
 
-	/* 게시판 삭제폼 */
-	@RequestMapping(value = "/delete_form", method = RequestMethod.GET)
-	public String board_delete(int no, Model model) throws Exception {
-
-		model.addAttribute("board_page",0);
-
-		log.info("delete_form.....");
-		model.addAttribute("no", no);
-
-		return "board_delete";
-	}
-
 	/* 게시판 삭제 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody String board_delete_post(Board board, int page, Model model) throws Exception {
+	public @ResponseBody String board_delete_post(Board board, int page, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
 
 		model.addAttribute("board_page",0);
-
+		
+		//파일 기본경로
+        String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        System.out.println("filePath================================>\n"+dftFilePath);
+        //파일 기본경로 _ 상세경로
+        String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/";
+        file1.setCategory(board.getCategory());
+        file1.setBo_no(board.getNo());
+        // 쿼리에서 불러온 List
+     	List<FileDownload> file_list = service.file_list(file1);
+     	for(FileDownload getfile : file_list) {
+     		File file = new File(filePath+getfile.getBo_encode());
+     		//파일 삭제 처리
+     		if(file.exists()) {
+     			file.delete();
+     		}
+     	}
+        
 		log.info("delete.....");
 
 		if (service.delete(board)) {
