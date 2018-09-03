@@ -193,5 +193,13 @@ public class BoardTest {
 		     		}
 		     	}
 	}
-	
+	@Test
+	public void jungbo()throws Exception{
+		Board board = new Board();
+		board.setCategory("freeboard");
+		board.setNo(20);
+		
+		Board bd = service.view(board);
+		System.out.println("게시판 정보 >>>>>>>>>>>>>>>>"+bd);
+	}
 }

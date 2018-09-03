@@ -60,7 +60,7 @@
 		<table class="table table-bordered" id="flist">
 			<tr>
 				<th>파일</th>
-				<td><input type="file" name="file_name" id="file_name"></td>
+				<td><input type="file" name="file_name" id="file_name" ></td>
 				<b><div id="end" style="color: red; font-size: 15px;"></div></b>
 			</tr>
 		</table>
