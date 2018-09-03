@@ -40,9 +40,6 @@ public class BoardController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Resource(name = "uploadPath")
-	private String uploadPath;
 
 	/* 게시판 목록 */
 	@RequestMapping("/{category}/list")
@@ -118,7 +115,6 @@ public class BoardController {
 		model.addAttribute("last", service.last_no(board));
 		boTable.setBo_table(board.getCategory());
 		model.addAttribute("info",dao.getBoardInfo(boTable));
-		System.out.println("Path==============>위치=========>>"+uploadPath);
 
 		return "board_write";
 	}
@@ -149,7 +145,9 @@ public class BoardController {
 			file.setBo_subject(fileName);
 			file.setBo_table(board.getCategory());
 			String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
-			String saveName = UUID.randomUUID().toString()+sub;
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String today= formatter.format(new java.util.Date());
+			String saveName = today+"_"+UUID.randomUUID().toString()+sub;
 			file.setBo_encode(saveName);
 			
 			int fileSize = (int) mf.getSize();
@@ -163,7 +161,7 @@ public class BoardController {
             String dftFilePath = request.getSession().getServletContext().getRealPath("/");
             System.out.println("filePath================================>\n"+dftFilePath);
             //파일 기본경로 _ 상세경로
-            String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\";
+            String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" +today+"\\";
             System.out.println("filePath================================>\n"+filePath);
             System.out.println("fileCreate=============================>\n"+filePath + saveName);
             File dir = new File(filePath);
@@ -345,6 +343,8 @@ public class BoardController {
 			HttpServletRequest request, Model model, HttpServletResponse response, FileDownload file1,
 			@RequestParam("fname") String name) throws Exception {
 		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String today= formatter.format(new java.util.Date());
 		file1.setBo_table(board.getCategory());
 		file1.setBo_no(board.getNo());
 		file1.setBo_subject(name);
@@ -357,16 +357,12 @@ public class BoardController {
 		//파일 기본경로
         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
         //파일 기본경로 _ 상세경로
-        String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/" + fname;
+        System.out.println("today===>"+today);
+        String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" +today+"\\"+ fname;
         
-		//String DownloadPath = uploadPath;
-		//String path = DownloadPath + "\\" + fname;
 		System.out.println("path=" + filePath);
 		
 		File file = new File(filePath);
-		if(!file.exists()) {
-            file.mkdirs();
-        }
 		String downName = file.getName(); //다운로드 받을 파일명을 절대경로로  구해옴
 
 		// 이 부분이 한글 파일명이 깨지는 것을 방지해 줍니다
