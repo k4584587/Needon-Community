@@ -127,7 +127,7 @@ public class BoardController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request,
 			int page, Model model, 
-			@RequestParam("file_name") List<MultipartFile> mf1, FileDownload file)
+			@RequestParam("file_name") MultipartFile[] mf1, FileDownload file)
 			throws Exception {
 
 		
@@ -140,16 +140,16 @@ public class BoardController {
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
 		
-		System.out.println("리스트 개수 출력 확인==============>"+mf1);
-		if(mf1.isEmpty() == false) {
-			System.out.println("파일이 존제함");
 			for(MultipartFile mf : mf1) {
+				System.out.println("리스트 이름 출력 확인==============>"+mf.getOriginalFilename());
+				if(mf.isEmpty() == false) {
+					System.out.println("파일이 존제함");
 			String fileName = mf.getOriginalFilename();
 			file.setBo_no(board.getNo());
 			file.setBo_subject(fileName);
 			file.setBo_table(board.getCategory());
 			String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
-			String saveName = passwordEncoder.encode(fileName)+sub;
+			String saveName = UUID.randomUUID().toString()+sub;
 			file.setBo_encode(saveName);
 			
 			int fileSize = (int) mf.getSize();
@@ -158,13 +158,19 @@ public class BoardController {
 
 			System.out.println("filename==========>"+saveName);
 			System.out.println("fileSize============>"+fileSize);
+			
 			//파일 기본경로
             String dftFilePath = request.getSession().getServletContext().getRealPath("/");
             System.out.println("filePath================================>\n"+dftFilePath);
             //파일 기본경로 _ 상세경로
             String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\";
             System.out.println("filePath================================>\n"+filePath);
-			try {
+            System.out.println("fileCreate=============================>\n"+filePath + saveName);
+            File dir = new File(filePath);
+    		if(!dir.exists()) {
+                dir.mkdirs();
+            }
+            try {
 				FileOutputStream fos = new FileOutputStream(filePath + saveName);
 				service.file_upload(file);
 				fos.write(mf.getBytes());
