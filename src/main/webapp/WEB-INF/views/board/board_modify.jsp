@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <sec:authentication property="principal" var="user" />
 <script type="text/javascript"
@@ -18,7 +19,8 @@
 	<div style="margin-top: 10px;" class="alert alert-secondary"
 		role="alert">
 		<b>${info.bo_title } 글쓰기</b>
-		${ test}
+		<%-- ${ path+test.bo_subject } --%>
+		<%-- ${test } --%>
 	</div>
 	<form id="board-write_form" action="<c:url value="/board/modify" />"
 		method="post" enctype="multipart/form-data">
@@ -56,16 +58,17 @@
 		</div>
 		<button type="button" id="fedit" class="btn btn-danger" style="margin: 10px 0px;">파일 추가</button>
 		<button type="button" id="fdelete" class="btn btn-secondary" style="margin-left: 10px">파일 삭제</button>	
-		<table class="table table-bordered" id="flist">
-			<tr>
-			<c:forEach items="${test }" var="a">			${a.bo_subject }		
-			</c:forEach>
-				<th>파일</th>
-				<td><input type="file" name="file_name" id="file_name"></td>
-				<%-- <div id="fname">${a.bo_subject }</div> --%>
-				<b><div id="end" style="color: red; font-size: 15px;"></div></b>
-			</tr>
-		</table>
+			<c:forEach items="${test }" var="a">		
+				<table class="table table-bordered" id="flist" style="margin: 10px 10px;">
+					<tr>
+						<th>첨부파일</th>
+						<td><input type="file" name="file_name" id="file_name"></td>
+					</tr>
+					
+						<!-- <b><div id="end" style="color: red; font-size: 15px;"></div></b> -->
+				</table>
+				<div id="fname" style="font-size: 15px; margin-left: 10px;"><a href="<c:url value="${path }${a.bo_encode}"/>">${a.bo_subject }</a></div>
+			 </c:forEach>
 		<div style="margin-top: 10px;" align="center">
 			<button id="btn-board_write" class="btn btn-success">수정하기</button>
 			<button class="btn btn-warning">취소</button>

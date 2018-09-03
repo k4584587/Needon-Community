@@ -10,7 +10,7 @@
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
                    url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
                    user="admin_project" password="3class"/>
-${pwd }
+
 <sql:query dataSource="${datasource}" var="command_count">
     select count(*) as count from nb_board_${param.category}
     where parent = ${param.no} and cm_count=1 order by no;

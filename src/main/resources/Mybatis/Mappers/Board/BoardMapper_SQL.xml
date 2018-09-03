@@ -92,9 +92,14 @@
 		ALTER TABLE nb_board_${category} AUTO_INCREMENT=1;	
 	</delete>
 	
+	<update id="file_modify">
+		update nb_board_file set bo_subject=#{bo_subject}, bo_encode=#{bo_encode},
+		bo_download=#{bo_download}, bo_filesize=#{bo_filesize}, bo_datetime=#{bo_datetime} where bo_no = #{no} and bo_table = #{bo_table};
+	</update>
+	
 	<update id="modify">
-		update nb_board_${category} set subject=#{subject}, content=#{content}, file=#{file, jdbcType=BLOB},
-		ip=#{ip, jdbcType=VARCHAR}, register_date=#{register_date} where no = #{no};
+		update nb_board_${category} set subject=#{subject}, content=#{content},
+		ip=#{ip}, register_date=#{register_date} where no = #{no};
 	</update>
 	
 	<select id="replylist" resultType="Board">
