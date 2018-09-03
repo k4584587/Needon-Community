@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -201,5 +202,27 @@ public class BoardTest {
 		
 		Board bd = service.view(board);
 		System.out.println("게시판 정보 >>>>>>>>>>>>>>>>"+bd);
+	}
+	
+	@Test
+	public void down()throws Exception{
+		FileDownload file = new FileDownload();
+		file.setBo_table("freeboard");
+		file.setBo_no(28);
+		file.setBo_subject("Hydrangeas.jpg");
+		file = service.file_down(file);
+		Board board = new Board();
+		
+			System.out.println();
+			System.out.println("result=>"+file.getBo_encode());
+		
+	}
+	
+	@Test
+	public void upload()throws Exception{
+		List<MultipartFile> mf1 = new ArrayList<MultipartFile>();
+		for(MultipartFile mf : mf1) {
+			
+		}
 	}
 }

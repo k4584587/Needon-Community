@@ -147,7 +147,7 @@
     }
 </style>
 <script>
-	alert('${msg}');
+	alert('${msg}'+'${t}');
 	location.href='<c:out value="${pageContext.request.contextPath}"/>${url}';
 </script>
 

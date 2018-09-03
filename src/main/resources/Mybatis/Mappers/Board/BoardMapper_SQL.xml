@@ -70,11 +70,11 @@
 	</delete>
 	
 	<select id="file_down" resultType="FileDownload">
-		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table};
+		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table} and bo_subject=#{bo_subject};
 	</select>
 	
 	<update id = "down_count">
-		update nb_board_file set bo_download = bo_download+1 where bo_no=#{bo_no};
+		update nb_board_file set bo_download = bo_download+1 where bo_no=#{bo_no} and bo_encode=#{bo_encode};
 	</update>
 	
 	<insert id="insert">

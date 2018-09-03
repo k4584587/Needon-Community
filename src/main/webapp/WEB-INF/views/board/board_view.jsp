@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -68,14 +69,11 @@ ${pwd }
                             <button class="btn btn-primary">작성글 보기</button> <button class="btn btn-success">쪽지 보내기</button> <button class="btn btn-success">블로그 보기</button> <button class="btn btn-success">팔로우하기</button> <button class="btn btn-success">구독하기</button>
                         </div>
                         <div style="margin-top: 10px;">
-                            <div style="margin-bottom: 10px;"><span>출석일수 : <b>000 일</b></span> | <span><b>Lv.100</b></span>
-                            <c:forEach items="${test }" var="a">														 
-                            <a href="<c:url value="/board/download?fname=${a.bo_subject }&page=${param.page}&no=${param.no }&category=${param.category } "/>" style="float: right;">${a.bo_subject }</a>
-                            <span style="float: none;"><c:if test="${a.bo_filesize != 0 }">파일크기 : ${a.bo_filesize }</c:if></span></div>
-                            </c:forEach>
+                            <div style="margin-bottom: 10px;"><span>출석일수 : <b>000 일</b></span> | <span><b>Lv.100</b></span>                           
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Exp. 75 %</div>
                             </div>
+                            
                             <div style="margin-top: 10px;">
                                 <span>추천수 : ${board.bo_good}</span> | <span>등록일시 : ${board.register_date}</span> | <span>아이피 : ${board.ip}</span>
                             </div>
@@ -84,6 +82,11 @@ ${pwd }
                 </div>
             </div>
             <div class="board-body p-4" style="background-color: white;width: 100%; height: 100%!important;border: 1px solid #dee3eb;border-bottom-color: white;">
+                <c:forEach items="${test }" var="a">														 
+                            <a href="<c:url value="/board/download?fname=${a.bo_subject }&page=${param.page}&no=${param.no }&category=${param.category } "/>" >${a.bo_subject }</a>
+                            <span><c:if test="${a.bo_filesize != 0 }"><fmt:formatNumber value="${a.bo_filesize / 1024 }" pattern=".#" var="filesize"/>(${filesize }K)</c:if></span>&nbsp;
+                            <span><i class="far fa-clock"></i>&nbsp;<fmt:formatDate value="${a.bo_datetime }" pattern="yyyy.MM.dd"/></span><br>
+                </c:forEach>
                 ${board.content}
             </div>
             <div class="row justify-content-center" style="background-color: white;margin-right: 0px!important;margin-left: 0px!important; border-left: 1px solid #dee3eb; border-right: 1px solid #dee3eb;">

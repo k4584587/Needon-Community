@@ -123,9 +123,13 @@ public class BoardController {
 
 	/* 게시판 글쓰기 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request, int page, Model model, @RequestParam("file_name") List<MultipartFile> mf1, FileDownload file)
+	public String board_write_post(@ModelAttribute Board board, HttpServletRequest request,
+			int page, Model model, 
+			@RequestParam("file_name") List<MultipartFile> mf1, FileDownload file)
 			throws Exception {
 
+		
+		System.out.println("게시판 글쓰기 호출");
 		model.addAttribute("board_page",0);
 
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
@@ -134,9 +138,10 @@ public class BoardController {
 		board.setWr_nick(member.getNick());
 		board.setWr_password(member.getPassword());
 		
-		for(MultipartFile mf : mf1) {
-		if(mf.isEmpty() == false) {
+		System.out.println("리스트 개수 출력 확인==============>"+mf1);
+		if(mf1.isEmpty() == false) {
 			System.out.println("파일이 존제함");
+			for(MultipartFile mf : mf1) {
 			String fileName = mf.getOriginalFilename();
 			file.setBo_no(board.getNo());
 			file.setBo_subject(fileName);
@@ -144,7 +149,7 @@ public class BoardController {
 			String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
 			String saveName = passwordEncoder.encode(fileName)+sub;
 			file.setBo_encode(saveName);
-
+			
 			int fileSize = (int) mf.getSize();
 			file.setBo_filesize(fileSize);
 			// mf.transferTo(new File("/gov/"+fileName));
@@ -155,7 +160,7 @@ public class BoardController {
             String dftFilePath = request.getSession().getServletContext().getRealPath("/");
             System.out.println("filePath================================>\n"+dftFilePath);
             //파일 기본경로 _ 상세경로
-            String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/";
+            String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\";
             System.out.println("filePath================================>\n"+filePath);
 			try {
 				FileOutputStream fos = new FileOutputStream(filePath + saveName);
@@ -171,7 +176,6 @@ public class BoardController {
 
 		
 		if (service.insert(request, board)) {
-
 			model.addAttribute("msg", "게시물이 등록 되었습니다.");
 
 		} else {
@@ -329,10 +333,12 @@ public class BoardController {
 	/* 파일 다운로드 */
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public String download(Board board, int page,
-			HttpServletRequest request, Model model, HttpServletResponse response, FileDownload file1) throws Exception {
+			HttpServletRequest request, Model model, HttpServletResponse response, FileDownload file1,
+			@RequestParam("fname") String name) throws Exception {
 		
 		file1.setBo_table(board.getCategory());
 		file1.setBo_no(board.getNo());
+		file1.setBo_subject(name);
 		file1 = service.file_down(file1);
 		//String fname = request.getParameter("fname");
 		//down.setBo_no(board.getNo());
