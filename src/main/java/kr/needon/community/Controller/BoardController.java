@@ -110,12 +110,14 @@ public class BoardController {
 
 	/* 게시판 글쓰는 폼 */
 	@RequestMapping("/write_form")
-	public String board_write(Model model, Board board) throws Exception {
+	public String board_write(Model model, Board board, BoTable boTable) throws Exception {
 
 		model.addAttribute("board_page",0);
 		
 		board.setCategory(board.getCategory());
 		model.addAttribute("last", service.last_no(board));
+		boTable.setBo_table(board.getCategory());
+		model.addAttribute("info",dao.getBoardInfo(boTable));
 		System.out.println("Path==============>위치=========>>"+uploadPath);
 
 		return "board_write";
@@ -131,7 +133,7 @@ public class BoardController {
 		
 		System.out.println("게시판 글쓰기 호출");
 		model.addAttribute("board_page",0);
-
+		
 		model.addAttribute("url", "/board/" + board.getCategory() + "/list?page=" + page);
 
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -219,23 +221,24 @@ public class BoardController {
 
 	/* 게시판 수정폼 */
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
-	public String board_modify(Board board, Model model, FileDownload file) throws Exception {
+	public String board_modify(Board board, Model model, FileDownload file, BoTable boTable) throws Exception {
 
 		model.addAttribute("board_page",0);
-
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
 		model.addAttribute("filename", file.getBo_subject());
+		boTable.setBo_table(board.getCategory());
+		model.addAttribute("info",dao.getBoardInfo(boTable));
 
 		return "board_modify";
 	}
 
 	/* 게시판 수정 */
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String board_modify_post(HttpServletRequest request, Board board, Model model, int page) throws Exception {
+	public String board_modify_post(HttpServletRequest request, Board board, 
+			Model model, int page) throws Exception {
 
 		model.addAttribute("board_page",0);
-
 		model.addAttribute("board", board);
 		model.addAttribute("url", "/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
 
