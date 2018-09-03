@@ -7,6 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
+                   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
+                   user="admin_project" password="3class"/>
+
+<sql:query dataSource="${datasource}" var="user_count">
+    SELECT no FROM nb_member order by no  desc limit 1
+</sql:query>
+
+<c:forEach items="${user_count.rows}" var="no_count">
+    <c:set var="lat_user_count" value="${no_count.no +1}"/>
+</c:forEach>
+test ==> ${lat_user_count}
 <html>
 <head>
     <title>Title</title>
@@ -102,9 +115,9 @@
                         </div>
                     </div>
                     <div id="idcheck" style="margin-bottom: 10px"></div>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
+                        <input type="hidden" name="no" value="${lat_user_count}">
+                        <input type="text" id="inputEmail" class="form-control" placeholder="이름" name="name" required autofocus>
                         <input type="text" id="inputEmail" class="form-control" placeholder="닉네임" name="nick" required>
-
                         <input type="password" id="inputPassword" class="form-control" placeholder="패스워드" name="password" required>
                         <input type="password" id="inputPassword" class="form-control" placeholder="패스워드 확인" name="password_re" required>
                         <input type="email" id="inputEmail" class="form-control" placeholder="이메일" name="email" required>

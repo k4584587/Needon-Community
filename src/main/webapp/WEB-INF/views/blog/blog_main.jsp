@@ -18,8 +18,17 @@
 </sql:query>
 
 <c:forEach items="${post_count.rows}" var="count_result">
+
     <c:set var="last_count" value="${count_result.no}"/>
+
+
 </c:forEach>
+
+<c:if test="${last_count eq null || last_count eq ''}">
+    <c:set var="last_count" value="0"/>
+</c:if>
+
+
 <style>
 
     .main_profile {
@@ -72,19 +81,18 @@
         </div>
     </div>
     <sec:authorize access="isAuthenticated()">
-        <form id="timeLineInsertForm" action="<c:url value="/blog/timeline_post" />" method="post">
+        <sec:authentication property="principal" var="user"/>
+        <c:if test="${user_info.no eq user.no}">
+            <form id="timeLineInsertForm" action="<c:url value="/blog/timeline_post" />" method="post">
 
-            <input type="text" id="subject" name="subject" class="form-control" placeholder="글 제목"
-                   style="margin-bottom: 10px" required>
-            <div style="background-color: white; margin-bottom: 10px;">
-                        <textarea name="content" id="smarteditor" class="form-control"
-                                  style="margin-bottom: 10px;background-color: white;width: 100%;" placeholder="글 내용"
-                                  required></textarea>
-            </div>
+                <input type="text" id="subject" name="subject" class="form-control" placeholder="글 제목" style="margin-bottom: 10px" required>
+                <div style="background-color: white; margin-bottom: 10px;">
+                    <textarea name="content" id="smarteditor" class="form-control" style="margin-bottom: 10px;background-color: white;width: 100%;" placeholder="글 내용" equired></textarea>
+                </div>
 
-
-            <button type="button" id="timeLineInsert" class="btn btn-success btn-block" style="margin-bottom: 10px;">글 등록</button>
-        </form>
+                <button type="button" id="timeLineInsert" class="btn btn-success btn-block" style="margin-bottom: 10px;">글 등록</button>
+            </form>
+        </c:if>
     </sec:authorize>
 
     <nav aria-label="breadcrumb">
@@ -123,13 +131,6 @@
 <script>
 
     var last_no = ${last_count};
-
-    function test() {
-
-        last_no += 1;
-
-        console.log("번호 ==> " +last_no);
-    }
 
 
     //스마트에디터 적용
@@ -175,7 +176,7 @@
             $.ajax({
                 type: 'POST',
                 url: '<c:url value="/blog/timeline_post" />',
-                data: {"subject": subject, "content": content_body},
+                data: {"username":"${user_info.username}","subject": subject, "content": content_body},
                 success: function (result) {
                     if (result == 1) {
 

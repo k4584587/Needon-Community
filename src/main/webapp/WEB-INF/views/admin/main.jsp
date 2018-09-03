@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <sql:setDataSource var="datasource" driver="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-                   url="jdbc:log4jdbc:mysql://13.125.208.101/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC&useSSL=false&autoReconnectForPools=true&autoReconnection=true&testWhileIdle=false"
+                   url="jdbc:log4jdbc:mysql://125.183.115.12/admin_project?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC"
                    user="admin_project" password="3class"/>
 
 
@@ -49,7 +49,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <!-- Small boxes (Stat box) -->
+   <%-- <!-- Small boxes (Stat box) -->
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
@@ -109,7 +109,7 @@
         <!-- ./col -->
     </div>
     <!-- /.row -->
-
+--%>
     <%--회원목록 시작--%>
     <div class="box">
         <div class="box-header">
@@ -165,7 +165,7 @@
                 <tbody>
                 <c:forEach items="${notice_list.rows}" var="notice">
                     <tr>
-                        <td onclick="location.href='<c:url value="/board/notice/view?category=notice&no=${notice.no}" />">${notice.subject}</td>
+                        <td><a href="<c:url value="/board/notice/view?category=notice&no=${notice.no}"/>">${notice.subject}</a></td>
                         <td>${notice.wr_nick}</td>
                         <td>${notice.register_date}</td>
                     </tr>
