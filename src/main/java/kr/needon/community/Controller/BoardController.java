@@ -84,7 +84,7 @@ public class BoardController {
 		}else {
 			model.addAttribute("result", 2);
 		}*/
-		file.setCategory(board.getCategory());
+		file.setBo_table(board.getCategory());
 		file.setBo_no(board.getNo());
 
 		// 쿼리에서 불러온 List
@@ -229,12 +229,13 @@ public class BoardController {
 	/* 게시판 수정폼 */
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
 	public String board_modify(Board board, Model model, FileDownload file, BoTable boTable) throws Exception {
-
+		
+		
 		model.addAttribute("board_page",0);
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
 		file.setBo_no(board.getNo());
-		file.setCategory(board.getCategory());
+		file.setBo_table(board.getCategory());
 		// 쿼리에서 불러온 List
 		List<FileDownload> file_list = service.file_list(file);
 		System.out.println("file_list>>>>>>>>>"+file_list);
@@ -351,15 +352,14 @@ public class BoardController {
 			HttpServletRequest request, Model model, HttpServletResponse response, FileDownload file1,
 			@RequestParam("fname") String name) throws Exception {
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String today= formatter.format(new java.util.Date());
 		file1.setBo_table(board.getCategory());
 		file1.setBo_no(board.getNo());
-		file1.setBo_subject(name);
+		file1.setBo_encode(name);
 		file1 = service.file_down(file1);
 		//String fname = request.getParameter("fname");
 		//down.setBo_no(board.getNo());
 		String fname = file1.getBo_encode();
+		String today= fname.substring(0, 10);
 		System.out.println("fname = " + fname);
 		
 		//파일 기본경로
@@ -398,8 +398,7 @@ public class BoardController {
 		model.addAttribute("url",
 				"/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
 
-		model.addAttribute("msg", "다운로드 완료");
-		return "/msg";
+		return "/down";
 	}
 	
 	/*파일 업로드*/

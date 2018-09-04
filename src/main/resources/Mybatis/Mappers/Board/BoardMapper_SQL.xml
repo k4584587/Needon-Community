@@ -62,7 +62,7 @@
 	</select>
 	
 	<select id="file_list" resultType="FileDownload">
-		select * from nb_board_file where bo_table = #{category} and bo_no = #{bo_no};
+		select * from nb_board_file where bo_table = #{bo_table} and bo_no = #{bo_no};
 	</select>
 	
 	<delete id="file_delete">
@@ -70,7 +70,7 @@
 	</delete>
 	
 	<select id="file_down" resultType="FileDownload">
-		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table} and bo_subject=#{bo_subject};
+		select * from nb_board_file where bo_no=#{bo_no} and bo_table=#{bo_table} and bo_encode=#{bo_encode};
 	</select>
 	
 	<update id = "down_count">

@@ -110,7 +110,7 @@
 				console.log("추가"+num);
 				if (num > 0) {
 					num--;
-					$("#flist:last").append("<tbody><tr><th>파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
+					$("#flist:last").append("<tbody><tr><th>첨부파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
 				}else if (num == 0) {
 					$("#end").html("최대 5개까지만 등록할 수 있습니다.");
 					}

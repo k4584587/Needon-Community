@@ -67,7 +67,7 @@
 					
 						<!-- <b><div id="end" style="color: red; font-size: 15px;"></div></b> -->
 				</table>
-				<div id="fname" style="font-size: 15px; margin-left: 10px;"><a href="<c:url value="${path }${a.bo_encode}"/>">${a.bo_subject }</a></div>
+				<div id="fname" style="font-size: 15px; margin-left: 10px;"><a href="${path }${a.bo_encode}">${a.bo_subject }</a></div>
 			 </c:forEach>
 		<div style="margin-top: 10px;" align="center">
 			<button id="btn-board_write" class="btn btn-success">수정하기</button>
@@ -114,7 +114,7 @@
 				console.log("추가"+num);
 				if (num > 0) {
 					num--;
-					$("#flist:last").append("<tbody><tr><th>파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
+					$("#flist:last").append("<tbody><tr><th>첨부파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
 				}else if (num == 0) {
 					$("#end").html("최대 5개까지만 등록할 수 있습니다.");
 					}

@@ -223,4 +223,15 @@ public class BoardTest {
 			
 		}
 	}
+	
+	@Test
+	public void flist()throws Exception{
+		FileDownload file = new FileDownload();
+		Board board = new Board();
+		board.setCategory("freeboard");
+		file.setBo_no(9);
+		file.setBo_table(board.getCategory());
+		// 쿼리에서 불러온 List
+		List<FileDownload> file_list = service.file_list(file);
+	}
 }

@@ -22,7 +22,7 @@
 <div style="margin-left: 10px;">
 	<header style="background-color: white;border-bottom: 1px solid #b1b1b1;">
 		<div class="p-3 board_head">
-			<h3>${info.bo_title }</h3>
+			<h3>${info.bo_title }</h3>${test }
 		</div>
 	</header>
 
@@ -65,7 +65,7 @@
                 <c:forEach items="${test }" var="a">
                     <div class="row">
                         <div class="col-auto">
-                            <i class="fas fa-download"></i> <a href="<c:url value="/board/download?fname=${a.bo_subject }&page=${param.page}&no=${param.no }&category=${param.category } "/>" >${a.bo_subject }</a>
+                            <i class="fas fa-download"></i> <a href="<c:url value="/board/download?fname=${a.bo_encode }&page=${param.page}&no=${param.no }&category=${param.category } "/>" >${a.bo_subject }</a>
                             <span><c:if test="${a.bo_filesize != 0 }"><fmt:formatNumber value="${a.bo_filesize / 1024 }" pattern=".#" var="filesize"/>(${filesize }K)</c:if></span>&nbsp;
                             <span><i class="far fa-clock"></i>&nbsp;<fmt:formatDate value="${a.bo_datetime }" pattern="yyyy.MM.dd"/></span>
                         </div>
