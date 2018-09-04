@@ -30,9 +30,6 @@
 		<input type="hidden" name="category" value="${param.category }" /> <input
 			type="hidden" name="page" value="${param.page}" />
 		<input type="hidden" name="no" value=${param.no }/>
-		<c:if test="${last.no eq null}">
-				<input type="hidden" name="no" value="1" />
-		</c:if>
 		<div style="margin-top: 10px; margin-left: 100px;">
 			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-auto">
@@ -67,7 +64,7 @@
 					
 						<!-- <b><div id="end" style="color: red; font-size: 15px;"></div></b> -->
 				</table>
-				<div id="fname" style="font-size: 15px; margin-left: 10px;"><a href="${path }${a.bo_encode}">${a.bo_subject }</a></div>
+				<div id="fname" style="font-size: 15px; margin-left: 10px;">${a.bo_subject }  |  <a href="javascript:;" onclick="file_modify('${a.bo_encode}')" >삭제</a></div>
 			 </c:forEach>
 		<div style="margin-top: 10px;" align="center">
 			<button id="btn-board_write" class="btn btn-success">수정하기</button>
@@ -128,4 +125,22 @@
 				}
 			})
 	});
+</script>
+<script>
+	function file_modify(encode){
+		console.log("버튼 클릭");
+		 $.ajax({
+            type: "POST",
+            url: "<c:url value="/board/file_modify" />",
+            data:{"category":"${param.category}","bo_encode":encode, "page":"${param.page}", "no":"${param.no}"},
+            success: function (result) {
+                if(result == 1) {
+                    console.log("삭제 성공");                
+                    location.href = "<c:url value="/board/modify_form?page=${param.page}&category=${param.category}&no=${param.no}" />";
+                } else {
+                    console.log("삭제 실패");
+                }
+            }
+        }) 
+	}
 </script>

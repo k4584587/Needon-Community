@@ -192,20 +192,26 @@ public class BoardController {
 
 	/* 게시판 삭제 */
 	@RequestMapping(value = "/delete1", method = RequestMethod.POST)
-	public @ResponseBody String board_delete_post(Board board, Model model, HttpServletRequest request, FileDownload file1) throws Exception {
+	public @ResponseBody String board_delete_post(Board board, HttpServletRequest request, FileDownload file1) throws Exception {
 
 		System.out.println("삭제 호출함");
-
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		//String today = formatter.format(new java.util.Date());
+		String today = "";
+		
 		//파일 기본경로
         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("filePath================================>\n"+dftFilePath);
-        //파일 기본경로 _ 상세경로
-        String filePath = dftFilePath + "resources" + "/" + "file_upload" + "/";
-        file1.setCategory(board.getCategory());
+ 
+        file1.setBo_table(board.getCategory());
         file1.setBo_no(board.getNo());
         // 쿼리에서 불러온 List
      	List<FileDownload> file_list = service.file_list(file1);
      	for(FileDownload getfile : file_list) {
+     		today = formatter.format(getfile.getBo_datetime());
+     		String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" + today + "\\";
+     		System.out.println("today============>"+today);
      		File file = new File(filePath+getfile.getBo_encode());
      		System.out.println("FileList===============>"+getfile);
      		service.file_delete(getfile);
@@ -228,9 +234,9 @@ public class BoardController {
 
 	/* 게시판 수정폼 */
 	@RequestMapping(value = "/modify_form", method = RequestMethod.GET)
-	public String board_modify(Board board, Model model, FileDownload file, BoTable boTable) throws Exception {
-		
-		
+	public String board_modify(Board board, Model model, 
+			FileDownload file, BoTable boTable) throws Exception {
+				
 		model.addAttribute("board_page",0);
 		model.addAttribute("title", "게시판 수정");
 		model.addAttribute("board", service.view(board));
@@ -248,13 +254,54 @@ public class BoardController {
 
 	/* 게시판 수정 */
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String board_modify_post(HttpServletRequest request, Board board, 
-			Model model, int page) throws Exception {
+	public String board_modify_post(HttpServletRequest request, @ModelAttribute Board board, 
+			Model model, int page, @RequestParam("file_name") MultipartFile[] mf1,
+			FileDownload file) throws Exception {
 
 		model.addAttribute("board_page",0);
 		model.addAttribute("board", board);
 		model.addAttribute("url", "/board/view?page=" + page + "&no=" + board.getNo() + "&category=" + board.getCategory());
+		
+		for(MultipartFile mf : mf1) {
+			System.out.println("리스트 이름 출력 확인==============>" + mf.getOriginalFilename());
+			if (mf.isEmpty() == false) {
+				System.out.println("파일이 존제함");
+				String fileName = mf.getOriginalFilename();
+				file.setBo_no(board.getNo());
+				file.setBo_subject(fileName);
+				file.setBo_table(board.getCategory());
+				String sub = fileName.substring(fileName.lastIndexOf('.'), fileName.length()).toLowerCase();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String today = formatter.format(new java.util.Date());
+				String saveName = today + "_" + UUID.randomUUID().toString() + sub;
+				file.setBo_encode(saveName);
 
+				int fileSize = (int) mf.getSize();
+				file.setBo_filesize(fileSize);
+				// mf.transferTo(new File("/gov/"+fileName));
+
+				System.out.println("filename==========>" + saveName);
+				System.out.println("fileSize============>" + fileSize);
+
+				//파일 기본경로
+				String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+				System.out.println("filePath================================>\n" + dftFilePath);
+				//파일 기본경로 _ 상세경로
+				String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" + today + "\\";
+				System.out.println("filePath================================>\n" + filePath);
+				System.out.println("fileCreate=============================>\n" + filePath + saveName);
+		
+				try {
+					FileOutputStream fos = new FileOutputStream(filePath + saveName);
+					service.file_upload(file);
+					fos.write(mf.getBytes());
+					fos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		if (service.modify(request, board)) {
 			model.addAttribute("msg", "게시물이 수정 되었습니다.");
 		} else {
@@ -462,5 +509,39 @@ public class BoardController {
             e.printStackTrace();
         }
     }
+	
+	/*첨부 파일 수정*/
+	@RequestMapping(value = "/file_modify", method = RequestMethod.POST)
+	public @ResponseBody String file_modify(Board board, FileDownload file1, HttpServletRequest request)throws Exception {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		//String today = formatter.format(new java.util.Date());
+		String today = "";
+		
+		//파일 기본경로
+        String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        System.out.println("filePath================================>\n"+dftFilePath);
+ 
+        file1.setBo_table(board.getCategory());
+        file1.setBo_no(board.getNo());
+        file1.setBo_encode(file1.getBo_encode());
+        System.out.println("encode======================>"+file1.getBo_encode());
+        // 쿼리에서 불러온 파일
+     	FileDownload f = service.file_down(file1);
+     		today = formatter.format(f.getBo_datetime());
+     		String filePath = dftFilePath + "resources" + "\\" + "file_upload" + "\\" + today + "\\";
+     		System.out.println("today============>"+today);
+     		File file = new File(filePath+f.getBo_encode());
+     		System.out.println("FileList===============>"+f);
+     		//파일 삭제 처리
+     		if(file.exists()) {
+     			file.delete();
+     		}
+     		if(service.file_delete_one(f)) {
+     			return "1";
+     		}else {
+     			return "0";
+     		}
+     	}
 
 }
