@@ -48,10 +48,4 @@
 		<beans:property name="maxUploadSize" value="10000000"/>	
 	</beans:bean>	
 	
-	<!-- 파일 절대 경로 설정 -->
-	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="D:\\upload">
-		</beans:constructor-arg>
-	</beans:bean>
-	
 </beans:beans>

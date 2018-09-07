@@ -164,5 +164,19 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		session.delete(namespace+".file_delete", file);
 	}
+	
+	/*첨부파일 수정*/
+	@Override
+	public void file_modify(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".file_modify", file);
+	}
+	
+	/*뷰에서 첨부파일 수정*/
+	@Override
+	public void file_delete_one(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".file_delete_one", file);
+	}
 
 }

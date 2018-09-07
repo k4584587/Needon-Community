@@ -11,7 +11,14 @@
     function ms_list(){
         window.open("<c:url value="/message/ms_list" />","쪽지","width=690,height=500");
     }
+
+    function psw_find(){
+        window.open("<c:url value="/user/psw_find"/>","비번찾기","width=400,height=400");
+    }
+
 </script>
+
+
 
 <div style="margin-top: 10px;">
     <sec:authorize access="!isAuthenticated()">
@@ -21,7 +28,7 @@
                   <b>니드온 로그인</b>
                 </div>
                 <div>
-                    <span><a href="<c:url value="/user/login#join" />">비밀번호 찾기</a></span>
+                    <span><a href="#" onclick="psw_find()">비밀번호 찾기</a></span>
                 </div>
             </div>
         </div>
@@ -165,21 +172,19 @@
 
                             console.log("쪽지 갯수  ==> " + result.toString().length);
 
-                            if(result.toString().length > 3) {
-                                console.log("쪽지 있음");
-                            } else {
-                                console.log("쪽지 없음");
+
                                 $("#item_list").append("<p><b>새로운 알림이 없습니다.</b></p>");
-                            }
 
-                            $.each(jonData, function (index, item) {
 
-                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+                                $.each(jonData, function (index, item) {
 
-                                $("#item_list").append(item_list);
+                                    var item_list = "<li>\n" + item.content + "</li>";
 
-                                console.log("result ==> " + item.content);
-                            })
+
+                                    $("#item_list").append(item_list);
+
+                                    console.log("result ==> " + item.content);
+                                })
                         }
                     })
 
@@ -212,23 +217,11 @@
 
                             console.log("쪽지 갯수  ==> " + result.toString().length);
 
-                            if(result.toString().length > 3) {
-                                console.log("쪽지 있음");
-                            } else {
-                                console.log("쪽지 없음");
-                                $("#item_list").append("<p><b>팔로우된 블로거 들의 최신글이 없습니다.</b></p>"+
-                                "<br><p><a href='<c:url value="/blog/${user.username}" />'>내 블로그</a></p>"
-                                );
-                            }
 
-                            $.each(jonData, function (index, item) {
+                            $("#item_list").append("<p><b>팔로우된 블로거 들의 최신글이 없습니다.</b></p> <p><b><a href='<c:url value='/blog/${user.username}' />'>내 블로그로</a></b></p>");
 
-                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
 
-                                $("#item_list").append(item_list);
 
-                                console.log("result ==> " + item.content);
-                            })
                         }
                     })
 
@@ -266,9 +259,13 @@
                                 $("#item_list").append("<p><b>새로운 쪽지가 없습니다.</b></p>");
                             }
 
+
+                            var new_count = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
                             $.each(jonData, function (index, item) {
 
-                                var item_list = "<p><b>새로운 쪽지기 ${message_new_count}개 있습니다.</b></p><li>\n  <a onclick='view_message("+item.no+")' href='#'>" + item.content + "</a></li>";
+                                var item_list = "<li>\n" + item.content + "</li>";
+
+                                $("#item_list").append(item_list);
 
                                 $("#item_list").append(item_list);
 

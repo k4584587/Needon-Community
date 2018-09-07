@@ -15,6 +15,7 @@ public class BoTable {
     private String bo_read_role;
     private String bo_write_role;
     private String bo_info;
+    private String content;
     private int bo_category_count;
     private int read_p;
     private int write_p;

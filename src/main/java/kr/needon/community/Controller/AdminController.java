@@ -207,5 +207,28 @@ public class AdminController {
 		return "admin/menu_list";
 	}
 
+	@RequestMapping("/page_list")
+	public String PageList() {
+
+    	return "admin/page_list";
+	}
+
+	@RequestMapping("/page_add")
+	public String PageAdd() {
+
+		return "admin/page_add";
+	}
+
+	@PostMapping("/page_post")
+	public @ResponseBody String PageInsert(BoTable boTable) throws Exception {
+
+    	if(adminService.PageInsert(boTable)) {
+    		return "1";
+		} else {
+    		return "0";
+		}
+
+	}
+
 }
 

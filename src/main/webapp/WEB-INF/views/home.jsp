@@ -81,6 +81,9 @@
                                     <c:if test="${list.category eq 'ps4_info'}">
                                         PS4
                                     </c:if>
+                                    <c:if test="${list.category eq 'pc_game'}">
+                                        PC 게임
+                                    </c:if>
                                     <c:if test="${list.category eq 'online_game'}">
                                         온라인 게임
                                     </c:if>
@@ -112,23 +115,33 @@
             <div class="lat">
                 <ul>
                     <c:choose>
-                        <c:when test="${fn:length(new_pc) != 0 }">
-                            <c:forEach items="${new_pc}" var="new_pc" varStatus="status">
+                        <c:when test="${fn:length(pc_news) != 0 }">
+                            <c:forEach items="${pc_news}" var="pc_news" varStatus="status">
                                 <c:if test="${status.count eq 1}">
                                     <div class="row" style="margin-bottom: 10px;">
                                         <div class="col-auto" style="padding-right: 0px!important;">
-                                            <div><img width="125" src="${new_pc.img_src}" ></div>
+                                            <div><img width="125" src="${pc_news.img_src}" ></div>
                                         </div>
                                         <div class="col-auto">
-                                            <div><b style="font-size: 15px;"><a href="/board/view?category=${new_pc.category}&no=${new_pc.no}">${new_pc.subject}</a></b></div>
-                                            <div style="width: 625px;"><a href="/board/view?category=${new_pc.category}&no=${new_pc.no}"><c:out value='${fn:substring(new_pc.content.replaceAll("\\\<.*?\\\>",""),0, 150)}' />...</a></div>
+                                            <div><b style="font-size: 15px;"><a href="/board/view?category=${pc_news.category}&no=${pc_news.no}">${pc_news.subject}</a></b></div>
+                                            <div style="width: 625px;"><a href="/board/view?category=${pc_news.category}&no=${pc_news.no}"><c:out value='${fn:substring(pc_news.content.replaceAll("\\\<.*?\\\>",""),0, 150)}' />...</a></div>
                                         </div>
                                     </div>
                                 </c:if>
                             </c:forEach>
 
                             <c:forEach items="${new_pc}" var="new_pc" varStatus="status">
-                                <li> <span class="badge badge-primary">${new_pc.category}</span>
+                                <li> <span class="badge badge-primary">
+                                    <c:if test="${new_pc.category eq 'pc_news'}">
+                                        PC뉴스
+                                    </c:if>
+                                    <c:if test="${new_pc.category eq 'online_game'}">
+                                        온라인 게임
+                                    </c:if>
+                                     <c:if test="${new_pc.category eq 'pc_game'}">
+                                         PC 게임
+                                     </c:if>
+                                </span>
 
                                     <c:choose>
                                         <c:when test="${fn:length(new_pc.subject) > 100 }">
@@ -182,7 +195,7 @@
                                             </a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="<c:url value='/board/view?no=${new_pc.no }&category=freeboard'/>"> ${new_pc.subject}</a>
+                                            <a href="<c:url value='/board/view?no=${new_pc.no }&category=${new_pc.category}'/>"> ${new_pc.subject}</a>
                                         </c:otherwise>
                                     </c:choose> <span style="color: red;">[${new_pc.comment_count}]</span>
                                     <span style="float: right;">
@@ -320,7 +333,7 @@
                                         <a href="#"><img src="//via.placeholder.com/128"></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <div><a href="<c:url value="/board/view?category=comic&no=${comic.no}" />"><img width="128" src="${comic.img_src}"></a></div>
+                                        <div><a href="<c:url value="/board/view?category=comic&no=${comic.no}" />"><img style="display: block;" width="128" height="128" src="${comic.img_src}"></a></div>
                                         <div><a href="<c:url value="/board/view?category=comic&no=${comic.no}" />">${comic.subject}</a></div>
                                     </c:otherwise>
                                 </c:choose>

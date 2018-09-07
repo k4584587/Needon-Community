@@ -14,11 +14,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -201,5 +200,38 @@ public class BoardTest {
 		
 		Board bd = service.view(board);
 		System.out.println("게시판 정보 >>>>>>>>>>>>>>>>"+bd);
+	}
+	
+	@Test
+	public void down()throws Exception{
+		FileDownload file = new FileDownload();
+		file.setBo_table("freeboard");
+		file.setBo_no(4);
+		file.setBo_subject("스크린샷 2018-09-04 오전 3.28.15.png");
+		file = service.file_down(file);
+		Board board = new Board();
+		
+			System.out.println();
+			System.out.println("result=>"+file.getBo_encode());
+		
+	}
+	
+	@Test
+	public void upload()throws Exception{
+		List<MultipartFile> mf1 = new ArrayList<MultipartFile>();
+		for(MultipartFile mf : mf1) {
+			
+		}
+	}
+	
+	@Test
+	public void flist()throws Exception{
+		FileDownload file = new FileDownload();
+		Board board = new Board();
+		board.setCategory("freeboard");
+		file.setBo_no(9);
+		file.setBo_table(board.getCategory());
+		// 쿼리에서 불러온 List
+		List<FileDownload> file_list = service.file_list(file);
 	}
 }

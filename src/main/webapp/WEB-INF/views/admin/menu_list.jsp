@@ -282,36 +282,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-3" style="margin-bottom: 20px!important;">
-                        메뉴명
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" name="category_name" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3" style="margin-bottom: 20px!important;">
-                        링크
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" name="category_link" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3" style="margin-bottom: 20px!important;">
-                        순서
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3" style="margin-bottom: 20px!important;">
-                        새창 사용
-                    </div>
-                    <div class="col-auto">
-                        <select class="form-control" name="new_tab_count">
+
+                <input style="margin-bottom: 10px;" type="text" name="category_name" class="form-control" placeholder="메뉴명">
+
+                <input style="margin-bottom: 10px;" type="text" name="category_link" class="form-control" placeholder="메뉴 링크">
+
+
+                <input style="margin-bottom: 10px;" type="text" class="form-control" placeholder="메뉴 순서">
+
+
+                새창사용 : <select style="margin-bottom: 10px;"  name="new_tab_count">
                             <option value="0">
                                 사용안함
                             </option>
@@ -319,14 +299,10 @@
                                 사용함
                             </option>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3" style="margin-bottom: 20px!important;">
-                        서브 카테고리
-                    </div>
-                    <div class="col-auto">
-                        <select class="form-control" name="sub_category_count">
+                    <br>
+
+
+                       서브카테고리 :  <select style="margin-bottom: 10px;"  name="sub_category_count">
                             <option value="0">
                                 사용안함
                             </option>
@@ -334,13 +310,14 @@
                                 사용함
                             </option>
                         </select>
-                    </div>
-                </div>
+
+
                 <input type="hidden" name="main_count" value="1">
-            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="category_insert(1)">등록</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
             </div>
         </form>
     </div>

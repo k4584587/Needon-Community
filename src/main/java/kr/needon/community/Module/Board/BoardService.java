@@ -44,7 +44,11 @@ public interface BoardService {
 	
 	public boolean file_delete(FileDownload file)throws Exception;
 	
+	public boolean file_delete_one(FileDownload file)throws Exception;
+	
 	public boolean modify(HttpServletRequest request, Board board)throws Exception;
+	
+	public boolean file_modify(FileDownload file)throws Exception;
 	
 	public boolean repInsert(Board board, HttpServletRequest request)throws Exception;
 	

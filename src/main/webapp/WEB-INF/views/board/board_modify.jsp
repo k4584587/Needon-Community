@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <sec:authentication property="principal" var="user" />
 <script type="text/javascript"
@@ -12,17 +13,14 @@
 	<header
 		style="background-color: white; border-bottom: 1px solid #b1b1b1;">
 		<div class="p-3 board_head">
-		<c:if test="${param.category eq notice }">
-			<h3>공지사항</h3>
-		</c:if>
-		<c:if test="${param.category eq freeboard }">
-			<h3>자유게시판</h3>
-		</c:if>
+			<h3>${info.bo_title }</h3>
 		</div>
 	</header>
 	<div style="margin-top: 10px;" class="alert alert-secondary"
 		role="alert">
-		<b>공지사항 글쓰기</b>
+		<b>${info.bo_title } 글쓰기</b>
+		<%-- ${ path+test.bo_subject } --%>
+		<%-- ${test } --%>
 	</div>
 	<form id="board-write_form" action="<c:url value="/board/modify" />"
 		method="post" enctype="multipart/form-data">
@@ -32,9 +30,6 @@
 		<input type="hidden" name="category" value="${param.category }" /> <input
 			type="hidden" name="page" value="${param.page}" />
 		<input type="hidden" name="no" value=${param.no }/>
-		<c:if test="${last.no eq null}">
-				<input type="hidden" name="no" value="1" />
-		</c:if>
 		<div style="margin-top: 10px; margin-left: 100px;">
 			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-auto">
@@ -60,13 +55,17 @@
 		</div>
 		<button type="button" id="fedit" class="btn btn-danger" style="margin: 10px 0px;">파일 추가</button>
 		<button type="button" id="fdelete" class="btn btn-secondary" style="margin-left: 10px">파일 삭제</button>	
-		<table class="table table-bordered" id="flist">
-			<tr>
-				<th>파일</th>
-				<td><input type="file" name="file_name" id="file_name" value="${filename }"></td>
-				<b><div id="end" style="color: red; font-size: 15px;"></div></b>
-			</tr>
-		</table>
+			<c:forEach items="${test }" var="a">		
+				<table class="table table-bordered" id="flist" style="margin: 10px 10px;">
+					<tr>
+						<th>첨부파일</th>
+						<td><input type="file" name="file_name" id="file_name"></td>
+					</tr>
+					
+						<!-- <b><div id="end" style="color: red; font-size: 15px;"></div></b> -->
+				</table>
+				<div id="fname" style="font-size: 15px; margin-left: 10px;">${a.bo_subject }  |  <a href="javascript:;" onclick="file_modify('${a.bo_encode}')" >삭제</a></div>
+			 </c:forEach>
 		<div style="margin-top: 10px;" align="center">
 			<button id="btn-board_write" class="btn btn-success">수정하기</button>
 			<button class="btn btn-warning">취소</button>
@@ -112,7 +111,7 @@
 				console.log("추가"+num);
 				if (num > 0) {
 					num--;
-					$("#flist:last").append("<tbody><tr><th>파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
+					$("#flist:last").append("<tbody><tr><th>첨부파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
 				}else if (num == 0) {
 					$("#end").html("최대 5개까지만 등록할 수 있습니다.");
 					}
@@ -126,4 +125,22 @@
 				}
 			})
 	});
+</script>
+<script>
+	function file_modify(encode){
+		console.log("버튼 클릭");
+		 $.ajax({
+            type: "POST",
+            url: "<c:url value="/board/file_modify" />",
+            data:{"category":"${param.category}","bo_encode":encode, "page":"${param.page}", "no":"${param.no}"},
+            success: function (result) {
+                if(result == 1) {
+                    console.log("삭제 성공");                
+                    location.href = "<c:url value="/board/modify_form?page=${param.page}&category=${param.category}&no=${param.no}" />";
+                } else {
+                    console.log("삭제 실패");
+                }
+            }
+        }) 
+	}
 </script>

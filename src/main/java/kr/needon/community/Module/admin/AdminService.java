@@ -1,14 +1,12 @@
 package kr.needon.community.Module.admin;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import kr.needon.community.Model.BoTable;
 import kr.needon.community.Model.Member;
 import kr.needon.community.Model.UserRole;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 //=====================================
 //클래스 설명 : 관리자 service 인터페이스
@@ -27,5 +25,7 @@ public interface AdminService {
 	public Boolean AddBoard(BoTable boTable) throws Exception;
 
 	public Boolean BoardDelete(BoTable boTable) throws  Exception;
+
+	public Boolean PageInsert(BoTable boTable) throws Exception;
 
 }

@@ -43,6 +43,7 @@ public class Board {
 	private int page;
 	private int perPageNum;
 	private String username;
+	private String wr_username;
 	List<String> table_list = new ArrayList<String>();
 	
 	public Board() {

@@ -287,5 +287,31 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return true;
 	}
+	
+	/*첨부파일 수정*/
+	@Override
+	public boolean file_modify(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.file_modify(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	/*뷰에서 첨부파일 수정*/
+	@Override
+	public boolean file_delete_one(FileDownload file) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			dao.file_delete_one(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

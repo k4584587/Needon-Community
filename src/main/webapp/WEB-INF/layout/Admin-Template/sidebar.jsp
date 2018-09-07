@@ -48,6 +48,7 @@
 	<ul class="sidebar-menu" data-widget="tree">
 		<li class="header">MAIN NAVIGATION</li>
 		<li><a href="<c:url value="/admin/" />"><i class="fa fa-dashboard"></i>  <span>대시보드</span></a></li>
+		<li><a href="<c:url value="/admin/menu_list" />"><i class="fa fa-dashboard"></i>  <span>메뉴관리</span></a></li>
 
 		<li class="treeview">
 			<a href="#">
@@ -71,7 +72,7 @@
 			</a>
 			<ul class="treeview-menu">
 				<li><a href="<c:url value="/admin/board_list" />"><i class="fa fa-circle-o"></i> 게시판 관리</a></li>
-				<li><a href="<c:url value="/admin/board_list" />"><i class="fa fa-circle-o"></i> 페이지 관리</a></li>
+				<li><a href="<c:url value="/admin/page_list" />"><i class="fa fa-circle-o"></i> 페이지 관리</a></li>
 			</ul>
 		</li>
 	</ul>

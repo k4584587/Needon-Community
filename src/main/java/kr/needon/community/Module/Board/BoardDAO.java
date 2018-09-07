@@ -41,7 +41,11 @@ public interface BoardDAO {
 	
 	public void file_delete(FileDownload file)throws Exception;
 	
+	public void file_delete_one(FileDownload file)throws Exception;
+	
 	public void modify(Board board)throws Exception;
+	
+	public void file_modify(FileDownload file)throws Exception;
 	
 	public void repInsert(Board board)throws Exception;
 	

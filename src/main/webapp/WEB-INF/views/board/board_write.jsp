@@ -12,15 +12,16 @@
 	<header
 		style="background-color: white; border-bottom: 1px solid #b1b1b1;">
 		<div class="p-3 board_head">
-			<h3>공지사항</h3>
+			<h3>${info.bo_title }</h3>
 		</div>
 	</header>
 	<div style="margin-top: 10px;" class="alert alert-secondary"
 		role="alert">
-		<b>공지사항 글쓰기</b>
+		<b>${info.bo_title } 글쓰기</b>
 	</div>
 	<form id="board-write_form" action="<c:url value="/board/write" />"
 		method="post" enctype="multipart/form-data">
+		<input type="hidden" name="wr_username" value="${user.username}"/>
 		<input type="hidden" name="wr_nick" value="${user.nick }" /> <input
 			type="hidden" name="wr_password" value="${user.password }" /> <input
 			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -59,7 +60,7 @@
 		<button type="button" id="fdelete" class="btn btn-secondary" style="margin-left: 10px">파일 삭제</button>	
 		<table class="table table-bordered" id="flist">
 			<tr>
-				<th>파일</th>
+				<th>첨부파일</th>
 				<td><input type="file" name="file_name" id="file_name" ></td>
 				<b><div id="end" style="color: red; font-size: 15px;"></div></b>
 			</tr>
@@ -109,7 +110,7 @@
 				console.log("추가"+num);
 				if (num > 0) {
 					num--;
-					$("#flist:last").append("<tbody><tr><th>파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
+					$("#flist:last").append("<tbody><tr><th>첨부파일</th><td><input type='file' name='file_name' id='file_name'></td></tr></tbody>");
 				}else if (num == 0) {
 					$("#end").html("최대 5개까지만 등록할 수 있습니다.");
 					}
