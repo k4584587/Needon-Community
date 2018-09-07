@@ -149,7 +149,7 @@
 			</center>
 			<center>
 				<form style="margin-top: 10px;" action=<c:url value="/admin/search"/> name="search" method="post">
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-xs-2 col-xs-offset-5" style="margin-left: 38.666667%!important;">
 							<div class="input-group">
 								<div class="input-group-btn search-panel">
@@ -172,9 +172,9 @@
                 </span>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<%--<select name="keyfield">
+					<select name="keyfield">
 						<option value="username" selected>아이디</option>
 						<option value="name" >이름</option>
 						<option value="nick" >닉네임</option>
@@ -183,7 +183,7 @@
 
 					</select>
 					<input type="text" name="keyword" id="keyword">
-					<input type="submit" value="검색" onclick="return check()">--%>
+					<input type="submit" value="검색" onclick="return check()">
 				</form>
 			</center>
 

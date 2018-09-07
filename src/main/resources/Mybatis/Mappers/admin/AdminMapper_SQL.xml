@@ -95,6 +95,7 @@
 			`wr_nick` VARCHAR(30) NULL DEFAULT '',
 			`wr_password` VARCHAR(255) NULL DEFAULT NULL,
 			`cm_password` VARCHAR(255) NULL DEFAULT NULL,
+			`wr_username` VARCHAR(255) NULL DEFAULT NULL,
 	PRIMARY KEY (`no`)
 )
 COLLATE='utf8_general_ci'
